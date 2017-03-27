@@ -82,7 +82,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)ThirdParty\GoogleTest\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)ThirdParty\GoogleTest\;$(SolutionDir)Game\Source\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>$(SolutionDir)Game\Binaries\Win32-Debug\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -128,6 +128,7 @@
   <ItemGroup>
     <ClCompile Include="..\ThirdParty\GoogleTest\src\gtest-all.cc" />
     <ClCompile Include="MainTest.cpp" />
+    <ClCompile Include="WindowTest.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

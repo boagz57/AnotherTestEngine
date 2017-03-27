@@ -96,7 +96,7 @@
       <SDLCheck>true</SDLCheck>
     </ClCompile>
     <PostBuildEvent>
-      <Command>lib /NOLOGO /OUT:"$(ProjectDir)Binaries\$(PlatformName)-$(Configuration)\$(ProjectName).lib" "$(ProjectDir)Intermediate\$(PlatformName)-$(Configuration)\Main.obj"</Command>
+      <Command>lib /NOLOGO /OUT:"$(ProjectDir)Binaries\$(PlatformName)-$(Configuration)\$(ProjectName).lib" "$(ProjectDir)Intermediate\$(PlatformName)-$(Configuration)\*.obj"</Command>
     </PostBuildEvent>
     <PreLinkEvent>
       <Command>
@@ -142,9 +142,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Source\Main.cpp" />
+    <ClCompile Include="Source\Window.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Source\Window.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
