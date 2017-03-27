@@ -1,10 +1,8 @@
 #include "Window.h"
 
-
 Window::Window()
 {
 }
-
 
 Window::~Window()
 {
@@ -12,10 +10,10 @@ Window::~Window()
 
 bool Window::Initialize()
 {
-	return false;
+	return true;
 }
 
 bool Window::Shutdown()
 {
-	return false;
+	return true;
 }
