@@ -69,19 +69,25 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <OutDir>$(ProjectDir)\Binaries\$(PlatformName)-$(Configuration)</OutDir>
-    <IntDir>$(ProjectDir)\Intermediate\$(PlatformName)-$(Configuration)</IntDir>
+    <OutDir>$(ProjectDir)\Binaries\$(PlatformName)-$(Configuration)\</OutDir>
+    <IntDir>$(ProjectDir)\Intermediate\$(PlatformName)-$(Configuration)\</IntDir>
+    <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <OutDir>$(ProjectDir)\Binaries\$(PlatformName)-$(Configuration)</OutDir>
-    <IntDir>$(ProjectDir)\Intermediate\$(PlatformName)-$(Configuration)</IntDir>
+    <OutDir>$(ProjectDir)\Binaries\$(PlatformName)-$(Configuration)\</OutDir>
+    <IntDir>$(ProjectDir)\Intermediate\$(PlatformName)-$(Configuration)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(SolutionDir)ThirdParty\GoogleTest\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
+    <Link>
+      <AdditionalLibraryDirectories>$(SolutionDir)Game\Binaries\Win32-Debug\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>Game.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -118,6 +124,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\ThirdParty\GoogleTest\src\gtest-all.cc" />
+    <ClCompile Include="MainTest.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
