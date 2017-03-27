@@ -94,6 +94,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(SolutionDir)ThirdParty\Boost\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <PostBuildEvent>
       <Command>lib /NOLOGO /OUT:"$(ProjectDir)Binaries\$(PlatformName)-$(Configuration)\$(ProjectName).lib" "$(ProjectDir)Intermediate\$(PlatformName)-$(Configuration)\*.obj"</Command>
@@ -148,6 +149,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Source\Universal\Macro.h" />
     <ClInclude Include="Source\Window.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
