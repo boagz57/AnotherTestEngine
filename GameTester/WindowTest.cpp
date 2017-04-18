@@ -7,13 +7,3 @@ struct WindowTest : public testing::Test
 {
 	Window window;
 };
-
-TEST_F(WindowTest, DoesWindowInitializeProperly_ExpectTrue)
-{
-	EXPECT_TRUE(window.Initialize());
-}
-
-TEST_F(WindowTest, DoesWindowShutdownProperly_ExpectTrue)
-{
-	EXPECT_TRUE(window.Shutdown());
-}
