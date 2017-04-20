@@ -28,11 +28,13 @@ int main(int agrc, char** argv)
 	if (renderer == nullptr)
 	{
 		LOG("ERROR: SDL renderer failed to initialize! SDL error: %s", SDL_GetError());
+		SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "SDL Error", "SDL renderer did not initialize properly", window);
+
 		SDL_DestroyWindow(window);
 		SDL_Quit();
 	}
 
-	//Clear window color when utilizing sdl renderer
+	//Set background window color when utilizing sdl renderer
 	SDL_SetRenderDrawColor(renderer, 0, 0, 0, 1);
 	SDL_RenderFillRect(renderer, nullptr);
 
@@ -42,6 +44,9 @@ int main(int agrc, char** argv)
 
 	while (gamestate != GameState::EXIT)
 	{
+		unsigned int startTime = SDL_GetTicks();
+
+		//Game Logic Update
 		while (SDL_PollEvent(&evnt))
 		{
 			switch (evnt.type)
@@ -55,11 +60,14 @@ int main(int agrc, char** argv)
 			}
 		}
 
+		//Draw Game
 		SDL_RenderClear(renderer);
 
-		//Draw to buffer
 
 		SDL_RenderPresent(renderer);
+
+		unsigned int ms = startTime + 16.6 - SDL_GetTicks();
+		SDL_Delay(ms);
 	}
 
 	return 0;
