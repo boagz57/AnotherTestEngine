@@ -106,7 +106,9 @@ copy /y  "$(SolutionDir)ThirdParty\SDLImage\Lib\x86\SDL2_image.dll" "$(SolutionD
 
 copy /y  "$(SolutionDir)ThirdParty\SDLImage\Lib\x86\libpng16-16.dll" "$(SolutionDir)Game\Binaries\$(PlatformName)-$(Configuration)"
 
-copy /y  "$(SolutionDir)ThirdParty\SDLImage\Lib\x86\libjpeg-9.dll" "$(SolutionDir)Game\Binaries\$(PlatformName)-$(Configuration)"</Command>
+copy /y  "$(SolutionDir)ThirdParty\SDLImage\Lib\x86\libjpeg-9.dll" "$(SolutionDir)Game\Binaries\$(PlatformName)-$(Configuration)"
+
+copy /y  "$(SolutionDir)ThirdParty\SDLImage\Lib\x86\zlib1.dll" "$(SolutionDir)Game\Binaries\$(PlatformName)-$(Configuration)"</Command>
     </PostBuildEvent>
     <PreLinkEvent>
       <Command>
