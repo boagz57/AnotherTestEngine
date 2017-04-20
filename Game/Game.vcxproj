@@ -94,13 +94,19 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)ThirdParty\SDL\Include;$(SolutionDir)ThirdParty\Boost\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)ThirdParty\SDLImage\Include\;$(SolutionDir)ThirdParty\SDL\Include;$(SolutionDir)ThirdParty\Boost\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>$(ProjectDir)Source\Universal\Macro.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
     </ClCompile>
     <PostBuildEvent>
       <Command>lib /NOLOGO /OUT:"$(ProjectDir)Binaries\$(PlatformName)-$(Configuration)\$(ProjectName).lib" "$(ProjectDir)Intermediate\$(PlatformName)-$(Configuration)\*.obj"
 
-copy /y  "$(SolutionDir)ThirdParty\SDL\Lib\x86\SDL2.dll" "$(SolutionDir)Game\Binaries\$(PlatformName)-$(Configuration)"</Command>
+copy /y  "$(SolutionDir)ThirdParty\SDL\Lib\x86\SDL2.dll" "$(SolutionDir)Game\Binaries\$(PlatformName)-$(Configuration)"
+
+copy /y  "$(SolutionDir)ThirdParty\SDLImage\Lib\x86\SDL2_image.dll" "$(SolutionDir)Game\Binaries\$(PlatformName)-$(Configuration)"
+
+copy /y  "$(SolutionDir)ThirdParty\SDLImage\Lib\x86\libpng16-16.dll" "$(SolutionDir)Game\Binaries\$(PlatformName)-$(Configuration)"
+
+copy /y  "$(SolutionDir)ThirdParty\SDLImage\Lib\x86\libjpeg-9.dll" "$(SolutionDir)Game\Binaries\$(PlatformName)-$(Configuration)"</Command>
     </PostBuildEvent>
     <PreLinkEvent>
       <Command>
@@ -111,8 +117,8 @@ copy /y  "$(SolutionDir)ThirdParty\SDL\Lib\x86\SDL2.dll" "$(SolutionDir)Game\Bin
       </Command>
     </PreBuildEvent>
     <Link>
-      <AdditionalLibraryDirectories>$(SolutionDir)ThirdParty\SDL\Lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)ThirdParty\SDLImage\Lib\x86;$(SolutionDir)ThirdParty\SDL\Lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Console</SubSystem>
     </Link>
   </ItemDefinitionGroup>

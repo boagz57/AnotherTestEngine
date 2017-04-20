@@ -1,4 +1,5 @@
-#include "SDL/SDL.h"
+#include "SDL.h"
+#include "SDL_image.h"
 #include <iostream>
 #include "Window.h"
 
@@ -32,6 +33,13 @@ int main(int agrc, char** argv)
 
 		SDL_DestroyWindow(window);
 		SDL_Quit();
+	}
+
+	//Not necessarily needed but can help with errors
+	int imgFlags = IMG_INIT_PNG | IMG_INIT_JPG;
+	if (!(IMG_Init(imgFlags) & imgFlags))
+	{
+		LOG("SDL_image did not initialize properly. SDL image error: %s", IMG_GetError());
 	}
 
 	//Set background window color when utilizing sdl renderer
@@ -69,6 +77,10 @@ int main(int agrc, char** argv)
 		unsigned int ms = startTime + 16.6 - SDL_GetTicks();
 		SDL_Delay(ms);
 	}
+
+	SDL_DestroyWindow(window);
+	SDL_DestroyRenderer(renderer);
+	SDL_Quit();
 
 	return 0;
 }
