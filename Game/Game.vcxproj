@@ -168,11 +168,11 @@ copy /y  "$(SolutionDir)ThirdParty\SDLImage\Lib\x86\zlib1.dll" "$(SolutionDir)Ga
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Source\Main.cpp" />
-    <ClCompile Include="Source\Window.cpp" />
+    <ClCompile Include="Source\EngineFramework\Window.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Universal\Macro.h" />
-    <ClInclude Include="Source\Window.h" />
+    <ClInclude Include="Source\EngineFramework\Window.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets" />
