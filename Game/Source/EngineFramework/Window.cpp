@@ -19,7 +19,7 @@ namespace Blz
 
 	void Window::Initialize()
 	{
-		if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
+		if (SDL_Init(SDL_INIT_VIDEO) != 0)
 		{
 			SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "SDL Error", "SDL did not initialize", nullptr);
 			SDL_Quit();
@@ -41,6 +41,7 @@ namespace Blz
 
 		glContext = SDL_GL_CreateContext(window);
 
+		glewExperimental = GL_TRUE;
 		if (glewInit() != GLEW_OK)
 		{
 			LOG("ERROR: GLEW failed to initialize!");
