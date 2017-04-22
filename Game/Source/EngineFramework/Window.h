@@ -2,7 +2,7 @@
 #pragma once
 
 /*
-	Responsible for Creating and managing a window context as well as initializing and shutting down 
+	Responsible for Creating and managing an opengl window context as well as initializing and shutting down 
 	third party systems.
 */
 
@@ -18,7 +18,11 @@ namespace Blz
 
 		void Initialize();
 		void Shutdown();
+		void ClearBuffers();
+		void SwapBuffers();
 
+	private:
 		SDL_Window* window;
+		SDL_GLContext glContext;
 	};
 }

@@ -1,6 +1,7 @@
 #include "SDL.h"
 #include "SDL_image.h"
 #include "EngineFramework/Window.h"
+#include "GL/glew.h"
 #include <iostream>
 
 SDL_Texture* texture;
@@ -20,25 +21,9 @@ enum class GameState
 
 void LoadImage(const char* imageFilePath);
 
-
 int main(int agrc, char** argv)
 {
 	window.Initialize();
-
-	renderer = SDL_CreateRenderer(window.window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
-	if (renderer == nullptr)
-	{
-		LOG("ERROR: SDL renderer failed to initialize! SDL error: %s\n", SDL_GetError());
-		SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "SDL Error", "SDL renderer did not initialize properly", window.window);
-
-		SDL_Quit();
-	}
-
-	//Set background window color when utilizing sdl renderer
-	SDL_SetRenderDrawColor(renderer, 0, 0, 0, 1);
-	SDL_RenderFillRect(renderer, nullptr);
-
-	LoadImage("Goku.jpg");
 
 	GameState gamestate{ GameState::PLAY };
 
@@ -61,19 +46,11 @@ int main(int agrc, char** argv)
 			}
 		}
 
+		window.ClearBuffers();
 
-		imageRectangle.x += 5;
 
-		//Draw Game
-		SDL_RenderClear(renderer);
-
-		SDL_RenderCopy(renderer, texture, &screenRectangle, &imageRectangle);
-
-		SDL_RenderPresent(renderer);
+		window.SwapBuffers();
 	}
-
-	SDL_DestroyRenderer(renderer);
-	SDL_Quit();
 
 	return 0;
 }
