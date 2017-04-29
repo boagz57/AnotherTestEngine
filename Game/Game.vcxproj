@@ -172,13 +172,13 @@ copy /y  "$(SolutionDir)ThirdParty\SDL\Lib\x86\SDL2.dll" "$(SolutionDir)Game\Bin
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Source\EngineFramework\GLErrorLogging.cpp" />
+    <ClCompile Include="Source\EngineFramework\GLLogging.cpp" />
     <ClCompile Include="Source\EngineFramework\File.cpp" />
     <ClCompile Include="Source\Main.cpp" />
     <ClCompile Include="Source\EngineFramework\Window.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Source\EngineFramework\GLErrorLogging.h" />
+    <ClInclude Include="Source\EngineFramework\GLLogging.h" />
     <ClInclude Include="Source\EngineFramework\File.h" />
     <ClInclude Include="Source\Universal\Macro.h" />
     <ClInclude Include="Source\EngineFramework\Window.h" />

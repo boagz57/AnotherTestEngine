@@ -2,9 +2,10 @@
 
 namespace Blz
 {
-	namespace OpenGL
+	namespace GLLogging
 	{
 		bool RestartGLLogFile();
+		void LogParameters();
 
 		//Log openGL messages/errors to GL log file
 		bool LogToFile(const char8* Message);

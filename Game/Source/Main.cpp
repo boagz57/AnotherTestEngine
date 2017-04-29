@@ -1,6 +1,6 @@
 #include "SDL.h"
 #include "EngineFramework/Window.h"
-#include "EngineFramework/GLErrorLogging.h"
+#include "EngineFramework/GLLogging.h"
 #include "GL/glew.h"
 #include <iostream>
 
@@ -22,9 +22,6 @@ enum class GameState
 int main(int agrc, char** argv)
 {
 	window.Initialize();
-
-	Blz::OpenGL::RestartGLLogFile();
-	Blz::OpenGL::LogToFileAndConsole("What is this %s", "2323232323ob");
 
 	GameState gamestate{ GameState::PLAY };
 

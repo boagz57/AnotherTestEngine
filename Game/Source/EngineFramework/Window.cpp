@@ -1,5 +1,6 @@
 #include "SDL.h"
 #include "GL/glew.h"
+#include "GLLogging.h"
 #include "Window.h"
 
 namespace Blz
@@ -32,6 +33,10 @@ namespace Blz
 		}
 
 		glContext = SDL_GL_CreateContext(window);
+
+		GLLogging::RestartGLLogFile();
+		GLLogging::LogToFileAndConsole("What is this %s\n", "duuu");
+		GLLogging::LogParameters();
 
 		glewExperimental = GL_TRUE;
 		if (glewInit() != GLEW_OK)

@@ -1,14 +1,15 @@
 #include <ctime>
 #include <stdarg.h>
 #include <fstream>
+#include "GL/glew.h"
 #include "File.h"
-#include "GLErrorLogging.h"
+#include "GLLogging.h"
 
 #define GL_LOG_FILE "gl.log"
 
 namespace Blz
 {
-	namespace OpenGL
+	namespace GLLogging
 	{
 		bool RestartGLLogFile()
 		{
@@ -30,6 +31,32 @@ namespace Blz
 			glLogFile.Close();
 
 			return true;
+		}
+
+		void LogParameters()
+		{
+			GLenum params[] =
+			{
+				GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS,
+				GL_MAX_CUBE_MAP_TEXTURE_SIZE,
+			};
+
+			const char* names[] =
+			{
+				"GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS",
+				"GL_MAX_CUBE_MAP_TEXTURE_SIZE"
+			};
+
+			LogToFile("GL Context Parameters:\n");
+
+			for (uint16 i = 0; i < 1; ++i)
+			{
+				GLint v = 0;
+				glGetIntegerv(params[i], &v);
+				LogToFile("%s %i", names[i], v);
+			}
+
+			LogToFile("-------------------------------------------------\n");
 		}
 
 		bool LogToFile(const char8* c_Message)
