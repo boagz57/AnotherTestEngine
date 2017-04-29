@@ -2,6 +2,8 @@
 #include <stdarg.h>
 #include <stdio.h>
 
+//TODO: change implementation to more secure and portable c++ file handling
+
 namespace Blz 
 { 
 	File::File()
@@ -24,9 +26,9 @@ namespace Blz
 		fclose(p_OutputFile);
 	}
 
-	void File::Open(const char8* cFileName, const char8* mode)
+	void File::Open(const char8* c_FileName, const char8* mode)
 	{
-		p_OutputFile = fopen(cFileName, mode);
+		p_OutputFile = fopen(c_FileName, mode);
 	}
 
 	bool File::Good()
@@ -40,13 +42,13 @@ namespace Blz
 		return true;
 	}
 
-	void File::Write(const char8 * cpMessage, ...)
+	void File::Write(const char8 * cp_Message, ...)
 	{
 		//Believe this captures the ellipsis parameter in your function
 		va_list argptr;
-		va_start(argptr, cpMessage);//Initializes the va_list
+		va_start(argptr, cp_Message);//Initializes the va_list
 
-		vfprintf(p_OutputFile, cpMessage, argptr);
+		vfprintf(p_OutputFile, cp_Message, argptr);
 
 		va_end(argptr);//Cleans up the va_list
 	}

@@ -24,7 +24,7 @@ int main(int agrc, char** argv)
 	window.Initialize();
 
 	Blz::OpenGL::RestartGLLogFile();
-	Blz::OpenGL::LogToFileAndConsole("What is this %s", "Bob");
+	Blz::OpenGL::LogToFileAndConsole("What is this %s", "2323232323ob");
 
 	GameState gamestate{ GameState::PLAY };
 

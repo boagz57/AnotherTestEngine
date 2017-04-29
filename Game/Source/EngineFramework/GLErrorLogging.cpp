@@ -32,7 +32,7 @@ namespace Blz
 			return true;
 		}
 
-		bool LogToFile(const char8* cMessage)
+		bool LogToFile(const char8* c_Message)
 		{
 			File glLogFile;
 			glLogFile.Open(GL_LOG_FILE, "a");
@@ -43,14 +43,14 @@ namespace Blz
 				return false;
 			}
 
-			glLogFile.Write(cMessage);
+			glLogFile.Write(c_Message);
 
 			glLogFile.Close();
 
 			return true;
 		}
 
-		bool LogToFile(const char8* cMessage, const char8* cString)
+		bool LogToFile(const char8* c_Message, const char8* c_String)
 		{
 			File glLogFile;
 			glLogFile.Open(GL_LOG_FILE, "a");
@@ -61,14 +61,14 @@ namespace Blz
 				return false;
 			}
 
-			glLogFile.Write(cMessage, cString);
+			glLogFile.Write(c_Message, c_String);
 
 			glLogFile.Close();
 
 			return true;
 		}
 
-		bool LogToFile(const char8 * cMessage, const char8* cStringToInsertInMessage, int numberToInsertInMessage)
+		bool LogToFile(const char8 * c_Message, const char8* c_StringToInsertInMessage, int numberToInsertInMessage)
 		{
 			File glLogFile;
 			glLogFile.Open(GL_LOG_FILE, "a");
@@ -79,14 +79,14 @@ namespace Blz
 				return false;
 			}
 
-			glLogFile.Write(cMessage, cStringToInsertInMessage, numberToInsertInMessage);
+			glLogFile.Write(c_Message, c_StringToInsertInMessage, numberToInsertInMessage);
 
 			glLogFile.Close();
 
 			return true;
 		}
 
-		bool LogToFile(const char8 * cMessage, int numberToInsertInMessage)
+		bool LogToFile(const char8 * c_Message, int numberToInsertInMessage)
 		{
 			File glLogFile;
 			glLogFile.Open(GL_LOG_FILE, "a");
@@ -97,14 +97,14 @@ namespace Blz
 				return false;
 			}
 
-			glLogFile.Write(cMessage, numberToInsertInMessage);
+			glLogFile.Write(c_Message, numberToInsertInMessage);
 
 			glLogFile.Close();
 
 			return true;
 		}
 
-		bool LogToFileAndConsole(const char8* cMessage)
+		bool LogToFileAndConsole(const char8* c_Message)
 		{
 			File glLogFile;
 			glLogFile.Open(GL_LOG_FILE, "a");
@@ -116,16 +116,16 @@ namespace Blz
 			}
 
 			//Prints to log file
-			glLogFile.Write(cMessage);
+			glLogFile.Write(c_Message);
 			//Prints to console
-			LOG(cMessage);
+			LOG(c_Message);
 
 			glLogFile.Close();
 
 			return true;
 		}
 
-		bool LogToFileAndConsole(const char8 * cMessage, const char8 * cString)
+		bool LogToFileAndConsole(const char8 * c_Message, const char8 * c_String)
 		{
 			File glLogFile;
 			glLogFile.Open(GL_LOG_FILE, "a");
@@ -137,16 +137,16 @@ namespace Blz
 			}
 
 			//Prints to log file
-			glLogFile.Write(cMessage, cString);
+			glLogFile.Write(c_Message, c_String);
 			//Prints to console
-			LOG(cMessage, cString);
+			LOG(c_Message, c_String);
 
 			glLogFile.Close();
 
 			return true;
 		}
 
-		bool LogToFileAndConsole(const char8 * cMessage, const char8 * cString, int number)
+		bool LogToFileAndConsole(const char8 * c_Message, const char8 * c_String, int number)
 		{
 			File glLogFile;
 			glLogFile.Open(GL_LOG_FILE, "a");
@@ -158,16 +158,16 @@ namespace Blz
 			}
 
 			//Prints to log file
-			glLogFile.Write(cMessage, cString, number);
+			glLogFile.Write(c_Message, c_String, number);
 			//Prints to console
-			LOG(cMessage, cString, number);
+			LOG(c_Message, c_String, number);
 
 			glLogFile.Close();
 
 			return true;
 		}
 
-		bool LogToFileAndConsole(const char8 * cMessage, int number)
+		bool LogToFileAndConsole(const char8 * c_Message, int number)
 		{
 			File glLogFile;
 			glLogFile.Open(GL_LOG_FILE, "a");
@@ -179,9 +179,9 @@ namespace Blz
 			}
 
 			//Prints to log file
-			glLogFile.Write(cMessage, number);
+			glLogFile.Write(c_Message, number);
 			//Prints to console
-			LOG(cMessage, number);
+			LOG(c_Message, number);
 
 			glLogFile.Close();
 
