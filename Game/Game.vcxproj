@@ -95,8 +95,8 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>$(SolutionDir)ThirdParty\SDL\Include;$(SolutionDir)ThirdParty\GLEW\Include\;$(SolutionDir)ThirdParty\Boost\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <ForcedIncludeFiles>$(ProjectDir)Source\Universal\Macro.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
-      <PreprocessorDefinitions>GLEW_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ForcedIncludeFiles>$(ProjectDir)Source\Universal\Macro.h;$(ProjectDir)Source\Universal\PrimitiveTypes.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <PreprocessorDefinitions>GLEW_STATIC;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <PostBuildEvent>
       <Command>lib /NOLOGO /OUT:"$(ProjectDir)Binaries\$(PlatformName)-$(Configuration)\$(ProjectName).lib" "$(ProjectDir)Intermediate\$(PlatformName)-$(Configuration)\*.obj"
@@ -142,8 +142,8 @@ copy /y  "$(SolutionDir)ThirdParty\SDL\Lib\x86\SDL2.dll" "$(SolutionDir)Game\Bin
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>$(SolutionDir)ThirdParty\GLEW\Include;$(SolutionDir)ThirdParty\SDL\Include;$(SolutionDir)ThirdParty\Boost\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>GLEW_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ForcedIncludeFiles>$(ProjectDir)Source\Universal\Macro.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <PreprocessorDefinitions>GLEW_STATIC;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ForcedIncludeFiles>$(ProjectDir)Source\Universal\Macro.h;$(ProjectDir)Source\Universal\PrimitiveTypes.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -172,12 +172,17 @@ copy /y  "$(SolutionDir)ThirdParty\SDL\Lib\x86\SDL2.dll" "$(SolutionDir)Game\Bin
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Source\EngineFramework\GLErrorLogging.cpp" />
+    <ClCompile Include="Source\EngineFramework\File.cpp" />
     <ClCompile Include="Source\Main.cpp" />
     <ClCompile Include="Source\EngineFramework\Window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Source\EngineFramework\GLErrorLogging.h" />
+    <ClInclude Include="Source\EngineFramework\File.h" />
     <ClInclude Include="Source\Universal\Macro.h" />
     <ClInclude Include="Source\EngineFramework\Window.h" />
+    <ClInclude Include="Source\Universal\PrimitiveTypes.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets" />
