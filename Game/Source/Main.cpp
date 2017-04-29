@@ -1,5 +1,4 @@
 #include "SDL.h"
-#include "SDL_image.h"
 #include "EngineFramework/Window.h"
 #include "GL/glew.h"
 #include <iostream>
@@ -18,8 +17,6 @@ enum class GameState
 	PLAY,
 	EXIT
 };
-
-void LoadImage(const char* imageFilePath);
 
 int main(int agrc, char** argv)
 {
@@ -53,25 +50,4 @@ int main(int agrc, char** argv)
 	}
 
 	return 0;
-}
-
-void LoadImage(const char* imageFilePath)
-{
-	//Load image into regular RAM memory. Surface means this in SDL
-	SDL_Surface* surface = IMG_Load(imageFilePath);
-	if (surface == nullptr)
-	{
-		LOG("Image did not load into RAM memory properly! SDL_Image error: %s\n", IMG_GetError());
-	}
-
-	//Send image down to GPU hardware memory. Texture means GPU stored image data
-	texture = SDL_CreateTextureFromSurface(renderer, surface);
-	if (texture == nullptr)
-	{
-		LOG("Image did not load into GPU memory properly! SDL_Image error: %s\n", IMG_GetError());
-	}
-
-	//Since we've loaded our image into memory we can now free the RAM memory of our
-	//image data
-	SDL_FreeSurface(surface);
 }
