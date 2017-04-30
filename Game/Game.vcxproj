@@ -172,16 +172,16 @@ copy /y  "$(SolutionDir)ThirdParty\SDL\Lib\x86\SDL2.dll" "$(SolutionDir)Game\Bin
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Source\EngineFramework\GLLogging.cpp" />
-    <ClCompile Include="Source\EngineFramework\File.cpp" />
+    <ClCompile Include="Source\GameEngine\GLLogging.cpp" />
+    <ClCompile Include="Source\GameEngine\File.cpp" />
     <ClCompile Include="Source\Main.cpp" />
-    <ClCompile Include="Source\EngineFramework\Window.cpp" />
+    <ClCompile Include="Source\GameEngine\Window.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Source\EngineFramework\GLLogging.h" />
-    <ClInclude Include="Source\EngineFramework\File.h" />
+    <ClInclude Include="Source\GameEngine\GLLogging.h" />
+    <ClInclude Include="Source\GameEngine\File.h" />
     <ClInclude Include="Source\Universal\Macro.h" />
-    <ClInclude Include="Source\EngineFramework\Window.h" />
+    <ClInclude Include="Source\GameEngine\Window.h" />
     <ClInclude Include="Source\Universal\PrimitiveTypes.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
