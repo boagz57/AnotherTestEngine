@@ -25,6 +25,12 @@ namespace Blz
 			SDL_Quit();
 		}
 
+		//Needs to be set before window creation
+		SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
+		SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 2);
+		SDL_GL_SetAttribute(SDL_GL_CONTEXT_FLAGS, SDL_GL_CONTEXT_FORWARD_COMPATIBLE_FLAG);
+		SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
+
 		window = SDL_CreateWindow("Shadow Gods", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1024, 768, SDL_WINDOW_OPENGL);
 		if (window == nullptr)
 		{
@@ -34,9 +40,12 @@ namespace Blz
 
 		glContext = SDL_GL_CreateContext(window);
 
+		//Turns on or off v-sync
+		SDL_GL_SetSwapInterval(0);
+
 		GLLogging::RestartGLLogFile();
-		GLLogging::LogToFileAndConsole("What is this %s\n", "duuu");
-		GLLogging::LogParameters();
+		LOG("OpenGL version: %s", glGetString(GL_VERSION));
+		GLLogging::LogCurrentGPUCapabilites();
 
 		glewExperimental = GL_TRUE;
 		if (glewInit() != GLEW_OK)
@@ -47,11 +56,6 @@ namespace Blz
 			SDL_DestroyWindow(window);
 			SDL_Quit();
 		}
-
-		SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
-		SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 2);
-		SDL_GL_SetAttribute(SDL_GL_CONTEXT_FLAGS, SDL_GL_CONTEXT_FORWARD_COMPATIBLE_FLAG);
-		SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
 
 		//Sets the values that the depth and color buffers will be set to when glClear
 		//is called

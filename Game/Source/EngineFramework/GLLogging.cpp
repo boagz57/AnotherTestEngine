@@ -33,33 +33,52 @@ namespace Blz
 			return true;
 		}
 
-		void LogParameters()
+		void LogCurrentGPUCapabilites()
 		{
 			GLenum params[] =
 			{
 				GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS,
 				GL_MAX_CUBE_MAP_TEXTURE_SIZE,
+				GL_MAX_DRAW_BUFFERS,
+				GL_MAX_FRAGMENT_UNIFORM_COMPONENTS,
+				GL_MAX_TEXTURE_IMAGE_UNITS,
+				GL_MAX_TEXTURE_SIZE,
+				GL_MAX_VERTEX_ATTRIBS,
+				GL_MAX_VERTEX_TEXTURE_IMAGE_UNITS,
+				GL_MAX_VERTEX_UNIFORM_COMPONENTS,
+				GL_MAX_VIEWPORT_DIMS,
+				GL_STEREO
 			};
 
 			const char* names[] =
 			{
 				"GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS",
 				"GL_MAX_CUBE_MAP_TEXTURE_SIZE"
+				"GL_MAX_DRAW_BUFFERS",
+				"GL_MAX_FRAGMENT_UNIFORM_COMPONENTS",
+				"GL_MAX_TEXTURE_IMAGE_UNITS",
+				"GL_MAX_TEXTURE_SIZE",
+				"GL_MAX_VERTEX_ATTRIBS",
+				"GL_MAX_VERTEX_TEXTURE_IMAGE_UNITS",
+				"GL_MAX_VERTEX_UNIFORM_COMPONENTS",
+				"GL_MAX_VIEWPORT_DIMS",
+				"GL_STEREO"
 			};
 
-			LogToFile("GL Context Parameters:\n");
+			LogToFile("GL Context Parameters:\n\n");
 
-			for (uint16 i = 0; i < 1; ++i)
+			int32 numberOfGLParametersToLog = 9;
+			for (uint16 i = 0; i < numberOfGLParametersToLog; ++i)
 			{
-				GLint v = 0;
+				int32 v = 0;
 				glGetIntegerv(params[i], &v);
-				LogToFile("%s %i", names[i], v);
-			}
+				LogToFile("%s %i\n", names[i], v);
+			};
 
-			LogToFile("-------------------------------------------------\n");
+			LogToFile("-------------------------------------------------\n\n");
 		}
 
-		bool LogToFile(const char8* c_Message)
+		bool LogToFile(const char8* c_Message) 
 		{
 			File glLogFile;
 			glLogFile.Open(GL_LOG_FILE, "a");
@@ -125,6 +144,24 @@ namespace Blz
 			}
 
 			glLogFile.Write(c_Message, numberToInsertInMessage);
+
+			glLogFile.Close();
+
+			return true;
+		}
+
+		bool LogToFile(const char8 * c_Message, int numberToInsertInMessage, int anotherNumToInsertInMessage)
+		{
+			File glLogFile;
+			glLogFile.Open(GL_LOG_FILE, "a");
+
+			if (!glLogFile.Good())
+			{
+				LOG("ERROR: could not open %s file for appending\n", GL_LOG_FILE);
+				return false;
+			}
+
+			glLogFile.Write(c_Message, numberToInsertInMessage, anotherNumToInsertInMessage);
 
 			glLogFile.Close();
 
