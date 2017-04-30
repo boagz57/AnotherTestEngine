@@ -25,7 +25,7 @@ namespace Blz
 			SDL_Quit();
 		}
 
-		//Needs to be set before window creation
+		//Attributes Need to be set before window creation
 		SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
 		SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 2);
 		SDL_GL_SetAttribute(SDL_GL_CONTEXT_FLAGS, SDL_GL_CONTEXT_FORWARD_COMPATIBLE_FLAG);
@@ -43,8 +43,10 @@ namespace Blz
 		//Turns on or off v-sync
 		SDL_GL_SetSwapInterval(0);
 
+		//Log current computer opengl version and capabilities
 		GLLogging::RestartGLLogFile();
-		LOG("OpenGL version: %s", glGetString(GL_VERSION));
+		GLLogging::LogToFile("OpenGL Version %s\n\n", glGetString(GL_VERSION));
+		LOG("OpenGL Version %s", glGetString(GL_VERSION));
 		GLLogging::LogCurrentGPUCapabilites();
 
 		glewExperimental = GL_TRUE;

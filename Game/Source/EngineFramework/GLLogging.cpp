@@ -78,10 +78,14 @@ namespace Blz
 			LogToFile("-------------------------------------------------\n\n");
 		}
 
-		bool LogToFile(const char8* c_Message) 
+		bool LogToFile(const char8* c_Message, ...) 
 		{
 			File glLogFile;
 			glLogFile.Open(GL_LOG_FILE, "a");
+
+			//Captures ellipses arguments
+			va_list argptr;
+			va_start(argptr, c_Message);//Initializes the va_list
 
 			if (!glLogFile.Good())
 			{
@@ -89,167 +93,14 @@ namespace Blz
 				return false;
 			}
 
-			glLogFile.Write(c_Message);
+			glLogFile.Write(c_Message, argptr);
+
+			//cleans up argptr va_list
+			va_end(argptr);
 
 			glLogFile.Close();
 
 			return true;
-		}
-
-		bool LogToFile(const char8* c_Message, const char8* c_String)
-		{
-			File glLogFile;
-			glLogFile.Open(GL_LOG_FILE, "a");
-
-			if (!glLogFile.Good())
-			{
-				LOG("ERROR: could not open %s file for appending\n", GL_LOG_FILE);
-				return false;
-			}
-
-			glLogFile.Write(c_Message, c_String);
-
-			glLogFile.Close();
-
-			return true;
-		}
-
-		bool LogToFile(const char8 * c_Message, const char8* c_StringToInsertInMessage, int numberToInsertInMessage)
-		{
-			File glLogFile;
-			glLogFile.Open(GL_LOG_FILE, "a");
-
-			if (!glLogFile.Good())
-			{
-				LOG("ERROR: could not open %s file for appending\n", GL_LOG_FILE);
-				return false;
-			}
-
-			glLogFile.Write(c_Message, c_StringToInsertInMessage, numberToInsertInMessage);
-
-			glLogFile.Close();
-
-			return true;
-		}
-
-		bool LogToFile(const char8 * c_Message, int numberToInsertInMessage)
-		{
-			File glLogFile;
-			glLogFile.Open(GL_LOG_FILE, "a");
-
-			if (!glLogFile.Good())
-			{
-				LOG("ERROR: could not open %s file for appending\n", GL_LOG_FILE);
-				return false;
-			}
-
-			glLogFile.Write(c_Message, numberToInsertInMessage);
-
-			glLogFile.Close();
-
-			return true;
-		}
-
-		bool LogToFile(const char8 * c_Message, int numberToInsertInMessage, int anotherNumToInsertInMessage)
-		{
-			File glLogFile;
-			glLogFile.Open(GL_LOG_FILE, "a");
-
-			if (!glLogFile.Good())
-			{
-				LOG("ERROR: could not open %s file for appending\n", GL_LOG_FILE);
-				return false;
-			}
-
-			glLogFile.Write(c_Message, numberToInsertInMessage, anotherNumToInsertInMessage);
-
-			glLogFile.Close();
-
-			return true;
-		}
-
-		bool LogToFileAndConsole(const char8* c_Message)
-		{
-			File glLogFile;
-			glLogFile.Open(GL_LOG_FILE, "a");
-
-			if (!glLogFile.Good())
-			{
-				LOG("ERROR: could not open %s file for appending\n", GL_LOG_FILE);
-				return false;
-			}
-
-			//Prints to log file
-			glLogFile.Write(c_Message);
-			//Prints to console
-			LOG(c_Message);
-
-			glLogFile.Close();
-
-			return true;
-		}
-
-		bool LogToFileAndConsole(const char8 * c_Message, const char8 * c_String)
-		{
-			File glLogFile;
-			glLogFile.Open(GL_LOG_FILE, "a");
-
-			if (!glLogFile.Good())
-			{
-				LOG("ERROR: could not open %s file for appending\n", GL_LOG_FILE);
-				return false;
-			}
-
-			//Prints to log file
-			glLogFile.Write(c_Message, c_String);
-			//Prints to console
-			LOG(c_Message, c_String);
-
-			glLogFile.Close();
-
-			return true;
-		}
-
-		bool LogToFileAndConsole(const char8 * c_Message, const char8 * c_String, int number)
-		{
-			File glLogFile;
-			glLogFile.Open(GL_LOG_FILE, "a");
-
-			if (!glLogFile.Good())
-			{
-				LOG("ERROR: could not open %s file for appending\n", GL_LOG_FILE);
-				return false;
-			}
-
-			//Prints to log file
-			glLogFile.Write(c_Message, c_String, number);
-			//Prints to console
-			LOG(c_Message, c_String, number);
-
-			glLogFile.Close();
-
-			return true;
-		}
-
-		bool LogToFileAndConsole(const char8 * c_Message, int number)
-		{
-			File glLogFile;
-			glLogFile.Open(GL_LOG_FILE, "a");
-
-			if (!glLogFile.Good())
-			{
-				LOG("ERROR: could not open %s file for appending\n", GL_LOG_FILE);
-				return false;
-			}
-
-			//Prints to log file
-			glLogFile.Write(c_Message, number);
-			//Prints to console
-			LOG(c_Message, number);
-
-			glLogFile.Close();
-
-			return true;;
 		}
 	}
 }

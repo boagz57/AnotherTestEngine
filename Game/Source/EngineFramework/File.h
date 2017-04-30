@@ -16,6 +16,9 @@ namespace Blz
 
 		void Write(const char8* message, ...);
 
+		//So you can pass around variable arguments from another function to this one
+		void Write(const char8* message, va_list);
+
 	private:
 		const char8* cp_Filename;
 		FILE* p_OutputFile;

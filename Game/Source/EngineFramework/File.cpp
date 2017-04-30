@@ -52,4 +52,11 @@ namespace Blz
 
 		va_end(argptr);//Cleans up the va_list
 	}
+
+	void File::Write(const char8 * cp_Message, va_list argptr)
+	{
+		vfprintf(p_OutputFile, cp_Message, argptr);
+
+		va_end(argptr);
+	}
 }
