@@ -19,6 +19,7 @@ namespace Blz
 
 		ShaderProgram::~ShaderProgram()
 		{
+			glDeleteProgram(programID);
 		}
 
 		void ShaderProgram::CompileAndLink()

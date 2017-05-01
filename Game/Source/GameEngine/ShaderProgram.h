@@ -10,6 +10,8 @@ namespace Blz
 		public:
 			ShaderProgram();
 			~ShaderProgram();
+			ShaderProgram(const ShaderProgram& copy) = delete;
+			void operator=(const ShaderProgram& copy) = delete;
 
 			void CompileAndLink();
 			void Bind();
