@@ -1,6 +1,6 @@
 #include "SDL.h"
-#include "EngineFramework/Window.h"
-#include "EngineFramework/GLLogging.h"
+#include "GameEngine/Window.h"
+#include "GameEngine/GLLogging.h"
 #include "GL/glew.h"
 #include <iostream>
 
