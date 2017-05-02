@@ -1,5 +1,7 @@
 #include "SDL.h"
 #include "GameEngine/Window.h"
+#include "GameEngine\Sprite.h"
+#include "GameEngine\ShaderProgram.h"
 #include "GameEngine/GLLogging.h"
 #include "GL/glew.h"
 #include <iostream>
@@ -7,6 +9,7 @@
 SDL_Texture* texture;
 SDL_Renderer* renderer;
 Blz::Window window;
+Sprite playerSprite;
 
 //For RenderCopy function. ScreenRectanlge captures entire screen while imageRectangle
 //specifies the size you want to display the image
@@ -22,7 +25,8 @@ enum class GameState
 int main(int agrc, char** argv)
 {
 	window.Initialize();
-
+	playerSprite.Init(-1.0f, -1.0f, 1.0f, 1.0f);
+	
 	GameState gamestate{ GameState::PLAY };
 
 	SDL_Event evnt;
@@ -44,8 +48,16 @@ int main(int agrc, char** argv)
 			}
 		}
 
+		Blz::OpenGL::ShaderProgram shaderProgram;
+		shaderProgram.Compile();
+		shaderProgram.AddAttribute("vertexPosition");
+		shaderProgram.AddAttribute("vertexColor");
+		shaderProgram.Link();
+		shaderProgram.Bind();
+
 		window.ClearBuffers();
 
+		playerSprite.Draw();
 
 		window.SwapBuffers();
 	}

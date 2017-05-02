@@ -1,6 +1,6 @@
 #include <cstddef>
 #include "Sprite.h"
-#include "GameEngine/Vector3D.h"
+#include "Vector3D.h"
 #include "GL/glew.h"
 
 Sprite::Sprite()
@@ -42,8 +42,6 @@ void Sprite::Init(float x, float y, float width, float height)
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vertexData), vertexData, GL_STATIC_DRAW);
 
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
-	glEnableVertexAttribArray(0);
-	glEnableVertexAttribArray(1);
 }
 
 void Sprite::Draw()

@@ -13,7 +13,8 @@ namespace Blz
 		ShaderProgram::ShaderProgram() :
 			programID(0),
 			vertexShaderID(0),
-			fragmentShaderID(0)
+			fragmentShaderID(0),
+			numAttributes(0)
 		{
 		}
 
@@ -22,7 +23,7 @@ namespace Blz
 			glDeleteProgram(programID);
 		}
 
-		void ShaderProgram::CompileAndLink()
+		void ShaderProgram::Compile()
 		{
 			//Create GL Shaders
 			vertexShaderID = glCreateShader(GL_VERTEX_SHADER);
@@ -44,7 +45,15 @@ namespace Blz
 
 			if (!CheckShaderStatus(vertexShaderID) || !CheckShaderStatus(fragmentShaderID))
 				return;
+		}
 
+		void ShaderProgram::AddAttribute(Blz::string attributeName)
+		{
+			glBindAttribLocation(programID, numAttributes++, attributeName.c_str());
+		}
+
+		void ShaderProgram::Link()
+		{
 			//Create GL Program
 			programID = glCreateProgram();
 			glAttachShader(programID, vertexShaderID);
@@ -67,12 +76,20 @@ namespace Blz
 		void ShaderProgram::Bind()
 		{
 			glUseProgram(programID);
+			for (int i = 0; i < numAttributes; ++i)
+			{
+				glEnableVertexAttribArray(i);
+			}
 		}
 
 		void ShaderProgram::UnBind()
 		{
 			//Setting to 0 will effectively unbind program in OpenGL
 			glUseProgram(0);
+			for (int i = 0; i < numAttributes; ++i)
+			{
+				glDisableVertexAttribArray(i);
+			}
 		}
 
 		bool ShaderProgram::CheckShaderStatus(GLuint shaderID)

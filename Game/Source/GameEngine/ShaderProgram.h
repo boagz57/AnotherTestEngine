@@ -13,7 +13,9 @@ namespace Blz
 			ShaderProgram(const ShaderProgram& copy) = delete;
 			void operator=(const ShaderProgram& copy) = delete;
 
-			void CompileAndLink();
+			void Compile();
+			void AddAttribute(Blz::string attributeName);
+			void Link();
 			void Bind();
 			void UnBind();
 
@@ -21,6 +23,7 @@ namespace Blz
 			GLuint programID;
 			GLuint vertexShaderID;
 			GLuint fragmentShaderID;
+			uint16 numAttributes;
 
 			bool CheckShaderProgramStatus(GLuint programID);
 			bool CheckShaderStatus(GLuint shaderID);

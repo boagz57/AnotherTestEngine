@@ -1,5 +1,7 @@
 #pragma once
+#include <string>
 #include <stdint.h>
+
 
 typedef unsigned int uint;
 typedef uint64_t uint64;
@@ -12,3 +14,8 @@ typedef size_t sizeofobject;
 typedef char char8;
 typedef float sfloat;
 typedef double dfloat;
+
+namespace Blz
+{
+	typedef std::string string;
+}
