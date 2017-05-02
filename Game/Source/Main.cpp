@@ -1,13 +1,12 @@
 #include "SDL.h"
 #include "GameEngine/Window.h"
 #include "GameEngine\Sprite.h"
+#include "STB_Img\stb_image.h"
 #include "GameEngine\ShaderProgram.h"
 #include "GameEngine/GLLogging.h"
 #include "GL/glew.h"
 #include <iostream>
 
-SDL_Texture* texture;
-SDL_Renderer* renderer;
 Blz::Window window;
 Sprite playerSprite;
 
