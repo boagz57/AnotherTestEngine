@@ -9,7 +9,7 @@
 
 namespace Blz
 {
-	namespace GLLogging
+	namespace OpenGL
 	{
 		bool RestartGLLogFile()
 		{
@@ -65,7 +65,10 @@ namespace Blz
 				"GL_STEREO"
 			};
 
-			LogToFile("GL Context Parameters:\n\n");
+			//Header
+			OpenGL::LogToFile("-------------------------------------------------\n");
+			LogToFile("GL Context Parameters:\n");
+			OpenGL::LogToFile("-------------------------------------------------\n\n");
 
 			int32 numberOfGLParametersToLog = 9;
 			for (uint16 i = 0; i < numberOfGLParametersToLog; ++i)
@@ -74,11 +77,21 @@ namespace Blz
 				glGetIntegerv(params[i], &v);
 				LogToFile("%s %i\n", names[i], v);
 			};
-
-			LogToFile("-------------------------------------------------\n\n");
 		}
 
-		bool LogToFile(const char8* c_Message, ...) 
+		void LogTest(GLuint shaderProgramID)
+		{
+			//Header
+			OpenGL::LogToFile("-------------------------------------------------\n");
+			OpenGL::LogToFile("Shader program %i\n", shaderProgramID);
+			OpenGL::LogToFile("-------------------------------------------------\n\n");
+
+			GLint params = -1;
+			glGetProgramiv(shaderProgramID, GL_LINK_STATUS, &params);
+			OpenGL::LogToFile("GL_LINK_STATUS = %i\n", params);
+		}
+
+		bool LogToFile(const char8* c_Message, ...)
 		{
 			File glLogFile;
 			glLogFile.Open(GL_LOG_FILE, "a");

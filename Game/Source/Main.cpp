@@ -30,6 +30,15 @@ int main(int agrc, char** argv)
 
 	SDL_Event evnt;
 
+	Blz::OpenGL::ShaderProgram colorShaderProgram;
+	colorShaderProgram.Compile();
+	colorShaderProgram.AddAttribute("vertexPosition");
+	colorShaderProgram.AddAttribute("vertexColor");
+	colorShaderProgram.Link();
+	colorShaderProgram.Bind();
+
+	Blz::OpenGL::LogTest(colorShaderProgram.programID);
+
 	while (gamestate != GameState::EXIT)
 	{
 		unsigned int startTime = SDL_GetTicks();
@@ -46,13 +55,6 @@ int main(int agrc, char** argv)
 				break;
 			}
 		}
-
-		Blz::OpenGL::ShaderProgram shaderProgram;
-		shaderProgram.Compile();
-		shaderProgram.AddAttribute("vertexPosition");
-		shaderProgram.AddAttribute("vertexColor");
-		shaderProgram.Link();
-		shaderProgram.Bind();
 
 		window.ClearBuffers();
 

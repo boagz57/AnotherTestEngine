@@ -19,8 +19,10 @@ namespace Blz
 			void Bind();
 			void UnBind();
 
+		public:
+			const GLuint programID;
+
 		private:
-			GLuint programID;
 			GLuint vertexShaderID;
 			GLuint fragmentShaderID;
 			uint16 numAttributes;

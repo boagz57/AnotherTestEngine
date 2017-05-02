@@ -11,7 +11,7 @@ namespace Blz
 		std::string ReadShaderSource(const char8* c_ShaderFilePath, const char8* c_TypeOfShader);
 
 		ShaderProgram::ShaderProgram() :
-			programID(0),
+			programID(glCreateProgram()),
 			vertexShaderID(0),
 			fragmentShaderID(0),
 			numAttributes(0)
@@ -54,8 +54,6 @@ namespace Blz
 
 		void ShaderProgram::Link()
 		{
-			//Create GL Program
-			programID = glCreateProgram();
 			glAttachShader(programID, vertexShaderID);
 			glAttachShader(programID, fragmentShaderID);
 
