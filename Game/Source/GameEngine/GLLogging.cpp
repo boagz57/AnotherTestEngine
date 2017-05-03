@@ -1,6 +1,7 @@
 #include <ctime>
 #include <stdarg.h>
 #include <fstream>
+#include <cstdio>
 #include "GL/glew.h"
 #include "File.h"
 #include "GLLogging.h"
@@ -11,6 +12,9 @@ namespace Blz
 {
 	namespace OpenGL
 	{
+		//Helper functions
+		const char8* GLTypeToString(GLenum type);
+
 		bool RestartGLLogFile()
 		{
 			//Will create a NEW gl.log file, or replace old one, each compilation. 
@@ -79,16 +83,112 @@ namespace Blz
 			};
 		}
 
-		void LogTest(GLuint shaderProgramID)
+		void LogShaderProgramProperties(GLuint shaderProgramID)
 		{
 			//Header
 			OpenGL::LogToFile("-------------------------------------------------\n");
 			OpenGL::LogToFile("Shader program %i\n", shaderProgramID);
 			OpenGL::LogToFile("-------------------------------------------------\n\n");
 
-			GLint params = -1;
-			glGetProgramiv(shaderProgramID, GL_LINK_STATUS, &params);
-			OpenGL::LogToFile("GL_LINK_STATUS = %i\n", params);
+			int32 result = -1;
+			glGetProgramiv(shaderProgramID, GL_LINK_STATUS, &result);
+			OpenGL::LogToFile("GL_LINK_STATUS = %s\n", (result == GL_TRUE) ? "SUCCESS" : "FAILURE");
+
+			glGetProgramiv(shaderProgramID, GL_ATTACHED_SHADERS, &result);
+			OpenGL::LogToFile("GL_ATTACHED_SHADERS = %i\n", result);
+
+			glGetProgramiv(shaderProgramID, GL_ACTIVE_ATTRIBUTES, &result);
+			OpenGL::LogToFile("GL_ACTIVE_ATTRIBUTES = %i\n", result);
+
+			//Will log all current active attributes for program/shader
+			for (GLuint i = 0; i < (GLuint)result; ++i)
+			{
+				char8 name[64];
+				int32 maxLength = 64;
+				int32 actualLength = 0;
+				int32 size = 0;
+				GLenum type;
+
+				glGetActiveAttrib(shaderProgramID, i, maxLength, &actualLength, &size, &type, name);
+				if (size > 1)
+				{
+					//Sometimes an attribute will contain an array of other attributes for which this
+					//loop will catch and print all contained variables
+					for (int j = 0; j < size; j++)
+					{
+						char8 longName[64];
+						sprintf(longName, "%s[%i]", name, j);
+						int32 location = glGetAttribLocation(shaderProgramID, longName);
+						OpenGL::LogToFile(" - %i) type:%s name:%s location: %i\n", i, GLTypeToString(type), name, location);
+					}
+				}
+				else
+				{
+					//Just print single attribute information
+					int32 location = glGetAttribLocation(shaderProgramID, name);
+					OpenGL::LogToFile(" - %i) type:%s name:%s location %i\n", i, GLTypeToString(type), name, location);
+				}
+			}
+
+			glGetProgramiv(shaderProgramID, GL_ACTIVE_UNIFORMS, &result);
+			LogToFile("GL_ACTIVE_UNIFORMS = %i\n", result);
+
+			//Will log all current active attributes for program/shader
+			for (GLuint i = 0; i < (GLuint)result; ++i)
+			{
+				char8 name[64];
+				int32 maxLength = 64;
+				int32 actualLength = 0;
+				int32 size = 0;
+				GLenum type;
+
+				glGetActiveUniform(shaderProgramID, i, maxLength, &actualLength, &size, &type, name);
+				if (size > 1)
+				{
+					//In case a uniform contains an array of other variables/uniforms
+					for (int j = 0; j < size; j++)
+					{
+						char8 longName[64];
+						sprintf(longName, "%s[%i]", name, j);
+						int32 location = glGetUniformLocation(shaderProgramID, longName);
+						OpenGL::LogToFile(" - %i) type:%s name:%s location: %i\n", i, GLTypeToString(type), longName, location);
+					}
+				}
+				else
+				{
+					//Just print single uniform variable 
+					int32 location = glGetAttribLocation(shaderProgramID, name);
+					OpenGL::LogToFile(" - %i) type:%s name:%s location %i\n", i, GLTypeToString(type), name, location);
+				}
+			}
+
+			int32 maxLength = 2048;
+			int32 actualLength = 0;
+			char8 log[2048];
+			glGetProgramInfoLog(shaderProgramID, maxLength, &actualLength, log);
+			OpenGL::LogToFile("Program info log for GL index %u:\n%s", shaderProgramID, log);
+		}
+
+		bool IsProgramValid(GLuint shaderProgramID)
+		{
+			glValidateProgram(shaderProgramID);
+
+			int32 result = -1;
+			glGetProgramiv(shaderProgramID, GL_VALIDATE_STATUS, &result);
+			LOG("program %i GL_VALIDATE_STATUS = %s\n", shaderProgramID, (result == GL_TRUE) ? "VALID" : "INVALID!");
+
+			if (result != GL_TRUE)
+			{
+				int32 maxLength = 2048;
+				int32 actualLength = 0;
+				char8 log[2048];
+				glGetProgramInfoLog(shaderProgramID, maxLength, &actualLength, log);
+				OpenGL::LogToFile("Program info log for GL index %u:\n%s", shaderProgramID, log);
+
+				return false;
+			}
+
+			return true;
 		}
 
 		bool LogToFile(const char8* c_Message, ...)
@@ -114,6 +214,33 @@ namespace Blz
 			glLogFile.Close();
 
 			return true;
+		}
+
+		//Helper function definitions
+
+		//Used to make GL types printable and readable in the log file
+		const char8* GLTypeToString(GLenum type)
+		{
+			switch (type)
+			{
+			case GL_BOOL: return "bool";
+			case GL_INT: return "int";
+			case GL_FLOAT: return "float";
+			case GL_FLOAT_VEC2: return "vec2";
+			case GL_FLOAT_VEC3: return "vec3";
+			case GL_FLOAT_VEC4: return "vec4";
+			case GL_FLOAT_MAT2: return "mat2";
+			case GL_FLOAT_MAT3: return "mat3";
+			case GL_FLOAT_MAT4: return "mat4";
+			case GL_SAMPLER_2D: return "sampler2D";
+			case GL_SAMPLER_3D: return "sampler3D";
+			case GL_SAMPLER_CUBE: return "samplerCube";
+			case GL_SAMPLER_2D_SHADOW: return "sampler2DShadow";
+
+			default: break;
+			}
+
+			return "other";
 		}
 	}
 }

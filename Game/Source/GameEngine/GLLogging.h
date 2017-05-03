@@ -1,5 +1,10 @@
 #pragma once
 
+/*
+	These functions handle all openGL error/status checks and logs (either to console or gl log file)
+	the result for 'easy' problem identification
+*/
+
 namespace Blz
 {
 	namespace OpenGL
@@ -8,7 +13,8 @@ namespace Blz
 		bool RestartGLLogFile();
 
 		void LogCurrentGPUCapabilites();
-		void LogTest(GLuint shaderProgram);
+		void LogShaderProgramProperties(GLuint shaderProgramID);
+		bool IsProgramValid(GLuint shaderProgramID);
 
 		//Log openGL messages/errors to GL log file
 		bool LogToFile(const char8* Message, ...);

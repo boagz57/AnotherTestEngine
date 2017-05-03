@@ -37,7 +37,11 @@ int main(int agrc, char** argv)
 	colorShaderProgram.Link();
 	colorShaderProgram.Bind();
 
-	Blz::OpenGL::LogTest(colorShaderProgram.programID);
+	//This function should only be run in debug or development builds as it can be very computationally
+	//expensive 
+	Blz::OpenGL::IsProgramValid(colorShaderProgram.programID);
+
+	Blz::OpenGL::LogShaderProgramProperties(colorShaderProgram.programID);
 
 	while (gamestate != GameState::EXIT)
 	{
