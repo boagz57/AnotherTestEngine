@@ -12,6 +12,7 @@ typedef int32_t int32;
 typedef int16_t int16;
 typedef size_t sizeofobject;
 typedef char char8;
+typedef unsigned char uchar8;
 typedef float sfloat;
 typedef double dfloat;
 
