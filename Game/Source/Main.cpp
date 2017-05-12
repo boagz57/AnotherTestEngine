@@ -1,7 +1,6 @@
 #include "SDL.h"
 #include "GameEngine/Window.h"
 #include "GameEngine\Sprite.h"
-#include "GameEngine\ImageHandling.h"
 #include "GameEngine\ShaderProgram.h"
 #include "STB_Img\stb_image.h"
 #include "GameEngine/GLLogging.h"
@@ -47,7 +46,7 @@ int main(int agrc, char** argv)
 	int32 x, y, currentChannels;
 	int32 forceChannels = 4;
 	uchar8* imageData = 0;
-	imageData = stbi_load("", &x, &y, &currentChannels, forceChannels);
+	imageData = stbi_load("CharImage.png", &x, &y, &currentChannels, forceChannels);
 
 	if (imageData == nullptr)
 	{
