@@ -30,19 +30,6 @@ int main(int agrc, char** argv)
 
 	SDL_Event evnt;
 
-	Blz::OpenGL::ShaderProgram colorShaderProgram;
-	colorShaderProgram.Compile();
-	colorShaderProgram.AddAttribute("vertexPosition");
-	colorShaderProgram.AddAttribute("vertexColor");
-	colorShaderProgram.Link();
-	colorShaderProgram.Bind();
-
-	//This function should only be run in debug or development builds as it can be very computationally
-	//expensive 
-	Blz::OpenGL::IsProgramValid(colorShaderProgram.programID);
-
-	Blz::OpenGL::LogShaderProgramProperties(colorShaderProgram.programID);
-
 	int32 x, y, currentChannels;
 	int32 forceChannels = 4;
 	uchar8* imageData = 0;
@@ -53,15 +40,32 @@ int main(int agrc, char** argv)
 		LOG("ERROR: Could not load image file!");
 	};
 
+	Blz::OpenGL::ShaderProgram colorShaderProgram;
+	colorShaderProgram.Compile();
+	colorShaderProgram.Link();
+	colorShaderProgram.Bind();
+
 	GLuint texture;
 	glGenTextures(1, &texture);
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, texture);
+	GLuint uniformLocation = glGetUniformLocation(colorShaderProgram.programID, "basicTexture");
+	glUniform1i(uniformLocation, 0);
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, x, y, 0, GL_RGBA, GL_UNSIGNED_BYTE, imageData);
 	glTextureParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
 	glTextureParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-	glTextureParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	glTextureParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTextureParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTextureParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+
+	//This function should only be run in debug or development builds as it can be very computationally
+	//expensive 
+	Blz::OpenGL::IsProgramValid(colorShaderProgram.programID);
+
+	Blz::OpenGL::LogShaderProgramProperties(colorShaderProgram.programID);
+
+
+	glEnableVertexAttribArray(0);
+	glEnableVertexAttribArray(1);
 
 	while (gamestate != GameState::EXIT)
 	{

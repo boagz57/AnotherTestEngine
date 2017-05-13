@@ -3,8 +3,8 @@
 
 struct Position
 {
-	Position();
-	Position(float x, float y, float z);
+	inline Position();
+	inline Position(float x, float y, float z);
 	float x;
 	float y;
 	float z;
@@ -25,13 +25,22 @@ struct Color
 	GLubyte a;
 };
 
+struct TextureCoordinate
+{
+	float u;
+	float v;
+};
+
 struct Vector3D
 {
-	Vector3D();
-	Vector3D(float x, float y, float z);
+	inline Vector3D();
+	inline Vector3D(float x, float y, float z);
 
 	Position position;
 	Color color;
+	TextureCoordinate textCoordinate;
+
+	inline void setUV(float u, float v);
 };
 
 Vector3D::Vector3D()
@@ -40,3 +49,9 @@ Vector3D::Vector3D()
 Vector3D::Vector3D(float x, float y, float z) :
 	position(x, y, z)
 {}
+
+void Vector3D::setUV(float u, float v)
+{
+	this->textCoordinate.u = u;
+	this->textCoordinate.v = v;
+}
