@@ -24,6 +24,30 @@ namespace Blz
 			texture.width = x;
 			texture.height = y;
 
+			//Flip image right side up before sending to OpenGL since openGL will read it in upside down. Following code is utilizing pointer
+			//arithmetic 
+			int32 widthInBytes = texture.width * 4;
+			uchar8 *topRowOfTexels = nullptr;
+			uchar8 *bottomRowOfTexels = nullptr;
+			uchar8 temp = 0;
+			int32 halfHeight = texture.height / 2;
+
+			for (int32 row = 0; row < halfHeight; ++row)
+			{
+				topRowOfTexels = imageData + row * widthInBytes;
+				bottomRowOfTexels = imageData + (texture.height - row - 1) * widthInBytes;
+
+				for (int col = 0; col < widthInBytes; ++col)
+				{
+					temp = *topRowOfTexels;
+					*topRowOfTexels = *bottomRowOfTexels;
+					*bottomRowOfTexels = temp;
+					topRowOfTexels++;
+					bottomRowOfTexels++;
+				}
+			}
+
+			//Send down imageData to openGL and set some parameters for image
 			glGenTextures(1, &(texture.id));
 			glActiveTexture(GL_TEXTURE0);
 			glBindTexture(GL_TEXTURE_2D, texture.id);

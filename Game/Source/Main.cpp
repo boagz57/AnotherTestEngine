@@ -31,7 +31,9 @@ int main(int agrc, char** argv)
 
 	SDL_Event evnt;
 
-	Blz::OpenGL::ShaderProgram colorShaderProgram;
+	Blz::OpenGL::ShaderProgram colorShaderProgram("Source/GameEngine/Shaders/VertexShader.glsl", 
+		"Source/GameEngine/Shaders/FragmentShader.glsl");
+
 	colorShaderProgram.Compile();
 	colorShaderProgram.AddAttribute("vertexPosition");
 	colorShaderProgram.AddAttribute("textCoord");
@@ -40,7 +42,7 @@ int main(int agrc, char** argv)
 
 	Blz::OpenGL::LoadImage("CharImage.png");
 
-	GLuint uniformLocation = glGetUniformLocation(colorShaderProgram.programID, "basicTexture");
+	GLuint uniformLocation = colorShaderProgram.GetUniformLocation("basicTexture");
 	glUniform1i(uniformLocation, 0);
 
 	//This function should only be run in debug or development builds as it can be very computationally

@@ -10,12 +10,14 @@ namespace Blz
 		//Class Helper functions
 		std::string ReadShaderSource(const char8* c_ShaderFilePath, const char8* c_TypeOfShader);
 
-		ShaderProgram::ShaderProgram() :
+		ShaderProgram::ShaderProgram(Blz::string vertexShaderFilePath, Blz::string fragmentShaderFilePath) :
 			programID(glCreateProgram()),
 			vertexShaderID(0),
 			fragmentShaderID(0),
 			numAttributes(0)
 		{
+			vertexShaderFile = vertexShaderFilePath;
+			fragmentShaderFile = fragmentShaderFilePath;
 		}
 
 		ShaderProgram::~ShaderProgram()
@@ -32,11 +34,11 @@ namespace Blz
 			const GLchar* cAdapter[1];
 
 			//Add source or text file to shader object
-			std::string temp = ReadShaderSource("Source/GameEngine/Shaders/VertexShader.glsl", "Vertex").c_str();
+			std::string temp = ReadShaderSource(vertexShaderFile.c_str(), "Vertex").c_str();
 			cAdapter[0] = temp.c_str();
 			glShaderSource(vertexShaderID, 1, cAdapter, 0);
 
-			temp = ReadShaderSource("Source/GameEngine/Shaders/FragmentShader.glsl", "Fragment").c_str();
+			temp = ReadShaderSource(fragmentShaderFile.c_str(), "Fragment").c_str();
 			cAdapter[0] = temp.c_str();
 			glShaderSource(fragmentShaderID, 1, cAdapter, 0);
 
@@ -50,6 +52,12 @@ namespace Blz
 		void ShaderProgram::AddAttribute(Blz::string attributeName)
 		{
 			glBindAttribLocation(programID, numAttributes++, attributeName.c_str());
+		}
+
+		GLuint ShaderProgram::GetUniformLocation(Blz::string uniformNameFromShader)
+		{
+			GLuint location = glGetUniformLocation(programID, uniformNameFromShader.c_str());
+			return location;
 		}
 
 		void ShaderProgram::Link()
