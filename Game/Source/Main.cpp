@@ -42,6 +42,8 @@ int main(int agrc, char** argv)
 
 	Blz::OpenGL::ShaderProgram colorShaderProgram;
 	colorShaderProgram.Compile();
+	colorShaderProgram.AddAttribute("vertexPosition");
+	colorShaderProgram.AddAttribute("textCoord");
 	colorShaderProgram.Link();
 	colorShaderProgram.Bind();
 
@@ -62,10 +64,6 @@ int main(int agrc, char** argv)
 	Blz::OpenGL::IsProgramValid(colorShaderProgram.programID);
 
 	Blz::OpenGL::LogShaderProgramProperties(colorShaderProgram.programID);
-
-
-	glEnableVertexAttribArray(0);
-	glEnableVertexAttribArray(1);
 
 	while (gamestate != GameState::EXIT)
 	{

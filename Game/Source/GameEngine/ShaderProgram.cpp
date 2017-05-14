@@ -74,20 +74,20 @@ namespace Blz
 		void ShaderProgram::Bind()
 		{
 			glUseProgram(programID);
-			/*for (int i = 0; i < numAttributes; ++i)
+			for (int i = 0; i < numAttributes; ++i)
 			{
 				glEnableVertexAttribArray(i);
-			}*/
+			};
 		}
 
 		void ShaderProgram::UnBind()
 		{
 			//Setting to 0 will effectively unbind program in OpenGL
 			glUseProgram(0);
-			/*for (int i = 0; i < numAttributes; ++i)
+			for (int i = 0; i < numAttributes; ++i)
 			{
 				glDisableVertexAttribArray(i);
-			}*/
+			}
 		}
 
 		bool ShaderProgram::CheckShaderStatus(GLuint shaderID)
