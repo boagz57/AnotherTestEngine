@@ -3,10 +3,13 @@
 
 namespace Blz
 {
-	struct GLTexture
+	namespace OpenGL
 	{
-		GLuint id;
-		int32 width;
-		int32 height;
-	};
+		struct GLTexture
+		{
+			GLuint id;
+			int32 width;
+			int32 height;
+		};
+	}
 }
