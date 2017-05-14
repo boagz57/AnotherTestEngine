@@ -81,10 +81,9 @@ namespace Blz
 			glDebugMessageControl(GL_DONT_CARE, GL_DONT_CARE, GL_DONT_CARE, 0, nullptr, GL_TRUE);
 		}
 
-		//Sets the values that the depth and color buffers will be set to when glClear
-		//is called
+		//Sets the values that the depth and color buffers will be set to when glClear is called
 		glClearDepth(1.0);
-		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+		glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
 	}
 
 	void Window::Shutdown()
