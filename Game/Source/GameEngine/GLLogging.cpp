@@ -157,7 +157,7 @@ namespace Blz
 				else
 				{
 					//Just print single uniform variable 
-					int32 location = glGetAttribLocation(shaderProgramID, name);
+					int32 location = glGetUniformLocation(shaderProgramID, name);
 					OpenGL::LogToFile(" - %i) type:%s name:%s location %i\n", i, GLTypeToString(type), name, location);
 				}
 			}
