@@ -1,5 +1,6 @@
 #include <cstddef>
 #include "Sprite.h"
+#include "ImageHandling.h"
 #include "Vector3D.h"
 #include "GL/glew.h"
 
@@ -10,9 +11,12 @@ Sprite::Sprite()
 
 Sprite::~Sprite()
 {
+	//Clean up sprite buffers on GPU when done with sprite
+	if (vboID != 0)
+		glDeleteBuffers(1, &vboID);
 }
 
-void Sprite::Init(float x, float y, float width, float height)
+void Sprite::Init(float x, float y, float width, float height, Blz::string imageFilePath)
 {
 	this->x = x;
 	this->y = y;
@@ -21,6 +25,8 @@ void Sprite::Init(float x, float y, float width, float height)
 
 	if (vboID == 0)
 		glGenBuffers(1, &vboID);
+
+	texture = Blz::OpenGL::LoadImage(imageFilePath);
 
 	Vector3D vertexData[6]{
 		Vector3D {x + width, y + height, 1.0f},
@@ -53,6 +59,7 @@ void Sprite::Init(float x, float y, float width, float height)
 
 void Sprite::Draw()
 {
+	glBindTexture(GL_TEXTURE_2D, texture.id);
 	glBindBuffer(GL_ARRAY_BUFFER, vboID);
 
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vector3D), (void*)offsetof(Vector3D, position));

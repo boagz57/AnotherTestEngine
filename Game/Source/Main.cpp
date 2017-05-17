@@ -1,3 +1,4 @@
+#include <vector>
 #include "SDL.h"
 #include "GameEngine/Window.h"
 #include "GameEngine\Sprite.h"
@@ -10,6 +11,8 @@
 
 Blz::Window window;
 Sprite playerSprite;
+
+std::vector<Sprite*> p_sprites;
 
 //For RenderCopy function. ScreenRectanlge captures entire screen while imageRectangle
 //specifies the size you want to display the image
@@ -25,22 +28,27 @@ enum class GameState
 int main(int agrc, char** argv)
 {
 	window.Initialize();
-	playerSprite.Init(-1.0f, -1.0f, 1.0f, 1.0f);
-	
+
+	p_sprites.push_back(new Sprite());
+	p_sprites.back()->Init(-1.0f, 0.0f, 1.0f, 1.0f, "CharImage.png");
+
+	p_sprites.push_back(new Sprite());
+	p_sprites.back()->Init(-1.0f, -1.0f, 1.0f, 1.0f, "CharImage.png");
+
+	p_sprites.push_back(new Sprite());
+	p_sprites.back()->Init(0.0f, -1.0f, 1.0f, 1.0f, "CharImage.png");
+
 	GameState gamestate{ GameState::PLAY };
 
 	SDL_Event evnt;
 
-	Blz::OpenGL::ShaderProgram colorShaderProgram("Source/GameEngine/Shaders/VertexShader.glsl", 
-		"Source/GameEngine/Shaders/FragmentShader.glsl");
+	Blz::OpenGL::ShaderProgram colorShaderProgram("Source/GameEngine/Shaders/VertexShader.glsl", "Source/GameEngine/Shaders/FragmentShader.glsl");
 
 	colorShaderProgram.Compile();
 	colorShaderProgram.AddAttribute("vertexPosition");
 	colorShaderProgram.AddAttribute("textCoord");
 	colorShaderProgram.Link();
 	colorShaderProgram.Bind();
-
-	Blz::OpenGL::LoadImage("CharImage.png");
 
 	GLuint uniformLocation = colorShaderProgram.GetUniformLocation("basicTexture");
 	glUniform1i(uniformLocation, 0);
@@ -70,7 +78,8 @@ int main(int agrc, char** argv)
 
 		window.ClearBuffers();
 
-		playerSprite.Draw();
+		for (int i = 0; i < p_sprites.size(); ++i)
+			p_sprites[i]->Draw();
 
 		window.SwapBuffers();
 	}

@@ -2,7 +2,6 @@
 #include <string>
 #include <stdint.h>
 
-
 typedef unsigned int uint;
 typedef uint64_t uint64;
 typedef uint32_t uint32;
@@ -15,8 +14,4 @@ typedef char char8;
 typedef unsigned char uchar8;
 typedef float sfloat;
 typedef double dfloat;
-
-namespace Blz
-{
-	typedef std::string string;
-}
+namespace Blz { typedef std::string string; };

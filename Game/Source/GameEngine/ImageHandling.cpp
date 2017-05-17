@@ -65,7 +65,7 @@ namespace Blz
 			};
 
 			//Unbind Texture
-			//glBindTexture(GL_TEXTURE_2D, 0);
+			glBindTexture(GL_TEXTURE_2D, 0);
 
 			return texture;
 		}
