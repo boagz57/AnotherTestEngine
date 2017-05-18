@@ -25,18 +25,68 @@ enum class GameState
 	EXIT
 };
 
+
+
+void CalculateFPS()
+{
+	static uint32 FPS;
+	static uint32 frameTime;
+	static int32 currentFrame = 0;
+
+	static const int32 c_numSamples = 10;
+	static uint32 frameTimes[c_numSamples];
+
+	static uint32 previousTicks = SDL_GetTicks();
+
+	uint32 currentTicks = SDL_GetTicks();
+
+	frameTime = currentTicks - previousTicks;
+	frameTimes[currentFrame % c_numSamples] = frameTime;
+
+	previousTicks = currentTicks;
+
+	uint32 count;
+
+	currentFrame++;
+
+	if (currentFrame < c_numSamples)
+	{
+		count = currentFrame; 
+	}
+	else
+	{
+		count = c_numSamples;
+	}
+	
+	sfloat frameTimeAverage = 0;
+	for (int32 i = 0; i < count; ++i)
+	{
+		frameTimeAverage += frameTimes[i];
+	}
+
+	frameTimeAverage /= count;
+
+	if (frameTimeAverage > 0)
+	{
+		FPS = 1000 / frameTimeAverage;
+	}
+	else
+	{
+		FPS = 60.0f;
+	}
+
+	LOG("%i\n", FPS);
+}
+
 int main(int agrc, char** argv)
 {
 	window.Initialize();
 
-	p_sprites.push_back(new Sprite());
-	p_sprites.back()->Init(-1.0f, 0.0f, 1.0f, 1.0f, "CharImage.png");
-
-	p_sprites.push_back(new Sprite());
-	p_sprites.back()->Init(-1.0f, -1.0f, 1.0f, 1.0f, "CharImage.png");
-
-	p_sprites.push_back(new Sprite());
-	p_sprites.back()->Init(0.0f, -1.0f, 1.0f, 1.0f, "CharImage.png");
+	for (int i = 0; i < 10000; ++i)
+	{
+		p_sprites.push_back(new Sprite());
+		p_sprites.back()->Init(-1.0f, 0.0f, 1.0f, 1.0f, "CharImage.png");
+	};
 
 	GameState gamestate{ GameState::PLAY };
 
@@ -61,7 +111,7 @@ int main(int agrc, char** argv)
 
 	while (gamestate != GameState::EXIT)
 	{
-		unsigned int startTime = SDL_GetTicks();
+		uint32 startTime = SDL_GetTicks();
 
 		//Game Logic Update
 		while (SDL_PollEvent(&evnt))
@@ -78,10 +128,17 @@ int main(int agrc, char** argv)
 
 		window.ClearBuffers();
 
-		for (int i = 0; i < p_sprites.size(); ++i)
+		for (uint32 i = 0; i < p_sprites.size(); ++i)
 			p_sprites[i]->Draw();
 
 		window.SwapBuffers();
+
+		CalculateFPS();
+
+		//uint32 currentTime = SDL_GetTicks() - startTime;
+
+		//if (1000.0f / 60.0f > currentTime)
+		//	SDL_Delay(1000.0f / (60.0f - currentTime));
 	}
 
 	return 0;
