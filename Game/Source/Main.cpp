@@ -25,7 +25,7 @@ enum class GameState
 	EXIT
 };
 
-
+const uint32 maxFPS = 60;
 
 void CalculateFPS()
 {
@@ -82,7 +82,7 @@ int main(int agrc, char** argv)
 {
 	window.Initialize();
 
-	for (int i = 0; i < 10000; ++i)
+	for (int i = 0; i < 1000; ++i)
 	{
 		p_sprites.push_back(new Sprite());
 		p_sprites.back()->Init(-1.0f, 0.0f, 1.0f, 1.0f, "CharImage.png");
@@ -135,10 +135,12 @@ int main(int agrc, char** argv)
 
 		CalculateFPS();
 
-		//uint32 currentTime = SDL_GetTicks() - startTime;
+		uint32 currentTime = SDL_GetTicks() - startTime;
 
-		//if (1000.0f / 60.0f > currentTime)
-		//	SDL_Delay(1000.0f / (60.0f - currentTime));
+		if (1000 / maxFPS > currentTime)
+		{
+			SDL_Delay(1000 / (maxFPS - currentTime));
+		}
 	}
 
 	return 0;
