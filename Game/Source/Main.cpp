@@ -2,6 +2,7 @@
 #include <iostream>
 #include <SDL.h>
 #include <GL/glew.h>
+#include "GameEngine/Camera2D.h"
 #include "GameEngine/Window.h"
 #include "GameEngine\Sprite.h"
 #include "GameEngine\ImageHandling.h"
@@ -21,6 +22,8 @@ enum class GameState
 };
 
 const uint32 maxFPS = 60;
+
+Blz::Camera2D camera;
 
 void CalculateFPS()
 {
@@ -76,12 +79,13 @@ void CalculateFPS()
 int main(int agrc, char** argv)
 {
 	window.Initialize();
+	camera.Init(500, 500);
 
-	for (int i = 0; i < 10; ++i)
-	{
-		p_sprites.push_back(new Sprite());
-		p_sprites.back()->Init(-1.0f, 0.0f, 1.0f, 1.0f, "CharImage.png");
-	};
+	p_sprites.push_back(new Sprite());
+	p_sprites.back()->Init(0.0f, 0.0f, .4f, .4f, "CharImage.png");
+
+	p_sprites.push_back(new Sprite());
+	p_sprites.back()->Init(-0.4f, 0.0f, .4f, .4f, "CharImage.png");
 
 	GameState gamestate{ GameState::PLAY };
 
@@ -97,6 +101,10 @@ int main(int agrc, char** argv)
 
 	GLuint uniformLocation = colorShaderProgram.GetUniformLocation("basicTexture");
 	glUniform1i(uniformLocation, 0);
+
+	GLuint ProjectMatrixUniformLocation = colorShaderProgram.GetUniformLocation("projectionMatrix");
+	glm::mat4 transformMatrix = camera.GetOrthoMatrix();
+	glUniformMatrix4fv(ProjectMatrixUniformLocation, 1, GL_FALSE, &(transformMatrix[0][0]));
 
 	//This function should only be run in debug or development builds as it can be very computationally
 	//expensive 
@@ -116,6 +124,21 @@ int main(int agrc, char** argv)
 			case SDL_QUIT:
 				gamestate = GameState::EXIT;
 
+			case SDL_KEYDOWN:
+				switch (evnt.key.keysym.sym)
+				{
+				case SDLK_w:
+					camera.SetPosition((camera.GetPosition() + glm::vec2(0.0f, 1.0f)));
+					break;
+
+				case SDLK_s:
+					camera.SetPosition(camera.GetPosition() + glm::vec2(0.0f, 1.0f));
+					break;
+
+				default:
+					break;
+				}
+
 			default:
 				break;
 			}
@@ -125,6 +148,8 @@ int main(int agrc, char** argv)
 
 		for (uint32 i = 0; i < p_sprites.size(); ++i)
 			p_sprites[i]->Draw();
+
+		camera.Update();
 
 		window.SwapBuffers();
 
