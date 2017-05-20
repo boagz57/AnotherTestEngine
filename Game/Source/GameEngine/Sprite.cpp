@@ -1,8 +1,8 @@
 #include <cstddef>
+#include <GL/glew.h>
 #include "Sprite.h"
 #include "ImageHandling.h"
 #include "Vector3D.h"
-#include "GL/glew.h"
 
 Sprite::Sprite()
 {

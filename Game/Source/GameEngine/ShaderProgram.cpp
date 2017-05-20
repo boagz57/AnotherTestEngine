@@ -1,6 +1,6 @@
 #include <fstream>
 #include <string>
-#include "GL\glew.h"
+#include <GL\glew.h>
 #include "ShaderProgram.h"
 
 namespace Blz

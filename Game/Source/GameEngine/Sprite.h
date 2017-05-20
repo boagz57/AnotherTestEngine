@@ -1,6 +1,6 @@
 #pragma once
+#include <GL/glew.h>
 #include "GLTexture.h"
-#include "GL/glew.h"
 
 class Sprite
 {

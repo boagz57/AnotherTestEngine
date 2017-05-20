@@ -2,7 +2,7 @@
 #include <stdarg.h>
 #include <fstream>
 #include <cstdio>
-#include "GL/glew.h"
+#include <GL/glew.h>
 #include "File.h"
 #include "GLLogging.h"
 

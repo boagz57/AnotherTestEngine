@@ -1,4 +1,4 @@
-#include "GL\glew.h"
+#include <GL\glew.h>
 #include "STB_Img\stb_image.h"
 #include "ImageHandling.h"
 
@@ -27,23 +27,23 @@ namespace Blz
 			//Flip image right side up before sending to OpenGL since openGL will read it in upside down. Following code is utilizing pointer
 			//arithmetic 
 			int32 widthInBytes = texture.width * 4;
-			uchar8 *topRowOfTexels = nullptr;
-			uchar8 *bottomRowOfTexels = nullptr;
+			uchar8 *p_topRowOfTexels = nullptr;
+			uchar8 *p_bottomRowOfTexels = nullptr;
 			uchar8 temp = 0;
 			int32 halfHeight = texture.height / 2;
 
 			for (int32 row = 0; row < halfHeight; ++row)
 			{
-				topRowOfTexels = imageData + row * widthInBytes;
-				bottomRowOfTexels = imageData + (texture.height - row - 1) * widthInBytes;
+				p_topRowOfTexels = imageData + row * widthInBytes;
+				p_bottomRowOfTexels = imageData + (texture.height - row - 1) * widthInBytes;
 
 				for (int col = 0; col < widthInBytes; ++col)
 				{
-					temp = *topRowOfTexels;
-					*topRowOfTexels = *bottomRowOfTexels;
-					*bottomRowOfTexels = temp;
-					topRowOfTexels++;
-					bottomRowOfTexels++;
+					temp = *p_topRowOfTexels;
+					*p_topRowOfTexels = *p_bottomRowOfTexels;
+					*p_bottomRowOfTexels = temp;
+					p_topRowOfTexels++;
+					p_bottomRowOfTexels++;
 				}
 			}
 

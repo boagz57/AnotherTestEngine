@@ -1,23 +1,18 @@
 #include <vector>
-#include "SDL.h"
+#include <iostream>
+#include <SDL.h>
+#include <GL/glew.h>
 #include "GameEngine/Window.h"
 #include "GameEngine\Sprite.h"
 #include "GameEngine\ImageHandling.h"
 #include "GameEngine\ShaderProgram.h"
 #include "STB_Img\stb_image.h"
 #include "GameEngine/GLLogging.h"
-#include "GL/glew.h"
-#include <iostream>
 
 Blz::Window window;
 Sprite playerSprite;
 
 std::vector<Sprite*> p_sprites;
-
-//For RenderCopy function. ScreenRectanlge captures entire screen while imageRectangle
-//specifies the size you want to display the image
-SDL_Rect screenRectangle{ 0, 0, 1024, 768 };
-SDL_Rect imageRectangle{ 0, 0, 400, 100 };
 
 enum class GameState
 {
@@ -82,7 +77,7 @@ int main(int agrc, char** argv)
 {
 	window.Initialize();
 
-	for (int i = 0; i < 1000; ++i)
+	for (int i = 0; i < 10; ++i)
 	{
 		p_sprites.push_back(new Sprite());
 		p_sprites.back()->Init(-1.0f, 0.0f, 1.0f, 1.0f, "CharImage.png");
