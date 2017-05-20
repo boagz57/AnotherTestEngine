@@ -172,6 +172,7 @@ copy /y  "$(SolutionDir)ThirdParty\SDL\Lib\x86\SDL2.dll" "$(SolutionDir)Game\Bin
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\ThirdParty\STB_Image\Source\stb_image.cpp" />
     <ClCompile Include="Source\GameEngine\Camera2D.cpp" />
     <ClCompile Include="Source\GameEngine\AssetManager.cpp" />
     <ClCompile Include="Source\GameEngine\ImageHandling.cpp" />
@@ -179,7 +180,6 @@ copy /y  "$(SolutionDir)ThirdParty\SDL\Lib\x86\SDL2.dll" "$(SolutionDir)Game\Bin
     <ClCompile Include="Source\GameEngine\GLLogging.cpp" />
     <ClCompile Include="Source\GameEngine\File.cpp" />
     <ClCompile Include="Source\GameEngine\Sprite.cpp" />
-    <ClCompile Include="Source\GameEngine\stb_image.cpp" />
     <ClCompile Include="Source\Main.cpp" />
     <ClCompile Include="Source\GameEngine\Window.cpp" />
     <ClCompile Include="Source\GameEngine\TextureCache.cpp" />
