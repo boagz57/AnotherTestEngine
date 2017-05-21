@@ -31,10 +31,10 @@ namespace Blz
 	{
 		if (cameraNeedsUpdated)
 		{
-            //Camera Translation                                     //Add half of screenwidth/height to center the point of translation
+            //Camera Translation                                //Add half of screenwidth/height to center the point of translation
 			transformationMatrix = glm::translate(orthoMatrix, glm::vec3(-position.x + (screenWidth/2), position.y + (screenHeight / 2), 0.0f));
 
-		    //Camera Scaling                  //Identity matrix          //Scaling this way ceneters the scale to middle of screen
+		    //Camera Scaling                 //Identity matrix  //Scaling this way centers the scale to middle of screen
 			transformationMatrix = glm::scale(glm::mat4(1.0f), glm::vec3(scale, scale, 0.0f)) * transformationMatrix;
 			cameraNeedsUpdated = false;
 		}

@@ -19,7 +19,7 @@ Sprite::~Sprite()
 
 void Sprite::Init(int16 x, int16 y, uint16 width, uint16 height, Blz::string imageFilePath)
 {
-	//casting to float since shader vec2,3,4 require vertex data to be in floats
+	//casting to float since GLSL shader variables vec2,3,4 require vertex data to be in floats
 	static_cast<sfloat>(this->x) = x;
 	static_cast<sfloat>(this->y) = y;
 	static_cast<sfloat>(this->width) = width;

@@ -170,7 +170,6 @@ int main(int agrc, char** argv)
 		for (uint32 i = 0; i < p_sprites.size(); ++i)
 			p_sprites[i]->Draw();
 
-
 		window.SwapBuffers();
 
 		CalculateFPS();
