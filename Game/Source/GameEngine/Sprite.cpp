@@ -1,5 +1,6 @@
 #include <cstddef>
 #include <GL/glew.h>
+#include <iostream>
 #include "Sprite.h"
 #include "ImageHandling.h"
 #include "Vector3D.h"
@@ -16,12 +17,13 @@ Sprite::~Sprite()
 		glDeleteBuffers(1, &vboID);
 }
 
-void Sprite::Init(float x, float y, float width, float height, Blz::string imageFilePath)
+void Sprite::Init(int16 x, int16 y, uint16 width, uint16 height, Blz::string imageFilePath)
 {
-	this->x = x;
-	this->y = y;
-	this->width = width;
-	this->height = height;
+	//casting to float since shader vec2,3,4 require vertex data to be in floats
+	static_cast<sfloat>(this->x) = x;
+	static_cast<sfloat>(this->y) = y;
+	static_cast<sfloat>(this->width) = width;
+	static_cast<sfloat>(this->height) = height;
 
 	if (vboID == 0)
 		glGenBuffers(1, &vboID);
@@ -29,12 +31,12 @@ void Sprite::Init(float x, float y, float width, float height, Blz::string image
 	texture = Blz::OpenGL::LoadImage(imageFilePath);
 
 	Vector3D vertexData[6]{
-		Vector3D {x + width, y + height, 1.0f},
-		Vector3D {x, y + height, 1.0f },
-		Vector3D {x, y, 1.0f},
-		Vector3D {x, y, 1.0f},
-		Vector3D {x + width, y, 1.0f},
-		Vector3D {x + width, y + height, 1.0f},
+		Vector3D {this->x + this->width, this->y + this->height, 0.0f},
+		Vector3D {this->x, this->y + height, 0.0f },
+		Vector3D {this->x, this->y, 0.0f},
+		Vector3D {this->x, this->y, 0.0f},
+		Vector3D {this->x + this->width, this->y, 0.0f},
+		Vector3D {this->x + this->width, this->y + this->height, 0.0f},
 	};
 
 	for (int i = 0; i < 6; ++i)

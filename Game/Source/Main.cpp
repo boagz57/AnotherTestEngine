@@ -79,13 +79,13 @@ void CalculateFPS()
 int main(int agrc, char** argv)
 {
 	window.Initialize();
-	camera.Init(500, 500);
+	camera.Init(1024, 768);
 
 	p_sprites.push_back(new Sprite());
-	p_sprites.back()->Init(0.0f, 0.0f, .4f, .4f, "CharImage.png");
+	p_sprites.back()->Init(0, 0, 1024/2, 1024/2, "CharImage.png");
 
 	p_sprites.push_back(new Sprite());
-	p_sprites.back()->Init(-0.4f, 0.0f, .4f, .4f, "CharImage.png");
+	p_sprites.back()->Init(1024/2, 0, 1024/2, 1024/2, "CharImage.png");
 
 	GameState gamestate{ GameState::PLAY };
 
@@ -103,7 +103,7 @@ int main(int agrc, char** argv)
 	glUniform1i(uniformLocation, 0);
 
 	GLuint ProjectMatrixUniformLocation = colorShaderProgram.GetUniformLocation("projectionMatrix");
-	glm::mat4 transformMatrix = camera.GetOrthoMatrix();
+	glm::mat4 transformMatrix = camera.GetTransformationMatrix();
 	glUniformMatrix4fv(ProjectMatrixUniformLocation, 1, GL_FALSE, &(transformMatrix[0][0]));
 
 	//This function should only be run in debug or development builds as it can be very computationally
@@ -128,11 +128,27 @@ int main(int agrc, char** argv)
 				switch (evnt.key.keysym.sym)
 				{
 				case SDLK_w:
-					camera.SetPosition((camera.GetPosition() + glm::vec2(0.0f, 1.0f)));
+					camera.SetPosition(camera.GetPosition() + glm::vec2(0.0f, 50.0f));
 					break;
 
 				case SDLK_s:
-					camera.SetPosition(camera.GetPosition() + glm::vec2(0.0f, 1.0f));
+					camera.SetPosition(camera.GetPosition() + glm::vec2(0.0f, -50.0f));
+					break;
+
+				case SDLK_a:
+					camera.SetPosition(camera.GetPosition() + glm::vec2(50.0f, 0.0f));
+					break;
+
+				case SDLK_d:
+					camera.SetPosition(camera.GetPosition() + glm::vec2(-50.0f, 0.0f));
+					break;
+
+				case SDLK_q:
+					camera.SetScale(camera.GetScale() + .1f);
+					break;
+
+				case SDLK_z:
+					camera.SetScale(camera.GetScale() + -.1f);
 					break;
 
 				default:
@@ -144,12 +160,16 @@ int main(int agrc, char** argv)
 			}
 		}
 
+		glm::mat4 transformMatrix = camera.GetTransformationMatrix();
+		glUniformMatrix4fv(ProjectMatrixUniformLocation, 1, GL_FALSE, &(transformMatrix[0][0]));
+
 		window.ClearBuffers();
+
+		camera.Update();
 
 		for (uint32 i = 0; i < p_sprites.size(); ++i)
 			p_sprites[i]->Draw();
 
-		camera.Update();
 
 		window.SwapBuffers();
 

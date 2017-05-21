@@ -18,7 +18,7 @@ namespace Blz
 
 		glm::vec2 GetPosition() { return position; };
 		sfloat GetScale() { return scale; };
-		glm::mat4 GetOrthoMatrix() { return transformationMatrix; };
+		glm::mat4 GetTransformationMatrix() { return transformationMatrix; };
 
 	private:
 		int32 screenWidth, screenHeight;

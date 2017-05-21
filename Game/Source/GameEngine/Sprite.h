@@ -8,7 +8,7 @@ public:
 	Sprite();
 	~Sprite();
 
-	void Init(float x, float y, float width, float height, Blz::string imageFilePath);
+	void Init(int16 screenCoordinateX, int16 screenCoordinateY, uint16 imageWidth, uint16 imageHeight, Blz::string imageFilePath);
 
 	void Draw();
 
