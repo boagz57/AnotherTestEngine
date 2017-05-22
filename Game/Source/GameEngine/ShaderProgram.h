@@ -15,8 +15,8 @@ namespace Blz
 			void operator=(const ShaderProgram& copy) = delete;
 
 			void Compile();
-			void AddAttribute(Blz::string attributeNameFromShader);
-			GLuint GetUniformLocation(Blz::string uniformNameFromShader);
+			void AddAttribute(Blz::string attributeNameFromShaderFile);
+			GLuint GetUniformLocation(Blz::string uniformNameFromShaderFile);
 			void Link();
 			void Bind();
 			void UnBind();

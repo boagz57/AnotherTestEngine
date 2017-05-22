@@ -14,4 +14,4 @@ typedef char char8;
 typedef unsigned char uchar8;
 typedef float sfloat;
 typedef double dfloat;
-namespace Blz { typedef std::string string; };
+namespace Blz { typedef std::string string; }; //TODO: Replace with EASTL string classjj

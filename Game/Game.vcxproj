@@ -173,6 +173,7 @@ copy /y  "$(SolutionDir)ThirdParty\SDL\Lib\x86\SDL2.dll" "$(SolutionDir)Game\Bin
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\ThirdParty\STB_Image\Source\stb_image.cpp" />
+    <ClCompile Include="Source\GameEngine\Input.cpp" />
     <ClCompile Include="Source\GameEngine\Camera2D.cpp" />
     <ClCompile Include="Source\GameEngine\AssetManager.cpp" />
     <ClCompile Include="Source\GameEngine\ImageHandling.cpp" />
@@ -185,6 +186,7 @@ copy /y  "$(SolutionDir)ThirdParty\SDL\Lib\x86\SDL2.dll" "$(SolutionDir)Game\Bin
     <ClCompile Include="Source\GameEngine\TextureCache.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Source\GameEngine\Input.h" />
     <ClInclude Include="Source\GameEngine\Camera2D.h" />
     <ClInclude Include="Source\GameEngine\AssetManager.h" />
     <ClInclude Include="Source\GameEngine\GLTexture.h" />
@@ -194,11 +196,13 @@ copy /y  "$(SolutionDir)ThirdParty\SDL\Lib\x86\SDL2.dll" "$(SolutionDir)Game\Bin
     <ClInclude Include="Source\GameEngine\File.h" />
     <ClInclude Include="Source\GameEngine\Sprite.h" />
     <ClInclude Include="Source\GameEngine\Vector3D.h" />
-    <ClInclude Include="Source\Universal\DataStructures.h" />
     <ClInclude Include="Source\Universal\Macro.h" />
     <ClInclude Include="Source\GameEngine\Window.h" />
+    <ClInclude Include="Source\Universal\Map.h" />
     <ClInclude Include="Source\Universal\PrimitiveTypes.h" />
     <ClInclude Include="Source\GameEngine\TextureCache.h" />
+    <ClInclude Include="Source\Universal\UnorderedMap.h" />
+    <ClInclude Include="Source\Universal\Vector.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets" />

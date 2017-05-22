@@ -1,6 +1,6 @@
 #pragma once
 #include "GLTexture.h"
-#include "../Universal/DataStructures.h"
+#include "../Universal/Map.h"
 
 namespace Blz
 {

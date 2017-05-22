@@ -1,3 +1,4 @@
+//TODO: Turn off exceptions (for speed) and make sure no exception based library is used
 #include <vector>
 #include <iostream>
 #include <SDL.h>
@@ -5,6 +6,7 @@
 #include "GameEngine/Camera2D.h"
 #include "GameEngine/Window.h"
 #include "GameEngine\Sprite.h"
+#include "GameEngine\Input.h"
 #include "GameEngine\ImageHandling.h"
 #include "GameEngine\ShaderProgram.h"
 #include "STB_Img\stb_image.h"
@@ -82,10 +84,10 @@ int main(int agrc, char** argv)
 	camera.Init(1024, 768);
 
 	p_sprites.push_back(new Sprite());
-	p_sprites.back()->Init(0, 0, 1024/2, 1024/2, "CharImage.png");
+	p_sprites.back()->Init(0, 0, 200, 200, "CharImage.png");
 
 	p_sprites.push_back(new Sprite());
-	p_sprites.back()->Init(1024/2, 0, 1024/2, 1024/2, "CharImage.png");
+	p_sprites.back()->Init(-200, 0, 200, 200, "CharImage.png");
 
 	GameState gamestate{ GameState::PLAY };
 
@@ -116,7 +118,7 @@ int main(int agrc, char** argv)
 	{
 		uint32 startTime = SDL_GetTicks();
 
-		//Game Logic Update
+		//Process input
 		while (SDL_PollEvent(&evnt))
 		{
 			switch (evnt.type)
@@ -125,40 +127,27 @@ int main(int agrc, char** argv)
 				gamestate = GameState::EXIT;
 
 			case SDL_KEYDOWN:
-				switch (evnt.key.keysym.sym)
-				{
-				case SDLK_w:
-					camera.SetPosition(camera.GetPosition() + glm::vec2(0.0f, 50.0f));
-					break;
+				Blz::Input::pressKey(evnt.key.keysym.sym);
+				break;
 
-				case SDLK_s:
-					camera.SetPosition(camera.GetPosition() + glm::vec2(0.0f, -50.0f));
-					break;
-
-				case SDLK_a:
-					camera.SetPosition(camera.GetPosition() + glm::vec2(50.0f, 0.0f));
-					break;
-
-				case SDLK_d:
-					camera.SetPosition(camera.GetPosition() + glm::vec2(-50.0f, 0.0f));
-					break;
-
-				case SDLK_q:
-					camera.SetScale(camera.GetScale() + .1f);
-					break;
-
-				case SDLK_z:
-					camera.SetScale(camera.GetScale() + -.1f);
-					break;
-
-				default:
-					break;
-				}
-
-			default:
+			case SDL_KEYUP:
+				Blz::Input::releaseKey(evnt.key.keysym.sym);
 				break;
 			}
 		}
+
+		if(Blz::Input::IsKeyPressed(SDLK_w))	
+			camera.SetPosition(camera.GetPosition() + glm::vec2(0.0f, 50.0f));
+		else if (Blz::Input::IsKeyPressed(SDLK_s))
+			camera.SetPosition(camera.GetPosition() + glm::vec2(0.0f, -50.0f));
+		else if (Blz::Input::IsKeyPressed(SDLK_a))
+			camera.SetPosition(camera.GetPosition() + glm::vec2(50.0f, 0.0f));
+		else if (Blz::Input::IsKeyPressed(SDLK_d))
+			camera.SetPosition(camera.GetPosition() + glm::vec2(-50.0f, 0.0f));
+		else if (Blz::Input::IsKeyPressed(SDLK_q))
+			camera.SetScale(camera.GetScale() + .1f);
+		else if (Blz::Input::IsKeyPressed(SDLK_z))
+			camera.SetScale(camera.GetScale() + -.1f);
 
 		glm::mat4 transformMatrix = camera.GetTransformationMatrix();
 		glUniformMatrix4fv(ProjectMatrixUniformLocation, 1, GL_FALSE, &(transformMatrix[0][0]));

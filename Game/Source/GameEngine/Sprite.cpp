@@ -1,6 +1,7 @@
 #include <cstddef>
 #include <GL/glew.h>
 #include <iostream>
+#include <GLM/glm.hpp>
 #include "Sprite.h"
 #include "ImageHandling.h"
 #include "Vector3D.h"
@@ -30,7 +31,7 @@ void Sprite::Init(int16 x, int16 y, uint16 width, uint16 height, Blz::string ima
 
 	texture = Blz::OpenGL::LoadImage(imageFilePath);
 
-	Vector3D vertexData[6]{
+	Vector3D vertexData[6]{			//TODO: switch to glm::vec3 instead of custom Vector3D class???
 		Vector3D {this->x + this->width, this->y + this->height, 0.0f},
 		Vector3D {this->x, this->y + height, 0.0f },
 		Vector3D {this->x, this->y, 0.0f},
