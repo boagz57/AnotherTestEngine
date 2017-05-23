@@ -5,14 +5,7 @@
 
 namespace Blz
 {
-	Camera2D::Camera2D() :
-		position(0.0f, 0.0f),
-		cameraNeedsUpdated(true),
-		scale(1.0f),
-		orthoMatrix(1.0f),
-		transformationMatrix(1.0f),
-		screenWidth(500),
-		screenHeight(500)
+	Camera2D::Camera2D() 
 	{
 	}
 
@@ -38,5 +31,15 @@ namespace Blz
 			transformationMatrix = glm::scale(glm::mat4(1.0f), glm::vec3(scale, scale, 0.0f)) * transformationMatrix;
 			cameraNeedsUpdated = false;
 		}
+	}
+	
+	void Camera2D::SetPosition(const glm::vec2 newPosition)
+	{
+		position = newPosition; cameraNeedsUpdated = true;
+	};
+
+	void Camera2D::SetScale(sfloat newScale)
+	{
+		scale = newScale; cameraNeedsUpdated = true;
 	}
 }

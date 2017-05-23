@@ -8,7 +8,6 @@
 
 Sprite::Sprite()
 {
-	vboID = 0;
 }
 
 Sprite::~Sprite()

@@ -17,7 +17,7 @@ namespace Blz
 	{
 		//In case window::Shutdown() function never gets called
 		SDL_GL_DeleteContext(glContext);
-		SDL_DestroyWindow(window);
+		SDL_DestroyWindow(p_window);
 		SDL_Quit();
 	}
 
@@ -41,14 +41,14 @@ namespace Blz
 			SDL_GL_SetAttribute(SDL_GL_CONTEXT_FLAGS, SDL_GL_CONTEXT_DEBUG_FLAG);
 		#endif
 
-		window = SDL_CreateWindow("Shadow Gods", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1024, 768, SDL_WINDOW_OPENGL);
-		if (window == nullptr)
+		p_window = SDL_CreateWindow("Shadow Gods", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1024, 768, SDL_WINDOW_OPENGL);
+		if (!p_window)
 		{
 			LOG("ERROR: SDL window failed to initialize! SDL error: %s\n", SDL_GetError());
 			SDL_Quit();
 		}
 
-		glContext = SDL_GL_CreateContext(window);
+		glContext = SDL_GL_CreateContext(p_window);
 
 		//Turns on or off v-sync
 		SDL_GL_SetSwapInterval(0);
@@ -65,7 +65,7 @@ namespace Blz
 			LOG("ERROR: GLEW failed to initialize!");
 
 			SDL_GL_DeleteContext(glContext);
-			SDL_DestroyWindow(window);
+			SDL_DestroyWindow(p_window);
 			SDL_Quit();
 		}
 
@@ -89,7 +89,7 @@ namespace Blz
 	void Window::Shutdown()
 	{
 		SDL_GL_DeleteContext(glContext);
-		SDL_DestroyWindow(window);
+		SDL_DestroyWindow(p_window);
 		SDL_Quit();
 	}
 
@@ -100,7 +100,7 @@ namespace Blz
 
 	void Window::SwapBuffers()
 	{
-		SDL_GL_SwapWindow(window);
+		SDL_GL_SwapWindow(p_window);
 	}
 
 	void GLAPIENTRY glDebugOutput(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar *message, const void *userParam)

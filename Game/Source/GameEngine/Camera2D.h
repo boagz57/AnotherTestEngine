@@ -13,19 +13,24 @@ namespace Blz
 
 		void Update();
 
-		void SetPosition(const glm::vec2 newPosition) { position = newPosition; cameraNeedsUpdated = true; };
-		void SetScale(sfloat newScale) { scale = newScale; cameraNeedsUpdated = true; };
+		void SetPosition(const glm::vec2 newPosition);
+		void SetScale(sfloat newScale);
 
 		glm::vec2 GetPosition() { return position; };
 		sfloat GetScale() { return scale; };
 		glm::mat4 GetTransformationMatrix() { return transformationMatrix; };
 
 	private:
-		int32 screenWidth, screenHeight;
-		bool cameraNeedsUpdated;
-		sfloat scale;
-		glm::vec2 position;
-		glm::mat4 transformationMatrix;
-		glm::mat4 orthoMatrix;
+		int32 screenWidth = 500, screenHeight = 500;
+
+		bool cameraNeedsUpdated = true;
+
+		sfloat scale = 1.0f;
+
+		glm::vec2 position{ 0.0f, 0.0f };
+
+		//Initialize matrices to identity matrix
+		glm::mat4 transformationMatrix{ 1.0f };
+		glm::mat4 orthoMatrix{ 1.0f };
 	};
 }

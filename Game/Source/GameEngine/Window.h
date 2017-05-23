@@ -22,7 +22,7 @@ namespace Blz
 		void SwapBuffers();
 
 	private:
-		SDL_Window* window;
-		SDL_GLContext glContext;
+		SDL_Window* p_window = nullptr;
+		SDL_GLContext glContext = nullptr;
 	};
 }

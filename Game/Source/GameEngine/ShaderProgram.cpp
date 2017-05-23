@@ -10,11 +10,7 @@ namespace Blz
 		//Class Helper functions
 		std::string ReadShaderSource(const char8* c_ShaderFilePath, const char8* c_TypeOfShader);
 
-		ShaderProgram::ShaderProgram(Blz::string vertexShaderFilePath, Blz::string fragmentShaderFilePath) :
-			programID(glCreateProgram()),
-			vertexShaderID(0),
-			fragmentShaderID(0),
-			numAttributes(0)
+		ShaderProgram::ShaderProgram(Blz::string vertexShaderFilePath, Blz::string fragmentShaderFilePath) 
 		{
 			vertexShaderFile = vertexShaderFilePath;
 			fragmentShaderFile = fragmentShaderFilePath;

@@ -22,15 +22,15 @@ namespace Blz
 			void UnBind();
 
 		public:
-			const GLuint programID;
+			const GLuint programID = glCreateProgram();
 
 		private:
 			Blz::string vertexShaderFile;
 			Blz::string fragmentShaderFile;
-			GLuint vertexShaderID;
-			GLuint fragmentShaderID;
+			GLuint vertexShaderID = 0;
+			GLuint fragmentShaderID = 0;
 
-			uint16 numAttributes;
+			uint16 numAttributes = 0;
 
 			bool CheckShaderProgramStatus(GLuint programID);
 			bool CheckShaderStatus(GLuint shaderID);
