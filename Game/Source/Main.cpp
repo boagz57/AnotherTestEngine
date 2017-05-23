@@ -1,4 +1,14 @@
-//TODO: Turn off exceptions (for speed) and make sure no exception based library is used
+/*TODO: Turn off exceptions (for speed purposes):	
+
+		- https://stackoverflow.com/questions/553103/can-i-disable-exceptions-in-stl 
+
+	and when handling std stl errors without exceptions:
+
+		- https://stackoverflow.com/questions/3870435/handling-stl-errors-without-exceptions
+
+	and make sure no exception based library is used. 
+*/
+
 #include <vector>
 #include <iostream>
 #include <SDL.h>
