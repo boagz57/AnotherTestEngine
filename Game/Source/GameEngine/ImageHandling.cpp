@@ -1,5 +1,6 @@
 #include <GL\glew.h>
 #include "STB_Img\stb_image.h"
+#include "ErrorHandling.h"
 #include "ImageHandling.h"
 
 namespace Blz
@@ -15,6 +16,8 @@ namespace Blz
 			int32 forceChannels = 4;
 			uchar8* imageData = 0;
 			imageData = stbi_load(filePath.c_str(), &x, &y, &currentChannels, forceChannels);
+
+			XASSERT(imageData, "Could not load file! %i", 3);
 
 			if (imageData == nullptr)
 			{

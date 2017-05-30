@@ -13,6 +13,7 @@
 #include <iostream>
 #include <SDL.h>
 #include <GL/glew.h>
+#include <Array>
 #include "GameEngine/Camera2D.h"
 #include "GameEngine/Window.h"
 #include "GameEngine\Sprite.h"
@@ -20,6 +21,7 @@
 #include "GameEngine\ImageHandling.h"
 #include "GameEngine\ShaderProgram.h"
 #include "STB_Img\stb_image.h"
+#include "GameEngine\ErrorHandling.h"
 #include "GameEngine/GLLogging.h"
 
 Blz::Window window;
