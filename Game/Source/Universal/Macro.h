@@ -4,19 +4,6 @@
 #include <assert.h>
 #include <Boost/BoostAssert.h>
 
-inline void ErrorLog(int lineNumberOfError, const char* fileOfError, const char* msg, ...)
-{
-	//Captures ellipses arguments
-	va_list argptr;
-	va_start(argptr, msg);//Initializes the va_list
-
-	fprintf(stderr, "In %s\n Line: %i\n", fileOfError, lineNumberOfError);
-	fprintf(stderr, msg);
-
-	//cleans up argptr va_list
-	va_end(argptr);
-}
-
 #if (_DEBUG)
 
 #define RUNTIME_ASSERT \
@@ -27,9 +14,6 @@ inline void ErrorLog(int lineNumberOfError, const char* fileOfError, const char*
 
 #define LOG(...) \
 	do { fprintf(stderr, __VA_ARGS__); } while (0)
-
-#define XASSERT(test, msg, ...) \
-	do {if (test) ErrorLog(__LINE__, __FILE__, msg, __VA_ARGS__);} while (0)
 
 #else
 #define NDEBUG

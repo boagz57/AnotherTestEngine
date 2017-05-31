@@ -1,27 +1,29 @@
 #pragma once
-#include "../Universal/Vector.h"
+#include <cstdio>
+#include "ErrorContext.h"
 
 namespace Blz
 {
 	namespace Error
 	{
-		class ErrorContext
+		inline void Log(bool IsValidVar, const char* message, ErrorContext &ec)
 		{
-		public:
-			ErrorContext();
-			ErrorContext(const char8* errorContextDescription, const char8* errorContextData);
-			ErrorContext(const char8* errorContextDescription);
-			~ErrorContext();
-			ErrorContext(const ErrorContext& copy) = delete;
-			void operator=(const ErrorContext& copy) = delete;
+			if (!IsValidVar)
+			{
+			}
+		}
 
-			void AddContextInfo(const char* errorContextDescription);
-			void AddContextInfo(const char* errorContextDescription, const char* errorContextData);
+		template<typename T> inline bool Check(T* ptr)
+		{
+			if (ptr == nullptr)
+				return false;
 
-		private:
-			static Blz::Vector<const char8*> errorContextDescriptions;
-			static Blz::Vector<const char8*> errorContextData;
-		};
-	};
+			return true;
+		}
+
+		template<typename T> inline bool Check(T)
+		{
+
+		}
+	}
 }
-

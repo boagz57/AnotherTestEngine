@@ -9,20 +9,19 @@ namespace Blz
 	{
 		GLTexture LoadImage(Blz::string filePath)
 		{
+			Blz::Error::ErrorContext ec;
+
 			//Initiliazes struct members to 0
 			GLTexture texture = {};
 
-			int32 x, y, currentChannels;
+			int32 x = 0, y = 0, currentChannels;
 			int32 forceChannels = 4;
 			uchar8* imageData = 0;
-			imageData = stbi_load(filePath.c_str(), &x, &y, &currentChannels, forceChannels);
+			//imageData = stbi_load(filePath.c_str(), &x, &y, &currentChannels, forceChannels);
 
-			XASSERT(imageData, "Could not load file! %i", 3);
+			imageData = nullptr;
 
-			if (imageData == nullptr)
-			{
-				LOG("ERROR: Could not load image file!");
-			};
+			Blz::Error::Log(Blz::Error::Check(imageData), "Ahhhhh", ec);
 
 			texture.width = x;
 			texture.height = y;

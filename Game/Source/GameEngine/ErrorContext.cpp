@@ -1,6 +1,7 @@
 #include <stdarg.h>
 #include <stdio.h>
-#include "ErrorHandling.h"
+#include "../Universal/Vector.h"
+#include "ErrorContext.h"
 
 namespace Blz
 {
@@ -12,7 +13,7 @@ namespace Blz
 		ErrorContext::ErrorContext()
 		{}
 
-		ErrorContext::ErrorContext(const char8* p_Description, const char8* p_Data) 
+		ErrorContext::ErrorContext(const char8* p_Description, const char8* p_Data)
 		{
 			errorContextDescriptions.reserve(40);
 			errorContextData.reserve(40);
