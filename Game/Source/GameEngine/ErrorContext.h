@@ -8,7 +8,7 @@ namespace Blz
 		class ErrorContext
 		{
 		public:
-			ErrorContext(const Blz::string errorContextDescription, const Blz::string errorContextData);
+			ErrorContext(const Blz::string errorContextDescription, const Blz::string errorContextData = "");
 			~ErrorContext();
 			ErrorContext(const ErrorContext& copy) = delete;
 			void operator=(const ErrorContext& copy) = delete;

@@ -6,27 +6,21 @@ namespace Blz
 {
 	namespace Err
 	{
-		inline void ErrReport(bool IsValidVar, const char* message)
+		inline void ErrReport(const char8* fileOfError, int32 lineNumberOfError, const Blz::string c_errMessage)
 		{
-			if (!IsValidVar)
-			{
-				ErrorContext::LogContext();
-				LOG("ERROR: %s\n\n", message);
-				exit(0);
-			}
+			ErrorContext::LogContext();
+			LOG("  ERROR: %s\n", c_errMessage.c_str());
+			LOG("  In %s: %i\n\n", fileOfError, lineNumberOfError);
+			exit(0);
 		}
 
-		template<typename T> inline bool Check(T* ptr)
+		template<typename T> inline bool Check(T& obj)
 		{
-			if (ptr == nullptr)
-				return false;
-
-			return true;
+			
 		}
 
-		template<typename T> inline bool Check(T)
-		{
-
-		}
+		#if(_DEBUG)
+			#define ERRASSERT(test, msg) do {if (!(test)) Blz::Err::ErrReport(__FILE__, __LINE__, msg);} while (0)
+		#endif
 	}
 }

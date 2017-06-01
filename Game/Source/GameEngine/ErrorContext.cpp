@@ -11,7 +11,7 @@ namespace Blz
 		Blz::Vector<Blz::string> ErrorContext::errorContextData;
 		uint16 ErrorContext::numContexts = 0;
 
-		ErrorContext::ErrorContext(const Blz::string p_Description, const Blz::string p_Data)
+		ErrorContext::ErrorContext(const Blz::string p_Description, const Blz::string p_Data /* default value = "" */)
 		{
 			errorContextDescriptions.reserve(40);
 			errorContextData.reserve(40);

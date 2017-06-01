@@ -12,7 +12,7 @@ namespace Blz
 			Blz::Err::ErrorContext ec("When trying to do something", "Data");
 
 			unsigned char* Thing = nullptr;
-			Blz::Err::ErrReport(Blz::Err::Check(Thing), "Something went wrong!!");
+			ERRASSERT(Thing, "Image not loading properly");
 		}
 
 		GLTexture LoadImage(Blz::string& filePath)
@@ -27,7 +27,7 @@ namespace Blz
 			uchar8* imageData = 0;
 			imageData = stbi_load(filePath.c_str(), &x, &y, &currentChannels, forceChannels);
 
-			Blz::Err::ErrReport(Blz::Err::Check(imageData), "Image not loading properly");
+			ERRASSERT(imageData, "Image not loading properly");
 
 			MyFunc();
 
