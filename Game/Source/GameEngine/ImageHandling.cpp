@@ -9,7 +9,7 @@ namespace Blz
 	{
 		GLTexture LoadImage(Blz::string filePath)
 		{
-			Blz::Error::ErrorContext ec;
+			Blz::Err::ErrorContext ec("When loading file", filePath.c_str());
 
 			//Initiliazes struct members to 0
 			GLTexture texture = {};
@@ -21,7 +21,7 @@ namespace Blz
 
 			imageData = nullptr;
 
-			Blz::Error::Log(Blz::Error::Check(imageData), "Ahhhhh", ec);
+			Blz::Err::ErrReport(Blz::Err::Check(imageData), "Image not loading properly");
 
 			texture.width = x;
 			texture.height = y;

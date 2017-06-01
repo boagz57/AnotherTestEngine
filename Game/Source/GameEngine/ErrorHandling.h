@@ -4,12 +4,19 @@
 
 namespace Blz
 {
-	namespace Error
+	namespace Err
 	{
-		inline void Log(bool IsValidVar, const char* message, ErrorContext &ec)
+		inline void ErrReport(bool IsValidVar, const char* message)
 		{
 			if (!IsValidVar)
 			{
+				ErrorContext ec;
+				for (int i = 0; i < ec.numContexts; ++i)
+				{
+					LOG("%s: %s\n", ec.errorContextDescriptions.at(i), ec.errorContextData.at(i));
+					LOG("%s\n\n", message);
+				}
+				
 			}
 		}
 
