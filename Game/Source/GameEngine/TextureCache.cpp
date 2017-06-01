@@ -12,7 +12,7 @@ namespace Blz
 	{
 	}
 
-	Blz::OpenGL::GLTexture TextureCache::GetTexture(const Blz::string textureFilePath)
+	Blz::OpenGL::GLTexture TextureCache::GetTexture(Blz::string textureFilePath)
 	{
 		using namespace Blz::OpenGL;
 

@@ -4,6 +4,7 @@
 #include <GLM/glm.hpp>
 #include "Sprite.h"
 #include "ImageHandling.h"
+#include "ErrorHandling.h"
 #include "Vector3D.h"
 
 Sprite::Sprite()

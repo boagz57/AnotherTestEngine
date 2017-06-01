@@ -7,11 +7,11 @@ namespace Blz
 {
 	namespace Err
 	{
-		Blz::Vector<const char*> ErrorContext::errorContextDescriptions;
-		Blz::Vector<const char*> ErrorContext::errorContextData;
+		Blz::Vector<Blz::string> ErrorContext::errorContextDescriptions;
+		Blz::Vector<Blz::string> ErrorContext::errorContextData;
 		uint16 ErrorContext::numContexts = 0;
 
-		ErrorContext::ErrorContext(const char8* p_Description, const char8* p_Data)
+		ErrorContext::ErrorContext(const Blz::string p_Description, const Blz::string p_Data)
 		{
 			errorContextDescriptions.reserve(40);
 			errorContextData.reserve(40);
@@ -21,12 +21,19 @@ namespace Blz
 			++numContexts;
 		}
 
-		ErrorContext::ErrorContext()
-		{}
-
 		ErrorContext::~ErrorContext()
 		{
+			errorContextDescriptions.pop_back();
+			errorContextData.pop_back();
 			--numContexts;
+		}
+
+		void ErrorContext::LogContext()
+		{
+			for (int i = 0; i < numContexts; ++i)
+			{
+				LOG("%s: %s\n", errorContextDescriptions.at(i).c_str(), errorContextData.at(i).c_str());
+			}
 		}
 	}
 }

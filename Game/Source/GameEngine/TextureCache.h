@@ -10,7 +10,7 @@ namespace Blz
 		TextureCache();
 		~TextureCache();
 
-		Blz::OpenGL::GLTexture GetTexture(const Blz::string textureFilePath);
+		Blz::OpenGL::GLTexture GetTexture(Blz::string textureFilePath);
 
 	private:
 		Blz::Map<Blz::string, Blz::OpenGL::GLTexture> textureMap;

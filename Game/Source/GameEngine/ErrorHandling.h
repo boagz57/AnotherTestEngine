@@ -10,13 +10,9 @@ namespace Blz
 		{
 			if (!IsValidVar)
 			{
-				ErrorContext ec;
-				for (int i = 0; i < ec.numContexts; ++i)
-				{
-					LOG("%s: %s\n", ec.errorContextDescriptions.at(i), ec.errorContextData.at(i));
-					LOG("%s\n\n", message);
-				}
-				
+				ErrorContext::LogContext();
+				LOG("ERROR: %s\n\n", message);
+				exit(0);
 			}
 		}
 

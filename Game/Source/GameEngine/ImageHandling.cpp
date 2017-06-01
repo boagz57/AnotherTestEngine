@@ -7,9 +7,17 @@ namespace Blz
 {
 	namespace OpenGL 
 	{
-		GLTexture LoadImage(Blz::string filePath)
+		void MyFunc()
 		{
-			Blz::Err::ErrorContext ec("When loading file", filePath.c_str());
+			Blz::Err::ErrorContext ec("When trying to do something", "Data");
+
+			unsigned char* Thing = nullptr;
+			Blz::Err::ErrReport(Blz::Err::Check(Thing), "Something went wrong!!");
+		}
+
+		GLTexture LoadImage(Blz::string& filePath)
+		{
+			Blz::Err::ErrorContext ec("When loading image from file", filePath);
 
 			//Initiliazes struct members to 0
 			GLTexture texture = {};
@@ -17,11 +25,11 @@ namespace Blz
 			int32 x = 0, y = 0, currentChannels;
 			int32 forceChannels = 4;
 			uchar8* imageData = 0;
-			//imageData = stbi_load(filePath.c_str(), &x, &y, &currentChannels, forceChannels);
-
-			imageData = nullptr;
+			imageData = stbi_load(filePath.c_str(), &x, &y, &currentChannels, forceChannels);
 
 			Blz::Err::ErrReport(Blz::Err::Check(imageData), "Image not loading properly");
+
+			MyFunc();
 
 			texture.width = x;
 			texture.height = y;

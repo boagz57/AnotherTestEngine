@@ -8,16 +8,16 @@ namespace Blz
 		class ErrorContext
 		{
 		public:
-			ErrorContext(const char8* errorContextDescription, const char8* errorContextData);
+			ErrorContext(const Blz::string errorContextDescription, const Blz::string errorContextData);
 			~ErrorContext();
 			ErrorContext(const ErrorContext& copy) = delete;
 			void operator=(const ErrorContext& copy) = delete;
 
+			static void LogContext();
+
 		private:
-			friend void ErrReport(bool, const char*);
-			ErrorContext();
-			static Blz::Vector<const char8*> errorContextDescriptions;
-			static Blz::Vector<const char8*> errorContextData;
+			static Blz::Vector<Blz::string> errorContextDescriptions;
+			static Blz::Vector<Blz::string> errorContextData;
 			static uint16 numContexts;
 		};
 	};
