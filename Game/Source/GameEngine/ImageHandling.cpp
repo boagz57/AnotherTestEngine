@@ -7,14 +7,6 @@ namespace Blz
 {
 	namespace OpenGL 
 	{
-		void MyFunc()
-		{
-			Blz::Err::ErrorContext ec("When trying to do something", "Data");
-
-			unsigned char* Thing = nullptr;
-			ERRASSERT(Thing, "Image not loading properly");
-		}
-
 		GLTexture LoadImage(Blz::string& filePath)
 		{
 			Blz::Err::ErrorContext ec("When loading image from file", filePath);
@@ -28,8 +20,6 @@ namespace Blz
 			imageData = stbi_load(filePath.c_str(), &x, &y, &currentChannels, forceChannels);
 
 			ERRASSERT(imageData, "Image not loading properly");
-
-			MyFunc();
 
 			texture.width = x;
 			texture.height = y;

@@ -14,11 +14,6 @@ namespace Blz
 			exit(0);
 		}
 
-		template<typename T> inline bool Check(T& obj)
-		{
-			
-		}
-
 		#if(_DEBUG)
 			#define ERRASSERT(test, msg) do {if (!(test)) Blz::Err::ErrReport(__FILE__, __LINE__, msg);} while (0)
 		#endif

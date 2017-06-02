@@ -1,0 +1,4 @@
+// Note the second line of this file must ALWAYS be the git SHA, third line ALWAYS the git SHA update time
+#define BOOST_OUTCOME_PREVIOUS_COMMIT_REF    9274c0d42307cac597f7c4e07a7eb9000a4792a5
+#define BOOST_OUTCOME_PREVIOUS_COMMIT_DATE   "2017-05-10 19:35:33 +00:00"
+#define BOOST_OUTCOME_PREVIOUS_COMMIT_UNIQUE 9274c0d4
