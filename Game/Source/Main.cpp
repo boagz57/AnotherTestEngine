@@ -10,7 +10,6 @@
 */
 
 #include <vector>
-#include <iostream>
 #include <SDL.h>
 #include <GL/glew.h>
 #include <Array>

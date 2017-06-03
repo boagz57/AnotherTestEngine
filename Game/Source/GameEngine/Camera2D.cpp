@@ -1,6 +1,5 @@
 #include <GLM/glm.hpp>
 #include <GLM/gtc/matrix_transform.hpp>
-#include <iostream>
 #include "Camera2D.h"
 
 namespace Blz

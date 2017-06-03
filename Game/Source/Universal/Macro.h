@@ -13,7 +13,7 @@
 	static_assert(expr, msg) 
 
 #define LOG(...) \
-	do { fprintf(stderr, __VA_ARGS__); } while (0)
+	do { fprintf_s(stderr, __VA_ARGS__); } while (0)
 
 #else
 #define NDEBUG
