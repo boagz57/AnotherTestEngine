@@ -1,5 +1,5 @@
 #include <GL\glew.h>
-#include "STB_Img\stb_image.h"
+#include <STB_Img\stb_image.h>
 #include "ErrorHandling.h"
 #include "ImageHandling.h"
 

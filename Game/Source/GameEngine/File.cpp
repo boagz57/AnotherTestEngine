@@ -21,14 +21,14 @@ namespace Blz
 		fclose(p_OutputFile);
 	}
 
-	void File::Close()
-	{
-		fclose(p_OutputFile);
-	}
-
 	void File::Open(const char8* c_FileName, const char8* mode)
 	{
 		p_OutputFile = fopen(c_FileName, mode);
+	}
+
+	void File::Close()
+	{
+		fclose(p_OutputFile);
 	}
 
 	bool File::Good()

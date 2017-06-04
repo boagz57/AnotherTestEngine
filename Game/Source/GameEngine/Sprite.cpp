@@ -1,4 +1,4 @@
-#include <cstddef>
+#include <cstddef> //For offsetof function below
 #include <GL/glew.h>
 #include <GLM/glm.hpp>
 #include "Sprite.h"

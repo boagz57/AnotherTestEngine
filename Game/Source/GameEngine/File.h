@@ -10,8 +10,8 @@ namespace Blz
 		File(char8* fileName);
 		~File();
 
-		void Close();
 		void Open(const char8* fileName, const char8* mode);
+		void Close();
 		bool Good();
 
 		void Write(const char8* message, ...);

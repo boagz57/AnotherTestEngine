@@ -1,5 +1,4 @@
 #include <fstream>
-#include <string>
 #include <GL\glew.h>
 #include "ShaderProgram.h"
 
@@ -8,7 +7,7 @@ namespace Blz
 	namespace OpenGL
 	{
 		//Class Helper functions
-		std::string ReadShaderSource(const char8* c_ShaderFilePath, const char8* c_TypeOfShader);
+		Blz::string ReadShaderSource(const char8* c_ShaderFilePath, const char8* c_TypeOfShader);
 
 		ShaderProgram::ShaderProgram(Blz::string vertexShaderFilePath, Blz::string fragmentShaderFilePath) 
 		{
@@ -30,7 +29,7 @@ namespace Blz
 			const GLchar* cAdapter[1];
 
 			//Add source or text file to shader object
-			std::string temp = ReadShaderSource(vertexShaderFile.c_str(), "Vertex").c_str();
+			Blz::string temp = ReadShaderSource(vertexShaderFile.c_str(), "Vertex").c_str();
 			cAdapter[0] = temp.c_str();
 			glShaderSource(vertexShaderID, 1, cAdapter, 0);
 
@@ -146,7 +145,7 @@ namespace Blz
 		}
 
 		//Class helper function definitions
-		std::string ReadShaderSource(const char8* cShaderFilePath, const char8* cTypeOfShader)
+		Blz::string ReadShaderSource(const char8* cShaderFilePath, const char8* cTypeOfShader)
 		{
 			std::ifstream shaderFileInputStream(cShaderFilePath);
 			if (!shaderFileInputStream.good())
@@ -154,7 +153,7 @@ namespace Blz
 				LOG("%s Shader File failed to load!\n", cTypeOfShader);
 			};
 
-			return std::string(std::istreambuf_iterator<char8>(shaderFileInputStream), std::istreambuf_iterator<char8>());
+			return Blz::string(std::istreambuf_iterator<char8>(shaderFileInputStream), std::istreambuf_iterator<char8>());
 		}
 	}
 }

@@ -1,5 +1,3 @@
-#include <stdarg.h>
-#include <stdio.h>
 #include "../Universal/Vector.h"
 #include "ErrorContext.h"
 
