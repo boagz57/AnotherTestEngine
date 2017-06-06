@@ -89,6 +89,7 @@
     <Link>
       <AdditionalLibraryDirectories>$(SolutionDir)ThirdParty\GLEW\Lib\x86;$(SolutionDir)ThirdParty\SDL\Lib\x86;$(SolutionDir)Game\Binaries\Win32-Debug\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>SDL2.lib;SDL2main.lib;opengl32.lib;glew32s.lib;Game.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <SubSystem>NotSet</SubSystem>
     </Link>
     <PostBuildEvent>
       <Command>
