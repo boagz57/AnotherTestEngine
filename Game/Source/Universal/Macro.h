@@ -20,6 +20,5 @@
 #define RUNTIME_ASSERT
 #define COMPILETIME_ASSERT(expr, msg) 
 #define LOG(...) ((void)0)
-#define XASSERT(test, msg, ...) ((void)0)
 #endif
 
