@@ -4,7 +4,7 @@
 #include <assert.h>
 #include <Boost/BoostAssert.h>
 
-#if (_DEBUG)
+#if (_DEBUG) || (PROFILE)
 
 #define RUNTIME_ASSERT \
 	BOOST_ASSERT_MSG 
