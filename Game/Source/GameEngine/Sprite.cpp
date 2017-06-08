@@ -28,7 +28,7 @@ void Sprite::Init(int16 x, int16 y, uint16 width, uint16 height, Blz::string ima
 	if (vboID == 0)
 		glGenBuffers(1, &vboID);
 
-	texture = Blz::OpenGL::LoadImage(imageFilePath);
+	texture = Blz::OpenGL::LoadImageToGPU(imageFilePath);
 
 	Vector3D vertexData[6]{			//TODO: switch to glm::vec3 instead of custom Vector3D class???
 		Vector3D {this->x + this->width, this->y + this->height, 0.0f},

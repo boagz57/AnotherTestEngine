@@ -97,9 +97,6 @@ int main(int agrc, char** argv)
 	p_sprites.push_back(new Sprite());
 	p_sprites.back()->Init(0, 0, 200, 200, "CharImage.png");
 
-	p_sprites.push_back(new Sprite());
-	p_sprites.back()->Init(-200, 0, 200, 200, "CharImage.png");
-
 	GameState gamestate{ GameState::PLAY };
 
 	SDL_Event evnt;

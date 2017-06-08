@@ -7,7 +7,7 @@ namespace Blz
 {
 	namespace OpenGL 
 	{
-		GLTexture LoadImage(Blz::string& filePath)
+		GLTexture LoadImageToGPU(Blz::string& filePath)
 		{
 			Blz::Err::ErrorContext ec("When loading image from file", filePath);
 
@@ -18,8 +18,10 @@ namespace Blz
 			int32 forceChannels = 4;
 			uchar8* imageData = 0;
 			imageData = stbi_load(filePath.c_str(), &x, &y, &currentChannels, forceChannels);
+			RUNTIME_ASSERT(x > 0, "Image width is less than 0 for image!");
+			RUNTIME_ASSERT(y > 0, "Image width is less than 0 for image!");
 
-			ERRASSERT(imageData, "Image not loading properly");
+			ERRASSERT(imageData, "Image not loaded properly");
 
 			texture.width = x;
 			texture.height = y;

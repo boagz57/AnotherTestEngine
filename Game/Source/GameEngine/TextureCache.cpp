@@ -23,7 +23,7 @@ namespace Blz
 		if (it == textureMap.end())
 		{
 			//Load Texture to OpenGL
-			GLTexture newTexture = Blz::OpenGL::LoadImage(textureFilePath);
+			GLTexture newTexture = Blz::OpenGL::LoadImageToGPU(textureFilePath);
 			textureMap.emplace(std::make_pair(textureFilePath, newTexture));
 
 			return newTexture;

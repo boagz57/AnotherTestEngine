@@ -13,7 +13,7 @@ namespace Blz
 			exit(0);
 		}
 
-		#if (_DEBUG)
+		#if (_DEBUG) || (PROFILE)
 			#define ERRASSERT(test, msg) do {if (!(test)) Blz::Err::ErrReport(__FILE__, __LINE__, msg);} while (0)
 		#else
 			#define ERRASSERT(test, msg) (void(0))
