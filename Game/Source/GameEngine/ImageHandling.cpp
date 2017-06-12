@@ -21,7 +21,8 @@ namespace Blz
 			RUNTIME_ASSERT(x > 0, "Image width is less than 0 for image!");
 			RUNTIME_ASSERT(y > 0, "Image width is less than 0 for image!");
 
-			ERRASSERT(imageData, "Image not loaded properly");
+			imageData = nullptr;
+			ERRASSERT(imageData, "Image data invalid!");
 
 			texture.width = x;
 			texture.height = y;

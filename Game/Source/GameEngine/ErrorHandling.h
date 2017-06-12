@@ -1,22 +1,34 @@
 #pragma once
+#define SPDLOG_DEBUG_ON
+#include "SpdLog\spdlog.h"
 #include "ErrorContext.h"
+
+#define ERRASSERT(data, msg, ...) \
+	do { Blz::Err::ErrorReport(data, __func__, __FILE__, __LINE__, msg, __VA_ARGS__); } while (0)
 
 namespace Blz
 {
 	namespace Err
 	{
-		inline void ErrReport(const char8* fileOfError, int32 lineNumberOfError, const Blz::string c_errMessage)
+		template<typename ptrType, typename... ArgTypes>
+		inline void ErrorReport(ptrType* data, const char* functionName, const char* file, int32 lineNumber, const Blz::string& c_errMessage, ArgTypes... args)
 		{
-			ErrorContext::LogContext();
-			LOG("  ERROR: %s\n", c_errMessage.c_str());
-			LOG("  In %s: %i\n\n", fileOfError, lineNumberOfError);
-			exit(0);
-		}
+			if (data != nullptr)
+			{
+				return;
+			}
+			else
+			{
+				//Create console object with spdlog
+				auto console = spdlog::stdout_color_mt("console");
+				//Controls how message is displayed. Different formatters % display different things. https://github.com/gabime/spdlog/wiki/3.-Custom-formatting
+				console->set_pattern("  %l: %v");
 
-		#if (_DEBUG) || (PROFILE)
-			#define ERRASSERT(test, msg) do {if (!(test)) Blz::Err::ErrReport(__FILE__, __LINE__, msg);} while (0)
-		#else
-			#define ERRASSERT(test, msg) (void(0))
-		#endif
+				ErrorContext::LogContext();
+				console->error(c_errMessage.c_str(), args...);
+				console->info("In {}() {}: {}", functionName, file, lineNumber);
+				exit(0);
+			}
+		}
 	}
 }
