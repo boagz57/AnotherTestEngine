@@ -1,4 +1,3 @@
-#include "GL\glew.h"
 #include "GameEngine\Window.h"
 #include "GameEngine\Sprite.h"
 

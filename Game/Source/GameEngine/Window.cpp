@@ -36,7 +36,7 @@ namespace Blz
 		//In openGL 4.3 a debug context was added for easier debugging. This debug context will automatically print debugging
 		//info to console (using a callback func) upon errors. This context can also be queried for versions lower than 4.3
 		//using extensions. This SDL function queries these extensions to help guarantee a debug context will be used
-		#if _DEBUG
+		#if (DEBUG) 
 			SDL_GL_SetAttribute(SDL_GL_CONTEXT_FLAGS, SDL_GL_CONTEXT_DEBUG_FLAG);
 		#endif
 

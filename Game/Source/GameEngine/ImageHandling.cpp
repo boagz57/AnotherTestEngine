@@ -14,18 +14,17 @@ namespace Blz
 			//Initiliazes struct members to 0
 			GLTexture texture = {};
 
-			int32 x = 0, y = 0, currentChannels;
+			int32 imgWidth = 0, imgHeight = 0, currentChannels;
 			int32 forceChannels = 4;
 			uchar8* imageData = 0;
-			imageData = stbi_load(filePath.c_str(), &x, &y, &currentChannels, forceChannels);
-			RUNTIME_ASSERT(x > 0, "Image width is less than 0 for image!");
-			RUNTIME_ASSERT(y > 0, "Image width is less than 0 for image!");
+			imageData = stbi_load(filePath.c_str(), &imgWidth, &imgHeight, &currentChannels, forceChannels);
+			RUNTIME_ASSERT(imgWidth >= 0, "Image width <= 0!");
+			RUNTIME_ASSERT(imgHeight >= 0, "Image height <= 0!");
 
-			imageData = nullptr;
 			ERRASSERT(imageData, "Image data invalid!");
 
-			texture.width = x;
-			texture.height = y;
+			texture.width = imgWidth;
+			texture.height = imgHeight;
 
 			//Flip image right side up before sending to OpenGL since openGL will read it in upside down. Following code is utilizing pointer
 			//arithmetic 

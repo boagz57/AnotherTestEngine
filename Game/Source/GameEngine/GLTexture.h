@@ -7,9 +7,9 @@ namespace Blz
 	{
 		struct GLTexture
 		{
-			GLuint id;
-			int32 width;
-			int32 height;
+			GLuint id = 0;
+			int32 width = 0;
+			int32 height = 0;
 		};
 	}
 }

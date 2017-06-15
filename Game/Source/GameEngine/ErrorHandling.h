@@ -1,6 +1,7 @@
 #pragma once
 #define SPDLOG_DEBUG_ON
-#include "SpdLog\spdlog.h"
+#include <SDL.h>
+#include <SpdLog\spdlog.h>
 #include "ErrorContext.h"
 
 #define ERRASSERT(data, msg, ...) \
@@ -27,6 +28,7 @@ namespace Blz
 				ErrorContext::LogContext();
 				console->error(c_errMessage.c_str(), args...);
 				console->info("In {}() {}: {}", functionName, file, lineNumber);
+				SDL_Quit();
 				exit(0);
 			}
 		}
