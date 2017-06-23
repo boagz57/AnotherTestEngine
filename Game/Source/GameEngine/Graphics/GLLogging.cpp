@@ -3,14 +3,14 @@
 #include <fstream>
 #include <cstdio>
 #include <GL/glew.h>
-#include "File.h"
+#include "../File.h"
 #include "GLLogging.h"
 
 #define GL_LOG_FILE "gl.log"
 
 namespace Blz
 {
-	namespace OpenGL
+	namespace Graphics
 	{
 		//Helper functions
 		const char8* GLTypeToString(GLenum type);
@@ -70,9 +70,9 @@ namespace Blz
 			};
 
 			//Header
-			OpenGL::LogToFile("-------------------------------------------------\n");
+			Graphics::LogToFile("-------------------------------------------------\n");
 			LogToFile("GL Context Parameters:\n");
-			OpenGL::LogToFile("-------------------------------------------------\n\n");
+			Graphics::LogToFile("-------------------------------------------------\n\n");
 
 			int32 numberOfGLParametersToLog = 9;
 			for (uint16 i = 0; i < numberOfGLParametersToLog; ++i)
@@ -86,19 +86,19 @@ namespace Blz
 		void LogShaderProgramProperties(GLuint shaderProgramID)
 		{
 			//Header
-			OpenGL::LogToFile("-------------------------------------------------\n");
-			OpenGL::LogToFile("Shader program %i\n", shaderProgramID);
-			OpenGL::LogToFile("-------------------------------------------------\n\n");
+			Graphics::LogToFile("-------------------------------------------------\n");
+			Graphics::LogToFile("Shader program %i\n", shaderProgramID);
+			Graphics::LogToFile("-------------------------------------------------\n\n");
 
 			int32 result = -1;
 			glGetProgramiv(shaderProgramID, GL_LINK_STATUS, &result);
-			OpenGL::LogToFile("GL_LINK_STATUS = %s\n", (result == GL_TRUE) ? "SUCCESS" : "FAILURE");
+			Graphics::LogToFile("GL_LINK_STATUS = %s\n", (result == GL_TRUE) ? "SUCCESS" : "FAILURE");
 
 			glGetProgramiv(shaderProgramID, GL_ATTACHED_SHADERS, &result);
-			OpenGL::LogToFile("GL_ATTACHED_SHADERS = %i\n", result);
+			Graphics::LogToFile("GL_ATTACHED_SHADERS = %i\n", result);
 
 			glGetProgramiv(shaderProgramID, GL_ACTIVE_ATTRIBUTES, &result);
-			OpenGL::LogToFile("GL_ACTIVE_ATTRIBUTES = %i\n", result);
+			Graphics::LogToFile("GL_ACTIVE_ATTRIBUTES = %i\n", result);
 
 			//Will log all current active attributes for program/shader
 			for (GLuint i = 0; i < (GLuint)result; ++i)
@@ -119,14 +119,14 @@ namespace Blz
 						char8 longName[64];
 						sprintf(longName, "%s[%i]", name, j);
 						int32 location = glGetAttribLocation(shaderProgramID, longName);
-						OpenGL::LogToFile(" - %i) type:%s name:%s location: %i\n", i, GLTypeToString(type), name, location);
+						Graphics::LogToFile(" - %i) type:%s name:%s location: %i\n", i, GLTypeToString(type), name, location);
 					}
 				}
 				else
 				{
 					//Just print single attribute information
 					int32 location = glGetAttribLocation(shaderProgramID, name);
-					OpenGL::LogToFile(" - %i) type:%s name:%s location %i\n", i, GLTypeToString(type), name, location);
+					Graphics::LogToFile(" - %i) type:%s name:%s location %i\n", i, GLTypeToString(type), name, location);
 				}
 			}
 
@@ -151,14 +151,14 @@ namespace Blz
 						char8 longName[64];
 						sprintf(longName, "%s[%i]", name, j);
 						int32 location = glGetUniformLocation(shaderProgramID, longName);
-						OpenGL::LogToFile(" - %i) type:%s name:%s location: %i\n", i, GLTypeToString(type), longName, location);
+						Graphics::LogToFile(" - %i) type:%s name:%s location: %i\n", i, GLTypeToString(type), longName, location);
 					}
 				}
 				else
 				{
 					//Just print single uniform variable 
 					int32 location = glGetUniformLocation(shaderProgramID, name);
-					OpenGL::LogToFile(" - %i) type:%s name:%s location %i\n", i, GLTypeToString(type), name, location);
+					Graphics::LogToFile(" - %i) type:%s name:%s location %i\n", i, GLTypeToString(type), name, location);
 				}
 			}
 
@@ -166,7 +166,7 @@ namespace Blz
 			int32 actualLength = 0;
 			char8 log[2048];
 			glGetProgramInfoLog(shaderProgramID, maxLength, &actualLength, log);
-			OpenGL::LogToFile("Program info log for GL index %u:\n%s", shaderProgramID, log);
+			Graphics::LogToFile("Program info log for GL index %u:\n%s", shaderProgramID, log);
 		}
 
 		bool IsProgramValid(GLuint shaderProgramID)
@@ -183,7 +183,7 @@ namespace Blz
 				int32 actualLength = 0;
 				char8 log[2048];
 				glGetProgramInfoLog(shaderProgramID, maxLength, &actualLength, log);
-				OpenGL::LogToFile("Program info log for GL index %u:\n%s", shaderProgramID, log);
+				Graphics::LogToFile("Program info log for GL index %u:\n%s", shaderProgramID, log);
 
 				return false;
 			}

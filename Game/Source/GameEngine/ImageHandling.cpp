@@ -1,11 +1,12 @@
 #include <GL\glew.h>
 #include <STB_Img\stb_image.h>
+#include "Graphics\GLImageHandling.h"
 #include "ErrorHandling.h"
 #include "ImageHandling.h"
 
 namespace Blz
 {
-	namespace OpenGL 
+	namespace Graphics 
 	{
 		GLTexture LoadImageToGPU(Blz::string& filePath)
 		{
@@ -25,6 +26,10 @@ namespace Blz
 
 			texture.width = imgWidth;
 			texture.height = imgHeight;
+
+			//Check if image is a power of 2 (which makes image compatible with older versions of opengl, also make things easier 
+			//for openGL to work with). If check is done with bitwise operations to keep check as fast as possible
+			RUNTIME_ASSERT((texture.width & (texture.width - 1)) == 0 || (texture.height & (texture.height - 1)) == 0, "Image dimensions are not a power of 2!");
 
 			//Flip image right side up before sending to OpenGL since openGL will read it in upside down. Following code is utilizing pointer
 			//arithmetic 
@@ -49,25 +54,7 @@ namespace Blz
 				}
 			}
 
-			//Send down imageData to openGL and set some parameters for image
-			glGenTextures(1, &(texture.id));
-			glActiveTexture(GL_TEXTURE0);
-			glBindTexture(GL_TEXTURE_2D, texture.id);
-			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, texture.width, texture.height, 0, GL_RGBA, GL_UNSIGNED_BYTE, imageData);
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-
-			//Check if image is a power of 2 (which makes image compatible with older versions of opengl, also make things easier 
-			//for openGL to work with). If check is done with bitwise operations to keep check as fast as possible
-			if ((texture.width & (texture.width - 1)) != 0 || (texture.height & (texture.height - 1)) != 0)
-			{
-				LOG("WARNING: %s texture is not a power of 2 dimensions\n\n", filePath.c_str());
-			};
-
-			//Unbind Texture
-			glBindTexture(GL_TEXTURE_2D, 0);
+			SendImageDataToGPU(imageData, texture);
 
 			return texture;
 		}

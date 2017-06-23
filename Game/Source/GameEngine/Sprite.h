@@ -1,6 +1,6 @@
 #pragma once
 #include <GL/glew.h>
-#include "GLTexture.h"
+#include "Graphics\GLTexture.h"
 
 class Sprite
 {
@@ -20,6 +20,6 @@ private:
 
 	GLuint vboID = 0;
 
-	Blz::OpenGL::GLTexture texture;
+	Blz::Graphics::GLTexture texture;
 };
 

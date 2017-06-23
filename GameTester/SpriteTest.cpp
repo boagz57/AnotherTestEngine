@@ -1,7 +1,6 @@
 #include <gmock\gmock.h>
 #include <gtest\gtest.h>
-#include "GameEngine\ShaderProgram.h"
-#include "GameEngine\Window.h"
+#include "GameEngine\Graphics\Window.h"
 #include "GameEngine\Sprite.h"
 
 TEST(SpriteClass, SpriteInitialize_True)

@@ -14,14 +14,14 @@
 #include <GL/glew.h>
 #include <Array>
 #include "GameEngine/Camera2D.h"
-#include "GameEngine/Window.h"
+#include "GameEngine\Graphics\Window.h"
 #include "GameEngine\Sprite.h"
 #include "GameEngine\Input.h"
 #include "GameEngine\ImageHandling.h"
-#include "GameEngine\ShaderProgram.h"
+#include "GameEngine\Graphics\ShaderProgram.h"
 #include "STB_Img\stb_image.h"
 #include "GameEngine\ErrorHandling.h"
-#include "GameEngine/GLLogging.h"
+#include "GameEngine/Graphics\GLLogging.h"
 
 Blz::Window window;
 Sprite playerSprite;
@@ -101,7 +101,7 @@ int main(int agrc, char** argv)
 
 	SDL_Event evnt;
 
-	Blz::OpenGL::ShaderProgram colorShaderProgram("Source/GameEngine/Shaders/VertexShader.glsl", "Source/GameEngine/Shaders/FragmentShader.glsl");
+	Blz::Graphics::ShaderProgram colorShaderProgram("Source/GameEngine/Shaders/VertexShader.glsl", "Source/GameEngine/Shaders/FragmentShader.glsl");
 
 	colorShaderProgram.Compile();
 	colorShaderProgram.AddAttribute("vertexPosition");
@@ -118,9 +118,9 @@ int main(int agrc, char** argv)
 
 	//This function should only be run in debug or development builds as it can be very computationally
 	//expensive 
-	Blz::OpenGL::IsProgramValid(colorShaderProgram.programID);
+	Blz::Graphics::IsProgramValid(colorShaderProgram.programID);
 
-	Blz::OpenGL::LogShaderProgramProperties(colorShaderProgram.programID);
+	Blz::Graphics::LogShaderProgramProperties(colorShaderProgram.programID);
 
 	while (gamestate != GameState::EXIT)
 	{

@@ -1,5 +1,5 @@
 #pragma once
-#include "GLTexture.h"
+#include "Graphics\GLTexture.h"
 #include "../Universal/Map.h"
 
 namespace Blz
@@ -10,9 +10,9 @@ namespace Blz
 		TextureCache();
 		~TextureCache();
 
-		Blz::OpenGL::GLTexture GetTexture(Blz::string textureFilePath);
+		Blz::Graphics::GLTexture GetTexture(Blz::string textureFilePath);
 
 	private:
-		Blz::Map<Blz::string, Blz::OpenGL::GLTexture> textureMap;
+		Blz::Map<Blz::string, Blz::Graphics::GLTexture> textureMap;
 	};
 }

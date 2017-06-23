@@ -53,10 +53,10 @@ namespace Blz
 		SDL_GL_SetSwapInterval(0);
 
 		//Log current computer opengl version and capabilities
-		OpenGL::RestartGLLogFile();
-		OpenGL::LogToFile("OpenGL Version %s\n\n", glGetString(GL_VERSION));
+		Graphics::RestartGLLogFile();
+		Graphics::LogToFile("OpenGL Version %s\n\n", glGetString(GL_VERSION));
 		LOG("OpenGL Version %s\n\n", glGetString(GL_VERSION));
-		OpenGL::LogCurrentGPUCapabilites();
+		Graphics::LogCurrentGPUCapabilites();
 
 		glewExperimental = GL_TRUE;
 		if (glewInit() != GLEW_OK)

@@ -3,7 +3,7 @@
 
 namespace Blz
 {
-	namespace OpenGL
+	namespace Graphics
 	{
 		struct GLTexture
 		{

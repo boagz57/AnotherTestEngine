@@ -1,4 +1,4 @@
-#include "GLTexture.h"
+#include "Graphics\GLTexture.h"
 #include "ImageHandling.h"
 #include "TextureCache.h"
 
@@ -12,9 +12,9 @@ namespace Blz
 	{
 	}
 
-	Blz::OpenGL::GLTexture TextureCache::GetTexture(Blz::string textureFilePath)
+	Blz::Graphics::GLTexture TextureCache::GetTexture(Blz::string textureFilePath)
 	{
-		using namespace Blz::OpenGL;
+		using namespace Blz::Graphics;
 
 		//Search texture map to see if image is already cached
 		auto it = this->textureMap.find(textureFilePath);
@@ -23,7 +23,7 @@ namespace Blz
 		if (it == textureMap.end())
 		{
 			//Load Texture to OpenGL
-			GLTexture newTexture = Blz::OpenGL::LoadImageToGPU(textureFilePath);
+			GLTexture newTexture = Blz::Graphics::LoadImageToGPU(textureFilePath);
 			textureMap.emplace(std::make_pair(textureFilePath, newTexture));
 
 			return newTexture;

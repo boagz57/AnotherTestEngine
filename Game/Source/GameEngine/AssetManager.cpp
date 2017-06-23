@@ -14,7 +14,7 @@ namespace Blz
 	{
 	}
 
-	Blz::OpenGL::GLTexture AssetManager::GetTexture(Blz::string texturePath)
+	Blz::Graphics::GLTexture AssetManager::GetTexture(Blz::string texturePath)
 	{
 		return textureCache.GetTexture(texturePath);
 	}

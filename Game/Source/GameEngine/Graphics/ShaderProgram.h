@@ -4,7 +4,7 @@
 
 namespace Blz
 {
-	namespace OpenGL
+	namespace Graphics
 	{
 		class ShaderProgram
 		{

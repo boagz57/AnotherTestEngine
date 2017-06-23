@@ -4,7 +4,7 @@
 
 namespace Blz
 {
-	namespace OpenGL
+	namespace Graphics
 	{
 		//Class Helper functions
 		Blz::string ReadShaderSource(const char8* c_ShaderFilePath, const char8* c_TypeOfShader);

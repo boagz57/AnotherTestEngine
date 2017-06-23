@@ -1,9 +1,9 @@
 #pragma once
-#include "GLTexture.h"
+#include "Graphics\GLTexture.h"
 
 namespace Blz
 {
-	namespace OpenGL 
+	namespace Graphics 
 	{
 		//Load image into GPU and return a handle to the texture
 		GLTexture LoadImageToGPU(Blz::string& filePath);

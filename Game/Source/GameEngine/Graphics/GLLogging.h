@@ -7,7 +7,7 @@
 
 namespace Blz
 {
-	namespace OpenGL
+	namespace Graphics
 	{
 		//Creates new log file each compilation
 		bool RestartGLLogFile();
