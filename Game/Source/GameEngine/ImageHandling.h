@@ -3,9 +3,6 @@
 
 namespace Blz
 {
-	namespace Graphics 
-	{
-		//Load image into GPU and return a handle to the texture
-		GLTexture LoadImageToGPU(Blz::string& filePath);
-	}
+	//Load image into GPU and return a handle to the texture
+	Blz::Graphics::GLTexture LoadImageToGPU(Blz::string& filePath);
 }

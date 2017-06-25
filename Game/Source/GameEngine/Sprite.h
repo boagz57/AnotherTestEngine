@@ -2,6 +2,10 @@
 #include <GL/glew.h>
 #include "Graphics\GLTexture.h"
 
+/*
+	Sprite is a class that can draw a rectangle of a texture to a render target. It can also transform that texture in 2d space (translate, rotate, scale). 
+*/
+
 class Sprite
 {
 public:
