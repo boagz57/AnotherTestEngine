@@ -40,53 +40,28 @@ Blz::Camera2D camera;
 
 void CalculateFPS()
 {
-	static uint32 FPS;
-	static uint32 frameTime;
-	static int32 currentFrame = 0;
+	static uint32 FPS = 0;
+	static uint32 frames = 0;
+	static bool firstTimeCalculatingFPS = true;
+	static uint32 startTime = 0;
 
-	static const int32 c_numSamples = 10;
-	static uint32 frameTimes[c_numSamples];
-
-	static uint32 previousTicks = SDL_GetTicks();
-
-	uint32 currentTicks = SDL_GetTicks();
-
-	frameTime = currentTicks - previousTicks;
-	frameTimes[currentFrame % c_numSamples] = frameTime;
-
-	previousTicks = currentTicks;
-
-	uint32 count;
-
-	currentFrame++;
-
-	if (currentFrame < c_numSamples)
+	if (firstTimeCalculatingFPS)
 	{
-		count = currentFrame; 
-	}
-	else
-	{
-		count = c_numSamples;
-	}
-	
-	sfloat frameTimeAverage = 0;
-	for (int32 i = 0; i < count; ++i)
-	{
-		frameTimeAverage += frameTimes[i];
+		frames = 0;
+		startTime = SDL_GetTicks();
+		firstTimeCalculatingFPS = false;
+		return;
 	}
 
-	frameTimeAverage /= count;
+	frames++;
 
-	if (frameTimeAverage > 0)
+	if (SDL_GetTicks() - startTime > 250 && frames > 10)
 	{
-		FPS = 1000 / frameTimeAverage;
+		FPS = (frames / (.001 * (SDL_GetTicks() -startTime)));
+		startTime = SDL_GetTicks();
+		frames = 0;
+		LOG("%i\n", FPS);
 	}
-	else
-	{
-		FPS = 60.0f;
-	}
-
-	LOG("%i\n", FPS);
 }
 
 int main(int agrc, char** argv)
@@ -94,8 +69,11 @@ int main(int agrc, char** argv)
 	window.Initialize();
 	camera.Init(1024, 768);
 
-	p_sprites.push_back(new Sprite());
-	p_sprites.back()->Init(0, 0, 200, 200, "CharImage.png");
+	for (int16 i = 0; i < 1000; ++i)
+	{
+		p_sprites.push_back(new Sprite());
+		p_sprites.back()->Init(0, 0, 200, 200, "CharImage.png");
+	}
 
 	GameState gamestate{ GameState::PLAY };
 
@@ -175,8 +153,8 @@ int main(int agrc, char** argv)
 
 		if (1000 / maxFPS > currentTime)
 		{
-			SDL_Delay(1000 / (maxFPS - currentTime));
-		}
+			SDL_Delay((1000 / maxFPS) - currentTime);
+		} 
 	}
 
 	return 0;

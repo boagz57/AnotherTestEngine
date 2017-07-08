@@ -6,6 +6,8 @@
 #include "ErrorHandling.h"
 #include "Vector3D.h"
 
+//TODO: Remove all opengl code from here and have a separate renderer class that will take care of all rendering
+
 Sprite::Sprite()
 {
 }
