@@ -16,6 +16,7 @@
 #include "GameEngine/Camera2D.h"
 #include "GameEngine\Graphics\Window.h"
 #include "GameEngine\Sprite.h"
+#include "GameEngine\Timing\Timing.h"
 #include "GameEngine\Input.h"
 #include "GameEngine\ImageHandling.h"
 #include "GameEngine\Graphics\ShaderProgram.h"
@@ -34,35 +35,7 @@ enum class GameState
 	EXIT
 };
 
-const uint32 maxFPS = 60;
-
 Blz::Camera2D camera;
-
-void CalculateFPS()
-{
-	static uint32 FPS = 0;
-	static uint32 frames = 0;
-	static bool firstTimeCalculatingFPS = true;
-	static uint32 startTime = 0;
-
-	if (firstTimeCalculatingFPS)
-	{
-		frames = 0;
-		startTime = SDL_GetTicks();
-		firstTimeCalculatingFPS = false;
-		return;
-	}
-
-	frames++;
-
-	if (SDL_GetTicks() - startTime > 250 && frames > 10)
-	{
-		FPS = (frames / (.001 * (SDL_GetTicks() -startTime)));
-		startTime = SDL_GetTicks();
-		frames = 0;
-		LOG("%i\n", FPS);
-	}
-}
 
 int main(int agrc, char** argv)
 {
@@ -102,8 +75,6 @@ int main(int agrc, char** argv)
 
 	while (gamestate != GameState::EXIT)
 	{
-		uint32 startTime = SDL_GetTicks();
-
 		//Process input
 		while (SDL_PollEvent(&evnt))
 		{
@@ -147,14 +118,7 @@ int main(int agrc, char** argv)
 
 		window.SwapBuffers();
 
-		CalculateFPS();
-
-		uint32 currentTime = SDL_GetTicks() - startTime;
-
-		if (1000 / maxFPS > currentTime)
-		{
-			SDL_Delay((1000 / maxFPS) - currentTime);
-		} 
+		Blz::Timing::CalculateAndDisplayFPS();
 	}
 
 	return 0;
