@@ -2,7 +2,7 @@
 #include <GL/glew.h>
 #include <GLM/glm.hpp>
 #include "Sprite.h"
-#include "ImageHandling.h"
+#include "Graphics\GLTexture.h"
 #include "ErrorHandling.h"
 #include "Vector3D.h"
 
@@ -32,7 +32,9 @@ void Sprite::Init(int16 x, int16 y, uint16 width, uint16 height, Blz::string ima
 	if (vboID == 0)
 		glGenBuffers(1, &vboID);
 
-	texture = Blz::LoadImageToGPU(imageFilePath);
+	Blz::Graphics::GLTexture texture(imageFilePath);
+
+	this->texture = texture;
 
 	Vector3D vertexData[6]{			//TODO: switch to glm::vec3 instead of custom Vector3D class???
 		Vector3D {this->x + this->width, this->y + this->height, 0.0f},

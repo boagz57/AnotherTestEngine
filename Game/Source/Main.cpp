@@ -18,7 +18,6 @@
 #include "GameEngine\Sprite.h"
 #include "GameEngine\Timing\Timing.h"
 #include "GameEngine\Input.h"
-#include "GameEngine\ImageHandling.h"
 #include "GameEngine\Graphics\ShaderProgram.h"
 #include "STB_Img\stb_image.h"
 #include "GameEngine\ErrorHandling.h"

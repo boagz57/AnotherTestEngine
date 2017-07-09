@@ -20,6 +20,7 @@ namespace Blz
 			//Controls how message is displayed. Different formatters % display different things. https://github.com/gabime/spdlog/wiki/3.-Custom-formatting
 			console->set_pattern("  %l: %v");
 
+			//Combinging both 'condition' message and 'c_errMessage' first to keep everything on one line in console
 			Blz::string combinedErrMessages("Assertion failed: " + Blz::string(condition) + " \n         " + c_errMessage);
 
 			ErrorContext::LogContext();
