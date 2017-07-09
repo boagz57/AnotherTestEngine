@@ -30,7 +30,7 @@ namespace Blz
 		{
 			for (int i = 0; i < numContexts; ++i)
 			{
-				LOG("%s: %s\n", errorContextDescriptions.at(i).c_str(), errorContextData.at(i).c_str());
+				LOG("  %s: %s\n", errorContextDescriptions.at(i).c_str(), errorContextData.at(i).c_str());
 			}
 		}
 	}
