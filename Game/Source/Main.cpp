@@ -15,10 +15,11 @@
 #include <Array>
 #include "GameEngine/Camera2D.h"
 #include "GameEngine\Graphics\Window.h"
-#include "GameEngine\Sprite.h"
+#include "GameEngine\Graphics\Sprite.h"
 #include "GameEngine\Timing\Timing.h"
 #include "GameEngine\Input.h"
 #include "GameEngine\Graphics\ShaderProgram.h"
+#include "GameEngine\Graphics\Renderer.h"
 #include "STB_Img\stb_image.h"
 #include "GameEngine\ErrorHandling.h"
 #include "GameEngine/Graphics\GLLogging.h"
@@ -40,12 +41,11 @@ int main(int agrc, char** argv)
 {
 	window.Initialize();
 	camera.Init(1024, 768);
+	Blz::Graphics::Renderer renderer;
+	Sprite sprite;
+	sprite.Init(0, 0, 200, 200, "CharImage.png");
 
-	for (int16 i = 0; i < 1000; ++i)
-	{
-		p_sprites.push_back(new Sprite());
-		p_sprites.back()->Init(0, 0, 200, 200, "CharImage.png");
-	}
+	renderer.Init(sprite);
 
 	GameState gamestate{ GameState::PLAY };
 
@@ -112,8 +112,7 @@ int main(int agrc, char** argv)
 
 		camera.Update();
 
-		for (uint32 i = 0; i < p_sprites.size(); ++i)
-			p_sprites[i]->Draw();
+		renderer.Draw();
 
 		window.SwapBuffers();
 

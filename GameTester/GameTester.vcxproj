@@ -333,7 +333,6 @@ copy /y  "$(SolutionDir)ThirdParty\SDL\Lib\x86\SDL2.dll" "$(SolutionDir)GameTest
     <ClCompile Include="..\ThirdParty\GoogleTest\gmock\src\gmock-all.cc" />
     <ClCompile Include="..\ThirdParty\GoogleTest\gtest\src\gtest-all.cc" />
     <ClCompile Include="MainTest.cpp" />
-    <ClCompile Include="SpriteTest.cpp" />
     <ClCompile Include="WindowTest.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

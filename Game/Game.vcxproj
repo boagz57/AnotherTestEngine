@@ -410,8 +410,8 @@ copy /y  "$(SolutionDir)ThirdParty\SDL\Lib\x86\SDL2.dll" "$(SolutionDir)Game\Bin
     <ClCompile Include="Source\GameEngine\Graphics\ShaderProgram.cpp" />
     <ClCompile Include="Source\GameEngine\Graphics\GLLogging.cpp" />
     <ClCompile Include="Source\GameEngine\File.cpp" />
-    <ClCompile Include="Source\GameEngine\Renderer.cpp" />
-    <ClCompile Include="Source\GameEngine\Sprite.cpp" />
+    <ClCompile Include="Source\GameEngine\Graphics\Renderer.cpp" />
+    <ClCompile Include="Source\GameEngine\Graphics\Sprite.cpp" />
     <ClCompile Include="Source\GameEngine\Timing\Timing.cpp" />
     <ClCompile Include="Source\Main.cpp" />
     <ClCompile Include="Source\GameEngine\Graphics\Window.cpp" />
@@ -427,8 +427,8 @@ copy /y  "$(SolutionDir)ThirdParty\SDL\Lib\x86\SDL2.dll" "$(SolutionDir)Game\Bin
     <ClInclude Include="Source\GameEngine\Graphics\ShaderProgram.h" />
     <ClInclude Include="Source\GameEngine\Graphics\GLLogging.h" />
     <ClInclude Include="Source\GameEngine\File.h" />
-    <ClInclude Include="Source\GameEngine\Renderer.h" />
-    <ClInclude Include="Source\GameEngine\Sprite.h" />
+    <ClInclude Include="Source\GameEngine\Graphics\Renderer.h" />
+    <ClInclude Include="Source\GameEngine\Graphics\Sprite.h" />
     <ClInclude Include="Source\GameEngine\Timing\Timing.h" />
     <ClInclude Include="Source\GameEngine\Vector3D.h" />
     <ClInclude Include="Source\Universal\Macro.h" />

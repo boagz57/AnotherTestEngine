@@ -1,10 +1,9 @@
 #pragma once
-#include <GL/glew.h>
-#include "Graphics\GLTexture.h"
+#include "../../Universal/Vector.h"
+#include "../Vector3D.h"
+#include "GLTexture.h"
 
-/*
-	Sprite is a class that can draw a rectangle of a texture to a render target. It can also transform that texture in 2d space (translate, rotate, scale). 
-*/
+namespace Blz { namespace Graphics { class Renderer; } }
 
 class Sprite
 {
@@ -14,16 +13,15 @@ public:
 
 	void Init(int16 screenCoordinateX, int16 screenCoordinateY, uint16 imageWidth, uint16 imageHeight, Blz::string imageFilePath);
 
-	void Draw();
-
 private:
 	float x = 0.0f;
 	float y = 0.0f;
 	float width = 0.0f;
 	float height = 0.0f;
 
-	GLuint vboID = 0;
+	friend class Blz::Graphics::Renderer;
 
 	Blz::Graphics::GLTexture texture;
+	Blz::Vector<Vector3D> vertexData;
 };
 
