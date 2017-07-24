@@ -13,6 +13,8 @@
 #include <SDL.h>
 #include <GL/glew.h>
 #include <Array>
+#include <GLM/gtc/matrix_transform.hpp>
+#include <GLM/glm.hpp>
 #include "GameEngine/Camera2D.h"
 #include "GameEngine\Graphics\Window.h"
 #include "GameEngine\Graphics\Sprite.h"
@@ -40,10 +42,9 @@ Blz::Camera2D camera;
 int main(int agrc, char** argv)
 {
 	window.Initialize();
-	camera.Init(1024, 768);
 	Blz::Graphics::Renderer renderer;
 	Sprite sprite;
-	sprite.Init(0, 0, 200, 200, "CharImage.png");
+	sprite.Init(1024/2, 768/2, 200, 200, "CharImage.png");
 
 	renderer.Init(sprite);
 
@@ -61,10 +62,6 @@ int main(int agrc, char** argv)
 
 	GLuint uniformLocation = colorShaderProgram.GetUniformLocation("basicTexture");
 	glUniform1i(uniformLocation, 0);
-
-	GLuint ProjectMatrixUniformLocation = colorShaderProgram.GetUniformLocation("projectionMatrix");
-	glm::mat4 transformMatrix = camera.GetTransformationMatrix();
-	glUniformMatrix4fv(ProjectMatrixUniformLocation, 1, GL_FALSE, &(transformMatrix[0][0]));
 
 	//This function should only be run in debug or development builds as it can be very computationally
 	//expensive 
@@ -92,25 +89,13 @@ int main(int agrc, char** argv)
 			}
 		}
 
-		if(Blz::Input::IsKeyPressed(SDLK_w))	
-			camera.SetPosition(camera.GetPosition() + glm::vec2(0.0f, 50.0f));
-		else if (Blz::Input::IsKeyPressed(SDLK_s))
-			camera.SetPosition(camera.GetPosition() + glm::vec2(0.0f, -50.0f));
-		else if (Blz::Input::IsKeyPressed(SDLK_a))
-			camera.SetPosition(camera.GetPosition() + glm::vec2(50.0f, 0.0f));
-		else if (Blz::Input::IsKeyPressed(SDLK_d))
-			camera.SetPosition(camera.GetPosition() + glm::vec2(-50.0f, 0.0f));
-		else if (Blz::Input::IsKeyPressed(SDLK_q))
-			camera.SetScale(camera.GetScale() + .1f);
-		else if (Blz::Input::IsKeyPressed(SDLK_z))
-			camera.SetScale(camera.GetScale() + -.1f);
+		glm::mat4 orthoProjection = glm::ortho(0.0f, static_cast<sfloat>(1024), 0.0f, static_cast<sfloat>(768));
+		glm::mat4 transformationMatrix = glm::translate(orthoProjection, glm::vec3{0.0f, 0.0f, 0.0f });
 
-		glm::mat4 transformMatrix = camera.GetTransformationMatrix();
-		glUniformMatrix4fv(ProjectMatrixUniformLocation, 1, GL_FALSE, &(transformMatrix[0][0]));
+		GLuint transformationMatrixUniformLocation = colorShaderProgram.GetUniformLocation("transformationMatrix");
+		glUniformMatrix4fv(transformationMatrixUniformLocation, 1, GL_FALSE, &(transformationMatrix[0][0]));
 
 		window.ClearBuffers();
-
-		camera.Update();
 
 		renderer.Draw();
 
