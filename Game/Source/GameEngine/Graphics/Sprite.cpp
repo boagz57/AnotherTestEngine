@@ -6,6 +6,7 @@
 #include "Sprite.h"
 #include "GLTexture.h"
 #include "../ErrorContext.h"
+#include "../ErrorHandling.h"
 #include "../Vector3D.h"
 
 //TODO: Remove all opengl code from here and have a separate renderer class that will take care of all rendering
@@ -32,9 +33,13 @@ void Sprite::Init(int16 x, int16 y, uint16 width, uint16 height, Blz::string ima
 	this->width = static_cast<sfloat>(width);
 	this->height = static_cast<sfloat>(height);
 
-	Blz::Graphics::GLTexture texture(imageFilePath);
+	if (vboID == 0)
+		glGenBuffers(1, &vboID);
 
+	Blz::Graphics::GLTexture texture(imageFilePath);
 	this->texture = texture;
+
+	ERRASSERT(texture.id != 0, "Texture did not load properly!");
 
 	//TODO: Need to be able to find center point of quadrilateral (since all sprites with be drawn onto a quad) so I can have sprites origin centered.
 	this->vertexData.at(0).SetPosition(glm::vec3{ this->x + this->width, this->y + this->height, 0.0f });//Top right corner
@@ -50,4 +55,12 @@ void Sprite::Init(int16 x, int16 y, uint16 width, uint16 height, Blz::string ima
 	this->vertexData.at(3).SetUV(glm::vec2{ 0.0f, 0.0f });
 	this->vertexData.at(4).SetUV(glm::vec2{ 1.0f, 0.0f });
 	this->vertexData.at(5).SetUV(glm::vec2{ 1.0f, 1.0f });
+
+	glBindBuffer(GL_ARRAY_BUFFER, vboID);
+	glBufferData(GL_ARRAY_BUFFER, (sizeof(Vector3D) * this->vertexData.size()), &this->vertexData.front(), GL_STATIC_DRAW);
+
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vector3D), (void*)offsetof(Vector3D, position));
+	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(Vector3D), (void*)offsetof(Vector3D, textureCoordinates));
+
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
 }

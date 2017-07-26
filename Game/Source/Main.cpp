@@ -13,6 +13,7 @@
 #include <Array>
 #include "GameEngine\Graphics\Window.h"
 #include "GameEngine\Graphics\Sprite.h"
+#include "GameEngine\Fighter.h"
 #include "GameEngine\Timing\Timing.h"
 #include "GameEngine\Input.h"
 #include "GameEngine\Graphics\Renderer.h"
@@ -32,11 +33,11 @@ enum class GameState
 int main(int agrc, char** argv)
 {
 	window.Initialize();
+	
 	Blz::Graphics::Renderer renderer;
-	Sprite sprite;
-	sprite.Init(1024/2, 768/2, 200, 200, "CharImage.png");
 
-	renderer.Init(sprite);
+	Fighter player1("CharImage.png");
+	renderer.Init();
 
 	GameState gamestate{ GameState::PLAY };
 
@@ -64,7 +65,7 @@ int main(int agrc, char** argv)
 
 		window.ClearBuffers();
 
-		renderer.Draw();
+		renderer.Draw(player1);
 
 		window.SwapBuffers();
 

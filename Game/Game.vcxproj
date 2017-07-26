@@ -402,6 +402,7 @@ copy /y  "$(SolutionDir)ThirdParty\SDL\Lib\x86\SDL2.dll" "$(SolutionDir)Game\Bin
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\ThirdParty\STB_Image\Source\stb_image.cpp" />
+    <ClCompile Include="Source\GameEngine\Fighter.cpp" />
     <ClCompile Include="Source\GameEngine\Graphics\GLTexture.cpp" />
     <ClCompile Include="Source\GameEngine\ErrorContext.cpp" />
     <ClCompile Include="Source\GameEngine\Input.cpp" />
@@ -420,6 +421,7 @@ copy /y  "$(SolutionDir)ThirdParty\SDL\Lib\x86\SDL2.dll" "$(SolutionDir)Game\Bin
   <ItemGroup>
     <ClInclude Include="Source\GameEngine\ErrorContext.h" />
     <ClInclude Include="Source\GameEngine\ErrorHandling.h" />
+    <ClInclude Include="Source\GameEngine\Fighter.h" />
     <ClInclude Include="Source\GameEngine\Input.h" />
     <ClInclude Include="Source\GameEngine\Camera2D.h" />
     <ClInclude Include="Source\GameEngine\AssetManager.h" />

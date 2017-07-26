@@ -1,5 +1,6 @@
 #pragma once
 #include "ShaderProgram.h"
+#include "../Fighter.h"
 #include "Sprite.h"
 
 namespace Blz
@@ -12,12 +13,10 @@ namespace Blz
 			Renderer();
 			~Renderer();
 
-			void Init(Sprite& sprite);
-			void Draw();
+			void Init();
+			void Draw(Fighter& fighterToDraw);
 
 		private:
-			GLuint VBOID = 0;
-			Sprite sprite;
 			ShaderProgram shaderProgram;
 		};
 	}
