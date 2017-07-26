@@ -1,4 +1,5 @@
 #pragma once
+#include "ShaderProgram.h"
 #include "Sprite.h"
 
 namespace Blz
@@ -17,6 +18,7 @@ namespace Blz
 		private:
 			GLuint VBOID = 0;
 			Sprite sprite;
+			ShaderProgram shaderProgram;
 		};
 	}
 }

@@ -10,21 +10,13 @@
 */
 
 #include <vector>
-#include <SDL.h>
-#include <GL/glew.h>
 #include <Array>
-#include <GLM/gtc/matrix_transform.hpp>
-#include <GLM/glm.hpp>
-#include "GameEngine/Camera2D.h"
 #include "GameEngine\Graphics\Window.h"
 #include "GameEngine\Graphics\Sprite.h"
 #include "GameEngine\Timing\Timing.h"
 #include "GameEngine\Input.h"
-#include "GameEngine\Graphics\ShaderProgram.h"
 #include "GameEngine\Graphics\Renderer.h"
-#include "STB_Img\stb_image.h"
 #include "GameEngine\ErrorHandling.h"
-#include "GameEngine/Graphics\GLLogging.h"
 
 Blz::Window window;
 Sprite playerSprite;
@@ -36,8 +28,6 @@ enum class GameState
 	PLAY,
 	EXIT
 };
-
-Blz::Camera2D camera;
 
 int main(int agrc, char** argv)
 {
@@ -51,24 +41,7 @@ int main(int agrc, char** argv)
 	GameState gamestate{ GameState::PLAY };
 
 	SDL_Event evnt;
-
-	Blz::Graphics::ShaderProgram colorShaderProgram("Source/GameEngine/Shaders/VertexShader.glsl", "Source/GameEngine/Shaders/FragmentShader.glsl");
-
-	colorShaderProgram.Compile();
-	colorShaderProgram.AddAttribute("vertexPosition");
-	colorShaderProgram.AddAttribute("textCoord");
-	colorShaderProgram.Link();
-	colorShaderProgram.Bind();
-
-	GLuint uniformLocation = colorShaderProgram.GetUniformLocation("basicTexture");
-	glUniform1i(uniformLocation, 0);
-
-	//This function should only be run in debug or development builds as it can be very computationally
-	//expensive 
-	Blz::Graphics::IsProgramValid(colorShaderProgram.programID);
-
-	Blz::Graphics::LogShaderProgramProperties(colorShaderProgram.programID);
-
+	
 	while (gamestate != GameState::EXIT)
 	{
 		//Process input
@@ -88,12 +61,6 @@ int main(int agrc, char** argv)
 				break;
 			}
 		}
-
-		glm::mat4 orthoProjection = glm::ortho(0.0f, static_cast<sfloat>(1024), 0.0f, static_cast<sfloat>(768));
-		glm::mat4 transformationMatrix = glm::translate(orthoProjection, glm::vec3{0.0f, 0.0f, 0.0f });
-
-		GLuint transformationMatrixUniformLocation = colorShaderProgram.GetUniformLocation("transformationMatrix");
-		glUniformMatrix4fv(transformationMatrixUniformLocation, 1, GL_FALSE, &(transformationMatrix[0][0]));
 
 		window.ClearBuffers();
 
