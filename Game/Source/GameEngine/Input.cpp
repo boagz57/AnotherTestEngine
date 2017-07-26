@@ -1,10 +1,8 @@
+#include <SDL.h>
 #include "Input.h"
 
 namespace Blz
 {
-	//Initialize Static memory
-	UMap<uint, bool> Input::keyMap;
-
 	Input::Input()
 	{
 	}
@@ -13,14 +11,24 @@ namespace Blz
 	{
 	}
 
-	void Input::pressKey(uint keyID)
+	void Input::ProcessInput()
 	{
-		keyMap[keyID] = true;
-	}
+		while (SDL_PollEvent(&evnt))
+		{
+			switch (evnt.type)
+			{
+			case SDL_KEYDOWN:
+				keyMap[evnt.key.keysym.sym] = true;
+				break;
 
-	void Input::releaseKey(uint keyID)
-	{
-		keyMap[keyID] = false;
+			case SDL_KEYUP:
+				keyMap[evnt.key.keysym.sym] = false;
+				break;
+			}
+		}
+
+		if (IsKeyPressed(SDLK_w))
+			LOG("Hellllllo");
 	}
 
 	bool Input::IsKeyPressed(uint keyID)

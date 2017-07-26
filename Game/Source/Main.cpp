@@ -11,6 +11,7 @@
 
 #include <vector>
 #include <Array>
+#include <SDL.h>
 #include "GameEngine\Graphics\Window.h"
 #include "GameEngine\Graphics\Sprite.h"
 #include "GameEngine\Fighter.h"
@@ -39,29 +40,11 @@ int main(int agrc, char** argv)
 	Fighter player1("CharImage.png");
 	renderer.Init();
 
-	GameState gamestate{ GameState::PLAY };
+	Blz::Input input;
 
-	SDL_Event evnt;
-	
-	while (gamestate != GameState::EXIT)
+	while (!input.IsKeyPressed(SDLK_ESCAPE))
 	{
-		//Process input
-		while (SDL_PollEvent(&evnt))
-		{
-			switch (evnt.type)
-			{
-			case SDL_QUIT:
-				gamestate = GameState::EXIT;
-
-			case SDL_KEYDOWN:
-				Blz::Input::pressKey(evnt.key.keysym.sym);
-				break;
-
-			case SDL_KEYUP:
-				Blz::Input::releaseKey(evnt.key.keysym.sym);
-				break;
-			}
-		}
+		input.ProcessInput();
 
 		window.ClearBuffers();
 

@@ -3,18 +3,27 @@
 
 namespace Blz
 {
+	enum class GameState
+	{
+		PLAY,
+		EXIT
+	};
+
 	class Input
 	{
 	public:
 		Input();
 		~Input();
 
-		static void pressKey(uint keyID);
-		static void releaseKey(uint keyID);
+		void ProcessInput();
 
-		static bool IsKeyPressed(uint keyID);
+		void pressKey(uint keyID);
+		void releaseKey(uint keyID);
+
+		bool IsKeyPressed(uint keyID);
 
 	private:
-		static Blz::UMap<uint, bool> keyMap;
+		Blz::UMap<uint, bool> keyMap;
+		SDL_Event evnt;
 	};
 }
