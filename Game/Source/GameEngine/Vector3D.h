@@ -10,12 +10,10 @@ public:
 	inline Vector3D(glm::vec3 position);
 	inline Vector3D(glm::vec3 position, glm::vec2 textureCoordinates);
 
-	inline glm::vec3 GetPosition();
-	inline glm::vec2 GetTextCoords();
+	//Functions used for easier setting of attributes. Instead of having to write vec.position.x = blah, vec.position.y = blah, etc. 
 	inline void SetPosition(glm::vec3 positionToSet);
 	inline void SetUV(glm::vec2 textureCoordinatesToSet);
 
-private:
 	glm::vec3 position;
 	glm::vec2 textureCoordinates;
 };
@@ -31,16 +29,6 @@ Vector3D::Vector3D(glm::vec3 position, glm::vec2 textureCoordinates) :
 	position(position),
 	textureCoordinates(textureCoordinates)
 {}
-
-glm::vec3 Vector3D::GetPosition()
-{
-	return position;
-}
-
-glm::vec2 Vector3D::GetTextCoords()
-{
-	return textureCoordinates;
-}
 
 void Vector3D::SetPosition(glm::vec3 newPosition)
 {

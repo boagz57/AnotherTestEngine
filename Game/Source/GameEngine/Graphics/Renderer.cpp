@@ -31,10 +31,8 @@ namespace Blz
 			glBindTexture(GL_TEXTURE_2D, sprite.texture.id);
 			glBindBuffer(GL_ARRAY_BUFFER, VBOID);
 
-			//Position														  size 0 since position attribute is laid out first in Vector3D memory
-			glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vector3D), (void*)0);
-			//Texture Coordinates                                             text coords attribute is sizeof(glm::vec3) bytes into Vector3D since it's laid out after position attribute
-			glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(Vector3D), (void*)sizeof(glm::vec3));
+			glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vector3D), (void*)offsetof(Vector3D, position));
+			glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(Vector3D), (void*)offsetof(Vector3D, textureCoordinates));
 
 			glDrawArrays(GL_TRIANGLES, 0, 6);
 
