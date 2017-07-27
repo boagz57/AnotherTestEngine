@@ -13,7 +13,7 @@ Fighter::~Fighter()
 {
 }
 
-Sprite Fighter::GetSprite()
+glm::vec3 Fighter::GetPosition()
 {
-	return sprite;
+	return this->position;
 }

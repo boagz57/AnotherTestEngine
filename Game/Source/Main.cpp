@@ -25,17 +25,16 @@ Sprite playerSprite;
 
 std::vector<Sprite*> p_sprites;
 
-enum class GameState
-{
-	PLAY,
-	EXIT
-};
-
 int main(int agrc, char** argv)
 {
 	window.Initialize();
 	
 	Blz::Graphics::Renderer renderer;
+
+	//Player class, which inherits from fighter, will call a scene function within contructor adding fighter to scene in background
+	//Player player1;
+	//if (Player1.GetPosition().x > 0)
+	//{   ..do something  };
 
 	Fighter player1("CharImage.png");
 	renderer.Init();
@@ -44,7 +43,7 @@ int main(int agrc, char** argv)
 
 	while (!input.IsKeyPressed(SDLK_ESCAPE))
 	{
-		input.ProcessInput();
+		input.ProcessInput(player1);
 
 		window.ClearBuffers();
 

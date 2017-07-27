@@ -1,24 +1,16 @@
 #pragma once
+#include "Fighter.h"
 #include "../Universal/UnorderedMap.h"
 
 namespace Blz
 {
-	enum class GameState
-	{
-		PLAY,
-		EXIT
-	};
-
 	class Input
 	{
 	public:
 		Input();
 		~Input();
 
-		void ProcessInput();
-
-		void pressKey(uint keyID);
-		void releaseKey(uint keyID);
+		void ProcessInput(Fighter& fighterToApplyInputTo);
 
 		bool IsKeyPressed(uint keyID);
 

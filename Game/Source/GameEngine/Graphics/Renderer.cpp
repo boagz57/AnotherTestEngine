@@ -40,14 +40,16 @@ namespace Blz
 
 		void Renderer::Draw(Fighter& fighter)
 		{
+			glm::vec3 newFighterPosition = fighter.position;
+
 			glm::mat4 orthoProjection = glm::ortho(0.0f, static_cast<sfloat>(1024), 0.0f, static_cast<sfloat>(768));
-			glm::mat4 transformationMatrix = glm::translate(orthoProjection, glm::vec3{ 0.0f, 0.0f, 0.0f });
+			glm::mat4 transformationMatrix = glm::translate(orthoProjection, newFighterPosition);
 
 			GLuint transformationMatrixUniformLocation = this->shaderProgram.GetUniformLocation("transformationMatrix");
 			glUniformMatrix4fv(transformationMatrixUniformLocation, 1, GL_FALSE, &(transformationMatrix[0][0]));
 
-			glBindTexture(GL_TEXTURE_2D, fighter.GetSprite().texture.id);
-			glBindBuffer(GL_ARRAY_BUFFER, fighter.GetSprite().vboID);
+			glBindTexture(GL_TEXTURE_2D, fighter.sprite.texture.id);
+			glBindBuffer(GL_ARRAY_BUFFER, fighter.sprite.vboID);
 
 			glDrawArrays(GL_TRIANGLES, 0, 6);
 
