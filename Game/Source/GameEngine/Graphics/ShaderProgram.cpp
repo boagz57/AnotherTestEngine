@@ -12,13 +12,6 @@ namespace Blz
 		ShaderProgram::ShaderProgram()
 		{}
 
-		ShaderProgram::ShaderProgram(Blz::string vertexShaderFilePath, Blz::string fragmentShaderFilePath) 
-		{
-			vertexShaderFile = vertexShaderFilePath;
-			fragmentShaderFile = fragmentShaderFilePath;
-			programID = glCreateProgram();
-		}
-
 		ShaderProgram::~ShaderProgram()
 		{
 			glDeleteProgram(programID);

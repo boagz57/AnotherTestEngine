@@ -10,7 +10,7 @@ public:
 	Scene();
 	~Scene();
 
-	Fighter* CreateFighter();
+	Fighter* CreateFighter(Blz::string spriteImageFilePath, uint16 startingWorldPositionX, uint16 startingWorldPositionY);
 
 private:
 	friend class Blz::Graphics::Renderer;

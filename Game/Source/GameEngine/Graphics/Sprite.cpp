@@ -41,13 +41,15 @@ void Sprite::Init(int16 x, int16 y, uint16 width, uint16 height, Blz::string ima
 
 	ERRASSERT(texture.id != 0, "Texture did not load properly!");
 
-	//TODO: Need to be able to find center point of quadrilateral (since all sprites with be drawn onto a quad) so I can have sprites origin centered.
-	this->vertexData.at(0).SetPosition(glm::vec3{ this->x + this->width, this->y + this->height, 0.0f });//Top right corner
-	this->vertexData.at(1).SetPosition(glm::vec3{ this->x, this->y + height, 0.0f });//Top left corner
-	this->vertexData.at(2).SetPosition(glm::vec3{ this->x, this->y, 0.0f });//Bottom left corner
-	this->vertexData.at(3).SetPosition(glm::vec3{ this->x, this->y, 0.0f });//Bottom left corner
-	this->vertexData.at(4).SetPosition(glm::vec3{ this->x + this->width, this->y, 0.0f });//Bottom right corner
-	this->vertexData.at(5).SetPosition(glm::vec3{ this->x + this->width, this->y + this->height, 0.0f });//Top right corner
+	sfloat halfWidth = this->width / 2;
+
+	//Setting sprite origin at bottom middle of image by subtracting half width 
+	this->vertexData.at(0).SetPosition(glm::vec3{ this->x + (this->width - halfWidth), this->y + this->height, 0.0f });//Top right corner
+	this->vertexData.at(1).SetPosition(glm::vec3{ this->x - halfWidth, this->y + height, 0.0f });//Top left corner
+	this->vertexData.at(2).SetPosition(glm::vec3{ this->x - halfWidth, this->y, 0.0f });//Bottom left corner
+	this->vertexData.at(3).SetPosition(glm::vec3{ this->x - halfWidth, this->y, 0.0f });//Bottom left corner
+	this->vertexData.at(4).SetPosition(glm::vec3{ this->x + (this->width - halfWidth), this->y, 0.0f });//Bottom right corner
+	this->vertexData.at(5).SetPosition(glm::vec3{ this->x + (this->width - halfWidth), this->y + this->height, 0.0f });//Top right corner
 
 	this->vertexData.at(0).SetUV(glm::vec2{ 1.0f, 1.0f });
 	this->vertexData.at(1).SetUV(glm::vec2{ 0.0f, 1.0f });

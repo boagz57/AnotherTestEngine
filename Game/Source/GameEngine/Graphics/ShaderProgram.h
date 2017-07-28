@@ -10,7 +10,6 @@ namespace Blz
 		{
 		public:
 			ShaderProgram();
-			ShaderProgram(Blz::string vertexShaderFilePath, Blz::string fragmentShaderFilePath);
 			~ShaderProgram();
 			ShaderProgram(const ShaderProgram& copy) = delete;
 			void operator=(const ShaderProgram& copy) = delete;

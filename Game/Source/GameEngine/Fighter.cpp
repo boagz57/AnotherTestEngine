@@ -2,18 +2,18 @@
 #include "ErrorContext.h"
 #include "Graphics/Sprite.h"
 
-Fighter::Fighter(Blz::string imageFilePath)
+Fighter::Fighter(Blz::string imageFilePath, uint16 startPositionX, uint16 startPositionY)
 {
 	Blz::Err::ErrorContext ec("When initializing fighter character with image", imageFilePath);
 
-	sprite.Init(1024/2, 768/2, 200, 200, imageFilePath);
+	sprite.Init(startPositionX, startPositionY, 200, 200, imageFilePath);
 }
 
 Fighter::~Fighter()
 {
 }
 
-glm::vec3 Fighter::GetPosition()
+glm::vec3 Fighter::GetLocalPosition()
 {
-	return this->position;
+	return this->localPosition;
 }

@@ -14,15 +14,14 @@ namespace Blz
 	namespace Graphics
 	{
 		Renderer::Renderer() 
-		{
-		}
+		{}
 
 		Renderer::~Renderer()
 		{}
 
 		void Renderer::Init()
 		{
-			shaderProgram.Init("Source/GameEngine/Shaders/VertexShader.glsl", "Source/GameEngine/Shaders/FragmentShader.glsl");
+			this->shaderProgram.Init("Source/GameEngine/Shaders/VertexShader.glsl", "Source/GameEngine/Shaders/FragmentShader.glsl");
 			this->shaderProgram.Compile();
 			this->shaderProgram.AddAttribute("vertexPosition");
 			this->shaderProgram.AddAttribute("textCoord");
@@ -47,7 +46,7 @@ namespace Blz
 
 			for (uint16 i = 0; i < scene.fighters.size(); ++i)
 			{
-				newFighterPosition = scene.fighters.at(i).position;
+				newFighterPosition = scene.fighters.at(i).localPosition;
 				glm::mat4 transformationMatrix = glm::translate(orthoProjection, newFighterPosition);
 				glUniformMatrix4fv(transformationMatrixUniformLocation, 1, GL_FALSE, &(transformationMatrix[0][0]));
 
