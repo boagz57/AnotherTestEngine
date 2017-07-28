@@ -10,8 +10,13 @@ public:
 	Scene();
 	~Scene();
 
-	void AddFighterToScene(Fighter& fighterToAdd);
+	Fighter& CreateFighter();
 
+private:
+	friend class Blz::Graphics::Renderer;
+	friend class Blz::Input;
+
+	uint16 numFighters = 0;
 	Blz::Vector<Fighter> fighters;
 };
 

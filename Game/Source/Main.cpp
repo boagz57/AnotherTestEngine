@@ -10,29 +10,40 @@
 */
 
 #include <vector>
-#include <Array>
 #include <SDL.h>
-#include "GameEngine\Graphics\Sprite.h"
-#include "GameEngine\Engine.h"
+#include "GameEngine\Graphics\Renderer.h"
+#include "GameEngine\Graphics\Window.h"
 #include "GameEngine\Scene.h"
-#include "ShadowGodsGame.h"
 #include "GameEngine\Fighter.h"
 #include "GameEngine\Timing\Timing.h"
 #include "GameEngine\Input.h"
-#include "GameEngine\ErrorHandling.h"
 
 int main(int agrc, char** argv)
 {
-	ShadowGodsGame myGame;
+	Blz::Graphics::Renderer renderer;
+	Blz::Window window;
+	Blz::Input input;
 	Scene scene;
-	Engine engine;
-	engine.Init();
 
-	Fighter player1("CharImage.png");
+	window.Initialize();
+	renderer.Init();
 
-	scene.AddFighterToScene(player1);
+	Fighter player1 = scene.CreateFighter();
 
-	engine.GameLoop(scene, myGame);
+	while (!input.IsKeyPressed(SDLK_ESCAPE))
+	{
+		input.ProcessInput(scene);
+
+		//GameLogic
+
+		window.ClearBuffers();
+
+		renderer.Draw(scene);
+
+		window.SwapBuffers();
+
+		Blz::Timing::CalculateAndDisplayFPS();
+	}
 
 	return 0;
 }
