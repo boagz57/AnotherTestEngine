@@ -9,11 +9,13 @@ namespace Blz
 		class ShaderProgram
 		{
 		public:
+			ShaderProgram();
 			ShaderProgram(Blz::string vertexShaderFilePath, Blz::string fragmentShaderFilePath);
 			~ShaderProgram();
 			ShaderProgram(const ShaderProgram& copy) = delete;
 			void operator=(const ShaderProgram& copy) = delete;
 
+			void Init(Blz::string vertexShaderFilePath, Blz::string fragmentShaderFilePath);
 			void Compile();
 			void AddAttribute(Blz::string attributeNameFromShaderFile);
 			GLuint GetUniformLocation(Blz::string uniformNameFromShaderFile);
@@ -22,7 +24,7 @@ namespace Blz
 			void UnBind();
 
 		public:
-			const GLuint programID = glCreateProgram();
+			GLuint programID;
 
 		private:
 			Blz::string vertexShaderFile;

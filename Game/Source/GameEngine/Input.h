@@ -1,5 +1,5 @@
 #pragma once
-#include "Fighter.h"
+#include "Scene.h"
 #include "../Universal/UnorderedMap.h"
 
 namespace Blz
@@ -10,7 +10,7 @@ namespace Blz
 		Input();
 		~Input();
 
-		void ProcessInput(Fighter& fighterToApplyInputTo);
+		void ProcessInput(Scene& sceneToAppyInputCommandsOn);
 
 		bool IsKeyPressed(uint keyID);
 

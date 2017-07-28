@@ -13,8 +13,7 @@ namespace Blz
 {
 	namespace Graphics
 	{
-		Renderer::Renderer() :
-			shaderProgram("Source/GameEngine/Shaders/VertexShader.glsl", "Source/GameEngine/Shaders/FragmentShader.glsl")
+		Renderer::Renderer() 
 		{
 		}
 
@@ -23,6 +22,7 @@ namespace Blz
 
 		void Renderer::Init()
 		{
+			shaderProgram.Init("Source/GameEngine/Shaders/VertexShader.glsl", "Source/GameEngine/Shaders/FragmentShader.glsl");
 			this->shaderProgram.Compile();
 			this->shaderProgram.AddAttribute("vertexPosition");
 			this->shaderProgram.AddAttribute("textCoord");
@@ -38,22 +38,26 @@ namespace Blz
 			glUniform1i(uniformLocation, 0);
 		}
 
-		void Renderer::Draw(Fighter& fighter)
+		void Renderer::Draw(Scene& scene)
 		{
-			glm::vec3 newFighterPosition = fighter.position;
-
 			glm::mat4 orthoProjection = glm::ortho(0.0f, static_cast<sfloat>(1024), 0.0f, static_cast<sfloat>(768));
-			glm::mat4 transformationMatrix = glm::translate(orthoProjection, newFighterPosition);
-
 			GLuint transformationMatrixUniformLocation = this->shaderProgram.GetUniformLocation("transformationMatrix");
-			glUniformMatrix4fv(transformationMatrixUniformLocation, 1, GL_FALSE, &(transformationMatrix[0][0]));
 
-			glBindTexture(GL_TEXTURE_2D, fighter.sprite.texture.id);
-			glBindBuffer(GL_ARRAY_BUFFER, fighter.sprite.vboID);
+			glm::vec3 newFighterPosition;
 
-			glDrawArrays(GL_TRIANGLES, 0, 6);
+			for (uint16 i = 0; i < scene.fighters.size(); ++i)
+			{
+				newFighterPosition = scene.fighters.at(i).position;
+				glm::mat4 transformationMatrix = glm::translate(orthoProjection, newFighterPosition);
+				glUniformMatrix4fv(transformationMatrixUniformLocation, 1, GL_FALSE, &(transformationMatrix[0][0]));
 
-			glBindBuffer(GL_ARRAY_BUFFER, 0);
+				glBindTexture(GL_TEXTURE_2D, scene.fighters.at(i).sprite.texture.id);
+				glBindBuffer(GL_ARRAY_BUFFER, scene.fighters.at(i).sprite.vboID);
+
+				glDrawArrays(GL_TRIANGLES, 0, 6);
+
+				glBindBuffer(GL_ARRAY_BUFFER, 0);
+			};
 		}
 	}
 }

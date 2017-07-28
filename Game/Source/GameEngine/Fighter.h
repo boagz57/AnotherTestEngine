@@ -11,7 +11,6 @@ public:
 	Fighter(Blz::string imageFilePath);
 	~Fighter();
 
-protected:
 	glm::vec3 GetPosition();
 
 private:

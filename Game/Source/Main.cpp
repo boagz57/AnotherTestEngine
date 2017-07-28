@@ -12,47 +12,27 @@
 #include <vector>
 #include <Array>
 #include <SDL.h>
-#include "GameEngine\Graphics\Window.h"
 #include "GameEngine\Graphics\Sprite.h"
+#include "GameEngine\Engine.h"
+#include "GameEngine\Scene.h"
+#include "ShadowGodsGame.h"
 #include "GameEngine\Fighter.h"
 #include "GameEngine\Timing\Timing.h"
 #include "GameEngine\Input.h"
-#include "GameEngine\Graphics\Renderer.h"
 #include "GameEngine\ErrorHandling.h"
-
-Blz::Window window;
-Sprite playerSprite;
-
-std::vector<Sprite*> p_sprites;
 
 int main(int agrc, char** argv)
 {
-	window.Initialize();
-	
-	Blz::Graphics::Renderer renderer;
-
-	//Player class, which inherits from fighter, will call a scene function within contructor adding fighter to scene in background
-	//Player player1;
-	//if (Player1.GetPosition().x > 0)
-	//{   ..do something  };
+	ShadowGodsGame myGame;
+	Scene scene;
+	Engine engine;
+	engine.Init();
 
 	Fighter player1("CharImage.png");
-	renderer.Init();
 
-	Blz::Input input;
+	scene.AddFighterToScene(player1);
 
-	while (!input.IsKeyPressed(SDLK_ESCAPE))
-	{
-		input.ProcessInput(player1);
-
-		window.ClearBuffers();
-
-		renderer.Draw(player1);
-
-		window.SwapBuffers();
-
-		Blz::Timing::CalculateAndDisplayFPS();
-	}
+	engine.GameLoop(scene, myGame);
 
 	return 0;
 }

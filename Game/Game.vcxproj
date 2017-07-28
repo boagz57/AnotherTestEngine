@@ -402,6 +402,10 @@ copy /y  "$(SolutionDir)ThirdParty\SDL\Lib\x86\SDL2.dll" "$(SolutionDir)Game\Bin
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\ThirdParty\STB_Image\Source\stb_image.cpp" />
+    <ClCompile Include="Source\ShadowGodsGame.cpp" />
+    <ClCompile Include="Source\GameEngine\Engine.cpp" />
+    <ClCompile Include="Source\GameEngine\Game.cpp" />
+    <ClCompile Include="Source\GameEngine\Scene.cpp" />
     <ClCompile Include="Source\GameEngine\Fighter.cpp" />
     <ClCompile Include="Source\GameEngine\Graphics\GLTexture.cpp" />
     <ClCompile Include="Source\GameEngine\ErrorContext.cpp" />
@@ -419,6 +423,10 @@ copy /y  "$(SolutionDir)ThirdParty\SDL\Lib\x86\SDL2.dll" "$(SolutionDir)Game\Bin
     <ClCompile Include="Source\GameEngine\TextureCache.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Source\ShadowGodsGame.h" />
+    <ClInclude Include="Source\GameEngine\Engine.h" />
+    <ClInclude Include="Source\GameEngine\Game.h" />
+    <ClInclude Include="Source\GameEngine\Scene.h" />
     <ClInclude Include="Source\GameEngine\ErrorContext.h" />
     <ClInclude Include="Source\GameEngine\ErrorHandling.h" />
     <ClInclude Include="Source\GameEngine\Fighter.h" />

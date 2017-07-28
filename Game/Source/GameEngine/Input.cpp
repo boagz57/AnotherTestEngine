@@ -1,5 +1,5 @@
 #include <SDL.h>
-#include "Fighter.h"
+#include "Scene.h"
 #include "Input.h"
 
 namespace Blz
@@ -12,7 +12,7 @@ namespace Blz
 	{
 	}
 
-	void Input::ProcessInput(Fighter& fighter)
+	void Input::ProcessInput(Scene& scene)
 	{
 		while (SDL_PollEvent(&evnt))
 		{
@@ -28,14 +28,17 @@ namespace Blz
 			}
 		}
 
-		if (IsKeyPressed(SDLK_w))
-			fighter.position += glm::vec3{ 0.0f, 0.1f, 0.0f };
-		else if (IsKeyPressed(SDLK_s))
-			fighter.position += glm::vec3{ 0.0f, -0.1f, 0.0f };
-		else if (IsKeyPressed(SDLK_a))
-			fighter.position += glm::vec3{ -0.1f, 0.0f, 0.0f };
-		else if (IsKeyPressed(SDLK_d))
-			fighter.position += glm::vec3{ 0.1f, 0.0f, 0.0f };
+		for (uint16 i = 0; i < scene.fighters.size(); ++i)
+		{
+			if (IsKeyPressed(SDLK_w))
+				scene.fighters.at(i).position += glm::vec3{ 0.0f, 0.1f, 0.0f };
+			else if (IsKeyPressed(SDLK_s))
+				scene.fighters.at(i).position += glm::vec3{ 0.0f, -0.1f, 0.0f };
+			else if (IsKeyPressed(SDLK_a))
+				scene.fighters.at(i).position += glm::vec3{ -0.1f, 0.0f, 0.0f };
+			else if (IsKeyPressed(SDLK_d))
+				scene.fighters.at(i).position += glm::vec3{ 0.1f, 0.0f, 0.0f };
+		};
 	}
 
 	bool Input::IsKeyPressed(uint keyID)

@@ -1,6 +1,6 @@
 #pragma once
 #include "ShaderProgram.h"
-#include "../Fighter.h"
+#include "../Scene.h"
 #include "Sprite.h"
 
 namespace Blz
@@ -14,7 +14,7 @@ namespace Blz
 			~Renderer();
 
 			void Init();
-			void Draw(Fighter& fighterToDraw);
+			void Draw(Scene& sceneToDraw);
 
 		private:
 			ShaderProgram shaderProgram;
