@@ -28,13 +28,15 @@ int main(int agrc, char** argv)
 	window.Initialize();
 	renderer.Init();
 
-	Fighter player1 = scene.CreateFighter();
+	Fighter* player1 = scene.CreateFighter();
 
 	while (!input.IsKeyPressed(SDLK_ESCAPE))
 	{
 		input.ProcessInput(scene);
 
 		//GameLogic
+		if (player1->GetPosition().x > 0)
+			LOG("ahahaha");
 
 		window.ClearBuffers();
 

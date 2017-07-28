@@ -9,12 +9,12 @@ Scene::~Scene()
 {
 }
 
-Fighter& Scene::CreateFighter()
+Fighter* Scene::CreateFighter()
 {
 	RUNTIME_ASSERT(fighters.size() != 3, "Creating too many fighters for game to handle!");
 	Fighter fighter("CharImage.png");
 
 	fighters.push_back(fighter);
 	
-	return fighters.at(numFighters++);
+	return &fighters.at(numFighters++);
 }

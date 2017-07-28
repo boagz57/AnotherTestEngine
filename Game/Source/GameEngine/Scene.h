@@ -10,7 +10,7 @@ public:
 	Scene();
 	~Scene();
 
-	Fighter& CreateFighter();
+	Fighter* CreateFighter();
 
 private:
 	friend class Blz::Graphics::Renderer;
