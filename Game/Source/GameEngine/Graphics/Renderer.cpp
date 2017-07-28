@@ -44,6 +44,7 @@ namespace Blz
 
 			glm::vec3 newFighterPosition;
 
+			//TODO: Change to foreach?
 			for (uint16 i = 0; i < scene.fighters.size(); ++i)
 			{
 				newFighterPosition = scene.fighters.at(i).localPosition;

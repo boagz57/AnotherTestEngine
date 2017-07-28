@@ -29,6 +29,7 @@ int main(int agrc, char** argv)
 	renderer.Init();
 
 	Fighter* player1 = scene.CreateFighter("CharImage.png", 100, 0);
+	Fighter* player2 = scene.CreateFighter("CharImage.png", 900, 0);
 
 	while (!input.IsKeyPressed(SDLK_ESCAPE))
 	{
