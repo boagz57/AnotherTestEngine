@@ -2,7 +2,7 @@
 #include <cstdio>
 #include <stdarg.h>
 #include <assert.h>
-#include <Boost/BoostAssert.h>
+#include <boost/BoostAssert.h>
 
 #if (DEBUG) || (PROFILE)
 

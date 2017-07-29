@@ -1,8 +1,9 @@
 #pragma once
 #include <vector>
+#include <boost/container/small_vector.hpp>
 
 namespace Blz
 {
 	template<typename type>
-	using Vector = std::vector<type>; //TODO: Replace with boost::small_vector for better speed
+	using Vector = boost::container::small_vector<type, 10>; 
 }
