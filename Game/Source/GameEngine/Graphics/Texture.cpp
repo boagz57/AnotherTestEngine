@@ -1,16 +1,16 @@
 #include <STB_Img\stb_image.h>
 #include "../ErrorHandling.h"
-#include "GLTexture.h"
+#include "Texture.h"
 #include "../ErrorContext.h"
 
 namespace Blz
 {
 	namespace Graphics
 	{
-		GLTexture::GLTexture()
+		Texture::Texture()
 		{}
 
-		GLTexture::GLTexture(const Blz::string c_imageFilePath)
+		Texture::Texture(const Blz::string c_imageFilePath)
 		{
 			Blz::Err::ErrorContext ec("When constructing texture from", c_imageFilePath);
 
@@ -63,7 +63,7 @@ namespace Blz
 			glBindTexture(GL_TEXTURE_2D, 0);
 		}
 
-		GLTexture::~GLTexture()
+		Texture::~Texture()
 		{}
 	}
 }

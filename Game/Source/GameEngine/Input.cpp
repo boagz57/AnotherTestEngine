@@ -28,16 +28,16 @@ namespace Blz
 			}
 		}
 
-		for (uint16 i = 0; i < scene.fighters.size(); ++i)
+		for (Fighter& fighter : scene.fighters)
 		{
 			if (IsKeyPressed(SDLK_w))
-				scene.fighters.at(i).localPosition += glm::vec3{ 0.0f, 0.1f, 0.0f };
+				fighter.localPosition += glm::vec3{ 0.0f, 0.1f, 0.0f };
 			else if (IsKeyPressed(SDLK_s))
-				scene.fighters.at(i).localPosition += glm::vec3{ 0.0f, -0.1f, 0.0f };
+				fighter.localPosition += glm::vec3{ 0.0f, -0.1f, 0.0f };
 			else if (IsKeyPressed(SDLK_a))
-				scene.fighters.at(i).localPosition += glm::vec3{ -0.1f, 0.0f, 0.0f };
+				fighter.localPosition += glm::vec3{ -0.1f, 0.0f, 0.0f };
 			else if (IsKeyPressed(SDLK_d))
-				scene.fighters.at(i).localPosition += glm::vec3{ 0.1f, 0.0f, 0.0f };
+				fighter.localPosition += glm::vec3{ 0.1f, 0.0f, 0.0f };
 		};
 	}
 

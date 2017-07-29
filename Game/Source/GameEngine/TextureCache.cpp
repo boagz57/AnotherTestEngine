@@ -1,4 +1,4 @@
-#include "Graphics\GLTexture.h"
+#include "Graphics\Texture.h"
 #include "TextureCache.h"
 
 namespace Blz
@@ -11,7 +11,7 @@ namespace Blz
 	{
 	}
 
-	Blz::Graphics::GLTexture TextureCache::GetTexture(Blz::string textureFilePath)
+	Blz::Graphics::Texture TextureCache::GetTexture(Blz::string textureFilePath)
 	{
 		using namespace Blz::Graphics;
 
@@ -22,7 +22,7 @@ namespace Blz
 		if (it == textureMap.end())
 		{
 			//Load Texture to OpenGL
-			GLTexture newTexture(textureFilePath);
+			Texture newTexture(textureFilePath);
 			textureMap.emplace(std::make_pair(textureFilePath, newTexture));
 
 			return newTexture;

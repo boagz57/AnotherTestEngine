@@ -1,5 +1,5 @@
 #pragma once
-#include "Graphics\GLTexture.h"
+#include "Graphics\Texture.h"
 #include "TextureCache.h"
 
 namespace Blz
@@ -10,7 +10,7 @@ namespace Blz
 		AssetManager();
 		~AssetManager();
 
-		Blz::Graphics::GLTexture GetTexture(Blz::string texturePath);
+		Blz::Graphics::Texture GetTexture(Blz::string texturePath);
 
 	private:
 		static TextureCache textureCache;

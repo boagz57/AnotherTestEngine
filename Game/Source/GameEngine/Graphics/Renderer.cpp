@@ -6,7 +6,6 @@
 #include "../Fighter.h"
 #include "ShaderProgram.h"
 #include "../Vector3D.h"
-#include "Sprite.h"
 #include "Renderer.h"
 
 namespace Blz
@@ -44,15 +43,14 @@ namespace Blz
 
 			glm::vec3 newFighterPosition;
 
-			//TODO: Change to foreach?
-			for (uint16 i = 0; i < scene.fighters.size(); ++i)
+			for (Fighter& fighter : scene.fighters)
 			{
-				newFighterPosition = scene.fighters.at(i).localPosition;
+				newFighterPosition = fighter.localPosition;
 				glm::mat4 transformationMatrix = glm::translate(orthoProjection, newFighterPosition);
 				glUniformMatrix4fv(transformationMatrixUniformLocation, 1, GL_FALSE, &(transformationMatrix[0][0]));
 
-				glBindTexture(GL_TEXTURE_2D, scene.fighters.at(i).sprite.texture.id);
-				glBindBuffer(GL_ARRAY_BUFFER, scene.fighters.at(i).sprite.vboID);
+				glBindTexture(GL_TEXTURE_2D, fighter.sprite.texture.id);
+				glBindBuffer(GL_ARRAY_BUFFER, fighter.sprite.vboID);
 				glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vector3D), (void*)offsetof(Vector3D, position));
 				glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(Vector3D), (void*)offsetof(Vector3D, textureCoordinates));
 

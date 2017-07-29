@@ -5,12 +5,12 @@ namespace Blz
 {
 	namespace Graphics
 	{
-		class GLTexture
+		class Texture
 		{
 		public:
-			GLTexture();
-			GLTexture(const Blz::string imageFilePath);
-			~GLTexture();
+			Texture();
+			Texture(const Blz::string imageFilePath);
+			~Texture();
 
 			GLuint id = 0;
 

@@ -2,7 +2,7 @@
 #include <GL\glew.h>
 #include "../../Universal/Vector.h"
 #include "../Vector3D.h"
-#include "GLTexture.h"
+#include "Texture.h"
 
 namespace Blz { namespace Graphics { class Renderer; } }
 
@@ -23,7 +23,7 @@ private:
 
 	friend class Blz::Graphics::Renderer;
 
-	Blz::Graphics::GLTexture texture;
+	Blz::Graphics::Texture texture;
 	Blz::Vector<Vector3D> vertexData;
 };
 

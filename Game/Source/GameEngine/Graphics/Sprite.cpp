@@ -4,12 +4,11 @@
 #include <GLM\detail\type_vec3.hpp>
 #include <math.h>
 #include "Sprite.h"
-#include "GLTexture.h"
+#include "Texture.h"
 #include "../ErrorContext.h"
 #include "../ErrorHandling.h"
 #include "../Vector3D.h"
 
-//TODO: Remove all opengl code from here and have a separate renderer class that will take care of all rendering
 /*
 	Responsible for specifying the position and size of rectangle for which to draw the texture information
 */
@@ -35,7 +34,7 @@ void Sprite::Init(int16 x, int16 y, uint16 width, uint16 height, Blz::string ima
 
 	glGenBuffers(1, &vboID);
 
-	Blz::Graphics::GLTexture texture(imageFilePath);
+	Blz::Graphics::Texture texture(imageFilePath);
 	this->texture = texture;
 
 	ERRASSERT(texture.id != 0, "Texture did not load properly!");
