@@ -53,6 +53,8 @@ namespace Blz
 
 				glBindTexture(GL_TEXTURE_2D, scene.fighters.at(i).sprite.texture.id);
 				glBindBuffer(GL_ARRAY_BUFFER, scene.fighters.at(i).sprite.vboID);
+				glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vector3D), (void*)offsetof(Vector3D, position));
+				glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(Vector3D), (void*)offsetof(Vector3D, textureCoordinates));
 
 				glDrawArrays(GL_TRIANGLES, 0, 6);
 
