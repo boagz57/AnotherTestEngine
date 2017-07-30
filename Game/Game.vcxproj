@@ -440,6 +440,7 @@ copy /y  "$(SolutionDir)ThirdParty\SDL\Lib\x86\SDL2.dll" "$(SolutionDir)Game\Bin
     <ClInclude Include="Source\Universal\Map.h" />
     <ClInclude Include="Source\Universal\PrimitiveTypes.h" />
     <ClInclude Include="Source\GameEngine\TextureCache.h" />
+    <ClInclude Include="Source\Universal\SmallVector.h" />
     <ClInclude Include="Source\Universal\UnorderedMap.h" />
     <ClInclude Include="Source\Universal\Vector.h" />
   </ItemGroup>

@@ -1,5 +1,5 @@
 #pragma once
-#include "../Universal/Vector.h"
+#include "../Universal/SmallVector.h"
 
 namespace Blz
 {
@@ -16,8 +16,8 @@ namespace Blz
 			static void LogContext();
 
 		private:
-			static Blz::Vector<Blz::string> errorContextDescriptions;
-			static Blz::Vector<Blz::string> errorContextData;
+			static Blz::SmallVector<Blz::string> errorContextDescriptions;
+			static Blz::SmallVector<Blz::string> errorContextData;
 			static uint16 numContexts;
 		};
 	};

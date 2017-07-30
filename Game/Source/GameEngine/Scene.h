@@ -1,4 +1,5 @@
 #pragma once
+#include "../Universal/SmallVector.h"
 #include "Fighter.h"
 
 namespace Blz { namespace Graphics { class Renderer; } }
@@ -17,6 +18,6 @@ private:
 	friend class Blz::Input;
 
 	uint16 numFighters = 0;
-	Blz::Vector<Fighter> fighters;
+	Blz::SmallVector<Fighter> fighters;
 };
 

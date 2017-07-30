@@ -1,12 +1,13 @@
-#include "../Universal/Vector.h"
+#pragma once
+#include "../Universal/SmallVector.h"
 #include "ErrorContext.h"
 
 namespace Blz
 {
 	namespace Err
 	{
-		Blz::Vector<Blz::string> ErrorContext::errorContextDescriptions;
-		Blz::Vector<Blz::string> ErrorContext::errorContextData;
+		Blz::SmallVector<Blz::string> ErrorContext::errorContextDescriptions;
+		Blz::SmallVector<Blz::string> ErrorContext::errorContextData;
 		uint16 ErrorContext::numContexts = 0;
 
 		ErrorContext::ErrorContext(const Blz::string p_Description, const Blz::string p_Data /* default value = "" */)

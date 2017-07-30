@@ -1,6 +1,6 @@
 #pragma once
 #include <GL\glew.h>
-#include "../../Universal/Vector.h"
+#include "../../Universal/SmallVector.h"
 #include "../Vector3D.h"
 #include "Texture.h"
 
@@ -24,6 +24,6 @@ private:
 	friend class Blz::Graphics::Renderer;
 
 	Blz::Graphics::Texture texture;
-	Blz::Vector<Vector3D> vertexData;
+	Blz::SmallVector<Vector3D> vertexData;
 };
 

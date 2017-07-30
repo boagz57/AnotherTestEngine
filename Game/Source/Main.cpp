@@ -9,7 +9,6 @@
 	and make sure no exception based library is used. 
 */
 
-#include <vector>
 #include <SDL.h>
 #include "GameEngine\Graphics\Renderer.h"
 #include "GameEngine\Graphics\Window.h"
