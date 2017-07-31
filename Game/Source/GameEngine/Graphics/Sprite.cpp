@@ -32,7 +32,6 @@ void Sprite::Init(int16 x, int16 y, uint16 width, uint16 height, Blz::string ima
 	this->width = static_cast<sfloat>(width);
 	this->height = static_cast<sfloat>(height);
 
-	glGenBuffers(1, &vboID);
 
 	Blz::Graphics::Texture texture(imageFilePath);
 	this->texture = texture;
@@ -55,12 +54,4 @@ void Sprite::Init(int16 x, int16 y, uint16 width, uint16 height, Blz::string ima
 	this->vertexData.at(3).SetUV(glm::vec2{ 0.0f, 0.0f });
 	this->vertexData.at(4).SetUV(glm::vec2{ 1.0f, 0.0f });
 	this->vertexData.at(5).SetUV(glm::vec2{ 1.0f, 1.0f });
-
-	glBindBuffer(GL_ARRAY_BUFFER, vboID);
-	glBufferData(GL_ARRAY_BUFFER, (sizeof(Vector3D) * this->vertexData.size()), &this->vertexData.front(), GL_STATIC_DRAW);
-
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vector3D), (void*)offsetof(Vector3D, position));
-	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(Vector3D), (void*)offsetof(Vector3D, textureCoordinates));
-
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
 }

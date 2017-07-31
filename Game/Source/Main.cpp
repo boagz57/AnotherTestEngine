@@ -10,7 +10,8 @@
 */
 
 #include <SDL.h>
-#include "GameEngine\Graphics\Renderer.h"
+#include "GameEngine\Graphics\RenderSystem.h"
+#include "GameEngine\Graphics\ShaderProgram.h"
 #include "GameEngine\Graphics\Window.h"
 #include "GameEngine\Scene.h"
 #include "GameEngine\Fighter.h"
@@ -19,28 +20,33 @@
 
 int main(int agrc, char** argv)
 {
-	Blz::Graphics::Renderer renderer;
 	Blz::Window window;
 	Blz::Input input;
+	Blz::Graphics::ShaderProgram colorShaderProgram;
 	Scene scene;
 
 	window.Initialize();
-	renderer.Init();
+	colorShaderProgram.Init("Source/GameEngine/Shaders/VertexShader.glsl", "Source/GameEngine/Shaders/FragmentShader.glsl");
+	colorShaderProgram.Compile();
+	colorShaderProgram.AddAttribute("vertexPosition");
+	colorShaderProgram.AddAttribute("textCoord");
+	colorShaderProgram.Link();
+	colorShaderProgram.Bind();
 
 	Fighter* player1 = scene.CreateFighter("CharImage.png", 100, 0);
 	Fighter* player2 = scene.CreateFighter("CharImage.png", 900, 0);
+
+	Blz::Graphics::RenderSystem::Init(scene);
 
 	while (!input.IsKeyPressed(SDLK_ESCAPE))
 	{
 		input.ProcessInput(scene);
 
 		//GameLogic
-		if (player1->GetLocalPosition().x > 0)
-			LOG("ahahaha");
 
 		window.ClearBuffers();
 
-		renderer.Draw(scene);
+		Blz::Graphics::RenderSystem::Update(scene, colorShaderProgram);
 
 		window.SwapBuffers();
 

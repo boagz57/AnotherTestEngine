@@ -12,8 +12,3 @@ Fighter::Fighter(Blz::string imageFilePath, uint16 startPositionX, uint16 startP
 Fighter::~Fighter()
 {
 }
-
-glm::vec3 Fighter::GetLocalPosition()
-{
-	return this->localPosition;
-}
