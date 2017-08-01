@@ -1,6 +1,6 @@
 #pragma once
 #include "ShaderProgram.h"
-#include "../Fighter.h"
+#include "../Scene.h"
 
 namespace Blz
 {
@@ -8,8 +8,8 @@ namespace Blz
 	{
 		namespace RenderSystem
 		{
-			void Init(Fighter& fighter);
-			void Update(Fighter& fighter, ShaderProgram& shader);
+			void Init(Scene& scene);
+			void Update(Scene& scene, ShaderProgram& shader);
 		}
 	}
 }

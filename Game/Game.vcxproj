@@ -408,7 +408,6 @@ copy /y  "$(SolutionDir)ThirdParty\SDL\Lib\x86\SDL2.dll" "$(SolutionDir)Game\Bin
     <ClCompile Include="Source\GameEngine\Fighter.cpp" />
     <ClCompile Include="Source\GameEngine\Graphics\Texture.cpp" />
     <ClCompile Include="Source\GameEngine\ErrorContext.cpp" />
-    <ClCompile Include="Source\GameEngine\Input.cpp" />
     <ClCompile Include="Source\GameEngine\Camera2D.cpp" />
     <ClCompile Include="Source\GameEngine\AssetManager.cpp" />
     <ClCompile Include="Source\GameEngine\Graphics\ShaderProgram.cpp" />
@@ -427,7 +426,6 @@ copy /y  "$(SolutionDir)ThirdParty\SDL\Lib\x86\SDL2.dll" "$(SolutionDir)Game\Bin
     <ClInclude Include="Source\GameEngine\ErrorContext.h" />
     <ClInclude Include="Source\GameEngine\ErrorHandling.h" />
     <ClInclude Include="Source\GameEngine\Fighter.h" />
-    <ClInclude Include="Source\GameEngine\Input.h" />
     <ClInclude Include="Source\GameEngine\Camera2D.h" />
     <ClInclude Include="Source\GameEngine\AssetManager.h" />
     <ClInclude Include="Source\GameEngine\Graphics\Texture.h" />

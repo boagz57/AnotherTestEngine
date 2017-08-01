@@ -1,38 +1,42 @@
 #include <SDL.h>
 #include "../Universal/UnorderedMap.h"
+#include "Fighter.h"
 #include "InputSystem.h"
 
 namespace Blz
 {
 	namespace InputSystem
 	{
-		void ProcessInput(Fighter& fighter)
+		void ProcessInput(Scene& scene)
 		{
 			static Blz::UMap<uint, bool> keyMap;
 			static SDL_Event evnt;
 
-			while (SDL_PollEvent(&evnt))
+			for (Fighter& fighter : scene.fighters)
 			{
-				switch (evnt.type)
+				while (SDL_PollEvent(&evnt))
 				{
-				case SDL_KEYDOWN:
-					keyMap[evnt.key.keysym.sym] = true;
-					break;
+					switch (evnt.type)
+					{
+					case SDL_KEYDOWN:
+						keyMap[evnt.key.keysym.sym] = true;
+						break;
 
-				case SDL_KEYUP:
-					keyMap[evnt.key.keysym.sym] = false;
-					break;
+					case SDL_KEYUP:
+						keyMap[evnt.key.keysym.sym] = false;
+						break;
+					}
 				}
-			}
 
-			if (keyMap[SDLK_w])
-				fighter.localPosition += glm::vec3{ 0.0f, 0.1f, 0.0f };
-			else if (keyMap[SDLK_s])
-				fighter.localPosition += glm::vec3{ 0.0f, -0.1f, 0.0f };
-			else if (keyMap[SDLK_a])
-				fighter.localPosition += glm::vec3{ -0.1f, 0.0f, 0.0f };
-			else if (keyMap[SDLK_d])
-				fighter.localPosition += glm::vec3{ 0.1f, 0.0f, 0.0f };
+				if (keyMap[SDLK_w])
+					fighter.localPosition += glm::vec3{ 0.0f, 0.1f, 0.0f };
+				else if (keyMap[SDLK_s])
+					fighter.localPosition += glm::vec3{ 0.0f, -0.1f, 0.0f };
+				else if (keyMap[SDLK_a])
+					fighter.localPosition += glm::vec3{ -0.1f, 0.0f, 0.0f };
+				else if (keyMap[SDLK_d])
+					fighter.localPosition += glm::vec3{ 0.1f, 0.0f, 0.0f };
+			}
 		}
 	}
 }

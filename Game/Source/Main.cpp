@@ -37,24 +37,20 @@ int main(int agrc, char** argv)
 	Fighter* player2 = scene.CreateFighter("CharImage.png", 900, 0);
 
 	//Initialize systems
-	for (Fighter& fighter : scene.fighters)
-	{
-		Blz::Graphics::RenderSystem::Init(fighter);
-	}
+	Blz::Graphics::RenderSystem::Init(scene);
 
 	//Game loop
 	while (true)
 	{
+
+		Blz::InputSystem::ProcessInput(scene);
+
+		//GameLogic
+
+
 		window.ClearBuffers();
 
-		for (Fighter& fighter : scene.fighters)
-		{
-			Blz::InputSystem::ProcessInput(fighter);
-
-			//GameLogic
-
-			Blz::Graphics::RenderSystem::Update(fighter, colorShaderProgram);
-		}
+		Blz::Graphics::RenderSystem::Update(scene, colorShaderProgram);
 
 		window.SwapBuffers();
 

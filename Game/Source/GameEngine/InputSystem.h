@@ -1,10 +1,10 @@
 #pragma once
-#include "Fighter.h"
+#include "Scene.h"
 
 namespace Blz
 {
 	namespace InputSystem
 	{
-		void ProcessInput(Fighter& fighter);
+		void ProcessInput(Scene& scene);
 	}
 }
