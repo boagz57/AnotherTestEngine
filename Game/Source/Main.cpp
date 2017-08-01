@@ -17,12 +17,11 @@
 #include "GameEngine\Graphics\Sprite.h"
 #include "GameEngine\Fighter.h"
 #include "GameEngine\Timing\Timing.h"
-#include "GameEngine\Input.h"
+#include "GameEngine\InputSystem.h"
 
 int main(int agrc, char** argv)
 {
 	Blz::Window window;
-	Blz::Input input;
 	Blz::Graphics::ShaderProgram colorShaderProgram;
 	Scene scene;
 
@@ -44,13 +43,13 @@ int main(int agrc, char** argv)
 	}
 
 	//Game loop
-	while (!input.IsKeyPressed(SDLK_ESCAPE))
+	while (true)
 	{
 		window.ClearBuffers();
 
 		for (Fighter& fighter : scene.fighters)
 		{
-			input.ProcessInput(scene);
+			Blz::InputSystem::ProcessInput(fighter);
 
 			//GameLogic
 
