@@ -14,6 +14,7 @@
 #include "GameEngine\Graphics\ShaderProgram.h"
 #include "GameEngine\Graphics\Window.h"
 #include "GameEngine\Scene.h"
+#include "GameEngine\Graphics\Sprite.h"
 #include "GameEngine\Fighter.h"
 #include "GameEngine\Timing\Timing.h"
 #include "GameEngine\Input.h"
@@ -36,17 +37,25 @@ int main(int agrc, char** argv)
 	Fighter* player1 = scene.CreateFighter("CharImage.png", 100, 0);
 	Fighter* player2 = scene.CreateFighter("CharImage.png", 900, 0);
 
-	Blz::Graphics::RenderSystem::Init(scene);
+	//Initialize systems
+	for (Fighter& fighter : scene.fighters)
+	{
+		Blz::Graphics::RenderSystem::Init(fighter);
+	}
 
+	//Game loop
 	while (!input.IsKeyPressed(SDLK_ESCAPE))
 	{
-		input.ProcessInput(scene);
-
-		//GameLogic
-
 		window.ClearBuffers();
 
-		Blz::Graphics::RenderSystem::Update(scene, colorShaderProgram);
+		for (Fighter& fighter : scene.fighters)
+		{
+			input.ProcessInput(scene);
+
+			//GameLogic
+
+			Blz::Graphics::RenderSystem::Update(fighter, colorShaderProgram);
+		}
 
 		window.SwapBuffers();
 
