@@ -6,10 +6,14 @@ namespace Blz
 {
 	namespace Graphics
 	{
-		namespace RenderSystem
+		class RenderSystem
 		{
+		public:
+			RenderSystem();
+			~RenderSystem();
+
 			void Init(Scene& scene);
 			void Update(Scene& scene, ShaderProgram& shader);
-		}
+		};
 	}
 }
