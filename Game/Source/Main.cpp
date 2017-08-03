@@ -9,15 +9,14 @@
 	and make sure no exception based library is used. 
 */
 
-#include <SDL.h>
-#include "GameEngine\Graphics\RenderSystem.h"
 #include "GameEngine\Graphics\ShaderProgram.h"
 #include "GameEngine\Graphics\Window.h"
 #include "GameEngine\Scene.h"
-#include "GameEngine\Components\Sprite.h"
 #include "GameEngine\Fighter.h"
 #include "GameEngine\Timing\Timing.h"
 #include "GameEngine\InputSystem.h"
+#include "GameEngine\Graphics\RenderSystem.h"
+#include "GameEngine\AI\AISystem.h"
 
 int main(int agrc, char** argv)
 {
@@ -25,6 +24,7 @@ int main(int agrc, char** argv)
 	Blz::Graphics::ShaderProgram colorShaderProgram;
 	Blz::Graphics::RenderSystem renderSystem;
 	Blz::InputSystem inputSystem;
+	Blz::AISystem aiSystem;
 	Scene scene;
 
 	window.Initialize();
@@ -45,6 +45,7 @@ int main(int agrc, char** argv)
 	while (true)
 	{
 		inputSystem.ProcessInput(scene);
+		aiSystem.Update(scene);
 
 		//GameLogic
 
