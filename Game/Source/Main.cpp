@@ -44,7 +44,6 @@ int main(int agrc, char** argv)
 	//Game loop
 	while (true)
 	{
-
 		inputSystem.ProcessInput(scene);
 
 		//GameLogic
