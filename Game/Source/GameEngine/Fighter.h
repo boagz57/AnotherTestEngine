@@ -15,7 +15,11 @@ public:
 
 	Sprite GetSprite();
 
+	bool IsFighterControllable();
+	void SetIfFighterShouldBeControllable(bool fighterControllable);
+
 private:
-	Sprite sprite;
 	Position position;
+	Sprite sprite;
+	bool isControllable = false;
 };

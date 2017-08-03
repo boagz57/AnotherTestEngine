@@ -33,3 +33,13 @@ Sprite Fighter::GetSprite()
 {
 	return sprite;
 }
+
+bool Fighter::IsFighterControllable()
+{
+	return isControllable;
+}
+
+void Fighter::SetIfFighterShouldBeControllable(bool controllable)
+{
+	isControllable = controllable;
+}

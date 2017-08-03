@@ -35,8 +35,8 @@ int main(int agrc, char** argv)
 	colorShaderProgram.Link();
 	colorShaderProgram.Bind();
 
-	Fighter* player1 = scene.CreateFighter("CharImage.png", 100, 0);
-	Fighter* player2 = scene.CreateFighter("CharImage.png", 900, 0);
+	Fighter* enemy = scene.CreateAIFighter("CharImage.png", 100, 0);
+	Fighter* player = scene.CreatePlayerFighter("CharImage.png", 900, 0);
 
 	//Initialize systems
 	renderSystem.Init(scene);
