@@ -10,8 +10,8 @@ public:
 	~Fighter();
 
 	glm::vec3 GetPosition();
-	void SetPosition(sfloat x, sfloat y, sfloat z);
-	void AddToPosition(sfloat x, sfloat y, sfloat z);
+	void SetPosition(int16 x, int16 y, int16 z);
+	void AddToPosition(int16 x, int16 y, int16 z);
 
 	Sprite GetSprite();
 

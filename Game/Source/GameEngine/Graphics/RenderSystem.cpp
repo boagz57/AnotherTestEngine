@@ -43,14 +43,12 @@ namespace Blz
 			glUniform1i(uniformLocation, 0);
 
 			GLuint vboID = 0;
-			glm::vec3 newPosition;
 
 			for (Fighter& fighter : scene.fighters)
 			{
 				++vboID;
-				newPosition = fighter.GetPosition();
 
-				glm::mat4 transformationMatrix = glm::translate(orthoProjection, newPosition);
+				glm::mat4 transformationMatrix = glm::translate(orthoProjection, fighter.GetPosition());
 				glUniformMatrix4fv(transformationMatrixUniformLocation, 1, GL_FALSE, &(transformationMatrix[0][0]));
 
 				glBindTexture(GL_TEXTURE_2D, fighter.GetSprite().texture.id);

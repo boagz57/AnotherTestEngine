@@ -40,6 +40,6 @@ namespace Blz
 		}
 
 		if (player->GetPosition().x > 1)
-			AI->AddToPosition(0.2f, 0.0f, 0.0f);
+			AI->SetPosition(100.2f, 0.0f, 0.0f);
 	}
 }

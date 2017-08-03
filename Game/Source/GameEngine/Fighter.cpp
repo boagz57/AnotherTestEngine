@@ -19,14 +19,14 @@ glm::vec3 Fighter::GetPosition()
 	return position.worldPosition;
 }
 
-void Fighter::SetPosition(sfloat x, sfloat y, sfloat z)
+void Fighter::SetPosition(int16 x, int16 y, int16 z)
 {
-	position.worldPosition = glm::vec3{ x, y, z };
+	position.worldPosition = glm::vec3{ static_cast<sfloat>(x), static_cast<sfloat>(y), static_cast<sfloat>(z) };
 }
 
-void Fighter::AddToPosition(sfloat x, sfloat y, sfloat z)
+void Fighter::AddToPosition(int16 x, int16 y, int16 z)
 {
-	position.worldPosition += glm::vec3{ x, y, z };
+	position.worldPosition += glm::vec3{ static_cast<sfloat>(x), static_cast<sfloat>(y), static_cast<sfloat>(z) };
 }
 
 Sprite Fighter::GetSprite()
