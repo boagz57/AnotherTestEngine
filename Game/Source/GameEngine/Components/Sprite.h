@@ -2,7 +2,7 @@
 #include <GL\glew.h>
 #include "../../Universal/SmallVector.h"
 #include "../Vector3D.h"
-#include "Texture.h"
+#include "../Graphics/Texture.h"
 
 class Sprite
 {

@@ -4,7 +4,7 @@
 #include <GLM\detail\type_vec3.hpp>
 #include <math.h>
 #include "Sprite.h"
-#include "Texture.h"
+#include "../Graphics/Texture.h"
 #include "../ErrorContext.h"
 #include "../ErrorHandling.h"
 #include "../Vector3D.h"

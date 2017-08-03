@@ -14,7 +14,7 @@
 #include "GameEngine\Graphics\ShaderProgram.h"
 #include "GameEngine\Graphics\Window.h"
 #include "GameEngine\Scene.h"
-#include "GameEngine\Graphics\Sprite.h"
+#include "GameEngine\Components\Sprite.h"
 #include "GameEngine\Fighter.h"
 #include "GameEngine\Timing\Timing.h"
 #include "GameEngine\InputSystem.h"

@@ -25,7 +25,7 @@ namespace Blz
 				glGenBuffers(1, &vboID);
 
 				glBindBuffer(GL_ARRAY_BUFFER, vboID);
-				glBufferData(GL_ARRAY_BUFFER, (sizeof(Vector3D) * fighter.sprite.vertexData.size()), &fighter.sprite.vertexData.front(), GL_STATIC_DRAW);
+				glBufferData(GL_ARRAY_BUFFER, (sizeof(Vector3D) * fighter.GetSprite().vertexData.size()), &fighter.GetSprite().vertexData.front(), GL_DYNAMIC_DRAW);
 
 				glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vector3D), (void*)offsetof(Vector3D, position));
 				glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(Vector3D), (void*)offsetof(Vector3D, textureCoordinates));
@@ -42,18 +42,18 @@ namespace Blz
 			GLuint uniformLocation = shader.GetUniformLocation("basicTexture");
 			glUniform1i(uniformLocation, 0);
 
-			glm::vec3 newFighterPosition;
 			GLuint vboID = 0;
+			glm::vec3 newPosition;
 
 			for (Fighter& fighter : scene.fighters)
 			{
 				++vboID;
+				newPosition = fighter.GetPosition();
 
-				newFighterPosition = fighter.localPosition;
-				glm::mat4 transformationMatrix = glm::translate(orthoProjection, newFighterPosition);
+				glm::mat4 transformationMatrix = glm::translate(orthoProjection, newPosition);
 				glUniformMatrix4fv(transformationMatrixUniformLocation, 1, GL_FALSE, &(transformationMatrix[0][0]));
 
-				glBindTexture(GL_TEXTURE_2D, fighter.sprite.texture.id);
+				glBindTexture(GL_TEXTURE_2D, fighter.GetSprite().texture.id);
 				glBindBuffer(GL_ARRAY_BUFFER, vboID);
 				glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vector3D), (void*)offsetof(Vector3D, position));
 				glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(Vector3D), (void*)offsetof(Vector3D, textureCoordinates));

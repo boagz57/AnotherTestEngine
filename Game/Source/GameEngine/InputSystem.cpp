@@ -24,13 +24,13 @@ namespace Blz
 			}
 
 			if (keyMap[SDLK_w])
-				fighter.localPosition += glm::vec3{ 0.0f, 0.1f, 0.0f };
+				fighter.AddToPosition(0.0f, 0.1f, 0.0f);
 			else if (keyMap[SDLK_s])
-				fighter.localPosition += glm::vec3{ 0.0f, -0.1f, 0.0f };
+				fighter.AddToPosition(0.0f, -0.1f, 0.0f);	
 			else if (keyMap[SDLK_a])
-				fighter.localPosition += glm::vec3{ -0.1f, 0.0f, 0.0f };
+				fighter.AddToPosition(-0.1f, 0.0f, 0.0f);	
 			else if (keyMap[SDLK_d])
-				fighter.localPosition += glm::vec3{ 0.1f, 0.0f, 0.0f };
+				fighter.AddToPosition(0.1f, 0.0f, 0.0f);	
 		}
 	}
 }

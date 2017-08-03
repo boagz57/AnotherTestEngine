@@ -402,6 +402,7 @@ copy /y  "$(SolutionDir)ThirdParty\SDL\Lib\x86\SDL2.dll" "$(SolutionDir)Game\Bin
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\ThirdParty\STB_Image\Source\stb_image.cpp" />
+    <ClCompile Include="Source\GameEngine\Components\Position.cpp" />
     <ClCompile Include="Source\GameEngine\Graphics\RenderSystem.cpp" />
     <ClCompile Include="Source\GameEngine\InputSystem.cpp" />
     <ClCompile Include="Source\GameEngine\Scene.cpp" />
@@ -413,13 +414,14 @@ copy /y  "$(SolutionDir)ThirdParty\SDL\Lib\x86\SDL2.dll" "$(SolutionDir)Game\Bin
     <ClCompile Include="Source\GameEngine\Graphics\ShaderProgram.cpp" />
     <ClCompile Include="Source\GameEngine\Graphics\GLLogging.cpp" />
     <ClCompile Include="Source\GameEngine\File.cpp" />
-    <ClCompile Include="Source\GameEngine\Graphics\Sprite.cpp" />
+    <ClCompile Include="Source\GameEngine\Components\Sprite.cpp" />
     <ClCompile Include="Source\GameEngine\Timing\Timing.cpp" />
     <ClCompile Include="Source\Main.cpp" />
     <ClCompile Include="Source\GameEngine\Graphics\Window.cpp" />
     <ClCompile Include="Source\GameEngine\TextureCache.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Source\GameEngine\Components\Position.h" />
     <ClInclude Include="Source\GameEngine\Graphics\RenderSystem.h" />
     <ClInclude Include="Source\GameEngine\InputSystem.h" />
     <ClInclude Include="Source\GameEngine\Scene.h" />
@@ -432,7 +434,7 @@ copy /y  "$(SolutionDir)ThirdParty\SDL\Lib\x86\SDL2.dll" "$(SolutionDir)Game\Bin
     <ClInclude Include="Source\GameEngine\Graphics\ShaderProgram.h" />
     <ClInclude Include="Source\GameEngine\Graphics\GLLogging.h" />
     <ClInclude Include="Source\GameEngine\File.h" />
-    <ClInclude Include="Source\GameEngine\Graphics\Sprite.h" />
+    <ClInclude Include="Source\GameEngine\Components\Sprite.h" />
     <ClInclude Include="Source\GameEngine\Timing\Timing.h" />
     <ClInclude Include="Source\GameEngine\Vector3D.h" />
     <ClInclude Include="Source\Universal\Macro.h" />
