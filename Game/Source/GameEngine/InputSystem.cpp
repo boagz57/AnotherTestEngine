@@ -26,13 +26,13 @@ namespace Blz
 			if (fighter.IsFighterControllable())
 			{
 				if (keyMap[SDLK_w])
-					fighter.AddToPosition(0, 1, 0);
+					fighter.SetVelocity(0, 1);
 				else if (keyMap[SDLK_s])
-					fighter.AddToPosition(0, -1, 0);
+					fighter.SetVelocity(0, -1);
 				else if (keyMap[SDLK_a])
-					fighter.AddToPosition(-1, 0, 0);
+					fighter.SetVelocity(-1, 0);
 				else if (keyMap[SDLK_d])
-					fighter.AddToPosition(1, 0, 0);
+					fighter.SetVelocity(1, 0);
 			};
 		}
 	}

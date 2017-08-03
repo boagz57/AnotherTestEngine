@@ -2,6 +2,7 @@
 #include <GLM/vec3.hpp>
 #include "Components/Position.h"
 #include "Components/Sprite.h"
+#include "Components/Velocity.h"
 
 class Fighter
 {
@@ -13,6 +14,9 @@ public:
 	void SetPosition(int16 x, int16 y, int16 z);
 	void AddToPosition(int16 x, int16 y, int16 z);
 
+	void SetVelocity(int16 x, int16 y);
+	glm::vec3 GetVelocity();
+
 	Sprite GetSprite();
 
 	bool IsFighterControllable();
@@ -20,6 +24,7 @@ public:
 
 private:
 	Position position;
+	Velocity velocity;
 	Sprite sprite;
 	bool isControllable = false;
 };

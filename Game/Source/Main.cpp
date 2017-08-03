@@ -17,6 +17,7 @@
 #include "GameEngine\InputSystem.h"
 #include "GameEngine\Graphics\RenderSystem.h"
 #include "GameEngine\AI\AISystem.h"
+#include "GameEngine\Physics\PhysicsSystem.h"
 
 int main(int agrc, char** argv)
 {
@@ -25,6 +26,7 @@ int main(int agrc, char** argv)
 	Blz::Graphics::RenderSystem renderSystem;
 	Blz::InputSystem inputSystem;
 	Blz::AISystem aiSystem;
+	Blz::PhysicsSystem physicsSystem;
 	Scene scene;
 
 	window.Initialize();
@@ -46,6 +48,7 @@ int main(int agrc, char** argv)
 	{
 		inputSystem.ProcessInput(scene);
 		aiSystem.Update(scene);
+		physicsSystem.Update(scene);
 
 		//GameLogic
 

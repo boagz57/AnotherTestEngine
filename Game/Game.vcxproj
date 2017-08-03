@@ -402,6 +402,7 @@ copy /y  "$(SolutionDir)ThirdParty\SDL\Lib\x86\SDL2.dll" "$(SolutionDir)Game\Bin
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\ThirdParty\STB_Image\Source\stb_image.cpp" />
+    <ClCompile Include="Source\GameEngine\Physics\PhysicsSystem.cpp" />
     <ClCompile Include="Source\GameEngine\AI\AISystem.cpp" />
     <ClCompile Include="Source\GameEngine\Components\Position.cpp" />
     <ClCompile Include="Source\GameEngine\Graphics\RenderSystem.cpp" />
@@ -420,8 +421,10 @@ copy /y  "$(SolutionDir)ThirdParty\SDL\Lib\x86\SDL2.dll" "$(SolutionDir)Game\Bin
     <ClCompile Include="Source\Main.cpp" />
     <ClCompile Include="Source\GameEngine\Graphics\Window.cpp" />
     <ClCompile Include="Source\GameEngine\TextureCache.cpp" />
+    <ClCompile Include="Source\GameEngine\Components\Velocity.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Source\GameEngine\Physics\PhysicsSystem.h" />
     <ClInclude Include="Source\GameEngine\AI\AISystem.h" />
     <ClInclude Include="Source\GameEngine\Components\Position.h" />
     <ClInclude Include="Source\GameEngine\Graphics\RenderSystem.h" />
@@ -447,6 +450,7 @@ copy /y  "$(SolutionDir)ThirdParty\SDL\Lib\x86\SDL2.dll" "$(SolutionDir)Game\Bin
     <ClInclude Include="Source\Universal\SmallVector.h" />
     <ClInclude Include="Source\Universal\UnorderedMap.h" />
     <ClInclude Include="Source\Universal\Vector.h" />
+    <ClInclude Include="Source\GameEngine\Components\Velocity.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets" />
