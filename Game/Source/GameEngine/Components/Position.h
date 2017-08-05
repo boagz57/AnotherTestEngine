@@ -1,7 +1,7 @@
 #pragma once
 #include <GLM/vec3.hpp>
 
-class Position
+class PositionComponent
 {
 public:
 	inline glm::vec3 GetCurrentState();
@@ -11,12 +11,12 @@ private:
 	glm::vec3 worldPosition{ 0.0f, 0.0f, 0.0f };
 };
 
-glm::vec3 Position::GetCurrentState()
+glm::vec3 PositionComponent::GetCurrentState()
 {
 	return worldPosition;
 }
 
-void Position::Add(sfloat x, sfloat y)
+void PositionComponent::Add(sfloat x, sfloat y)
 {
 	worldPosition.x += x;
 	worldPosition.y += y;

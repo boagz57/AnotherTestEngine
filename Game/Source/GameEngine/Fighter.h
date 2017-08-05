@@ -15,7 +15,7 @@ public:
 	bool IsFighterControllable();
 	void SetIfFighterShouldBeControllable(bool fighterControllable);
 
-	Position position;
+	PositionComponent position;
 	VelocityComponent velocity;
 	Sprite sprite;
 	bool isControllable = false;

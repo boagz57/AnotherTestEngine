@@ -11,8 +11,7 @@ Fighter::Fighter(Blz::string imageFilePath, uint16 startPositionX, uint16 startP
 }
 
 Fighter::~Fighter()
-{
-}
+{}
 
 Sprite Fighter::GetSprite()
 {

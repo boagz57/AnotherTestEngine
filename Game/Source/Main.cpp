@@ -47,8 +47,9 @@ int main(int agrc, char** argv)
 	while (true)
 	{
 		inputSystem.ProcessInput(scene);
-		aiSystem.Update(scene);
-		physicsSystem.Update(scene);
+
+		Scene newScene = physicsSystem.Update(scene);
+		newScene = aiSystem.Update(newScene);
 
 		//GameLogic
 
@@ -56,7 +57,7 @@ int main(int agrc, char** argv)
 
 		window.ClearBuffers();
 
-		renderSystem.Update(scene, colorShaderProgram);
+		renderSystem.Update(newScene, colorShaderProgram);
 
 		window.SwapBuffers();
 

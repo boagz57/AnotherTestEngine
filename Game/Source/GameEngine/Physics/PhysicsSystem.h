@@ -1,4 +1,5 @@
 #pragma once
+#include "../../Universal/SmallVector.h"
 #include "../Scene.h"
 
 namespace Blz
@@ -11,6 +12,9 @@ namespace Blz
 
 		void Init();
 		void Shutdown();
-		void Update(Scene& scene);
+		Scene Update(Scene scene);
+
+	private:
+		Blz::SmallVector<Fighter> fighters;
 	};
 }
