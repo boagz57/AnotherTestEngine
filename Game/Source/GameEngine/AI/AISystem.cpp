@@ -38,8 +38,5 @@ namespace Blz
 				AI = &fighter;
 			}
 		}
-
-		if (player->GetPosition().x > 1)
-			AI->SetPosition(100.2f, 0.0f, 0.0f);
 	}
 }

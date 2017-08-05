@@ -14,7 +14,7 @@
 #include "GameEngine\Scene.h"
 #include "GameEngine\Fighter.h"
 #include "GameEngine\Timing\Timing.h"
-#include "GameEngine\InputSystem.h"
+#include "GameEngine\Input\InputSystem.h"
 #include "GameEngine\Graphics\RenderSystem.h"
 #include "GameEngine\AI\AISystem.h"
 #include "GameEngine\Physics\PhysicsSystem.h"
@@ -51,6 +51,7 @@ int main(int agrc, char** argv)
 		physicsSystem.Update(scene);
 
 		//GameLogic
+
 
 
 		window.ClearBuffers();

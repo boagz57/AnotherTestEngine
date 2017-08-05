@@ -404,9 +404,8 @@ copy /y  "$(SolutionDir)ThirdParty\SDL\Lib\x86\SDL2.dll" "$(SolutionDir)Game\Bin
     <ClCompile Include="..\ThirdParty\STB_Image\Source\stb_image.cpp" />
     <ClCompile Include="Source\GameEngine\Physics\PhysicsSystem.cpp" />
     <ClCompile Include="Source\GameEngine\AI\AISystem.cpp" />
-    <ClCompile Include="Source\GameEngine\Components\Position.cpp" />
     <ClCompile Include="Source\GameEngine\Graphics\RenderSystem.cpp" />
-    <ClCompile Include="Source\GameEngine\InputSystem.cpp" />
+    <ClCompile Include="Source\GameEngine\Input\InputSystem.cpp" />
     <ClCompile Include="Source\GameEngine\Scene.cpp" />
     <ClCompile Include="Source\GameEngine\Fighter.cpp" />
     <ClCompile Include="Source\GameEngine\Graphics\Texture.cpp" />
@@ -421,14 +420,13 @@ copy /y  "$(SolutionDir)ThirdParty\SDL\Lib\x86\SDL2.dll" "$(SolutionDir)Game\Bin
     <ClCompile Include="Source\Main.cpp" />
     <ClCompile Include="Source\GameEngine\Graphics\Window.cpp" />
     <ClCompile Include="Source\GameEngine\TextureCache.cpp" />
-    <ClCompile Include="Source\GameEngine\Components\Velocity.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\GameEngine\Physics\PhysicsSystem.h" />
     <ClInclude Include="Source\GameEngine\AI\AISystem.h" />
     <ClInclude Include="Source\GameEngine\Components\Position.h" />
     <ClInclude Include="Source\GameEngine\Graphics\RenderSystem.h" />
-    <ClInclude Include="Source\GameEngine\InputSystem.h" />
+    <ClInclude Include="Source\GameEngine\Input\InputSystem.h" />
     <ClInclude Include="Source\GameEngine\Scene.h" />
     <ClInclude Include="Source\GameEngine\ErrorContext.h" />
     <ClInclude Include="Source\GameEngine\ErrorHandling.h" />

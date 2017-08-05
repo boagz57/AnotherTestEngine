@@ -25,10 +25,10 @@ namespace Blz
 	{
 		for (Fighter& fighter : scene.fighters)
 		{
-			glm::vec3 fighterPosition = fighter.GetPosition();
-			glm::vec3 fighterVelocity = fighter.GetVelocity();
-			fighter.AddToPosition(fighterVelocity.x, fighterVelocity.y, fighterVelocity.z);
-			fighter.SetVelocity(0, 0);
+			fighter.position.Add(fighter.velocity.GetCurrentState().x, fighter.velocity.GetCurrentState().y);
+
+			//To stop fighter movement from continuing to move in the direction of input
+			fighter.velocity.ZeroOut();
 		}
 	}
 }

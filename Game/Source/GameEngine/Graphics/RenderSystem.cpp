@@ -48,7 +48,7 @@ namespace Blz
 			{
 				++vboID;
 
-				glm::mat4 transformationMatrix = glm::translate(orthoProjection, fighter.GetPosition());
+				glm::mat4 transformationMatrix = glm::translate(orthoProjection, fighter.position.GetCurrentState());
 				glUniformMatrix4fv(transformationMatrixUniformLocation, 1, GL_FALSE, &(transformationMatrix[0][0]));
 
 				glBindTexture(GL_TEXTURE_2D, fighter.GetSprite().texture.id);

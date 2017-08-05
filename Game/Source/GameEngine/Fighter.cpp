@@ -14,31 +14,6 @@ Fighter::~Fighter()
 {
 }
 
-glm::vec3 Fighter::GetPosition()
-{
-	return position.worldPosition;
-}
-
-void Fighter::SetPosition(int16 x, int16 y, int16 z)
-{
-	position.worldPosition = glm::vec3{ static_cast<sfloat>(x), static_cast<sfloat>(y), static_cast<sfloat>(z) };
-}
-
-void Fighter::AddToPosition(int16 x, int16 y, int16 z)
-{
-	position.worldPosition += glm::vec3{ static_cast<sfloat>(x), static_cast<sfloat>(y), static_cast<sfloat>(z) };
-}
-
-void Fighter::SetVelocity(int16 x, int16 y)
-{
-	velocity.velocity = glm::vec3{ static_cast<sfloat>(x), static_cast<sfloat>(y), 0.0f };
-}
-
-glm::vec3 Fighter::GetVelocity()
-{
-	return velocity.velocity;
-}
-
 Sprite Fighter::GetSprite()
 {
 	return sprite;
