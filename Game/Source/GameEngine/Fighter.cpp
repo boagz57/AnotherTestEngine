@@ -3,20 +3,14 @@
 #include "ErrorContext.h"
 #include "Components/Sprite.h"
 
-Fighter::Fighter(Blz::string imageFilePath, uint16 startPositionX, uint16 startPositionY) 
+Fighter::Fighter(Blz::string const imageFilePath, sfloat startPositionX, sfloat startPositionY) :
+	sprite(imageFilePath, 200, 200)
 {
-	Blz::Err::ErrorContext ec("When initializing fighter character with image", imageFilePath);
-
-	sprite.Init(startPositionX, startPositionY, 200, 200, imageFilePath);
+	position.Add(startPositionX, startPositionY);
 }
 
 Fighter::~Fighter()
 {}
-
-Sprite Fighter::GetSprite()
-{
-	return sprite;
-}
 
 bool Fighter::IsFighterControllable()
 {

@@ -8,15 +8,17 @@ class Sprite
 {
 public:
 	Sprite();
+	Sprite(Blz::string const imageFilePath, uint16 const imageWidth, uint16 const imageHeight);
 	~Sprite();
 
-	void Init(int16 screenCoordinateX, int16 screenCoordinateY, uint16 imageWidth, uint16 imageHeight, Blz::string imageFilePath);
+	void SetTargetPosition(sfloat screenPositionX, sfloat screenPositionY);
+	Blz::Graphics::Texture GetTexture();
+	Blz::SmallVector<Vector3D> GetVertexData();
 
-	float x = 0.0f;
-	float y = 0.0f;
 	float width = 0.0f;
 	float height = 0.0f;
 
+private:
 	Blz::Graphics::Texture texture;
 	Blz::SmallVector<Vector3D> vertexData;
 };

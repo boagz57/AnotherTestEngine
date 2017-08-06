@@ -9,20 +9,20 @@ Scene::~Scene()
 {
 }
 
-Fighter* Scene::CreateAIFighter(Blz::string spriteImage, uint16 startingPositionX, uint16 startingPositionY)
+Fighter* Scene::CreateAIFighter(Blz::string imageFilePath, sfloat startingPositionX, sfloat startingPositionY)
 {
 	RUNTIME_ASSERT(this->numFighters <= 2, "Creating too many fighters for game to handle!");
-	Fighter fighter(spriteImage, startingPositionX, startingPositionY);
+	Fighter fighter(imageFilePath, startingPositionX, startingPositionY);
 
 	fighters.push_back(fighter);
 	
 	return &fighters.at(this->numFighters++);
 }
 
-Fighter* Scene::CreatePlayerFighter(Blz::string spriteImage, uint16 startingPositionX, uint16 startingPositionY)
+Fighter* Scene::CreatePlayerFighter(Blz::string imageFilePath, sfloat startingPositionX, sfloat startingPositionY)
 {
 	RUNTIME_ASSERT(this->numFighters <= 2, "Creating too many fighters for game to handle!");
-	Fighter fighter(spriteImage, startingPositionX, startingPositionY);
+	Fighter fighter(imageFilePath, startingPositionX, startingPositionY);
 
 	fighter.SetIfFighterShouldBeControllable(true);
 

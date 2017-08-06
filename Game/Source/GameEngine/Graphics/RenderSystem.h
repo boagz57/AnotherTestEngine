@@ -1,5 +1,7 @@
 #pragma once
 #include "ShaderProgram.h"
+#include "Texture.h"
+#include "../Vector3D.h"
 #include "../Scene.h"
 
 namespace Blz
@@ -16,8 +18,6 @@ namespace Blz
 			void Update(Scene& scene, ShaderProgram& shader);
 
 		private:
-			Blz::Graphics::Texture texture;
-			Blz::SmallVector<Vector3D> vertexData;
 		};
 	}
 }

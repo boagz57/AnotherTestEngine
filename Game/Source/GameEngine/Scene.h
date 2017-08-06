@@ -8,8 +8,8 @@ public:
 	Scene();
 	~Scene();
 
-	Fighter* CreateAIFighter(Blz::string spriteImageFilePath, uint16 startingWorldPositionX, uint16 startingWorldPositionY);
-	Fighter* CreatePlayerFighter(Blz::string spriteImageFilePath, uint16 startingWorldPositionX, uint16 startingWorldPositionY);
+	Fighter* CreateAIFighter(Blz::string imageFilePath, sfloat startingWorldPositionX, sfloat startingWorldPositionY);
+	Fighter* CreatePlayerFighter(Blz::string imageFilePath, sfloat startingWorldPositionX, sfloat startingWorldPositionY);
 
 	Blz::SmallVector<Fighter> fighters;
 
