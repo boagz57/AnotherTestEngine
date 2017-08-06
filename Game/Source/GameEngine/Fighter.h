@@ -2,6 +2,7 @@
 #include <GLM/vec3.hpp>
 #include "Components/Position.h"
 #include "Components/Sprite.h"
+#include "Components/AABB.h"
 #include "Components/Velocity.h"
 
 class Fighter
@@ -17,6 +18,8 @@ public:
 
 	PositionComponent position;
 	VelocityComponent velocity;
+	AABBComponent collisionBox;
+
 	Sprite sprite;
 	bool isControllable = false;
 };

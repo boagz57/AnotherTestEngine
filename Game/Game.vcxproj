@@ -422,6 +422,7 @@ copy /y  "$(SolutionDir)ThirdParty\SDL\Lib\x86\SDL2.dll" "$(SolutionDir)Game\Bin
     <ClCompile Include="Source\GameEngine\TextureCache.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Source\GameEngine\Components\AABB.h" />
     <ClInclude Include="Source\GameEngine\Physics\PhysicsSystem.h" />
     <ClInclude Include="Source\GameEngine\AI\AISystem.h" />
     <ClInclude Include="Source\GameEngine\Components\Position.h" />

@@ -1,9 +1,11 @@
 #include "../Scene.h"
+#include "../../Universal/SmallVector.h"
 #include "PhysicsSystem.h"
 
 namespace Blz
 {
 	Fighter MovementSystem(Fighter fighter);
+	Blz::SmallVector<Fighter> AABBCollisionSystem(Blz::SmallVector<Fighter> fighters);
 
 	PhysicsSystem::PhysicsSystem()
 	{
@@ -45,5 +47,27 @@ namespace Blz
 		fighter.velocity.ZeroOut();
 
 		return fighter;
+	}
+
+	Blz::SmallVector<Fighter> AABBCollisionSystem(Blz::SmallVector<Fighter> fighters)
+	{
+		Fighter* fighter1 = nullptr;
+		Fighter* fighter2 = nullptr;
+
+		for (Fighter fighter : fighters)
+		{
+			fighter.collisionBox.SetMaxCoordinateOffset(100.0f, 100.0f);
+			fighter.collisionBox.SetMinCoordinateOffset(-100.0f, 0.0f);
+		}
+
+		for (uint16 i = 0; i < fighters.size(); ++i)
+		{
+			if (fighters.size() == 1)
+				fighter1 = &fighters.at(i);
+			else
+				fighter2 = &fighters.at(i);
+		}
+
+		
 	}
 }
