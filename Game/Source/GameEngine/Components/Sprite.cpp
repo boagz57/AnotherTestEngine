@@ -26,7 +26,6 @@ void Sprite::Init(int16 x, int16 y, uint16 width, uint16 height, Blz::string ima
 {
 	Blz::Err::ErrorContext ec("When initializing sprite with image", imageFilePath);
 
-	//casting to float since GLSL shader variables vec2,3,4 require vertex data to be in floats
 	this->x = static_cast<sfloat>(x);
 	this->y = static_cast<sfloat>(y);
 	this->width = static_cast<sfloat>(width);

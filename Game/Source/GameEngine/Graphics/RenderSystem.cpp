@@ -48,7 +48,7 @@ namespace Blz
 			{
 				++vboID;
 
-				glm::mat4 transformationMatrix = glm::translate(orthoProjection, fighter.position.GetCurrentState());
+				glm::mat4 transformationMatrix = glm::translate(orthoProjection, glm::vec3{ fighter.transform.GetCurrentTranslationAmount().x, fighter.transform.GetCurrentTranslationAmount().y, 0.0f });
 				glUniformMatrix4fv(transformationMatrixUniformLocation, 1, GL_FALSE, &(transformationMatrix[0][0]));
 
 				glBindTexture(GL_TEXTURE_2D, fighter.GetSprite().texture.id);
@@ -59,6 +59,8 @@ namespace Blz
 				glDrawArrays(GL_TRIANGLES, 0, 6);
 
 				glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+				fighter.transform.ResetTranslation();
 			}
 		}
 	}

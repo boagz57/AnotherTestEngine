@@ -4,6 +4,7 @@
 #include "Components/Sprite.h"
 #include "Components/AABB.h"
 #include "Components/Velocity.h"
+#include "Components/Transform.h"
 
 class Fighter
 {
@@ -19,6 +20,7 @@ public:
 	PositionComponent position;
 	VelocityComponent velocity;
 	AABBComponent collisionBox;
+	TransformComponent transform;
 
 	Sprite sprite;
 	bool isControllable = false;

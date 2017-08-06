@@ -14,6 +14,10 @@ namespace Blz
 
 			void Init(Scene& scene);
 			void Update(Scene& scene, ShaderProgram& shader);
+
+		private:
+			Blz::Graphics::Texture texture;
+			Blz::SmallVector<Vector3D> vertexData;
 		};
 	}
 }
