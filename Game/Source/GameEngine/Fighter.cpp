@@ -3,6 +3,9 @@
 #include "ErrorContext.h"
 #include "Components/Sprite.h"
 
+Fighter::Fighter()
+{}
+
 Fighter::Fighter(Blz::string const imageFilePath, sfloat startPositionX, sfloat startPositionY) :
 	sprite(imageFilePath, 200, 200)
 {

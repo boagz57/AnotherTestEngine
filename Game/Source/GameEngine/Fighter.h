@@ -9,6 +9,7 @@
 class Fighter
 {
 public:
+	Fighter();
 	Fighter(Blz::string const imageFilePath, sfloat startingWorldPositionX, sfloat startingWorldPositionY);
 	~Fighter();
 
