@@ -14,19 +14,19 @@
 #include "GameEngine\Scene.h"
 #include "GameEngine\Fighter.h"
 #include "GameEngine\Timing\Timing.h"
-#include "GameEngine\Input\InputSystem.h"
-#include "GameEngine\Graphics\RenderSystem.h"
-#include "GameEngine\AI\AISystem.h"
-#include "GameEngine\Physics\PhysicsSystem.h"
+#include "GameEngine\Input\MainInputSystem.h"
+#include "GameEngine\Graphics\MainGraphicsSystem.h"
+#include "GameEngine\AI\MainAISystem.h"
+#include "GameEngine\Physics\MainPhysicsSystem.h"
 
 int main(int agrc, char** argv)
 {
 	Blz::Window window;
 	Blz::Graphics::ShaderProgram colorShaderProgram;
-	Blz::Graphics::RenderSystem renderSystem;
-	Blz::InputSystem inputSystem;
-	Blz::AISystem aiSystem;
-	Blz::PhysicsSystem physicsSystem;
+	Blz::Graphics::MainSystem Renderer;
+	Blz::Input::MainSystem Input;
+	Blz::AI::MainSystem AI;
+	Blz::Physics::MainSystem Physics;
 	Scene scene;
 
 	window.Initialize();
@@ -41,15 +41,15 @@ int main(int agrc, char** argv)
 	Fighter* player = scene.CreatePlayerFighter("CharImage.png", 0.0f, 0.0f);
 
 	//Initialize systems
-	renderSystem.Init(scene);
+	Renderer.Init(scene);
 
 	//Game loop
 	while (true)
 	{
-		inputSystem.ProcessInput(scene);
+		Input.ProcessInput(scene);
 
-		Scene newScene = physicsSystem.Update(scene);
-		newScene = aiSystem.Update(newScene);
+		Scene newScene = Physics.Update(scene);
+		newScene = AI.Update(newScene);
 
 		//GameLogic
 
@@ -57,7 +57,7 @@ int main(int agrc, char** argv)
 
 		window.ClearBuffers();
 
-		renderSystem.Update(newScene, colorShaderProgram);
+		Renderer.Update(newScene, colorShaderProgram);
 
 		window.SwapBuffers();
 

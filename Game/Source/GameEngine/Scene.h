@@ -2,6 +2,7 @@
 #include "../Universal/SmallVector.h"
 #include "Fighter.h"
 
+
 class Scene
 {
 public:

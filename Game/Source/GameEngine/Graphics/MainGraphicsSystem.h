@@ -8,11 +8,11 @@ namespace Blz
 {
 	namespace Graphics
 	{
-		class RenderSystem
+		class MainSystem
 		{
 		public:
-			RenderSystem();
-			~RenderSystem();
+			MainSystem();
+			~MainSystem();
 
 			void Init(Scene& scene);
 			void Update(Scene& scene, ShaderProgram& shader);
