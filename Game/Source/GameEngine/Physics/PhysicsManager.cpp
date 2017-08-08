@@ -2,30 +2,30 @@
 #include "SubSystems\AABBCollisionSystem.h"
 #include "SubSystems\MovementSystem.h"
 #include "../../Universal/SmallVector.h"
-#include "MainPhysicsSystem.h"
+#include "PhysicsManager.h"
 
 namespace Blz
 {
 	namespace Physics
 	{
-		MainSystem::MainSystem()
+		PhysicsManager::PhysicsManager()
 		{
 		}
 
-		MainSystem::~MainSystem()
+		PhysicsManager::~PhysicsManager()
 		{
 		}
 
-		void MainSystem::Init()
+		void PhysicsManager::Init()
 		{
 		}
 
-		void MainSystem::Shutdown()
+		void PhysicsManager::Shutdown()
 		{
 
 		}
 
-		Scene MainSystem::Update(Scene scene)
+		Scene PhysicsManager::Update(Scene scene)
 		{
 			for (Fighter& fighter : scene.fighters)
 			{

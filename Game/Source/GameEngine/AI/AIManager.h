@@ -6,11 +6,11 @@ namespace Blz
 {
 	namespace AI
 	{
-		class MainSystem
+		class AIManager
 		{
 		public:
-			MainSystem();
-			~MainSystem();
+			AIManager();
+			~AIManager();
 
 			void Init();
 			void Shutdown();

@@ -7,7 +7,7 @@ namespace Blz
 {
 	namespace Input
 	{
-		class MainSystem
+		class InputManager
 		{
 		public:
 			void ProcessInput(Scene& scene);

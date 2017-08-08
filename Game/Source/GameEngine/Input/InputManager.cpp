@@ -1,13 +1,13 @@
 #include <SDL.h>
 #include "../../Universal/UnorderedMap.h"
 #include "../Fighter.h"
-#include "MainInputSystem.h"
+#include "InputManager.h"
 
 namespace Blz
 {
 	namespace Input
 	{
-		void MainSystem::ProcessInput(Scene& scene)
+		void InputManager::ProcessInput(Scene& scene)
 		{
 			for (Fighter& fighter : scene.fighters)
 			{

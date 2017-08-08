@@ -5,7 +5,7 @@
 #include "ShaderProgram.h"
 #include "Texture.h"
 #include "../Vector3D.h"
-#include "MainGraphicsSystem.h"
+#include "RenderManager.h"
 #include "../Scene.h"
 #include "../Fighter.h"
 
@@ -13,13 +13,13 @@ namespace Blz
 {
 	namespace Graphics
 	{
-		MainSystem::MainSystem()
+		RenderManager::RenderManager()
 		{}
 
-		MainSystem::~MainSystem()
+		RenderManager::~RenderManager()
 		{}
 
-		void MainSystem::Init(Scene& scene)
+		void RenderManager::Init(Scene& scene)
 		{
 			for (Fighter& fighter : scene.fighters)
 			{
@@ -44,7 +44,7 @@ namespace Blz
 			}
 		}
 
-		void MainSystem::Update(Scene& scene, ShaderProgram& shader)
+		void RenderManager::Update(Scene& scene, ShaderProgram& shader)
 		{
 			glm::mat4 orthoProjection = glm::ortho(0.0f, static_cast<sfloat>(1024), 0.0f, static_cast<sfloat>(768));
 			GLuint transformationMatrixUniformLocation = shader.GetUniformLocation("transformationMatrix");

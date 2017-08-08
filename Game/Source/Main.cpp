@@ -14,19 +14,19 @@
 #include "GameEngine\Scene.h"
 #include "GameEngine\Fighter.h"
 #include "GameEngine\Timing\Timing.h"
-#include "GameEngine\Input\MainInputSystem.h"
-#include "GameEngine\Graphics\MainGraphicsSystem.h"
-#include "GameEngine\AI\MainAISystem.h"
-#include "GameEngine\Physics\MainPhysicsSystem.h"
+#include "GameEngine\Input\InputManager.h"
+#include "GameEngine\Graphics\RenderManager.h"
+#include "GameEngine\AI\AIManager.h"
+#include "GameEngine\Physics\PhysicsManager.h"
 
 int main(int agrc, char** argv)
 {
 	Blz::Window window;
 	Blz::Graphics::ShaderProgram colorShaderProgram;
-	Blz::Graphics::MainSystem Renderer;
-	Blz::Input::MainSystem Input;
-	Blz::AI::MainSystem AI;
-	Blz::Physics::MainSystem Physics;
+	Blz::Graphics::RenderManager Renderer;
+	Blz::Input::InputManager Input;
+	Blz::AI::AIManager AI;
+	Blz::Physics::PhysicsManager Physics;
 	Scene scene;
 
 	window.Initialize();

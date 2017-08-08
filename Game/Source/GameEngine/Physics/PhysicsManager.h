@@ -6,11 +6,11 @@ namespace Blz
 {
 	namespace Physics
 	{
-		class MainSystem
+		class PhysicsManager
 		{
 		public:
-			MainSystem();
-			~MainSystem();
+			PhysicsManager();
+			~PhysicsManager();
 
 			void Init();
 			void Shutdown();
