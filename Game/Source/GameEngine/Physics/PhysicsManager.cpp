@@ -27,17 +27,14 @@ namespace Blz
 
 		Scene PhysicsManager::Update(Scene scene)
 		{
+			Blz::SmallVector<Fighter> newFighterStates;
+
 			for (Fighter& fighter : scene.fighters)
 			{
-				Fighter newFighterState = MovementSystem(fighter);
+				glm::vec2 newFighterPosition = MovementSystem(fighter.transform, fighter.velocity);
 
-				fighters.push_back(newFighterState);
+				fighter.transform.SetPosition(newFighterPosition.x, newFighterPosition.y);
 			}
-
-			Blz::SmallVector<Fighter> newFighterStates = AABBCollisionSystem(fighters);
-
-			scene.fighters.swap(newFighterStates);
-			fighters.clear();
 
 			return scene;
 		}

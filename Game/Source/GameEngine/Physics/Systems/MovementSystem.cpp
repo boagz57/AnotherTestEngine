@@ -1,16 +1,18 @@
 #include "../../Fighter.h"
+#include "../../Components/Transform.h"
+#include "../../Components/Velocity.h"
 #include "MovementSystem.h"
 
 namespace Blz
 {
 	namespace Physics
 	{
-		Fighter MovementSystem(Fighter fighter)
+		glm::vec2 MovementSystem(TransformComponent fighterTransform, VelocityComponent fighterVelocity)
 		{
-			//Set how much fighter will be translated within world
-			fighter.transform.TranslatePosition(fighter.velocity.GetCurrentState().x, fighter.velocity.GetCurrentState().y);
+			//Move fighter position according to current velocity applied 
+			fighterTransform.TranslatePosition(fighterVelocity.GetCurrentState().x, fighterVelocity.GetCurrentState().y);
 
-			return fighter;
+			return fighterTransform.GetCurrentPosition();
 		}
 	}
 }
