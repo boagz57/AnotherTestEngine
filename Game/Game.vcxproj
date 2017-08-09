@@ -429,7 +429,6 @@ copy /y  "$(SolutionDir)ThirdParty\SDL\Lib\x86\SDL2.dll" "$(SolutionDir)Game\Bin
     <ClInclude Include="Source\GameEngine\Physics\Systems\AABBCollisionSystem.h" />
     <ClInclude Include="Source\GameEngine\Physics\PhysicsManager.h" />
     <ClInclude Include="Source\GameEngine\AI\AIManager.h" />
-    <ClInclude Include="Source\GameEngine\Components\Position.h" />
     <ClInclude Include="Source\GameEngine\Graphics\RenderManager.h" />
     <ClInclude Include="Source\GameEngine\Input\InputManager.h" />
     <ClInclude Include="Source\GameEngine\Physics\Systems\MovementSystem.h" />

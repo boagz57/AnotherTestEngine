@@ -9,7 +9,9 @@ Fighter::Fighter()
 Fighter::Fighter(Blz::string const imageFilePath, sfloat startPositionX, sfloat startPositionY) :
 	sprite(imageFilePath, 200, 200)
 {
-	position.Add(startPositionX, startPositionY);
+	transform.SetPosition(startPositionX, startPositionY);
+	originalPosition.x = startPositionX;
+	originalPosition.y = startPositionY;
 }
 
 Fighter::~Fighter()

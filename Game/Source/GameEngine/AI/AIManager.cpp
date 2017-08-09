@@ -53,9 +53,6 @@ namespace Blz
 				}
 			}
 
-			if (player->position.GetCurrentState().x > 0)
-				AI->position.Add(20.0f, 0.0f);
-
 			return fighters;
 		}
 	}

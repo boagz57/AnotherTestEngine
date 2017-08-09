@@ -23,8 +23,8 @@ namespace Blz
 		{
 			for (Fighter& fighter : scene.fighters)
 			{
-				sfloat fighterPosX = fighter.position.GetCurrentState().x;
-				sfloat fighterPosY = fighter.position.GetCurrentState().y;
+				sfloat fighterPosX = fighter.transform.GetCurrentPosition().x;
+				sfloat fighterPosY = fighter.transform.GetCurrentPosition().y;
 
 				fighter.sprite.SetTargetPosition(fighterPosX, fighterPosY);
 			}
@@ -58,7 +58,8 @@ namespace Blz
 			{
 				++vboID;
 
-				glm::mat4 transformationMatrix = glm::translate(orthoProjection, glm::vec3{ fighter.transform.GetCurrentTranslationAmount().x, fighter.transform.GetCurrentTranslationAmount().y, 0.0f });
+				glm::vec2 translationAmount = fighter.transform.GetCurrentPosition() - fighter.originalPosition;
+				glm::mat4 transformationMatrix = glm::translate(orthoProjection, glm::vec3{ translationAmount.x, translationAmount.y, 0.0f });
 				glUniformMatrix4fv(transformationMatrixUniformLocation, 1, GL_FALSE, &(transformationMatrix[0][0]));
 
 				glBindTexture(GL_TEXTURE_2D, fighter.sprite.GetTexture().id);
@@ -69,8 +70,6 @@ namespace Blz
 				glDrawArrays(GL_TRIANGLES, 0, 6);
 
 				glBindBuffer(GL_ARRAY_BUFFER, 0);
-
-				fighter.transform.ResetTranslation();
 			}
 		}
 	}

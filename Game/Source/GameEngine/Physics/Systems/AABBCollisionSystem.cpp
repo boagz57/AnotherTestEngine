@@ -19,8 +19,8 @@ namespace Blz
 				fighter.collisionBox.SetMaxCoordinateOffset(100.0f, 200.0f);
 				fighter.collisionBox.SetMinCoordinateOffset(-100.0f, 0.0f);
 
-				fighter.collisionBox.SetMaxCoordinatePosition(fighter.position.GetCurrentState().x, fighter.position.GetCurrentState().y);
-				fighter.collisionBox.SetMinCoordinatePosition(fighter.position.GetCurrentState().x, fighter.position.GetCurrentState().y);
+				fighter.collisionBox.SetMaxCoordinatePosition(fighter.transform.GetCurrentPosition().x, fighter.transform.GetCurrentPosition().y);
+				fighter.collisionBox.SetMinCoordinatePosition(fighter.transform.GetCurrentPosition().x, fighter.transform.GetCurrentPosition().y);
 
 				if (fighter.IsFighterControllable())
 					fighter1 = fighter;

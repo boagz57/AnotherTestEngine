@@ -5,25 +5,28 @@ class TransformComponent
 {
 public:
 	inline void TranslatePosition(sfloat amountToTranslateX, sfloat amountToTranslateY);
-	inline glm::vec2 GetCurrentTranslationAmount();
-	inline void ResetTranslation();
+	inline glm::vec2 GetCurrentPosition();
+	inline void SetPosition(sfloat locationX, sfloat locationY);
 
 private:
-	glm::vec2 currentTranslation{ 0.0f, 0.0f };
+	glm::vec2 position{ 0.0f, 0.0f };
+	glm::vec2 rotation{ 0.0f, 0.0f };
+	glm::vec2 scale{ 0.0f, 0.0f };
 };
 
 void TransformComponent::TranslatePosition(sfloat amountToTranslateX, sfloat amountToTranslateY)
 {
-	currentTranslation.x += amountToTranslateX;
-	currentTranslation.y += amountToTranslateY;
+	position.x += amountToTranslateX;
+	position.y += amountToTranslateY;
 }
 
-glm::vec2 TransformComponent::GetCurrentTranslationAmount()
+glm::vec2 TransformComponent::GetCurrentPosition()
 {
-	return currentTranslation;
+	return position;
 }
 
-void TransformComponent::ResetTranslation()
+inline void TransformComponent::SetPosition(sfloat locationX, sfloat locationY)
 {
-	currentTranslation *= 0.0f;
+	position.x = locationX;
+	position.y = locationY;
 }

@@ -1,7 +1,6 @@
 #pragma once
 #include <GLM/vec3.hpp>
 #include "Components/Sprite.h"
-#include "Components/Position.h"
 #include "Components/AABB.h"
 #include "Components/Velocity.h"
 #include "Components/Transform.h"
@@ -16,10 +15,10 @@ public:
 	bool IsFighterControllable();
 	void SetIfFighterShouldBeControllable(bool fighterControllable);
 
-	PositionComponent position;
 	VelocityComponent velocity;
 	AABBComponent collisionBox;
 	TransformComponent transform;
+	glm::vec2 originalPosition{ 0.0f, 0.0f };
 	Sprite sprite;
 
 	bool isControllable = false;

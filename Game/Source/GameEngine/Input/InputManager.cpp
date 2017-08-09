@@ -7,24 +7,24 @@ namespace Blz
 {
 	namespace Input
 	{
-		void InputManager::ProcessInput(Scene& scene)
+		void InputManager::Update(Scene& scene)
 		{
+			while (SDL_PollEvent(&evnt))
+			{
+				switch (evnt.type)
+				{
+				case SDL_KEYDOWN:
+					keyMap[evnt.key.keysym.sym] = true;
+					break;
+
+				case SDL_KEYUP:
+					keyMap[evnt.key.keysym.sym] = false;
+					break;
+				}
+			}
+
 			for (Fighter& fighter : scene.fighters)
 			{
-				while (SDL_PollEvent(&evnt))
-				{
-					switch (evnt.type)
-					{
-					case SDL_KEYDOWN:
-						keyMap[evnt.key.keysym.sym] = true;
-						break;
-
-					case SDL_KEYUP:
-						keyMap[evnt.key.keysym.sym] = false;
-						break;
-					}
-				}
-
 				if (fighter.IsFighterControllable())
 				{
 					if (keyMap[SDLK_w])

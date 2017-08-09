@@ -46,7 +46,7 @@ int main(int agrc, char** argv)
 	//Game loop
 	while (true)
 	{
-		Input.ProcessInput(scene);
+		Input.Update(scene);
 
 		Scene newScene = Physics.Update(scene);
 		newScene = AI.Update(newScene);

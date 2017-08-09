@@ -10,7 +10,7 @@ namespace Blz
 		class InputManager
 		{
 		public:
-			void ProcessInput(Scene& scene);
+			void Update(Scene& scene);
 
 		private:
 			Blz::UMap<uint, bool> keyMap;
