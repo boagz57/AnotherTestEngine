@@ -1,6 +1,6 @@
 #include "../Scene.h"
-#include "SubSystems\AABBCollisionSystem.h"
-#include "SubSystems\MovementSystem.h"
+#include "Systems\AABBCollisionSystem.h"
+#include "Systems\MovementSystem.h"
 #include "../../Universal/SmallVector.h"
 #include "PhysicsManager.h"
 

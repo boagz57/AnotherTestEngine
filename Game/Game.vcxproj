@@ -402,12 +402,12 @@ copy /y  "$(SolutionDir)ThirdParty\SDL\Lib\x86\SDL2.dll" "$(SolutionDir)Game\Bin
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\ThirdParty\STB_Image\Source\stb_image.cpp" />
-    <ClCompile Include="Source\GameEngine\Physics\SubSystems\AABBCollisionSystem.cpp" />
+    <ClCompile Include="Source\GameEngine\Physics\Systems\AABBCollisionSystem.cpp" />
     <ClCompile Include="Source\GameEngine\Physics\PhysicsManager.cpp" />
     <ClCompile Include="Source\GameEngine\AI\AIManager.cpp" />
     <ClCompile Include="Source\GameEngine\Graphics\RenderManager.cpp" />
     <ClCompile Include="Source\GameEngine\Input\InputManager.cpp" />
-    <ClCompile Include="Source\GameEngine\Physics\SubSystems\MovementSystem.cpp" />
+    <ClCompile Include="Source\GameEngine\Physics\Systems\MovementSystem.cpp" />
     <ClCompile Include="Source\GameEngine\Scene.cpp" />
     <ClCompile Include="Source\GameEngine\Fighter.cpp" />
     <ClCompile Include="Source\GameEngine\Graphics\Texture.cpp" />
@@ -426,13 +426,13 @@ copy /y  "$(SolutionDir)ThirdParty\SDL\Lib\x86\SDL2.dll" "$(SolutionDir)Game\Bin
   <ItemGroup>
     <ClInclude Include="Source\GameEngine\Components\AABB.h" />
     <ClInclude Include="Source\GameEngine\Components\Transform.h" />
-    <ClInclude Include="Source\GameEngine\Physics\SubSystems\AABBCollisionSystem.h" />
+    <ClInclude Include="Source\GameEngine\Physics\Systems\AABBCollisionSystem.h" />
     <ClInclude Include="Source\GameEngine\Physics\PhysicsManager.h" />
     <ClInclude Include="Source\GameEngine\AI\AIManager.h" />
     <ClInclude Include="Source\GameEngine\Components\Position.h" />
     <ClInclude Include="Source\GameEngine\Graphics\RenderManager.h" />
     <ClInclude Include="Source\GameEngine\Input\InputManager.h" />
-    <ClInclude Include="Source\GameEngine\Physics\SubSystems\MovementSystem.h" />
+    <ClInclude Include="Source\GameEngine\Physics\Systems\MovementSystem.h" />
     <ClInclude Include="Source\GameEngine\Scene.h" />
     <ClInclude Include="Source\GameEngine\ErrorContext.h" />
     <ClInclude Include="Source\GameEngine\ErrorHandling.h" />

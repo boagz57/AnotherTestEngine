@@ -177,7 +177,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)ThirdParty\GoogleTest\gmock;$(SolutionDir)ThirdParty\GoogleTest\gtest;$(SolutionDir)ThirdParty\GLEW\Include\;$(SolutionDir)ThirdParty\SDL\Include\;$(SolutionDir)ThirdParty\GoogleTest\gmock\include;$(SolutionDir)ThirdParty\GoogleTest\gtest\include;$(SolutionDir)Game\Source\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)ThirdParty\GoogleTest\gmock;$(SolutionDir)ThirdParty\GoogleTest\gtest;$(SolutionDir)ThirdParty\GLEW\Include\;$(SolutionDir)ThirdParty\SDL\Include\;$(SolutionDir)ThirdParty\GoogleTest\gmock\include;$(SolutionDir)ThirdParty\GoogleTest\gtest\include;$(SolutionDir)Game\Source\GameEngine\;$(SolutionDir)Game\Source\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>$(SolutionDir)Game\Source\Universal\PrimitiveTypes.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
       <PreprocessorDefinitions>GLEW_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
@@ -196,7 +196,7 @@ copy /y  "$(SolutionDir)ThirdParty\SDL\Lib\x86\SDL2.dll" "$(SolutionDir)GameTest
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)ThirdParty\GoogleTest\gmock;$(SolutionDir)ThirdParty\GoogleTest\gtest;$(SolutionDir)ThirdParty\GLEW\Include\;$(SolutionDir)ThirdParty\SDL\Include\;$(SolutionDir)ThirdParty\GoogleTest\gmock\include;$(SolutionDir)ThirdParty\GoogleTest\gtest\include;$(SolutionDir)Game\Source\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)ThirdParty\GoogleTest\gmock;$(SolutionDir)ThirdParty\GoogleTest\gtest;$(SolutionDir)ThirdParty\GLEW\Include\;$(SolutionDir)ThirdParty\SDL\Include\;$(SolutionDir)ThirdParty\GoogleTest\gmock\include;$(SolutionDir)ThirdParty\GoogleTest\gtest\include;$(SolutionDir)Game\Source\GameEngine\;$(SolutionDir)Game\Source\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>$(SolutionDir)Game\Source\Universal\PrimitiveTypes.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
       <PreprocessorDefinitions>DEBUGUNIT%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
@@ -231,7 +231,7 @@ copy /y  "$(SolutionDir)ThirdParty\SDL\Lib\x86\SDL2.dll" "$(SolutionDir)GameTest
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)ThirdParty\GoogleTest\gmock;$(SolutionDir)ThirdParty\GoogleTest\gtest;$(SolutionDir)ThirdParty\GLEW\Include\;$(SolutionDir)ThirdParty\SDL\Include\;$(SolutionDir)ThirdParty\GoogleTest\gmock\include;$(SolutionDir)ThirdParty\GoogleTest\gtest\include;$(SolutionDir)Game\Source\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)ThirdParty\GoogleTest\gmock;$(SolutionDir)ThirdParty\GoogleTest\gtest;$(SolutionDir)ThirdParty\GLEW\Include\;$(SolutionDir)ThirdParty\SDL\Include\;$(SolutionDir)ThirdParty\GoogleTest\gmock\include;$(SolutionDir)ThirdParty\GoogleTest\gtest\include;$(SolutionDir)Game\Source\GameEngine\;$(SolutionDir)Game\Source\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>$(SolutionDir)Game\Source\Universal\PrimitiveTypes.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <PreprocessorDefinitions>GLEW_STATIC_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -253,7 +253,7 @@ copy /y  "$(SolutionDir)ThirdParty\SDL\Lib\x86\SDL2.dll" "$(SolutionDir)GameTest
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)ThirdParty\GoogleTest\gmock;$(SolutionDir)ThirdParty\GoogleTest\gtest;$(SolutionDir)ThirdParty\GLEW\Include\;$(SolutionDir)ThirdParty\SDL\Include\;$(SolutionDir)ThirdParty\GoogleTest\gmock\include;$(SolutionDir)ThirdParty\GoogleTest\gtest\include;$(SolutionDir)Game\Source\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)ThirdParty\GoogleTest\gmock;$(SolutionDir)ThirdParty\GoogleTest\gtest;$(SolutionDir)ThirdParty\GLEW\Include\;$(SolutionDir)ThirdParty\SDL\Include\;$(SolutionDir)ThirdParty\GoogleTest\gmock\include;$(SolutionDir)ThirdParty\GoogleTest\gtest\include;$(SolutionDir)Game\Source\GameEngine\;$(SolutionDir)Game\Source\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>$(SolutionDir)Game\Source\Universal\PrimitiveTypes.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <PreprocessorDefinitions>GLEW_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -275,7 +275,7 @@ copy /y  "$(SolutionDir)ThirdParty\SDL\Lib\x86\SDL2.dll" "$(SolutionDir)GameTest
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)ThirdParty\GoogleTest\gmock;$(SolutionDir)ThirdParty\GoogleTest\gtest;$(SolutionDir)ThirdParty\GLEW\Include\;$(SolutionDir)ThirdParty\SDL\Include\;$(SolutionDir)ThirdParty\GoogleTest\gmock\include;$(SolutionDir)ThirdParty\GoogleTest\gtest\include;$(SolutionDir)Game\Source\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)ThirdParty\GoogleTest\gmock;$(SolutionDir)ThirdParty\GoogleTest\gtest;$(SolutionDir)ThirdParty\GLEW\Include\;$(SolutionDir)ThirdParty\SDL\Include\;$(SolutionDir)ThirdParty\GoogleTest\gmock\include;$(SolutionDir)ThirdParty\GoogleTest\gtest\include;$(SolutionDir)Game\Source\GameEngine\;$(SolutionDir)Game\Source\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>$(SolutionDir)Game\Source\Universal\PrimitiveTypes.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <PreprocessorDefinitions>GLEW_STATIC%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -333,7 +333,7 @@ copy /y  "$(SolutionDir)ThirdParty\SDL\Lib\x86\SDL2.dll" "$(SolutionDir)GameTest
     <ClCompile Include="..\ThirdParty\GoogleTest\gmock\src\gmock-all.cc" />
     <ClCompile Include="..\ThirdParty\GoogleTest\gtest\src\gtest-all.cc" />
     <ClCompile Include="MainTest.cpp" />
-    <ClCompile Include="PhysicsManager.cpp" />
+    <ClCompile Include="MovementSystemTest.cpp" />
     <ClCompile Include="WindowTest.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

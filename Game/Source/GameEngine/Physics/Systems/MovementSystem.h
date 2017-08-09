@@ -5,6 +5,6 @@ namespace Blz
 {
 	namespace Physics
 	{
-		Fighter MovementSystem(Fighter fighter);
+		Fighter MovementSystem(Fighter figher);
 	}
 }
