@@ -1,8 +1,7 @@
 #pragma once
-#include "Component.h"
 #include <GLM/vec3.hpp>
 
-class VelocityComponent : public Component
+class VelocityComponent 
 {
 public:
 	VelocityComponent();

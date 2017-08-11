@@ -23,8 +23,8 @@ namespace Blz
 		{
 			for (Fighter& fighter : scene.fighters)
 			{
-				sfloat fighterPosX = fighter.transform.GetCurrentPosition().x;
-				sfloat fighterPosY = fighter.transform.GetCurrentPosition().y;
+				sfloat fighterPosX = fighter.GetComponent<TransformComponent>().GetCurrentPosition().x;
+				sfloat fighterPosY = fighter.GetComponent<TransformComponent>().GetCurrentPosition().y;
 
 				fighter.sprite.SetTargetPosition(fighterPosX, fighterPosY);
 			}
@@ -58,7 +58,7 @@ namespace Blz
 			{
 				++vboID;
 
-				glm::vec2 translationAmount = fighter.transform.GetCurrentPosition() - fighter.originalPosition;
+				glm::vec2 translationAmount = fighter.GetComponent<TransformComponent>().GetCurrentPosition() - fighter.originalPosition;
 				glm::mat4 transformationMatrix = glm::translate(orthoProjection, glm::vec3{ translationAmount.x, translationAmount.y, 0.0f });
 				glUniformMatrix4fv(transformationMatrixUniformLocation, 1, GL_FALSE, &(transformationMatrix[0][0]));
 

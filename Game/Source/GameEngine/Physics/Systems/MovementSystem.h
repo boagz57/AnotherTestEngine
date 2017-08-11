@@ -8,6 +8,6 @@ namespace Blz
 	namespace Physics
 	{
 		//Returns new translated position
-		glm::vec2 MovementSystem(TransformComponent fighterTransform, VelocityComponent fighterVelocity);
+		TransformComponent MovementSystem(TransformComponent fighterTransform, VelocityComponent fighterVelocity);
 	}
 }

@@ -1,10 +1,10 @@
 #pragma once
-#include "Component.h"
 #include <GLM/vec2.hpp>
 
-class TransformComponent : public Component
+class TransformComponent
 {
 public:
+	TransformComponent();
 	TransformComponent(glm::vec2 position);
 
 	void TranslatePosition(sfloat amountToTranslateX, sfloat amountToTranslateY);

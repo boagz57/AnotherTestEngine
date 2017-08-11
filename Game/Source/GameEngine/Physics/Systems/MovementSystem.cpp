@@ -7,7 +7,7 @@ namespace Blz
 {
 	namespace Physics
 	{
-		glm::vec2 MovementSystem(TransformComponent fighterTransform, VelocityComponent fighterVelocity)
+		TransformComponent MovementSystem(TransformComponent fighterTransform, VelocityComponent fighterVelocity)
 		{
 			//Move fighter position according to current velocity applied 
 			fighterTransform.TranslatePosition(fighterVelocity.GetCurrentState().x, fighterVelocity.GetCurrentState().y);

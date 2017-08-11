@@ -27,14 +27,14 @@ namespace Blz
 			{
 				if (fighter.IsFighterControllable())
 				{
-					/*if (keyMap[SDLK_w])
-						fighter.velocity.Add(0.0f, 1.0f);
+					if (keyMap[SDLK_w])
+						fighter.GetComponent<VelocityComponent>().Add(0.0f, 1.0f);
 					else if (keyMap[SDLK_s])
-						fighter.velocity.Add(0.0f, -1.0f);
+						fighter.GetComponent<VelocityComponent>().Add(0.0f, -1.0f);
 					else if (keyMap[SDLK_a])
-						fighter.velocity.Add(-1.0f, 0.0f);
+						fighter.GetComponent<VelocityComponent>().Add(-1.0f, 0.0f);
 					else if (keyMap[SDLK_d])
-						fighter.velocity.Add(1.0f, 0.0f);*/
+						fighter.GetComponent<VelocityComponent>().Add(1.0f, 0.0f);
 				};
 			}
 		}
