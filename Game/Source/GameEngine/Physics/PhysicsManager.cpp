@@ -31,9 +31,8 @@ namespace Blz
 
 			for (Fighter& fighter : scene.fighters)
 			{
-				glm::vec2 newFighterPosition = MovementSystem(fighter.transform, fighter.velocity);
-
-				fighter.transform.SetPosition(newFighterPosition.x, newFighterPosition.y);
+				glm::vec2 newPosition = MovementSystem(fighter.transform, fighter.velocity);
+				fighter.Insert(new TransformComponent(newPosition));
 			}
 
 			return scene;
