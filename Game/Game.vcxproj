@@ -405,7 +405,6 @@ copy /y  "$(SolutionDir)ThirdParty\SDL\Lib\x86\SDL2.dll" "$(SolutionDir)Game\Bin
     <ClCompile Include="Source\GameEngine\Components\Component.cpp" />
     <ClCompile Include="Source\GameEngine\Components\Transform.cpp" />
     <ClCompile Include="Source\GameEngine\Components\Velocity.cpp" />
-    <ClCompile Include="Source\GameEngine\Physics\Systems\AABBCollisionSystem.cpp" />
     <ClCompile Include="Source\GameEngine\Physics\PhysicsManager.cpp" />
     <ClCompile Include="Source\GameEngine\AI\AIManager.cpp" />
     <ClCompile Include="Source\GameEngine\Graphics\RenderManager.cpp" />
@@ -430,7 +429,6 @@ copy /y  "$(SolutionDir)ThirdParty\SDL\Lib\x86\SDL2.dll" "$(SolutionDir)Game\Bin
     <ClInclude Include="Source\GameEngine\Components\AABB.h" />
     <ClInclude Include="Source\GameEngine\Components\Component.h" />
     <ClInclude Include="Source\GameEngine\Components\Transform.h" />
-    <ClInclude Include="Source\GameEngine\Physics\Systems\AABBCollisionSystem.h" />
     <ClInclude Include="Source\GameEngine\Physics\PhysicsManager.h" />
     <ClInclude Include="Source\GameEngine\AI\AIManager.h" />
     <ClInclude Include="Source\GameEngine\Graphics\RenderManager.h" />
