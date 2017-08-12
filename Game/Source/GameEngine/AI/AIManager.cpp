@@ -28,12 +28,9 @@ namespace Blz
 
 		}
 
-		Scene AIManager::Update(Scene scene)
+		void AIManager::Update(Scene& scene)
 		{
 			Blz::SmallVector<Fighter> updatedFighters = MoveAI(scene.fighters);
-
-			scene.fighters = updatedFighters;
-			return scene;
 		}
 
 		Blz::SmallVector<Fighter> MoveAI(Blz::SmallVector<Fighter> fighters)

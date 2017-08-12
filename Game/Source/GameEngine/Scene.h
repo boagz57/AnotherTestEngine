@@ -1,4 +1,5 @@
 #pragma once
+#include <GLM\vec2.hpp>
 #include "../Universal/SmallVector.h"
 #include "Fighter.h"
 
@@ -12,6 +13,7 @@ public:
 	Fighter* CreatePlayerFighter(Blz::string imageFilePath, sfloat startingWorldPositionX, sfloat startingWorldPositionY);
 
 	Blz::SmallVector<Fighter> fighters;
+	Blz::SmallVector<glm::vec2> fighterStartingPositions;
 
 private:
 	uint16 numFighters = 0;

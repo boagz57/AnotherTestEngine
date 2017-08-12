@@ -6,9 +6,11 @@ namespace Blz
 	{
 		namespace System
 		{
-			TransformComponent Blz::GameWorld::System::SetFighterStartingPosition(TransformComponent fighterPosition, SpriteComponent fighterSprite)
+			TransformComponent Blz::GameWorld::System::SetFighterStartingPosition(TransformComponent fighterPosition, glm::vec2 fighterStartingPositions)
 			{
-				return TransformComponent();
+				fighterPosition.SetPosition(fighterStartingPositions.x, fighterStartingPositions.y);
+
+				return fighterPosition;
 			}
 		}
 	}

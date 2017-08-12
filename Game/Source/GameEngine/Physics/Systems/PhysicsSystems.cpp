@@ -1,7 +1,7 @@
 #include "../../Fighter.h"
 #include "../../Components/Transform.h"
 #include "../../Components/Velocity.h"
-#include "MovementSystem.h"
+#include "PhysicsSystems.h"
 
 namespace Blz
 {
@@ -9,12 +9,18 @@ namespace Blz
 	{
 		namespace System
 		{
-			TransformComponent MovementSystem(TransformComponent fighterTransform, VelocityComponent fighterVelocity)
+			TransformComponent MoveFighter(TransformComponent fighterTransform, VelocityComponent fighterVelocity)
 			{
 				//Move fighter position according to current velocity applied 
 				fighterTransform.TranslatePosition(fighterVelocity.GetCurrentState().x, fighterVelocity.GetCurrentState().y);
 
 				return fighterTransform.GetCurrentPosition();
+			}
+
+			VelocityComponent ZeroOutVelocity(VelocityComponent fighterVelocity)
+			{
+				fighterVelocity.ZeroOut();
+				return fighterVelocity;
 			}
 		}
 	}

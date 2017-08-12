@@ -1,5 +1,5 @@
 #include "../Scene.h"
-#include "Systems\MovementSystem.h"
+#include "Systems/PhysicsSystems.h"
 #include "../../Universal/SmallVector.h"
 #include "PhysicsManager.h"
 
@@ -24,17 +24,16 @@ namespace Blz
 
 		}
 
-		Scene PhysicsManager::Update(Scene scene)
+		void PhysicsManager::Update(Scene& scene)
 		{
-			Blz::SmallVector<Fighter> newFighterStates;
-
 			for (Fighter& fighter : scene.fighters)
 			{
-				TransformComponent newComp = System::MovementSystem(fighter.GetComponent<TransformComponent>(), fighter.GetComponent<VelocityComponent>());
-				fighter.Insert<TransformComponent>(newComp);
-			}
+				TransformComponent newFighterPosition = System::MoveFighter(fighter.GetComponent<TransformComponent>(), fighter.GetComponent<VelocityComponent>());
+				VelocityComponent newFighterVelocity = System::ZeroOutVelocity(fighter.GetComponent<VelocityComponent>());
 
-			return scene;
+				fighter.Insert<TransformComponent>(newFighterPosition);
+				fighter.Insert<VelocityComponent>(newFighterVelocity);
+			}
 		}
 	}
 }

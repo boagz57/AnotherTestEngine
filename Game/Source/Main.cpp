@@ -43,6 +43,7 @@ int main(int agrc, char** argv)
 	Fighter* player = scene.CreatePlayerFighter("CharImage.png", 100.0f, 0.0f);
 
 	//Initialize systems
+	gameWolrd.Init(scene);
 	Renderer.Init(scene);
 
 	//Game loop
@@ -50,16 +51,15 @@ int main(int agrc, char** argv)
 	{
 		Input.Update(scene);
 
-		Scene newScene = Physics.Update(scene);
-		newScene = AI.Update(newScene);
+		Physics.Update(scene);
+		AI.Update(scene);
 
 		//GameLogic
 
 
-
 		window.ClearBuffers();
 
-		Renderer.Update(newScene, colorShaderProgram);
+		Renderer.Update(scene, colorShaderProgram);
 
 		window.SwapBuffers();
 

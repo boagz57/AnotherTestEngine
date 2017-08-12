@@ -8,7 +8,7 @@ namespace Blz
 	{
 		namespace System
 		{
-			TransformComponent SetFighterStartingPosition(TransformComponent fighterPosition, SpriteComponent fighterSprite);
+			TransformComponent SetFighterStartingPosition(TransformComponent fighterPosition, glm::vec2 fighterStartingPositions);
 		}
 	}
 }

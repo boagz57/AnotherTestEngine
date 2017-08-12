@@ -14,10 +14,7 @@ namespace Blz
 
 			void Init();
 			void Shutdown();
-			Scene Update(Scene scene);
-
-		private:
-			Blz::SmallVector<Fighter> fighters;
+			void Update(Scene& scene);
 		};
 	}
 }
