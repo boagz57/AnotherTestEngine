@@ -13,7 +13,7 @@ namespace Blz
 			void Update(Scene& scene);
 
 		private:
-			Blz::UMap<uint, bool> keyMap;
+			Blz::Map<uint, bool> keyMap;
 			SDL_Event evnt;
 		};
 	}

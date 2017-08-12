@@ -7,7 +7,10 @@ namespace Blz
 {
 	namespace Physics
 	{
-		//Returns new translated position
-		TransformComponent MovementSystem(TransformComponent fighterTransform, VelocityComponent fighterVelocity);
+		namespace System
+		{
+			//Returns new translated position
+			TransformComponent MovementSystem(TransformComponent fighterTransform, VelocityComponent fighterVelocity);
+		}
 	}
 }

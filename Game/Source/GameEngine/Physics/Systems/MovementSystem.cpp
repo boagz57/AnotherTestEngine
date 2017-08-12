@@ -7,12 +7,15 @@ namespace Blz
 {
 	namespace Physics
 	{
-		TransformComponent MovementSystem(TransformComponent fighterTransform, VelocityComponent fighterVelocity)
+		namespace System
 		{
-			//Move fighter position according to current velocity applied 
-			fighterTransform.TranslatePosition(fighterVelocity.GetCurrentState().x, fighterVelocity.GetCurrentState().y);
+			TransformComponent MovementSystem(TransformComponent fighterTransform, VelocityComponent fighterVelocity)
+			{
+				//Move fighter position according to current velocity applied 
+				fighterTransform.TranslatePosition(fighterVelocity.GetCurrentState().x, fighterVelocity.GetCurrentState().y);
 
-			return fighterTransform.GetCurrentPosition();
+				return fighterTransform.GetCurrentPosition();
+			}
 		}
 	}
 }

@@ -1,4 +1,5 @@
 #include <SDL.h>
+#include "Systems\SystemFunctions.h"
 #include "../../Universal/UnorderedMap.h"
 #include "../Fighter.h"
 #include "InputManager.h"
@@ -27,14 +28,7 @@ namespace Blz
 			{
 				if (fighter.IsFighterControllable())
 				{
-					if (keyMap[SDLK_w])
-						fighter.GetComponent<VelocityComponent>().Add(0.0f, 1.0f);
-					else if (keyMap[SDLK_s])
-						fighter.GetComponent<VelocityComponent>().Add(0.0f, -1.0f);
-					else if (keyMap[SDLK_a])
-						fighter.GetComponent<VelocityComponent>().Add(-1.0f, 0.0f);
-					else if (keyMap[SDLK_d])
-						fighter.GetComponent<VelocityComponent>().Add(1.0f, 0.0f);
+					fighter.Insert(System::GatherDirectionalInput(fighter.GetComponent<VelocityComponent>(), keyMap));
 				};
 			}
 		}

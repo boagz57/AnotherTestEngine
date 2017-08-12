@@ -30,7 +30,7 @@ namespace Blz
 
 			for (Fighter& fighter : scene.fighters)
 			{
-				TransformComponent newComp = MovementSystem(fighter.GetComponent<TransformComponent>(), fighter.GetComponent<VelocityComponent>());
+				TransformComponent newComp = System::MovementSystem(fighter.GetComponent<TransformComponent>(), fighter.GetComponent<VelocityComponent>());
 				fighter.Insert<TransformComponent>(newComp);
 			}
 
