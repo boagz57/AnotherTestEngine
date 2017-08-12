@@ -9,7 +9,7 @@
 #include "../ErrorHandling.h"
 #include "../Vector3D.h"
 
-Sprite::Sprite(Blz::string const imageFilePath, uint16 const imageWidth, uint16 const imageHeight)
+SpriteComponent::SpriteComponent(Blz::string const imageFilePath, uint16 const imageWidth, uint16 const imageHeight)
 {
 	Blz::Err::ErrorContext ec("When initializing sprite with image", imageFilePath);
 
@@ -24,15 +24,15 @@ Sprite::Sprite(Blz::string const imageFilePath, uint16 const imageWidth, uint16 
 	vertexData.resize(6);
 }
 
-Sprite::Sprite()
+SpriteComponent::SpriteComponent()
 {
 }
 
-Sprite::~Sprite()
+SpriteComponent::~SpriteComponent()
 {
 }
 
-void Sprite::SetTargetPosition(sfloat screenPositionX, sfloat screenPositionY)
+void SpriteComponent::SetTargetPosition(sfloat screenPositionX, sfloat screenPositionY)
 {
 	sfloat halfWidth = this->width / 2;
 
@@ -53,12 +53,12 @@ void Sprite::SetTargetPosition(sfloat screenPositionX, sfloat screenPositionY)
 	this->vertexData.at(5).SetUV(glm::vec2{ 1.0f, 1.0f });
 }
 
-Blz::Graphics::Texture Sprite::GetTexture()
+Blz::Graphics::Texture SpriteComponent::GetTexture()
 {
 	return texture;
 }
 
-Blz::SmallVector<Vector3D> Sprite::GetVertexData()
+Blz::SmallVector<Vector3D> SpriteComponent::GetVertexData()
 {
 	return vertexData;
 }

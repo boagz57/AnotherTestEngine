@@ -4,12 +4,12 @@
 #include "../Vector3D.h"
 #include "../Graphics/Texture.h"
 
-class Sprite
+class SpriteComponent
 {
 public:
-	Sprite();
-	Sprite(Blz::string const imageFilePath, uint16 const imageWidth, uint16 const imageHeight);
-	~Sprite();
+	SpriteComponent();
+	SpriteComponent(Blz::string const imageFilePath, uint16 const imageWidth, uint16 const imageHeight);
+	~SpriteComponent();
 
 	void SetTargetPosition(sfloat screenPositionX, sfloat screenPositionY);
 	Blz::Graphics::Texture GetTexture();

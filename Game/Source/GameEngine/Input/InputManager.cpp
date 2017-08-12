@@ -1,5 +1,5 @@
 #include <SDL.h>
-#include "Systems\SystemFunctions.h"
+#include "Systems\InputSystems.h"
 #include "../../Universal/UnorderedMap.h"
 #include "../Fighter.h"
 #include "InputManager.h"

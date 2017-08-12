@@ -3,6 +3,11 @@
 #include "../../Universal/UnorderedMap.h"
 #include "../Scene.h"
 
+/*
+	Input System Responsible for the Gathering of input and changing only those components which do not directly effect Fighter. So This system would
+	never manipulate a Fighter's position directly for exmaple. 
+*/
+
 namespace Blz
 {
 	namespace Input

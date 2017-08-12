@@ -4,6 +4,10 @@
 #include "../Vector3D.h"
 #include "../Scene.h"
 
+/*
+	Responsible for the actual drawing of everything on screen.
+*/
+
 namespace Blz
 {
 	namespace Graphics

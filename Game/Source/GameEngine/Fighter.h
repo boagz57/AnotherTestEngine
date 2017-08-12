@@ -26,7 +26,7 @@ public:
 	void SetIfFighterShouldBeControllable(bool fighterControllable);
 
 	glm::vec2 originalPosition{ 0.0f, 0.0f };
-	Sprite sprite;
+	SpriteComponent sprite;
 
 	bool isControllable = false;
 };
