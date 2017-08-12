@@ -3,6 +3,7 @@
 #include <GLM\gtc\matrix_transform.hpp>
 #include "../ErrorHandling.h"
 #include "ShaderProgram.h"
+#include "../Components/Sprite.h"
 #include "Texture.h"
 #include "../Vector3D.h"
 #include "RenderManager.h"
@@ -26,7 +27,10 @@ namespace Blz
 				sfloat fighterPosX = fighter.GetComponent<TransformComponent>().GetCurrentPosition().x;
 				sfloat fighterPosY = fighter.GetComponent<TransformComponent>().GetCurrentPosition().y;
 
-				fighter.sprite.SetTargetPosition(fighterPosX, fighterPosY);
+				//TODO: Make into a system
+				SpriteComponent newSprite = fighter.GetComponent<SpriteComponent>();
+				newSprite.SetTargetPosition(fighterPosX, fighterPosY);
+				fighter.Insert(newSprite);
 			}
 
 			for (Fighter& fighter : scene.fighters)
@@ -35,7 +39,7 @@ namespace Blz
 				glGenBuffers(1, &vboID);
 
 				glBindBuffer(GL_ARRAY_BUFFER, vboID);
-				glBufferData(GL_ARRAY_BUFFER, (sizeof(Vector3D) * fighter.sprite.GetVertexData().size()), &fighter.sprite.GetVertexData().front(), GL_DYNAMIC_DRAW);
+				glBufferData(GL_ARRAY_BUFFER, (sizeof(Vector3D) * fighter.GetComponent<SpriteComponent>().GetVertexData().size()), &fighter.GetComponent<SpriteComponent>().GetVertexData().front(), GL_DYNAMIC_DRAW);
 
 				glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vector3D), (void*)offsetof(Vector3D, position));
 				glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(Vector3D), (void*)offsetof(Vector3D, textureCoordinates));
@@ -62,7 +66,7 @@ namespace Blz
 				glm::mat4 transformationMatrix = glm::translate(orthoProjection, glm::vec3{ translationAmount.x, translationAmount.y, 0.0f });
 				glUniformMatrix4fv(transformationMatrixUniformLocation, 1, GL_FALSE, &(transformationMatrix[0][0]));
 
-				glBindTexture(GL_TEXTURE_2D, fighter.sprite.GetTexture().id);
+				glBindTexture(GL_TEXTURE_2D, fighter.GetComponent<SpriteComponent>().GetTexture().id);
 				glBindBuffer(GL_ARRAY_BUFFER, vboID);
 				glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vector3D), (void*)offsetof(Vector3D, position));
 				glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(Vector3D), (void*)offsetof(Vector3D, textureCoordinates));

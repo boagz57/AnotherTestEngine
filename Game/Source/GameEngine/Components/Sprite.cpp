@@ -9,23 +9,21 @@
 #include "../ErrorHandling.h"
 #include "../Vector3D.h"
 
-SpriteComponent::SpriteComponent(Blz::string const imageFilePath, uint16 const imageWidth, uint16 const imageHeight)
+SpriteComponent::SpriteComponent()
 {
-	Blz::Err::ErrorContext ec("When initializing sprite with image", imageFilePath);
+	//TODO: Remove default parameters and have user define what to be set 
 
-	this->width = static_cast<sfloat>(imageWidth);
-	this->height = static_cast<sfloat>(imageHeight);
+	Blz::Err::ErrorContext ec("When initializing sprite with image", "CharImage.png");
 
-	Blz::Graphics::Texture texture(imageFilePath);
+	this->width = static_cast<sfloat>(200);
+	this->height = static_cast<sfloat>(200);
+
+	Blz::Graphics::Texture texture("CharImage.png");
 	this->texture = texture;
 
 	ERRASSERT(texture.id != 0, "Texture did not load properly!");
 
 	vertexData.resize(6);
-}
-
-SpriteComponent::SpriteComponent()
-{
 }
 
 SpriteComponent::~SpriteComponent()

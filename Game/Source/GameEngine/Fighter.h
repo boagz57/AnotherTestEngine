@@ -6,14 +6,16 @@
 #include "Components/Sprite.h"
 #include "Components/Velocity.h"
 #include "Components/Transform.h"
+#include "Components\Sprite.h"
 
 class Fighter :
 	public ComponentHolder<TransformComponent>,
-	public ComponentHolder<VelocityComponent>
+	public ComponentHolder<VelocityComponent>,
+	public ComponentHolder<SpriteComponent>
 {
 public:
 	Fighter();
-	Fighter(Blz::string const imageFilePath, sfloat startingWorldPositionX, sfloat startingWorldPositionY);
+	Fighter(sfloat startingWorldPositionX, sfloat startingWorldPositionY);
 	~Fighter();
 
 	template<class T>
@@ -26,7 +28,6 @@ public:
 	void SetIfFighterShouldBeControllable(bool fighterControllable);
 
 	glm::vec2 originalPosition{ 0.0f, 0.0f };
-	SpriteComponent sprite;
 
 	bool isControllable = false;
 };

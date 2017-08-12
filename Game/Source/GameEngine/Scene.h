@@ -9,8 +9,8 @@ public:
 	Scene();
 	~Scene();
 
-	Fighter* CreateAIFighter(Blz::string imageFilePath, sfloat startingWorldPositionX, sfloat startingWorldPositionY);
-	Fighter* CreatePlayerFighter(Blz::string imageFilePath, sfloat startingWorldPositionX, sfloat startingWorldPositionY);
+	Fighter* CreateAIFighter(sfloat startingWorldPositionX, sfloat startingWorldPositionY);
+	Fighter* CreatePlayerFighter(sfloat startingWorldPositionX, sfloat startingWorldPositionY);
 
 	Blz::SmallVector<Fighter> fighters;
 	Blz::SmallVector<glm::vec2> fighterStartingPositions;

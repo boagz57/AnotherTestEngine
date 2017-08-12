@@ -10,10 +10,10 @@ Scene::~Scene()
 {
 }
 
-Fighter* Scene::CreateAIFighter(Blz::string imageFilePath, sfloat startingPositionX, sfloat startingPositionY)
+Fighter* Scene::CreateAIFighter(sfloat startingPositionX, sfloat startingPositionY)
 {
 	RUNTIME_ASSERT(this->numFighters <= 2, "Creating too many fighters for game to handle!");
-	Fighter fighter(imageFilePath, startingPositionX, startingPositionY);
+	Fighter fighter(startingPositionX, startingPositionY);
 
 	fighters.push_back(fighter);
 	fighterStartingPositions.push_back(glm::vec2{ startingPositionX, startingPositionY });
@@ -21,10 +21,10 @@ Fighter* Scene::CreateAIFighter(Blz::string imageFilePath, sfloat startingPositi
 	return &fighters.at(this->numFighters++);
 }
 
-Fighter* Scene::CreatePlayerFighter(Blz::string imageFilePath, sfloat startingPositionX, sfloat startingPositionY)
+Fighter* Scene::CreatePlayerFighter(sfloat startingPositionX, sfloat startingPositionY)
 {
 	RUNTIME_ASSERT(this->numFighters <= 2, "Creating too many fighters for game to handle!");
-	Fighter fighter(imageFilePath, startingPositionX, startingPositionY);
+	Fighter fighter(startingPositionX, startingPositionY);
 
 	fighter.SetIfFighterShouldBeControllable(true);
 

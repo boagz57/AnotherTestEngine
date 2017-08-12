@@ -8,7 +8,6 @@ class SpriteComponent
 {
 public:
 	SpriteComponent();
-	SpriteComponent(Blz::string const imageFilePath, uint16 const imageWidth, uint16 const imageHeight);
 	~SpriteComponent();
 
 	void SetTargetPosition(sfloat screenPositionX, sfloat screenPositionY);
