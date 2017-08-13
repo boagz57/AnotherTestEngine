@@ -1,7 +1,7 @@
 #include "../Fighter.h"
 #include "../Scene.h"
 #include "../Fighter.h"
-#include "../../Universal/SmallVector.h"
+#include "Containers/SmallVector.h"
 #include "AIManager.h"
 
 namespace Blz

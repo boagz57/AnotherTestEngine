@@ -1,6 +1,6 @@
 #include "../Scene.h"
 #include "Systems/PhysicsSystems.h"
-#include "../../Universal/SmallVector.h"
+#include "Containers/SmallVector.h"
 #include "PhysicsManager.h"
 
 namespace Blz

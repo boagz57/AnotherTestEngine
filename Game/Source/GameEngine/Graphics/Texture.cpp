@@ -1,7 +1,5 @@
 #include <STB_Img\stb_image.h>
-#include "../ErrorHandling.h"
 #include "Texture.h"
-#include "../ErrorContext.h"
 
 namespace Blz
 {

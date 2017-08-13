@@ -1,6 +1,4 @@
-#include <GLM/vec3.hpp>
 #include "Fighter.h"
-#include "ErrorContext.h"
 #include "Components/Sprite.h"
 
 Fighter::Fighter()

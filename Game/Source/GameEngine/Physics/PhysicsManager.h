@@ -1,5 +1,4 @@
 #pragma once
-#include "../../Universal/SmallVector.h"
 #include "../Scene.h"
 
 namespace Blz

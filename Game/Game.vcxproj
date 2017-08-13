@@ -201,8 +201,8 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)ThirdParty\GLM\Include\;$(SolutionDir)ThirdParty\STB_Image\Include;$(SolutionDir)ThirdParty\SDL\Include;$(SolutionDir)ThirdParty\GLEW\Include\;$(SolutionDir)ThirdParty\Boost\Include;$(SolutionDir)ThirdParty\SpdLog\Include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <ForcedIncludeFiles>$(ProjectDir)Source\Universal\Macro.h;$(ProjectDir)Source\Universal\PrimitiveTypes.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <AdditionalIncludeDirectories>$(SolutionDir)ThirdParty\GLM\Include\;$(SolutionDir)ThirdParty\STB_Image\Include;$(SolutionDir)ThirdParty\SDL\Include;$(SolutionDir)ThirdParty\GLEW\Include\;$(SolutionDir)ThirdParty\Boost\Include;$(SolutionDir)ThirdParty\SpdLog\Include\;$(ProjectDir)Source\GameEngine\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <ForcedIncludeFiles>$(ProjectDir)Source\GameEngine\Logging\Logger.h;$(ProjectDir)Source\Universal\PrimitiveTypes.h;$(ProjectDir)Source\GameEngine\ErrorHandling\ErrorContext.h;$(ProjectDir)Source\GameEngine\ErrorHandling\ErrorHandling.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
       <PreprocessorDefinitions>GLEW_STATIC;_CRT_SECURE_NO_WARNINGS;STB_IMAGE_IMPLEMENTATION;DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <PostBuildEvent>
@@ -230,8 +230,8 @@ copy /y  "$(SolutionDir)ThirdParty\SDL\Lib\x86\SDL2.dll" "$(SolutionDir)Game\Bin
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)ThirdParty\GLM\Include\;$(SolutionDir)ThirdParty\STB_Image\Include;$(SolutionDir)ThirdParty\SDL\Include;$(SolutionDir)ThirdParty\GLEW\Include\;$(SolutionDir)ThirdParty\Boost\Include;$(SolutionDir)ThirdParty\SpdLog\Include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <ForcedIncludeFiles>$(ProjectDir)Source\Universal\Macro.h;$(ProjectDir)Source\Universal\PrimitiveTypes.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <AdditionalIncludeDirectories>$(SolutionDir)ThirdParty\GLM\Include\;$(SolutionDir)ThirdParty\STB_Image\Include;$(SolutionDir)ThirdParty\SDL\Include;$(SolutionDir)ThirdParty\GLEW\Include\;$(SolutionDir)ThirdParty\Boost\Include;$(SolutionDir)ThirdParty\SpdLog\Include\;$(ProjectDir)Source\GameEngine\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <ForcedIncludeFiles>$(ProjectDir)Source\GameEngine\Logging\Logger.h;$(ProjectDir)Source\Universal\PrimitiveTypes.h;$(ProjectDir)Source\GameEngine\ErrorHandling\ErrorContext.h;$(ProjectDir)Source\GameEngine\ErrorHandling\ErrorHandling.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
       <PreprocessorDefinitions>GLEW_STATIC;_CRT_SECURE_NO_WARNINGS;STB_IMAGE_IMPLEMENTATION;DEBUGUNIT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <PostBuildEvent>
@@ -293,9 +293,9 @@ copy /y  "$(SolutionDir)ThirdParty\SDL\Lib\x86\SDL2.dll" "$(SolutionDir)Game\Bin
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)ThirdParty\GLM\Include\;$(SolutionDir)ThirdParty\STB_Image\Include;$(SolutionDir)ThirdParty\SDL\Include;$(SolutionDir)ThirdParty\GLEW\Include\;$(SolutionDir)ThirdParty\Boost\Include;$(SolutionDir)ThirdParty\SpdLog\Include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)ThirdParty\GLM\Include\;$(SolutionDir)ThirdParty\STB_Image\Include;$(SolutionDir)ThirdParty\SDL\Include;$(SolutionDir)ThirdParty\GLEW\Include\;$(SolutionDir)ThirdParty\Boost\Include;$(SolutionDir)ThirdParty\SpdLog\Include\;$(ProjectDir)Source\GameEngine\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>GLEW_STATIC;_CRT_SECURE_NO_WARNINGS;STB_IMAGE_IMPLEMENTATION;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ForcedIncludeFiles>$(ProjectDir)Source\Universal\Macro.h;$(ProjectDir)Source\Universal\PrimitiveTypes.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles>$(ProjectDir)Source\GameEngine\Logging\Logger.h;$(ProjectDir)Source\Universal\PrimitiveTypes.h;$(ProjectDir)Source\GameEngine\ErrorHandling\ErrorContext.h;$(ProjectDir)Source\GameEngine\ErrorHandling\ErrorHandling.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -318,9 +318,9 @@ copy /y  "$(SolutionDir)ThirdParty\SDL\Lib\x86\SDL2.dll" "$(SolutionDir)Game\Bin
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)ThirdParty\GLM\Include\;$(SolutionDir)ThirdParty\STB_Image\Include;$(SolutionDir)ThirdParty\SDL\Include;$(SolutionDir)ThirdParty\GLEW\Include\;$(SolutionDir)ThirdParty\Boost\Include;$(SolutionDir)ThirdParty\SpdLog\Include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)ThirdParty\GLM\Include\;$(SolutionDir)ThirdParty\STB_Image\Include;$(SolutionDir)ThirdParty\SDL\Include;$(SolutionDir)ThirdParty\GLEW\Include\;$(SolutionDir)ThirdParty\Boost\Include;$(SolutionDir)ThirdParty\SpdLog\Include\;$(ProjectDir)Source\GameEngine\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>GLEW_STATIC;_CRT_SECURE_NO_WARNINGS;STB_IMAGE_IMPLEMENTATION;PROFILE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ForcedIncludeFiles>$(ProjectDir)Source\Universal\Macro.h;$(ProjectDir)Source\Universal\PrimitiveTypes.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles>$(ProjectDir)Source\GameEngine\Logging\Logger.h;$(ProjectDir)Source\Universal\PrimitiveTypes.h;$(ProjectDir)Source\GameEngine\ErrorHandling\ErrorContext.h;$(ProjectDir)Source\GameEngine\ErrorHandling\ErrorHandling.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -343,9 +343,9 @@ copy /y  "$(SolutionDir)ThirdParty\SDL\Lib\x86\SDL2.dll" "$(SolutionDir)Game\Bin
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)ThirdParty\GLM\Include\;$(SolutionDir)ThirdParty\STB_Image\Include;$(SolutionDir)ThirdParty\SDL\Include;$(SolutionDir)ThirdParty\GLEW\Include\;$(SolutionDir)ThirdParty\Boost\Include;$(SolutionDir)ThirdParty\SpdLog\Include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)ThirdParty\GLM\Include\;$(SolutionDir)ThirdParty\STB_Image\Include;$(SolutionDir)ThirdParty\SDL\Include;$(SolutionDir)ThirdParty\GLEW\Include\;$(SolutionDir)ThirdParty\Boost\Include;$(SolutionDir)ThirdParty\SpdLog\Include\;$(ProjectDir)Source\GameEngine\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>GLEW_STATIC;_CRT_SECURE_NO_WARNINGS;STB_IMAGE_IMPLEMENTATION;PROFILEUNIT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ForcedIncludeFiles>$(ProjectDir)Source\Universal\Macro.h;$(ProjectDir)Source\Universal\PrimitiveTypes.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles>$(ProjectDir)Source\GameEngine\Logging\Logger.h;$(ProjectDir)Source\Universal\PrimitiveTypes.h;$(ProjectDir)Source\GameEngine\ErrorHandling\ErrorContext.h;$(ProjectDir)Source\GameEngine\ErrorHandling\ErrorHandling.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -416,9 +416,8 @@ copy /y  "$(SolutionDir)ThirdParty\SDL\Lib\x86\SDL2.dll" "$(SolutionDir)Game\Bin
     <ClCompile Include="Source\GameEngine\Scene.cpp" />
     <ClCompile Include="Source\GameEngine\Fighter.cpp" />
     <ClCompile Include="Source\GameEngine\Graphics\Texture.cpp" />
-    <ClCompile Include="Source\GameEngine\ErrorContext.cpp" />
+    <ClCompile Include="Source\GameEngine\ErrorHandling\ErrorContext.cpp" />
     <ClCompile Include="Source\GameEngine\Camera2D.cpp" />
-    <ClCompile Include="Source\GameEngine\AssetManager.cpp" />
     <ClCompile Include="Source\GameEngine\Graphics\ShaderProgram.cpp" />
     <ClCompile Include="Source\GameEngine\Graphics\GLLogging.cpp" />
     <ClCompile Include="Source\GameEngine\File.cpp" />
@@ -436,17 +435,17 @@ copy /y  "$(SolutionDir)ThirdParty\SDL\Lib\x86\SDL2.dll" "$(SolutionDir)Game\Bin
     <ClInclude Include="Source\GameEngine\GameWorld\Systems\GameWorldSystems.h" />
     <ClInclude Include="Source\GameEngine\Graphics\Systems\GraphicsSystems.h" />
     <ClInclude Include="Source\GameEngine\Input\Systems\InputSystems.h" />
+    <ClInclude Include="Source\GameEngine\Logging\Logger.h" />
     <ClInclude Include="Source\GameEngine\Physics\PhysicsManager.h" />
     <ClInclude Include="Source\GameEngine\AI\AIManager.h" />
     <ClInclude Include="Source\GameEngine\Graphics\RenderManager.h" />
     <ClInclude Include="Source\GameEngine\Input\InputManager.h" />
     <ClInclude Include="Source\GameEngine\Physics\Systems\PhysicsSystems.h" />
     <ClInclude Include="Source\GameEngine\Scene.h" />
-    <ClInclude Include="Source\GameEngine\ErrorContext.h" />
-    <ClInclude Include="Source\GameEngine\ErrorHandling.h" />
+    <ClInclude Include="Source\GameEngine\ErrorHandling\ErrorContext.h" />
+    <ClInclude Include="Source\GameEngine\ErrorHandling\ErrorHandling.h" />
     <ClInclude Include="Source\GameEngine\Fighter.h" />
     <ClInclude Include="Source\GameEngine\Camera2D.h" />
-    <ClInclude Include="Source\GameEngine\AssetManager.h" />
     <ClInclude Include="Source\GameEngine\Graphics\Texture.h" />
     <ClInclude Include="Source\GameEngine\Graphics\ShaderProgram.h" />
     <ClInclude Include="Source\GameEngine\Graphics\GLLogging.h" />
@@ -454,14 +453,13 @@ copy /y  "$(SolutionDir)ThirdParty\SDL\Lib\x86\SDL2.dll" "$(SolutionDir)Game\Bin
     <ClInclude Include="Source\GameEngine\Components\Sprite.h" />
     <ClInclude Include="Source\GameEngine\Timing\Timing.h" />
     <ClInclude Include="Source\GameEngine\Vector3D.h" />
-    <ClInclude Include="Source\Universal\Macro.h" />
     <ClInclude Include="Source\GameEngine\Graphics\Window.h" />
-    <ClInclude Include="Source\Universal\Map.h" />
+    <ClInclude Include="Source\GameEngine\Containers\Map.h" />
     <ClInclude Include="Source\Universal\PrimitiveTypes.h" />
     <ClInclude Include="Source\GameEngine\TextureCache.h" />
-    <ClInclude Include="Source\Universal\SmallVector.h" />
-    <ClInclude Include="Source\Universal\UnorderedMap.h" />
-    <ClInclude Include="Source\Universal\Vector.h" />
+    <ClInclude Include="Source\GameEngine\Containers\SmallVector.h" />
+    <ClInclude Include="Source\GameEngine\Containers\UnorderedMap.h" />
+    <ClInclude Include="Source\GameEngine\Containers\Vector.h" />
     <ClInclude Include="Source\GameEngine\Components\Velocity.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -1,7 +1,6 @@
 #include <GL\glew.h>
 #include <GLM\mat4x4.hpp>
 #include <GLM\gtc\matrix_transform.hpp>
-#include "../ErrorHandling.h"
 #include "ShaderProgram.h"
 #include "../Components/Sprite.h"
 #include "Texture.h"

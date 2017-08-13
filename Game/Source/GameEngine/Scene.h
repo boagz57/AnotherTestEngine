@@ -1,6 +1,6 @@
 #pragma once
 #include <GLM\vec2.hpp>
-#include "../Universal/SmallVector.h"
+#include "Containers/SmallVector.h"
 #include "Fighter.h"
 
 class Scene

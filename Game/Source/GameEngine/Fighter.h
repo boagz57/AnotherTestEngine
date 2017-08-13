@@ -1,13 +1,14 @@
 #pragma once
 #include <memory>
 #include <GLM/vec3.hpp>
-#include "../Universal/Map.h"
+#include "Containers/Map.h"
 #include "Components\ComponentHolder.h"
 #include "Components/Sprite.h"
 #include "Components/Velocity.h"
 #include "Components/Transform.h"
 #include "Components\Sprite.h"
 
+//TODO: Find a way to remove the need for the isFighterControllable boolean
 class Fighter :
 	public ComponentHolder<TransformComponent>,
 	public ComponentHolder<VelocityComponent>,

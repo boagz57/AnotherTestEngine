@@ -1,5 +1,5 @@
 #pragma once
-#include "../Universal/SmallVector.h"
+#include "Containers/SmallVector.h"
 #include "ErrorContext.h"
 
 namespace Blz

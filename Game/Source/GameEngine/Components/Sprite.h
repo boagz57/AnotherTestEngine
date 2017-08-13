@@ -1,6 +1,6 @@
 #pragma once
 #include <GL\glew.h>
-#include "../../Universal/SmallVector.h"
+#include "Containers/SmallVector.h"
 #include "../Vector3D.h"
 #include "../Graphics/Texture.h"
 
