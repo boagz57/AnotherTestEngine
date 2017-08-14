@@ -26,7 +26,7 @@ Fighter* Scene::CreatePlayerFighter(sfloat startingPositionX, sfloat startingPos
 	RUNTIME_ASSERT(this->numFighters <= 2, "Creating too many fighters for game to handle!");
 	Fighter fighter(startingPositionX, startingPositionY);
 
-	fighter.SetIfFighterShouldBeControllable(true);
+	fighter.SetFighterToBeControllable();
 
 	fighters.push_back(fighter);
 	fighterStartingPositions.push_back(glm::vec2{ startingPositionX, startingPositionY });

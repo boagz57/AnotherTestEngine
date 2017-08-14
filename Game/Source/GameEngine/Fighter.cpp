@@ -18,7 +18,7 @@ bool Fighter::IsFighterControllable()
 	return isControllable;
 }
 
-void Fighter::SetIfFighterShouldBeControllable(bool controllable)
+void Fighter::SetFighterToBeControllable()
 {
-	isControllable = controllable;
+	isControllable = true;
 }

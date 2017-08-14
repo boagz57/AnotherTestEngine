@@ -8,7 +8,6 @@
 #include "Components/Transform.h"
 #include "Components\Sprite.h"
 
-//TODO: Find a way to remove the need for the isFighterControllable boolean
 class Fighter :
 	public ComponentHolder<TransformComponent>,
 	public ComponentHolder<VelocityComponent>,
@@ -20,27 +19,28 @@ public:
 	~Fighter();
 
 	template<class T>
-	inline T GetComponent();
+	T GetComponent();
 
 	template<class T>
-	inline void Insert(T comp);
+	void Insert(T comp);
 
 	bool IsFighterControllable();
-	void SetIfFighterShouldBeControllable(bool fighterControllable);
+	void SetFighterToBeControllable();
 
 	glm::vec2 originalPosition{ 0.0f, 0.0f };
 
+private:
 	bool isControllable = false;
 };
 
 template<class T>
-T Fighter::GetComponent() 
+inline T Fighter::GetComponent() 
 {
 	return this->ComponentHolder<T>::component;
 }
 
 template<class T>
-void Fighter::Insert(T comp)
+inline void Fighter::Insert(T comp)
 {
 	this->ComponentHolder<T>::component = comp;
 }
