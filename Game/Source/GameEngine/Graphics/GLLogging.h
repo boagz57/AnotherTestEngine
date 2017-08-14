@@ -17,6 +17,6 @@ namespace Blz
 		bool IsProgramValid(GLuint shaderProgramID);
 
 		//Log openGL messages/errors to GL log file
-		bool LogToFile(const char8* Message, ...);
+		bool LogToFile(const char* Message, ...);
 	}
 }

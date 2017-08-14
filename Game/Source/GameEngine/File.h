@@ -7,20 +7,20 @@ namespace Blz
 	public:
 		File();
 		//Opens or creates(if not already created) a file for writing
-		File(char8* fileName);
+		File(char* fileName);
 		~File();
 
-		void Open(const char8* fileName, const char8* mode);
+		void Open(const char* fileName, const char* mode);
 		void Close();
 		bool Good();
 
-		void Write(const char8* message, ...);
+		void Write(const char* message, ...);
 
 		//So you can pass around variable arguments from another function to this one
-		void Write(const char8* message, va_list);
+		void Write(const char* message, va_list);
 
 	private:
-		const char8* cp_Filename;
+		const char* cp_Filename;
 		FILE* p_OutputFile;
 	};
 }

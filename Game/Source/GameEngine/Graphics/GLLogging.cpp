@@ -13,7 +13,7 @@ namespace Blz
 	namespace Graphics
 	{
 		//Helper functions
-		const char8* GLTypeToString(GLenum type);
+		const char* GLTypeToString(GLenum type);
 
 		bool RestartGLLogFile()
 		{
@@ -103,7 +103,7 @@ namespace Blz
 			//Will log all current active attributes for program/shader
 			for (GLuint i = 0; i < (GLuint)result; ++i)
 			{
-				char8 name[64];
+				char name[64];
 				int32 maxLength = 64;
 				int32 actualLength = 0;
 				int32 size = 0;
@@ -116,7 +116,7 @@ namespace Blz
 					//loop will catch and print all contained variables
 					for (int j = 0; j < size; j++)
 					{
-						char8 longName[64];
+						char longName[64];
 						sprintf(longName, "%s[%i]", name, j);
 						int32 location = glGetAttribLocation(shaderProgramID, longName);
 						Graphics::LogToFile(" - %i) type:%s name:%s location: %i\n", i, GLTypeToString(type), name, location);
@@ -136,7 +136,7 @@ namespace Blz
 			//Will log all current active attributes for program/shader
 			for (GLuint i = 0; i < (GLuint)result; ++i)
 			{
-				char8 name[64];
+				char name[64];
 				int32 maxLength = 64;
 				int32 actualLength = 0;
 				int32 size = 0;
@@ -148,7 +148,7 @@ namespace Blz
 					//In case a uniform contains an array of other variables/uniforms
 					for (int j = 0; j < size; j++)
 					{
-						char8 longName[64];
+						char longName[64];
 						sprintf(longName, "%s[%i]", name, j);
 						int32 location = glGetUniformLocation(shaderProgramID, longName);
 						Graphics::LogToFile(" - %i) type:%s name:%s location: %i\n", i, GLTypeToString(type), longName, location);
@@ -164,7 +164,7 @@ namespace Blz
 
 			int32 maxLength = 2048;
 			int32 actualLength = 0;
-			char8 log[2048];
+			char log[2048];
 			glGetProgramInfoLog(shaderProgramID, maxLength, &actualLength, log);
 			Graphics::LogToFile("Program info log for GL index %u:\n%s", shaderProgramID, log);
 		}
@@ -181,7 +181,7 @@ namespace Blz
 			{
 				int32 maxLength = 2048;
 				int32 actualLength = 0;
-				char8 log[2048];
+				char log[2048];
 				glGetProgramInfoLog(shaderProgramID, maxLength, &actualLength, log);
 				Graphics::LogToFile("Program info log for GL index %u:\n%s", shaderProgramID, log);
 
@@ -191,7 +191,7 @@ namespace Blz
 			return true;
 		}
 
-		bool LogToFile(const char8* c_Message, ...)
+		bool LogToFile(const char* c_Message, ...)
 		{
 			File glLogFile;
 			glLogFile.Open(GL_LOG_FILE, "a");
@@ -219,7 +219,7 @@ namespace Blz
 		//Helper function definitions
 
 		//Used to make GL types printable and readable in the log file
-		const char8* GLTypeToString(GLenum type)
+		const char* GLTypeToString(GLenum type)
 		{
 			switch (type)
 			{

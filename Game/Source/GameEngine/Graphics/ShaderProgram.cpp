@@ -7,7 +7,7 @@ namespace Blz
 	namespace Graphics
 	{
 		//Class Helper functions
-		Blz::string ReadShaderSource(const char8* c_ShaderFilePath, const char8* c_TypeOfShader);
+		Blz::string ReadShaderSource(const char* c_ShaderFilePath, const char* c_TypeOfShader);
 
 		ShaderProgram::ShaderProgram()
 		{}
@@ -149,7 +149,7 @@ namespace Blz
 		}
 
 		//Class helper function definitions
-		Blz::string ReadShaderSource(const char8* cShaderFilePath, const char8* cTypeOfShader)
+		Blz::string ReadShaderSource(const char* cShaderFilePath, const char* cTypeOfShader)
 		{
 			std::ifstream shaderFileInputStream(cShaderFilePath);
 			if (!shaderFileInputStream.good())
@@ -157,7 +157,7 @@ namespace Blz
 				LOG("%s Shader File failed to load!\n", cTypeOfShader);
 			};
 
-			return Blz::string(std::istreambuf_iterator<char8>(shaderFileInputStream), std::istreambuf_iterator<char8>());
+			return Blz::string(std::istreambuf_iterator<char>(shaderFileInputStream), std::istreambuf_iterator<char>());
 		}
 	}
 }

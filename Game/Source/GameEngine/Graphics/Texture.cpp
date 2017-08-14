@@ -13,7 +13,7 @@ namespace Blz
 			Blz::Err::ErrorContext ec("When constructing texture from", c_imageFilePath);
 
 			int32 forceChannels = 4;
-			uchar8* imageData = stbi_load(c_imageFilePath.c_str(), &this->width, &this->height, &channels, forceChannels);
+			unsigned char* imageData = stbi_load(c_imageFilePath.c_str(), &this->width, &this->height, &channels, forceChannels);
 
 			RUNTIME_ASSERT(this->width >= 0, "Image width <= 0!");
 			RUNTIME_ASSERT(this->height >= 0, "Image height <= 0!");
@@ -27,9 +27,9 @@ namespace Blz
 			//Flip image right side up before sending to OpenGL since openGL will read it in upside down. Following code is utilizing pointer
 			//arithmetic 
 			int32 widthInBytes = this->width * 4;
-			uchar8 *p_topRowOfTexels = nullptr;
-			uchar8 *p_bottomRowOfTexels = nullptr;
-			uchar8 temp = 0;
+			unsigned char* p_topRowOfTexels = nullptr;
+			unsigned char* p_bottomRowOfTexels = nullptr;
+			unsigned char temp = 0;
 			int32 halfHeight = this->height / 2;
 
 			for (int32 row = 0; row < halfHeight; ++row)
