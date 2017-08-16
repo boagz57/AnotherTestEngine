@@ -8,21 +8,28 @@
 
 namespace Blz
 {
-	class Window
+	namespace Graphics
 	{
-	public:
-		Window();
-		~Window();
-		Window(const Window& copy) = delete;
-		void operator=(const Window& copy) = delete;
+		class RenderManager;
 
-		void Initialize();
-		void Shutdown();
-		void ClearBuffers();
-		void SwapBuffers();
+		class Window
+		{
+		public:
+			Window(uint16 width, uint16 height);
+			~Window();
+			Window(const Window& copy) = default;
+			void operator=(const Window& copy) = delete;
 
-	private:
-		SDL_Window* p_window = nullptr;
-		SDL_GLContext glContext = nullptr;
-	};
+			void ClearBuffers();
+			void SwapBuffers();
+
+		private:
+			friend class RenderManager;
+
+			const uint16 width;
+			const uint16 height;
+			SDL_Window* p_window = nullptr;
+			SDL_GLContext glContext = nullptr;
+		};
+	}
 }

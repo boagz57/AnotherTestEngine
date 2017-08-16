@@ -19,18 +19,36 @@ namespace Blz
 		RenderManager::~RenderManager()
 		{}
 
-		void RenderManager::Init(Scene& scene)
+		void RenderManager::Init(Scene& scene, Window& window)
 		{
 			for (Fighter& fighter : scene.fighters)
 			{
 				sfloat fighterPosX = fighter.GetComponent<TransformComponent>().GetCurrentPosition().x;
 				sfloat fighterPosY = fighter.GetComponent<TransformComponent>().GetCurrentPosition().y;
 
+				//Convert my theoretical world units to actual screen pixels by deciphering if window is 1080p or 720p
+				//and doing necessary math for conversion. My logical screen grid contains 160 'world units' in the x and 90 in 
+				//the y and this 160x90 unit subdivision is a common factor of both 720p and 1080p screens. This way I will get a whole 
+				//number of pixels per unit in both cases which is important to avoid fractional scales that can distort artwork.
+				if (window.width == 1920)
+				{
+					fighterPosX *= 12;
+					fighterPosY *= 12;
+				}
+				else if (window.width == 1280)
+				{
+					fighterPosX *= 8;
+					fighterPosY *= 8;
+				}
+
 				//TODO: Make into a system
 				SpriteComponent newSprite = fighter.GetComponent<SpriteComponent>();
-				newSprite.SetTargetPosition(fighterPosX, fighterPosY);
+				newSprite.SetScreenTargetLocation(fighterPosX, fighterPosY);
 				fighter.Insert(newSprite);
 			}
+
+			//Turn OpenGL normalized device coodinates (-1 to 1) to pixel coordinates
+			orthoProjection = glm::ortho(0.0f, static_cast<sfloat>(window.width), 0.0f, static_cast<sfloat>(window.height));
 
 			for (Fighter& fighter : scene.fighters)
 			{
@@ -49,7 +67,6 @@ namespace Blz
 
 		void RenderManager::Update(Scene& scene, ShaderProgram& shader)
 		{
-			glm::mat4 orthoProjection = glm::ortho(0.0f, static_cast<sfloat>(1024), 0.0f, static_cast<sfloat>(768));
 			GLuint transformationMatrixUniformLocation = shader.GetUniformLocation("transformationMatrix");
 
 			GLuint uniformLocation = shader.GetUniformLocation("basicTexture");

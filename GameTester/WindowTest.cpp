@@ -4,6 +4,4 @@
 
 TEST(WindowClass, WindowInitialize_True)
 {
-	Blz::Window win;
-	win.Initialize();
 }

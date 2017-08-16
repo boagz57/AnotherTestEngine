@@ -22,7 +22,7 @@
 
 int main(int agrc, char** argv)
 {
-	Blz::Window window;
+	Blz::Graphics::Window window(1280, 720);
 	Blz::Graphics::ShaderProgram colorShaderProgram;
 	Blz::Graphics::RenderManager Renderer;
 	Blz::Input::InputManager Input;
@@ -31,7 +31,6 @@ int main(int agrc, char** argv)
 	Blz::GameWorld::GameWorldManager gameWolrd;
 	Scene scene;
 
-	window.Initialize();
 	colorShaderProgram.Init("Source/GameEngine/Shaders/VertexShader.glsl", "Source/GameEngine/Shaders/FragmentShader.glsl");
 	colorShaderProgram.Compile();
 	colorShaderProgram.AddAttribute("vertexPosition");
@@ -39,12 +38,12 @@ int main(int agrc, char** argv)
 	colorShaderProgram.Link();
 	colorShaderProgram.Bind();
 
-	Fighter* enemy = scene.CreateAIFighter(900.0f, 0.0f);
-	Fighter* player = scene.CreatePlayerFighter(100.0f, 0.0f);
+	Fighter* enemy = scene.CreateAIFighter(80.0f, 45.0f);
+	Fighter* player = scene.CreatePlayerFighter(160.0f, 0.0f);
 
 	//Initialize systems
 	gameWolrd.Init(scene);
-	Renderer.Init(scene);
+	Renderer.Init(scene, window);
 
 	//Game loop
 	while (true)

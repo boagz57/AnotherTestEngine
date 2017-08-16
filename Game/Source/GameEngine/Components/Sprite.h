@@ -10,14 +10,13 @@ public:
 	SpriteComponent();
 	~SpriteComponent();
 
-	void SetTargetPosition(sfloat screenPositionX, sfloat screenPositionY);
+	void SetScreenTargetLocation(sfloat screenPositionX, sfloat screenPositionY);
 	Blz::Graphics::Texture GetTexture();
 	Blz::SmallVector<Vector3D> GetVertexData();
 
+private:
 	float width = 0.0f;
 	float height = 0.0f;
-
-private:
 	Blz::Graphics::Texture texture;
 	Blz::SmallVector<Vector3D> vertexData;
 };

@@ -25,7 +25,7 @@ SpriteComponent::~SpriteComponent()
 {
 }
 
-void SpriteComponent::SetTargetPosition(sfloat screenPositionX, sfloat screenPositionY)
+void SpriteComponent::SetScreenTargetLocation(sfloat screenPositionX, sfloat screenPositionY)
 {
 	sfloat halfWidth = this->width / 2;
 
