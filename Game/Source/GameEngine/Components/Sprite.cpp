@@ -1,23 +1,10 @@
 #include <GL/glew.h>
 #include <GLM\detail\type_vec2.hpp>
 #include <GLM\detail\type_vec3.hpp>
-#include "../Graphics/Texture.h"
 #include "Sprite.h"
 
 SpriteComponent::SpriteComponent()
 {
-	//TODO: Remove default parameters and have user define what to be set 
-
-	Blz::Err::ErrorContext ec("When initializing sprite with image", "CharImage.png");
-
-	this->width = static_cast<sfloat>(200);
-	this->height = static_cast<sfloat>(200);
-
-	Blz::Graphics::Texture texture("CharImage.png");
-	this->texture = texture;
-
-	ERRASSERT(texture.id != 0, "Texture did not load properly!");
-
 	vertexData.resize(6);
 }
 
@@ -46,9 +33,20 @@ void SpriteComponent::SetScreenTargetLocation(sfloat screenPositionX, sfloat scr
 	this->vertexData.at(5).SetUV(glm::vec2{ 1.0f, 1.0f });
 }
 
-Blz::Graphics::Texture SpriteComponent::GetTexture()
+void SpriteComponent::SetWidthAndHeight(sfloat width, sfloat height)
 {
-	return texture;
+	this->width = width;
+	this->height = height;
+}
+
+void SpriteComponent::SetTextureID(GLuint id)
+{
+	this->textureID = id;
+}
+
+GLuint SpriteComponent::GetTextureID()
+{
+	return textureID;
 }
 
 Blz::SmallVector<Vector3D> SpriteComponent::GetVertexData()

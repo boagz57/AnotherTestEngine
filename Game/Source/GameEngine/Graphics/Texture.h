@@ -12,11 +12,10 @@ namespace Blz
 			Texture(const Blz::string imageFilePath);
 			~Texture();
 
-			GLuint id = 0;
-
-			//TODO: add a load texture function
+			GLuint ID() { return id; };
 
 		private:
+			GLuint id = 0;
 			int32 width = 0;
 			int32 height = 0;
 			int32 channels = 0;

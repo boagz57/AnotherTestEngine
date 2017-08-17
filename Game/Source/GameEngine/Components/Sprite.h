@@ -2,7 +2,6 @@
 #include <GL\glew.h>
 #include "Containers/SmallVector.h"
 #include "../Vector3D.h"
-#include "../Graphics/Texture.h"
 
 class SpriteComponent
 {
@@ -11,13 +10,16 @@ public:
 	~SpriteComponent();
 
 	void SetScreenTargetLocation(sfloat screenPositionX, sfloat screenPositionY);
-	Blz::Graphics::Texture GetTexture();
+	void SetWidthAndHeight(sfloat width, sfloat height);
+	void SetTextureID(GLuint id);
+	GLuint GetTextureID();
+
 	Blz::SmallVector<Vector3D> GetVertexData();
 
 private:
 	float width = 0.0f;
 	float height = 0.0f;
-	Blz::Graphics::Texture texture;
+	GLuint textureID = 0;
 	Blz::SmallVector<Vector3D> vertexData;
 };
 

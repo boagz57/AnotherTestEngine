@@ -41,9 +41,14 @@ namespace Blz
 					fighterPosY *= 8;
 				}
 
+				Texture texture("CharImage.png");
+
+				ERRASSERT(texture.ID() != 0, "Texture did not load properly!");
+
 				//TODO: Make into a system
 				SpriteComponent newSprite = fighter.GetComponent<SpriteComponent>();
 				newSprite.SetScreenTargetLocation(fighterPosX, fighterPosY);
+				newSprite.SetTextureID(texture.ID());
 				fighter.Insert(newSprite);
 			}
 
@@ -82,7 +87,7 @@ namespace Blz
 				glm::mat4 transformationMatrix = glm::translate(orthoProjection, glm::vec3{ translationAmount.x, translationAmount.y, 0.0f });
 				glUniformMatrix4fv(transformationMatrixUniformLocation, 1, GL_FALSE, &(transformationMatrix[0][0]));
 
-				glBindTexture(GL_TEXTURE_2D, fighter.GetComponent<SpriteComponent>().GetTexture().id);
+				glBindTexture(GL_TEXTURE_2D, fighter.GetComponent<SpriteComponent>().GetTextureID());
 				glBindBuffer(GL_ARRAY_BUFFER, vboID);
 				glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vector3D), (void*)offsetof(Vector3D, position));
 				glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(Vector3D), (void*)offsetof(Vector3D, textureCoordinates));
