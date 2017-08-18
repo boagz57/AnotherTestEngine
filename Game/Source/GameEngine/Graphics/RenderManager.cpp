@@ -1,6 +1,7 @@
 #include <GL\glew.h>
 #include <GLM\mat4x4.hpp>
 #include <GLM\gtc\matrix_transform.hpp>
+#include <math.h>
 #include "ShaderProgram.h"
 #include "../Components/Sprite.h"
 #include "Texture.h"
@@ -84,6 +85,11 @@ namespace Blz
 				++vboID;
 
 				glm::vec2 translationAmount = fighter.GetComponent<TransformComponent>().GetCurrentPosition() - fighter.originalPosition;
+
+				//Round values to nearest int value to avoid fractional values which can create distorted art work
+				translationAmount.x = rint(translationAmount.x);
+				translationAmount.y = rint(translationAmount.y);
+
 				glm::mat4 transformationMatrix = glm::translate(orthoProjection, glm::vec3{ translationAmount.x, translationAmount.y, 0.0f });
 				glUniformMatrix4fv(transformationMatrixUniformLocation, 1, GL_FALSE, &(transformationMatrix[0][0]));
 

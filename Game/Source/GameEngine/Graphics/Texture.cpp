@@ -12,7 +12,7 @@ namespace Blz
 		{
 			Blz::Err::ErrorContext ec("When constructing texture from", c_imageFilePath);
 
-			int32 forceChannels = 4;
+			int32 forceChannels = 4;																   //out param
 			unsigned char* imageData = stbi_load(c_imageFilePath.c_str(), &this->width, &this->height, &channels, forceChannels);
 
 			RUNTIME_ASSERT(this->width >= 0, "Image width <= 0!");
