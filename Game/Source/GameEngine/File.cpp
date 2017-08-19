@@ -6,10 +6,6 @@
 
 namespace Blz 
 { 
-	File::File()
-	{
-	}
-
 	File::File(char* p_FileName) :
 		p_OutputFile(p_OutputFile = fopen(p_FileName, "w")),
 		cp_Filename(p_FileName)

@@ -15,9 +15,10 @@ namespace Blz
 		class Window
 		{
 		public:
+			Window() = default;
 			Window(uint16 width, uint16 height);
 			~Window();
-			Window(const Window& copy) = default;
+			Window(const Window& copy) = delete;
 			void operator=(const Window& copy) = delete;
 
 			void ClearBuffers();

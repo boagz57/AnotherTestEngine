@@ -7,10 +7,6 @@ Scene::Scene()
 	fighterStartingPositions.reserve(2);
 }
 
-Scene::~Scene()
-{
-}
-
 Fighter* Scene::CreateAIFighter(sfloat startingPositionX, sfloat startingPositionY)
 {
 	startingPositionX = rint(startingPositionX);

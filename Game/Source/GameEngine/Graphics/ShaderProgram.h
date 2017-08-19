@@ -9,7 +9,7 @@ namespace Blz
 		class ShaderProgram
 		{
 		public:
-			ShaderProgram();
+			ShaderProgram() = default;
 			~ShaderProgram();
 			ShaderProgram(const ShaderProgram& copy) = delete;
 			void operator=(const ShaderProgram& copy) = delete;

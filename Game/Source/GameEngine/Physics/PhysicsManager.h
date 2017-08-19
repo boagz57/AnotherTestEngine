@@ -8,8 +8,8 @@ namespace Blz
 		class PhysicsManager
 		{
 		public:
-			PhysicsManager();
-			~PhysicsManager();
+			PhysicsManager() = default;
+			~PhysicsManager() = default;
 
 			void Init();
 			void Shutdown();

@@ -8,10 +8,6 @@ SpriteComponent::SpriteComponent()
 	vertexData.resize(6);
 }
 
-SpriteComponent::~SpriteComponent()
-{
-}
-
 void SpriteComponent::SetScreenTargetLocation(sfloat screenPositionX, sfloat screenPositionY)
 {
 	sfloat halfWidth = this->width / 2;

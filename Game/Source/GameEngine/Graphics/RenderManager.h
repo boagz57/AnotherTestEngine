@@ -17,8 +17,8 @@ namespace Blz
 		class RenderManager
 		{
 		public:
-			RenderManager();
-			~RenderManager();
+			RenderManager() = default;
+			~RenderManager() = default;
 
 			void Init(Scene& scene, Window& window);
 			void Update(Scene& scene, ShaderProgram& shader);

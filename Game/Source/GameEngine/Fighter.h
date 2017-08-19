@@ -14,9 +14,9 @@ class Fighter :
 	public ComponentHolder<SpriteComponent>
 {
 public:
-	Fighter();
+	Fighter() = default;
 	Fighter(sfloat startingWorldPositionX, sfloat startingWorldPositionY);
-	~Fighter();
+	~Fighter() = default;
 
 	template<class T>
 	T GetComponent();

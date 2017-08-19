@@ -1,8 +1,5 @@
 #include "Transform.h"
 
-TransformComponent::TransformComponent() 
-{}
-
 TransformComponent::TransformComponent(glm::vec2 position) :
 	position(position)
 {}

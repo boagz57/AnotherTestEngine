@@ -14,12 +14,6 @@ namespace Blz
 {
 	namespace Graphics
 	{
-		RenderManager::RenderManager()
-		{}
-
-		RenderManager::~RenderManager()
-		{}
-
 		void RenderManager::Init(Scene& scene, Window& window)
 		{
 			for (Fighter& fighter : scene.fighters)

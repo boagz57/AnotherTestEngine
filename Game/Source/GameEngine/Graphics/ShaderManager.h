@@ -6,8 +6,8 @@
 class ShaderManager
 {
 public:
-	ShaderManager();
-	~ShaderManager();
+	ShaderManager() = default;
+	~ShaderManager() = default;
 
 	void CreateProgram(const Blz::string& shaderName, const std::string& vertexShaderFileName, const std::string& FragmentShaderFileName);
 

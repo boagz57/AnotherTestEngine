@@ -7,7 +7,7 @@ class Scene
 {
 public:
 	Scene();
-	~Scene();
+	~Scene() = default;
 
 	Fighter* CreateAIFighter(sfloat startingWorldPositionX, sfloat startingWorldPositionY);
 	Fighter* CreatePlayerFighter(sfloat startingWorldPositionX, sfloat startingWorldPositionY);

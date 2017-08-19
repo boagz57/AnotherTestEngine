@@ -5,7 +5,7 @@ namespace Blz
 	class File
 	{
 	public:
-		File();
+		File() = default;
 		//Opens or creates(if not already created) a file for writing
 		File(char* fileName);
 		~File();
@@ -20,7 +20,7 @@ namespace Blz
 		void Write(const char* message, va_list);
 
 	private:
-		const char* cp_Filename;
-		FILE* p_OutputFile;
+		const char* cp_Filename = nullptr;
+		FILE* p_OutputFile = nullptr;
 	};
 }

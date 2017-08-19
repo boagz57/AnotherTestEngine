@@ -1,8 +1,5 @@
 #include "Velocity.h"
 
-VelocityComponent::VelocityComponent() 
-{}
-
 glm::vec3 VelocityComponent::GetCurrentState()
 {
 	return currentVelocity;

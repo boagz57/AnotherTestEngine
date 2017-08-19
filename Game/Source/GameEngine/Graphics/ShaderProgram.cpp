@@ -9,9 +9,6 @@ namespace Blz
 		//Class Helper functions
 		Blz::string ReadShaderSource(const char* c_ShaderFilePath, const char* c_TypeOfShader);
 
-		ShaderProgram::ShaderProgram()
-		{}
-
 		ShaderProgram::~ShaderProgram()
 		{
 			glDeleteProgram(programID);

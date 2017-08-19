@@ -15,6 +15,9 @@ namespace Blz
 		class InputManager
 		{
 		public:
+			InputManager() = default;
+			~InputManager() = default;
+
 			void Update(Scene& scene);
 
 		private:

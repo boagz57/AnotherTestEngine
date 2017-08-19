@@ -4,7 +4,7 @@
 class TransformComponent
 {
 public:
-	TransformComponent();
+	TransformComponent() = default;
 	TransformComponent(glm::vec2 position);
 
 	void TranslatePosition(sfloat amountToTranslateX, sfloat amountToTranslateY);

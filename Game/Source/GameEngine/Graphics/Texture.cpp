@@ -5,20 +5,17 @@ namespace Blz
 {
 	namespace Graphics
 	{
-		Texture::Texture()
-		{}
-
 		Texture::Texture(const Blz::string c_imageFilePath)
 		{
 			Blz::Err::ErrorContext ec("When constructing texture from", c_imageFilePath);
 
-			int32 forceChannels = 4;																   //out param
-			unsigned char* imageData = stbi_load(c_imageFilePath.c_str(), &this->width, &this->height, &channels, forceChannels);
+			int32 forceChannels = 4;															 //out param
+			auto* p_ImageData = stbi_load(c_imageFilePath.c_str(), &this->width, &this->height, &channels, forceChannels);
 
 			RUNTIME_ASSERT(this->width >= 0, "Image width <= 0!");
 			RUNTIME_ASSERT(this->height >= 0, "Image height <= 0!");
 
-			ERRASSERT(imageData != nullptr, "Image data {} did not load properly!", c_imageFilePath);
+			ERRASSERT(p_ImageData != nullptr, "Image data {} did not load properly!", c_imageFilePath);
 
 			//Check if image is a power of 2 (which makes image compatible with older versions of opengl, also make things easier 
 			//for openGL to work with). If check is done with bitwise operations to keep check as fast as possible
@@ -34,8 +31,8 @@ namespace Blz
 
 			for (int32 row = 0; row < halfHeight; ++row)
 			{
-				p_topRowOfTexels = imageData + row * widthInBytes;
-				p_bottomRowOfTexels = imageData + (this->height - row - 1) * widthInBytes;
+				p_topRowOfTexels = p_ImageData + row * widthInBytes;
+				p_bottomRowOfTexels = p_ImageData + (this->height - row - 1) * widthInBytes;
 
 				for (int col = 0; col < widthInBytes; ++col)
 				{
@@ -51,7 +48,7 @@ namespace Blz
 			glGenTextures(1, &(this->id));
 			glActiveTexture(GL_TEXTURE0);
 			glBindTexture(GL_TEXTURE_2D, this->id);
-			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, this->width, this->height, 0, GL_RGBA, GL_UNSIGNED_BYTE, imageData);
+			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, this->width, this->height, 0, GL_RGBA, GL_UNSIGNED_BYTE, p_ImageData);
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
@@ -60,8 +57,5 @@ namespace Blz
 			//Unbind Texture
 			glBindTexture(GL_TEXTURE_2D, 0);
 		}
-
-		Texture::~Texture()
-		{}
 	}
 }

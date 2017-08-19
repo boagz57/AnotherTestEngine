@@ -7,14 +7,6 @@ namespace Blz
 {
 	namespace Physics
 	{
-		PhysicsManager::PhysicsManager()
-		{
-		}
-
-		PhysicsManager::~PhysicsManager()
-		{
-		}
-
 		void PhysicsManager::Init()
 		{
 		}

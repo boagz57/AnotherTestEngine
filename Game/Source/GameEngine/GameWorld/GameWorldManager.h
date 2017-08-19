@@ -8,8 +8,8 @@ namespace Blz
 		class GameWorldManager
 		{
 		public:
-			GameWorldManager();
-			~GameWorldManager();
+			GameWorldManager() = default;
+			~GameWorldManager() = default;
 
 			void Init(Scene& scene);
 			void Update(Scene& scene);

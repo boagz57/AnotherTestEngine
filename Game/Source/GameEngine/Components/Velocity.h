@@ -4,7 +4,7 @@
 class VelocityComponent 
 {
 public:
-	VelocityComponent();
+	VelocityComponent() = default;
 
 	glm::vec3 GetCurrentState();
 	void Add(sfloat x, sfloat y);

@@ -8,9 +8,9 @@ namespace Blz
 		class Texture
 		{
 		public:
-			Texture();
+			Texture() = default;
 			Texture(const Blz::string imageFilePath);
-			~Texture();
+			~Texture() = default;
 
 			GLuint ID() { return id; };
 

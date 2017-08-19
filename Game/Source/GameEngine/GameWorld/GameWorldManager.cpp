@@ -6,15 +6,6 @@ namespace Blz
 {
 	namespace GameWorld
 	{
-		GameWorldManager::GameWorldManager()
-		{
-		}
-
-
-		GameWorldManager::~GameWorldManager()
-		{
-		}
-
 		void GameWorldManager::Init(Scene& scene)
 		{
 			for (uint16 i = 0; i < scene.fighters.size(); ++i)

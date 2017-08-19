@@ -425,7 +425,6 @@ copy /y  "$(SolutionDir)ThirdParty\SDL\Lib\x86\SDL2.dll" "$(SolutionDir)Game\Bin
     <ClCompile Include="Source\GameEngine\Timing\Timing.cpp" />
     <ClCompile Include="Source\Main.cpp" />
     <ClCompile Include="Source\GameEngine\Graphics\Window.cpp" />
-    <ClCompile Include="Source\GameEngine\TextureCache.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\GameEngine\GameWorld\GameWorldManager.h" />
@@ -456,7 +455,6 @@ copy /y  "$(SolutionDir)ThirdParty\SDL\Lib\x86\SDL2.dll" "$(SolutionDir)Game\Bin
     <ClInclude Include="Source\GameEngine\Graphics\Window.h" />
     <ClInclude Include="Source\GameEngine\Containers\Map.h" />
     <ClInclude Include="Source\Universal\PrimitiveTypes.h" />
-    <ClInclude Include="Source\GameEngine\TextureCache.h" />
     <ClInclude Include="Source\GameEngine\Containers\SmallVector.h" />
     <ClInclude Include="Source\GameEngine\Containers\UnorderedMap.h" />
     <ClInclude Include="Source\GameEngine\Containers\Vector.h" />

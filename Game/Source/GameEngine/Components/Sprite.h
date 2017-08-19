@@ -7,7 +7,7 @@ class SpriteComponent
 {
 public:
 	SpriteComponent();
-	~SpriteComponent();
+	~SpriteComponent() = default;
 
 	void SetScreenTargetLocation(sfloat screenPositionX, sfloat screenPositionY);
 	void SetWidthAndHeight(sfloat width, sfloat height);
