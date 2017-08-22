@@ -5,10 +5,11 @@ class TransformComponent
 {
 public:
 	TransformComponent() = default;
-	TransformComponent(glm::vec2 position);
+
+	glm::vec2 GetCurrentPosition() const;
 
 	void TranslatePosition(sfloat amountToTranslateX, sfloat amountToTranslateY);
-	glm::vec2 GetCurrentPosition();
+	void MultiplyPosition(int16 const amountToMultipyX, int16 const amountToMultiplyY);
 	void SetPosition(sfloat locationX, sfloat locationY);
 
 private:

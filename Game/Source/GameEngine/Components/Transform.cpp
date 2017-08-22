@@ -1,8 +1,9 @@
 #include "Transform.h"
 
-TransformComponent::TransformComponent(glm::vec2 position) :
-	position(position)
-{}
+glm::vec2 TransformComponent::GetCurrentPosition() const
+{
+	return position;
+}
 
 void TransformComponent::TranslatePosition(sfloat amountToTranslateX, sfloat amountToTranslateY)
 {
@@ -10,9 +11,10 @@ void TransformComponent::TranslatePosition(sfloat amountToTranslateX, sfloat amo
 	position.y += amountToTranslateY;
 }
 
-glm::vec2 TransformComponent::GetCurrentPosition()
+void TransformComponent::MultiplyPosition(int16 const multiplyX, const int16 multiplyY)
 {
-	return position;
+	position.x *= multiplyX;
+	position.y *= multiplyY;
 }
 
 void TransformComponent::SetPosition(sfloat locationX, sfloat locationY)

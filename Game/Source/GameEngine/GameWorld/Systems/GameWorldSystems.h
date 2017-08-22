@@ -1,5 +1,4 @@
 #pragma once
-#include <tuple>
 #include "Fighter.h"
 #include "../../Components/Transform.h"
 #include "../../Components/Sprite.h"

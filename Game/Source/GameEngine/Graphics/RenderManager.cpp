@@ -7,6 +7,7 @@
 #include "Texture.h"
 #include "../Vector3D.h"
 #include "RenderManager.h"
+#include "Systems\GraphicsSystems.h"
 #include "../Scene.h"
 #include "../Fighter.h"
 
@@ -16,42 +17,23 @@ namespace Blz
 	{
 		void RenderManager::Init(Scene& scene, Window& window)
 		{
+			//Turn OpenGL normalized device coodinates (-1 to 1) to pixel coordinates
+			orthoProjection = glm::ortho(0.0f, static_cast<sfloat>(window.width), 0.0f, static_cast<sfloat>(window.height));
+
+			Texture texture("spritesheet.png");
+			ERRASSERT(texture.ID() != 0, "Texture did not load properly!");
+
 			for (Fighter& fighter : scene.fighters)
 			{
-				sfloat fighterPosX = fighter.GetComponent<TransformComponent>().GetCurrentPosition().x;
-				sfloat fighterPosY = fighter.GetComponent<TransformComponent>().GetCurrentPosition().y;
-
 				//Convert my theoretical world units to actual screen pixels by deciphering if window is 1080p or 720p
 				//and doing necessary math for conversion. My logical screen grid contains 160 'world units' in the x and 90 in 
 				//the y and this 160x90 unit subdivision is a common factor of both 720p and 1080p screens. This way I will get a whole 
 				//number of pixels per unit in both cases which is important to avoid fractional scales that can distort artwork.
-				if (window.width == 1920)
-				{
-					fighterPosX *= 12;
-					fighterPosY *= 12;
-				}
-				else if (window.width == 1280)
-				{
-					fighterPosX *= 8;
-					fighterPosY *= 8;
-				}
+				TransformComponent newTransform = System::ConvertWorldUnitsToScreenPixels(fighter.GetComponent<TransformComponent>(), window.width);
+				SpriteComponent newSprite = System::SetSpriteScreenLocation(newTransform, fighter.GetComponent<SpriteComponent>(), texture);
 
-				Texture texture("spritesheet.png");
-
-				ERRASSERT(texture.ID() != 0, "Texture did not load properly!");
-
-				//TODO: Make into a system
-				SpriteComponent newSprite = fighter.GetComponent<SpriteComponent>();
-				newSprite.SetScreenTargetLocation(fighterPosX, fighterPosY, glm::ivec2{ 4, 4 });
-				newSprite.SetTextureID(texture.ID());
 				fighter.Insert(newSprite);
-			}
 
-			//Turn OpenGL normalized device coodinates (-1 to 1) to pixel coordinates
-			orthoProjection = glm::ortho(0.0f, static_cast<sfloat>(window.width), 0.0f, static_cast<sfloat>(window.height));
-
-			for (Fighter& fighter : scene.fighters)
-			{
 				GLuint vboID = 0;
 				glGenBuffers(1, &vboID);
 
@@ -91,7 +73,6 @@ namespace Blz
 				glBindTexture(GL_TEXTURE_2D, fighter.GetComponent<SpriteComponent>().GetTextureID());
 				glBindBuffer(GL_ARRAY_BUFFER, vboID);
 
-				glBufferSubData(GL_ARRAY_BUFFER,(sizeof(sfloat) * 3), (sizeof(Vector3D) * fighter.GetComponent<SpriteComponent>().GetVertexData().size()), &fighter.GetComponent<SpriteComponent>().GetVertexData().front());
 				glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vector3D), (void*)offsetof(Vector3D, position));
 				glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(Vector3D), (void*)offsetof(Vector3D, textureCoordinates));
 
