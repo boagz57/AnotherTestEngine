@@ -17,9 +17,10 @@ namespace Blz
 
 			ERRASSERT(p_ImageData != nullptr, "Image data {} did not load properly!", c_imageFilePath);
 
+			//TODO: uncomment RUNTIMEASSERT below so I check if images loaded are dimensions of 2
 			//Check if image is a power of 2 (which makes image compatible with older versions of opengl, also make things easier 
 			//for openGL to work with). If check is done with bitwise operations to keep check as fast as possible
-			RUNTIME_ASSERT((this->width & (this->width - 1)) == 0 || (this->height & (this->height - 1)) == 0, "Image dimensions are not a power of 2!");
+			//RUNTIME_ASSERT((this->width & (this->width - 1)) == 0 || (this->height & (this->height - 1)) == 0, "Image dimensions are not a power of 2!");
 
 			//Flip image right side up before sending to OpenGL since openGL will read it in upside down. Following code is utilizing pointer
 			//arithmetic 

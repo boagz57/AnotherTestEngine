@@ -36,13 +36,13 @@ namespace Blz
 					fighterPosY *= 8;
 				}
 
-				Texture texture("CharImage.png");
+				Texture texture("spritesheet.png");
 
 				ERRASSERT(texture.ID() != 0, "Texture did not load properly!");
 
 				//TODO: Make into a system
 				SpriteComponent newSprite = fighter.GetComponent<SpriteComponent>();
-				newSprite.SetScreenTargetLocation(fighterPosX, fighterPosY);
+				newSprite.SetScreenTargetLocation(fighterPosX, fighterPosY, glm::ivec2{ 4, 4 });
 				newSprite.SetTextureID(texture.ID());
 				fighter.Insert(newSprite);
 			}
@@ -77,6 +77,7 @@ namespace Blz
 			for (Fighter& fighter : scene.fighters)
 			{
 				++vboID;
+				fighter.GetComponent<SpriteComponent>().Update();
 
 				glm::vec2 translationAmount = fighter.GetComponent<TransformComponent>().GetCurrentPosition() - fighter.originalPosition;
 
@@ -89,6 +90,8 @@ namespace Blz
 
 				glBindTexture(GL_TEXTURE_2D, fighter.GetComponent<SpriteComponent>().GetTextureID());
 				glBindBuffer(GL_ARRAY_BUFFER, vboID);
+
+				glBufferSubData(GL_ARRAY_BUFFER,(sizeof(sfloat) * 3), (sizeof(Vector3D) * fighter.GetComponent<SpriteComponent>().GetVertexData().size()), &fighter.GetComponent<SpriteComponent>().GetVertexData().front());
 				glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vector3D), (void*)offsetof(Vector3D, position));
 				glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(Vector3D), (void*)offsetof(Vector3D, textureCoordinates));
 
