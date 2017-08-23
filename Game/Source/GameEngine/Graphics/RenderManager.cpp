@@ -2,6 +2,7 @@
 #include <GLM\mat4x4.hpp>
 #include <GLM\gtc\matrix_transform.hpp>
 #include <math.h>
+#include <GLM\vec2.hpp>
 #include "ShaderProgram.h"
 #include "../Components/Sprite.h"
 #include "Texture.h"
@@ -59,7 +60,9 @@ namespace Blz
 			for (Fighter& fighter : scene.fighters)
 			{
 				++vboID;
-				fighter.GetComponent<SpriteComponent>().Update();
+				SpriteComponent fighterSprite = fighter.GetComponent<SpriteComponent>();
+
+				fighterSprite.Update();
 
 				glm::vec2 translationAmount = fighter.GetComponent<TransformComponent>().GetCurrentPosition() - fighter.originalPosition;
 
@@ -73,12 +76,15 @@ namespace Blz
 				glBindTexture(GL_TEXTURE_2D, fighter.GetComponent<SpriteComponent>().GetTextureID());
 				glBindBuffer(GL_ARRAY_BUFFER, vboID);
 
+				glBufferData(GL_ARRAY_BUFFER, (sizeof(Vector3D) * fighter.GetComponent<SpriteComponent>().GetVertexData().size()), &fighter.GetComponent<SpriteComponent>().GetVertexData().front(), GL_DYNAMIC_DRAW);
 				glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vector3D), (void*)offsetof(Vector3D, position));
 				glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(Vector3D), (void*)offsetof(Vector3D, textureCoordinates));
 
 				glDrawArrays(GL_TRIANGLES, 0, 6);
 
 				glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+				fighter.Insert(fighterSprite);
 			}
 		}
 	}

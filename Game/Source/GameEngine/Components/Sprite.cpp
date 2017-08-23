@@ -22,6 +22,7 @@ void SpriteComponent::SetScreenTargetLocation(sfloat screenPositionX, sfloat scr
 	this->vertexData.at(4).SetPosition(glm::vec3{ screenPositionX + (this->width - halfWidth), screenPositionY, 0.0f });//Bottom right corner
 	this->vertexData.at(5).SetPosition(glm::vec3{ screenPositionX + (this->width - halfWidth), screenPositionY + this->height, 0.0f });//Top right corner
 
+
 	glm::vec4 uvs;
 
 	uint16 xTile = index % tileDimensions.x;
@@ -85,6 +86,9 @@ void SpriteComponent::Update()
 	{
 		index++;
 		counter = 0;
+
+		if (index == 15)
+			index = 0;
 	}
 
 	counter++;
