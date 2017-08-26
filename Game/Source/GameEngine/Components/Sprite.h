@@ -11,7 +11,7 @@ public:
 	SpriteComponent();
 	~SpriteComponent() = default;
 
-	void SetScreenTargetLocation(sfloat screenPositionX, sfloat screenPositionY);
+	void SetScreenTargetLocationAndTileDimensions(sfloat screenPositionX, sfloat screenPositionY, glm::ivec2 spriteSheetTileDimensions);
 	void SetWidthAndHeight(sfloat width, sfloat height);
 	void SetTextureID(GLuint id);
 	GLuint GetTextureID();
@@ -25,7 +25,5 @@ private:
 	GLuint textureID = 0;
 	Blz::SmallVector<Vector3D> vertexData;
 	glm::ivec2 tileDimensions;
-
-	uint16 counter;
 };
 

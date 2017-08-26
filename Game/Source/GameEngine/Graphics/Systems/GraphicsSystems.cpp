@@ -23,7 +23,7 @@ namespace Blz
 
 			SpriteComponent SetSpriteScreenLocation(TransformComponent fighterTransform, SpriteComponent fighterSprite, Texture texture)
 			{
-				fighterSprite.SetScreenTargetLocation(fighterTransform.GetCurrentPosition().x, fighterTransform.GetCurrentPosition().y);
+				fighterSprite.SetScreenTargetLocationAndTileDimensions(fighterTransform.GetCurrentPosition().x, fighterTransform.GetCurrentPosition().y, glm::ivec2{ 4, 4 });
 				fighterSprite.SetTextureID(texture.ID());
 				return fighterSprite;
 			}

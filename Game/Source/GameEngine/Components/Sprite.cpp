@@ -6,11 +6,11 @@
 SpriteComponent::SpriteComponent()
 {
 	vertexData.resize(6);
-	tileDimensions = glm::ivec2{ 4, 4 };
 }
 
-void SpriteComponent::SetScreenTargetLocation(sfloat screenPositionX, sfloat screenPositionY)
+void SpriteComponent::SetScreenTargetLocationAndTileDimensions(sfloat screenPositionX, sfloat screenPositionY, glm::ivec2 spriteSheetTileDimensions)
 {
+	tileDimensions = spriteSheetTileDimensions;
 	uint16 index = 0;
 
 	sfloat halfWidth = this->width / 2;
