@@ -14,6 +14,7 @@
 #include "GameEngine\Scene.h"
 #include "GameEngine\Fighter.h"
 #include "GameEngine\Timing\Timing.h"
+#include "GameEngine\Animation\AnimationManager.h"
 #include "GameEngine\Input\InputManager.h"
 #include "GameEngine\GameWorld\GameWorldManager.h"
 #include "GameEngine\Graphics\RenderManager.h"
@@ -27,6 +28,7 @@ int main(int agrc, char** argv)
 	Blz::Graphics::RenderManager Renderer;
 	Blz::Input::InputManager Input;
 	Blz::AI::AIManager AI;
+	Blz::Animation::AnimationManager Animation;
 	Blz::Physics::PhysicsManager Physics;
 	Blz::GameWorld::GameWorldManager gameWolrd;
 	Scene scene;
@@ -52,9 +54,7 @@ int main(int agrc, char** argv)
 
 		Physics.Update(scene);
 		AI.Update(scene);
-
-		//GameLogic
-
+		Animation.Update(scene);
 
 		window.ClearBuffers();
 

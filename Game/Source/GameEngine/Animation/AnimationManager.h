@@ -1,13 +1,18 @@
 #pragma once
 #include "Scene.h"
 
-class AnimationManager
+namespace Blz
 {
-public:
-	AnimationManager() = default;
-	~AnimationManager() = default;
+	namespace Animation
+	{
+		class AnimationManager
+		{
+		public:
+			AnimationManager() = default;
+			~AnimationManager() = default;
 
-	void Init(Scene& scene);
-	void Update(Scene& scene);
-};
-
+			void Init(Scene& scene);
+			void Update(Scene& scene);
+		};
+	}
+}

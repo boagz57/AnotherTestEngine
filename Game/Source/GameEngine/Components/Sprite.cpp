@@ -6,13 +6,14 @@
 SpriteComponent::SpriteComponent()
 {
 	vertexData.resize(6);
+	tileDimensions = glm::ivec2{ 4, 4 };
 }
 
-void SpriteComponent::SetScreenTargetLocation(sfloat screenPositionX, sfloat screenPositionY, glm::ivec2 c_TextureTileDimensions)
+void SpriteComponent::SetScreenTargetLocation(sfloat screenPositionX, sfloat screenPositionY)
 {
-	sfloat halfWidth = this->width / 2;
+	uint16 index = 0;
 
-	tileDimensions = c_TextureTileDimensions;
+	sfloat halfWidth = this->width / 2;
 
 	//Setting sprite origin at bottom middle of image by subtracting half width 
 	this->vertexData.at(0).SetPosition(glm::vec3{ screenPositionX + (this->width - halfWidth), screenPositionY + this->height, 0.0f });//Top right corner
@@ -21,7 +22,6 @@ void SpriteComponent::SetScreenTargetLocation(sfloat screenPositionX, sfloat scr
 	this->vertexData.at(3).SetPosition(glm::vec3{ screenPositionX - halfWidth, screenPositionY, 0.0f });//Bottom left corner
 	this->vertexData.at(4).SetPosition(glm::vec3{ screenPositionX + (this->width - halfWidth), screenPositionY, 0.0f });//Bottom right corner
 	this->vertexData.at(5).SetPosition(glm::vec3{ screenPositionX + (this->width - halfWidth), screenPositionY + this->height, 0.0f });//Top right corner
-
 
 	glm::vec4 uvs;
 
@@ -39,7 +39,6 @@ void SpriteComponent::SetScreenTargetLocation(sfloat screenPositionX, sfloat scr
 	this->vertexData.at(3).SetUV(glm::vec2{ uvs.x, uvs.y });
 	this->vertexData.at(4).SetUV(glm::vec2{ uvs.x + uvs.w, uvs.y });
 	this->vertexData.at(5).SetUV(glm::vec2{ uvs.x + uvs.w, uvs.y + uvs.z });
-
 }
 
 void SpriteComponent::SetWidthAndHeight(sfloat width, sfloat height)
@@ -63,7 +62,7 @@ Blz::SmallVector<Vector3D> SpriteComponent::GetVertexData()
 	return vertexData;
 }
 
-void SpriteComponent::Update()
+glm::vec4 SpriteComponent::SetUVs(uint16 index)
 {
 	glm::vec4 uvs;
 
@@ -82,14 +81,5 @@ void SpriteComponent::Update()
 	this->vertexData.at(4).SetUV(glm::vec2{ uvs.x + uvs.w, uvs.y });
 	this->vertexData.at(5).SetUV(glm::vec2{ uvs.x + uvs.w, uvs.y + uvs.z });
 
-	if (counter == 100)
-	{
-		index++;
-		counter = 0;
-
-		if (index == 15)
-			index = 0;
-	}
-
-	counter++;
+	return uvs;
 }

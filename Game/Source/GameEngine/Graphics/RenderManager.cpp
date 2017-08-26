@@ -62,8 +62,6 @@ namespace Blz
 				++vboID;
 				SpriteComponent fighterSprite = fighter.GetComponent<SpriteComponent>();
 
-				fighterSprite.Update();
-
 				glm::vec2 translationAmount = fighter.GetComponent<TransformComponent>().GetCurrentPosition() - fighter.originalPosition;
 
 				//Round values to nearest int value to avoid fractional values which can create distorted art work

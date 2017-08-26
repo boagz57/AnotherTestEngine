@@ -11,11 +11,11 @@ public:
 	SpriteComponent();
 	~SpriteComponent() = default;
 
-	void SetScreenTargetLocation(sfloat screenPositionX, sfloat screenPositionY, glm::ivec2 const textureTileDimensions);
+	void SetScreenTargetLocation(sfloat screenPositionX, sfloat screenPositionY);
 	void SetWidthAndHeight(sfloat width, sfloat height);
 	void SetTextureID(GLuint id);
 	GLuint GetTextureID();
-	void Update();
+	glm::vec4 SetUVs(uint16 index);
 
 	Blz::SmallVector<Vector3D> GetVertexData();
 
@@ -24,7 +24,6 @@ private:
 	float height = 0.0f;
 	GLuint textureID = 0;
 	Blz::SmallVector<Vector3D> vertexData;
-	uint16 index = 0;
 	glm::ivec2 tileDimensions;
 
 	uint16 counter;
