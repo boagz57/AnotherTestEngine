@@ -4,7 +4,7 @@
 #include <math.h>
 #include <GLM\vec2.hpp>
 #include "ShaderProgram.h"
-#include "../Components/Sprite.h"
+#include "../Components/SpriteTileSheet.h"
 #include "Texture.h"
 #include "../Vector3D.h"
 #include "RenderManager.h"
@@ -31,7 +31,7 @@ namespace Blz
 				//the y and this 160x90 unit subdivision is a common factor of both 720p and 1080p screens. This way I will get a whole 
 				//number of pixels per unit in both cases which is important to avoid fractional scales that can distort artwork.
 				TransformComponent newTransform = System::ConvertWorldUnitsToScreenPixels(fighter.GetComponent<TransformComponent>(), window.width);
-				SpriteComponent newSprite = System::SetSpriteScreenLocation(newTransform, fighter.GetComponent<SpriteComponent>(), texture);
+				SpriteTileSheetComponent newSprite = System::SetSpriteScreenLocation(newTransform, fighter.GetComponent<SpriteTileSheetComponent>(), texture);
 
 				fighter.Insert(newSprite);
 
@@ -39,7 +39,7 @@ namespace Blz
 				glGenBuffers(1, &vboID);
 
 				glBindBuffer(GL_ARRAY_BUFFER, vboID);
-				glBufferData(GL_ARRAY_BUFFER, (sizeof(Vector3D) * fighter.GetComponent<SpriteComponent>().GetVertexData().size()), &fighter.GetComponent<SpriteComponent>().GetVertexData().front(), GL_DYNAMIC_DRAW);
+				glBufferData(GL_ARRAY_BUFFER, (sizeof(Vector3D) * fighter.GetComponent<SpriteTileSheetComponent>().GetVertexData().size()), &fighter.GetComponent<SpriteTileSheetComponent>().GetVertexData().front(), GL_DYNAMIC_DRAW);
 
 				glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vector3D), (void*)offsetof(Vector3D, position));
 				glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(Vector3D), (void*)offsetof(Vector3D, textureCoordinates));
@@ -60,7 +60,7 @@ namespace Blz
 			for (Fighter& fighter : scene.fighters)
 			{
 				++vboID;
-				SpriteComponent fighterSprite = fighter.GetComponent<SpriteComponent>();
+				SpriteTileSheetComponent fighterSprite = fighter.GetComponent<SpriteTileSheetComponent>();
 
 				glm::vec2 translationAmount = fighter.GetComponent<TransformComponent>().GetCurrentPosition() - fighter.originalPosition;
 
@@ -71,10 +71,10 @@ namespace Blz
 				glm::mat4 transformationMatrix = glm::translate(orthoProjection, glm::vec3{ translationAmount.x, translationAmount.y, 0.0f });
 				glUniformMatrix4fv(transformationMatrixUniformLocation, 1, GL_FALSE, &(transformationMatrix[0][0]));
 
-				glBindTexture(GL_TEXTURE_2D, fighter.GetComponent<SpriteComponent>().GetTextureID());
+				glBindTexture(GL_TEXTURE_2D, fighter.GetComponent<SpriteTileSheetComponent>().GetTextureID());
 				glBindBuffer(GL_ARRAY_BUFFER, vboID);
 
-				glBufferData(GL_ARRAY_BUFFER, (sizeof(Vector3D) * fighter.GetComponent<SpriteComponent>().GetVertexData().size()), &fighter.GetComponent<SpriteComponent>().GetVertexData().front(), GL_DYNAMIC_DRAW);
+				glBufferData(GL_ARRAY_BUFFER, (sizeof(Vector3D) * fighter.GetComponent<SpriteTileSheetComponent>().GetVertexData().size()), &fighter.GetComponent<SpriteTileSheetComponent>().GetVertexData().front(), GL_DYNAMIC_DRAW);
 				glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vector3D), (void*)offsetof(Vector3D, position));
 				glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(Vector3D), (void*)offsetof(Vector3D, textureCoordinates));
 

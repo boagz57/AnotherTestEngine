@@ -1,17 +1,16 @@
 #include <GL/glew.h>
 #include <GLM\detail\type_vec2.hpp>
 #include <GLM\detail\type_vec3.hpp>
-#include "Sprite.h"
+#include "SpriteTileSheet.h"
 
-SpriteComponent::SpriteComponent()
+SpriteTileSheetComponent::SpriteTileSheetComponent()
 {
 	vertexData.resize(6);
 }
 
-void SpriteComponent::SetScreenTargetLocationAndTileDimensions(sfloat screenPositionX, sfloat screenPositionY, glm::ivec2 spriteSheetTileDimensions)
+void SpriteTileSheetComponent::SetScreenTargetLocationAndTileDimensions(sfloat screenPositionX, sfloat screenPositionY, glm::ivec2 spriteSheetTileDimensions)
 {
 	tileDimensions = spriteSheetTileDimensions;
-	uint16 index = 0;
 
 	sfloat halfWidth = this->width / 2;
 
@@ -41,33 +40,35 @@ void SpriteComponent::SetScreenTargetLocationAndTileDimensions(sfloat screenPosi
 	this->vertexData.at(5).SetUV(glm::vec2{ uvs.x + uvs.w, uvs.y + uvs.z });
 }
 
-void SpriteComponent::SetWidthAndHeight(sfloat width, sfloat height)
+void SpriteTileSheetComponent::SetWidthAndHeight(sfloat width, sfloat height)
 {
 	this->width = width;
 	this->height = height;
 }
 
-void SpriteComponent::SetTextureID(GLuint id)
+void SpriteTileSheetComponent::SetTextureID(GLuint id)
 {
 	this->textureID = id;
 }
 
-GLuint SpriteComponent::GetTextureID()
+GLuint SpriteTileSheetComponent::GetTextureID()
 {
 	return textureID;
 }
 
-Blz::SmallVector<Vector3D> SpriteComponent::GetVertexData()
+Blz::SmallVector<Vector3D> SpriteTileSheetComponent::GetVertexData()
 {
 	return vertexData;
 }
 
-glm::vec4 SpriteComponent::SetUVs(uint16 index)
+void SpriteTileSheetComponent::SetUVs(const uint16 startingIndex)
 {
 	glm::vec4 uvs;
 
-	uint16 xTile = index % tileDimensions.x;
-	uint16 yTile = index / tileDimensions.x;
+	this->index = startingIndex;
+
+	uint16 xTile = startingIndex % tileDimensions.x;
+	uint16 yTile = startingIndex / tileDimensions.x;
 
 	uvs.x = xTile / static_cast<sfloat>(tileDimensions.x);
 	uvs.y = yTile / static_cast<sfloat>(tileDimensions.y);
@@ -80,6 +81,9 @@ glm::vec4 SpriteComponent::SetUVs(uint16 index)
 	this->vertexData.at(3).SetUV(glm::vec2{ uvs.x, uvs.y });
 	this->vertexData.at(4).SetUV(glm::vec2{ uvs.x + uvs.w, uvs.y });
 	this->vertexData.at(5).SetUV(glm::vec2{ uvs.x + uvs.w, uvs.y + uvs.z });
+}
 
-	return uvs;
+uint16 const SpriteTileSheetComponent::CheckIndex() const
+{
+	return this->index;
 }

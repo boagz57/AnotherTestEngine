@@ -1,5 +1,5 @@
 #include "Fighter.h"
-#include "Components/Sprite.h"
+#include "Components/SpriteTileSheet.h"
 #include "Components/Velocity.h"
 #include "Scene.h"
 #include "Systems/AnimationSystems.h"
@@ -17,7 +17,8 @@ namespace Blz
 		{
 			for (Fighter& fighter : scene.fighters)
 			{
-				SpriteComponent newSprite = System::SetAnimation(fighter.GetComponent<SpriteComponent>(), 0, 15);
+				AnimClip walkingAnimation = System::CreateAnimation(0, 16);
+				SpriteTileSheetComponent newSprite = System::SetAnimation(fighter.GetComponent<SpriteTileSheetComponent>(), walkingAnimation);
 
 				fighter.Insert(newSprite);
 			}

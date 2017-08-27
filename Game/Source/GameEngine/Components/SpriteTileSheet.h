@@ -5,17 +5,18 @@
 #include "Containers/SmallVector.h"
 #include "../Vector3D.h"
 
-class SpriteComponent
+class SpriteTileSheetComponent
 {
 public:
-	SpriteComponent();
-	~SpriteComponent() = default;
+	SpriteTileSheetComponent();
+	~SpriteTileSheetComponent() = default;
 
 	void SetScreenTargetLocationAndTileDimensions(sfloat screenPositionX, sfloat screenPositionY, glm::ivec2 spriteSheetTileDimensions);
 	void SetWidthAndHeight(sfloat width, sfloat height);
 	void SetTextureID(GLuint id);
 	GLuint GetTextureID();
-	glm::vec4 SetUVs(uint16 index);
+	void SetUVs(const uint16 startingIndex);
+	uint16 const CheckIndex() const;
 
 	Blz::SmallVector<Vector3D> GetVertexData();
 
@@ -25,5 +26,6 @@ private:
 	GLuint textureID = 0;
 	Blz::SmallVector<Vector3D> vertexData;
 	glm::ivec2 tileDimensions;
+	uint16 index = 0;
 };
 

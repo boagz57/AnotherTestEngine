@@ -1,6 +1,7 @@
 #pragma once
 #include "Containers/SmallVector.h"
-#include "../../Components/Sprite.h"
+#include "../../Components/SpriteTileSheet.h"
+#include "AnimationSystems.h"
 
 namespace Blz
 {
@@ -8,17 +9,24 @@ namespace Blz
 	{
 		namespace System
 		{
-			SpriteComponent SetAnimation(SpriteComponent fighterSprite, const uint16 c_LowIndexRange, const uint16 c_HighIndexRange)
+			Blz::Animation::AnimClip CreateAnimation(const uint16 lowIndexRange, const uint16 highIndexRange)
 			{
-				static uint16 currentIndex;
+				AnimClip animation;
 
-				fighterSprite.SetUVs(currentIndex);
+				animation.lowIndexRange = lowIndexRange;
+				animation.highIndexRange = highIndexRange;
+				
+				return animation;
+			}
 
-				if (currentIndex < c_HighIndexRange)
-					currentIndex++;
+			SpriteTileSheetComponent SetAnimation(SpriteTileSheetComponent fighterSprite, AnimClip animation)
+			{
+				fighterSprite.SetUVs(animation.lowIndexRange);
+
+				if (animation.currentIndex < animation.highIndexRange)
+					animation.currentIndex++;
 				else
-					currentIndex = 0;
-
+					animation.currentIndex = 0;
 
 				return fighterSprite;
 			}

@@ -1,5 +1,5 @@
 #include "Fighter.h"
-#include "Components\Sprite.h"
+#include "Components\SpriteTileSheet.h"
 #include "Components\Transform.h"
 #include "GameWorldSystems.h"
 
@@ -16,7 +16,7 @@ namespace Blz
 				return fighterPosition;
 			}
 
-			SpriteComponent SetSpriteWidthAndHeight(SpriteComponent fighterSprite, sfloat const spriteWidth, sfloat const spriteHeight)
+			SpriteTileSheetComponent SetSpriteWidthAndHeight(SpriteTileSheetComponent fighterSprite, sfloat const spriteWidth, sfloat const spriteHeight)
 			{
 				fighterSprite.SetWidthAndHeight(spriteWidth, spriteHeight);
 				return fighterSprite;

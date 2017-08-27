@@ -402,6 +402,7 @@ copy /y  "$(SolutionDir)ThirdParty\SDL\Lib\x86\SDL2.dll" "$(SolutionDir)Game\Bin
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\ThirdParty\STB_Image\Source\stb_image.cpp" />
+    <ClCompile Include="Source\GameEngine\Animation\AnimationClip.cpp" />
     <ClCompile Include="Source\GameEngine\Animation\AnimationManager.cpp" />
     <ClCompile Include="Source\GameEngine\Animation\Systems\AnimationSystems.cpp" />
     <ClCompile Include="Source\GameEngine\GameWorld\GameWorldManager.cpp" />
@@ -423,12 +424,13 @@ copy /y  "$(SolutionDir)ThirdParty\SDL\Lib\x86\SDL2.dll" "$(SolutionDir)Game\Bin
     <ClCompile Include="Source\GameEngine\Graphics\ShaderProgram.cpp" />
     <ClCompile Include="Source\GameEngine\Graphics\GLLogging.cpp" />
     <ClCompile Include="Source\GameEngine\File.cpp" />
-    <ClCompile Include="Source\GameEngine\Components\Sprite.cpp" />
+    <ClCompile Include="Source\GameEngine\Components\SpriteTileSheet.cpp" />
     <ClCompile Include="Source\GameEngine\Timing\Timing.cpp" />
     <ClCompile Include="Source\Main.cpp" />
     <ClCompile Include="Source\GameEngine\Graphics\Window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Source\GameEngine\Animation\AnimationClip.h" />
     <ClInclude Include="Source\GameEngine\Animation\AnimationManager.h" />
     <ClInclude Include="Source\GameEngine\Animation\Systems\AnimationSystems.h" />
     <ClInclude Include="Source\GameEngine\GameWorld\GameWorldManager.h" />
@@ -453,7 +455,7 @@ copy /y  "$(SolutionDir)ThirdParty\SDL\Lib\x86\SDL2.dll" "$(SolutionDir)Game\Bin
     <ClInclude Include="Source\GameEngine\Graphics\ShaderProgram.h" />
     <ClInclude Include="Source\GameEngine\Graphics\GLLogging.h" />
     <ClInclude Include="Source\GameEngine\File.h" />
-    <ClInclude Include="Source\GameEngine\Components\Sprite.h" />
+    <ClInclude Include="Source\GameEngine\Components\SpriteTileSheet.h" />
     <ClInclude Include="Source\GameEngine\Timing\Timing.h" />
     <ClInclude Include="Source\GameEngine\Vector3D.h" />
     <ClInclude Include="Source\GameEngine\Graphics\Window.h" />

@@ -1,6 +1,7 @@
 #pragma once
+#include "Animation/AnimationClip.h"
 #include "Containers/SmallVector.h"
-#include "../../Components/Sprite.h"
+#include "../../Components/SpriteTileSheet.h"
 
 namespace Blz
 {
@@ -8,7 +9,8 @@ namespace Blz
 	{
 		namespace System
 		{
-			SpriteComponent SetAnimation(SpriteComponent fighterSprite, const uint16 lowIndexRange, const uint16 highIndexRange);
+			AnimClip CreateAnimation(const uint16 lowIndexRange, const uint16 highIndexRange);
+			SpriteTileSheetComponent SetAnimation(SpriteTileSheetComponent fighterSprite, AnimClip animation);
 		}
 	}
 }

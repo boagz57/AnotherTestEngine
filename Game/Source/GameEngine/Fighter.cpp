@@ -1,5 +1,5 @@
 #include "Fighter.h"
-#include "Components/Sprite.h"
+#include "Components/SpriteTileSheet.h"
 
 Fighter::Fighter(sfloat startPositionX, sfloat startPositionY) 
 {

@@ -3,15 +3,15 @@
 #include <GLM/vec3.hpp>
 #include "Containers/Map.h"
 #include "Components\ComponentHolder.h"
-#include "Components/Sprite.h"
+#include "Components/SpriteTileSheet.h"
 #include "Components/Velocity.h"
 #include "Components/Transform.h"
-#include "Components\Sprite.h"
+#include "Components\SpriteTileSheet.h"
 
 class Fighter :
 	public ComponentHolder<TransformComponent>,
 	public ComponentHolder<VelocityComponent>,
-	public ComponentHolder<SpriteComponent>
+	public ComponentHolder<SpriteTileSheetComponent>
 {
 public:
 	Fighter() = default;
