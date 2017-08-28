@@ -1,4 +1,5 @@
 #pragma once
+#include "AnimationClip.h"
 #include "Scene.h"
 
 namespace Blz
@@ -13,6 +14,9 @@ namespace Blz
 
 			void Init(Scene& scene);
 			void Update(Scene& scene);
+
+		private:
+			AnimClip animation;
 		};
 	}
 }

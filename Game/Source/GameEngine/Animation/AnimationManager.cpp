@@ -11,14 +11,14 @@ namespace Blz
 	{
 		void AnimationManager::Init(Scene& scene)
 		{
+			animation = System::CreateAnimation(0, 15);
 		}
 
 		void AnimationManager::Update(Scene& scene)
 		{
 			for (Fighter& fighter : scene.fighters)
 			{
-				AnimClip walkingAnimation = System::CreateAnimation(0, 16);
-				SpriteTileSheetComponent newSprite = System::SetAnimation(fighter.GetComponent<SpriteTileSheetComponent>(), walkingAnimation);
+				SpriteTileSheetComponent newSprite = System::SetAnimation(fighter.GetComponent<SpriteTileSheetComponent>(), animation);
 
 				fighter.Insert(newSprite);
 			}

@@ -9,24 +9,20 @@ namespace Blz
 	{
 		namespace System
 		{
-			Blz::Animation::AnimClip CreateAnimation(const uint16 lowIndexRange, const uint16 highIndexRange)
+			Blz::Animation::AnimClip CreateAnimation(const uint16 startingIndex, const uint16 numTilesToAnimate)
 			{
 				AnimClip animation;
 
-				animation.lowIndexRange = lowIndexRange;
-				animation.highIndexRange = highIndexRange;
+				animation.SetIndex(startingIndex);
+				animation.SetTotalTilesForAnimation(numTilesToAnimate);
 				
 				return animation;
 			}
 
-			SpriteTileSheetComponent SetAnimation(SpriteTileSheetComponent fighterSprite, AnimClip animation)
+			SpriteTileSheetComponent SetAnimation(SpriteTileSheetComponent fighterSprite, AnimClip& animation)
 			{
-				fighterSprite.SetUVs(animation.lowIndexRange);
-
-				if (animation.currentIndex < animation.highIndexRange)
-					animation.currentIndex++;
-				else
-					animation.currentIndex = 0;
+				fighterSprite.SetUVs(animation.GetCurrentClipIndex());
+				animation.IncrementIndex();
 
 				return fighterSprite;
 			}

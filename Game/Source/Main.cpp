@@ -46,6 +46,7 @@ int main(int agrc, char** argv)
 	//Initialize systems
 	gameWolrd.Init(scene);
 	Renderer.Init(scene, window);
+	Animation.Init(scene);
 
 	//Game loop
 	while (true)

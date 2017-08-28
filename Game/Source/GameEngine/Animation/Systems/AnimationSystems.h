@@ -9,8 +9,8 @@ namespace Blz
 	{
 		namespace System
 		{
-			AnimClip CreateAnimation(const uint16 lowIndexRange, const uint16 highIndexRange);
-			SpriteTileSheetComponent SetAnimation(SpriteTileSheetComponent fighterSprite, AnimClip animation);
+			AnimClip CreateAnimation(const uint16 startingIndex, const uint16 numTilesToAnimate);
+			SpriteTileSheetComponent SetAnimation(SpriteTileSheetComponent fighterSprite, AnimClip& animation);
 		}
 	}
 }
