@@ -21,7 +21,7 @@ namespace Blz
 			//Turn OpenGL normalized device coodinates (-1 to 1) to pixel coordinates
 			orthoProjection = glm::ortho(0.0f, static_cast<sfloat>(window.width), 0.0f, static_cast<sfloat>(window.height));
 
-			Texture texture("spritesheet.png");
+			Texture texture("Girl.png");
 			ERRASSERT(texture.ID() != 0, "Texture did not load properly!");
 
 			for (Fighter& fighter : scene.fighters)

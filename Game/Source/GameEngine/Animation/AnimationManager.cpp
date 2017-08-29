@@ -11,7 +11,7 @@ namespace Blz
 	{
 		void AnimationManager::Init(Scene& scene)
 		{
-			animation = System::CreateAnimation(0, 15);
+			animation = System::CreateAnimation(0, 7);
 		}
 
 		void AnimationManager::Update(Scene& scene)
