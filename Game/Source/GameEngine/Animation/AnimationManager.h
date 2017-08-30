@@ -1,11 +1,19 @@
 #pragma once
 #include "AnimationClip.h"
+#include "Containers/Map.h"
 #include "Scene.h"
 
 namespace Blz
 {
 	namespace Animation
 	{
+		enum class AnimationState
+		{
+			WALKINGUP,
+			WALKINGRIGHT,
+			IDLE
+		};
+
 		class AnimationManager
 		{
 		public:
@@ -16,7 +24,7 @@ namespace Blz
 			void Update(Scene& scene);
 
 		private:
-			AnimClip animation;
+			Blz::Map<AnimationState, AnimClip> animationMap;
 		};
 	}
 }

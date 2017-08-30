@@ -21,10 +21,8 @@ namespace Blz
 			for (Fighter& fighter : scene.fighters)
 			{
 				TransformComponent newFighterPosition = System::MoveFighter(fighter.GetComponent<TransformComponent>(), fighter.GetComponent<VelocityComponent>());
-				VelocityComponent newFighterVelocity = System::ZeroOutVelocity(fighter.GetComponent<VelocityComponent>());
 
 				fighter.Insert<TransformComponent>(newFighterPosition);
-				fighter.Insert<VelocityComponent>(newFighterVelocity);
 			}
 		}
 	}

@@ -20,6 +20,9 @@ namespace Blz
 				case SDL_KEYUP:
 					keyMap[evnt.key.keysym.sym] = false;
 					break;
+
+				default:
+					break;
 				}
 			}
 

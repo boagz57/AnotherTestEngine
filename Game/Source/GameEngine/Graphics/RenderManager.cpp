@@ -82,6 +82,10 @@ namespace Blz
 
 				glBindBuffer(GL_ARRAY_BUFFER, 0);
 
+				//TODO: Remove zeroing out velocity from Renderer update. 
+				VelocityComponent vel = fighter.GetComponent<VelocityComponent>();
+				vel.ZeroOut();
+				fighter.Insert(vel);
 				fighter.Insert(fighterSprite);
 			}
 		}
