@@ -21,9 +21,6 @@ namespace Blz
 			//Turn OpenGL normalized device coodinates (-1 to 1) to pixel coordinates
 			orthoProjection = glm::ortho(0.0f, static_cast<sfloat>(window.width), 0.0f, static_cast<sfloat>(window.height));
 
-			Texture texture("Girl.png");
-			ERRASSERT(texture.ID() != 0, "Texture did not load properly!");
-
 			for (Fighter& fighter : scene.fighters)
 			{
 				//Convert my theoretical world units to actual screen pixels by deciphering if window is 1080p or 720p
@@ -31,7 +28,8 @@ namespace Blz
 				//the y and this 160x90 unit subdivision is a common factor of both 720p and 1080p screens. This way I will get a whole 
 				//number of pixels per unit in both cases which is important to avoid fractional scales that can distort artwork.
 				PositionComponent newPosition = System::ConvertWorldUnitsToScreenPixels(fighter.GetComponent<PositionComponent>(), window.width);
-				SpriteTileSheetComponent newSprite = System::SetSpriteScreenLocation(newPosition, fighter.GetComponent<SpriteTileSheetComponent>(), texture);
+
+				SpriteTileSheetComponent newSprite = System::SetSpriteScreenLocation(newPosition, fighter.GetComponent<SpriteTileSheetComponent>());
 
 				fighter.Insert(newSprite);
 

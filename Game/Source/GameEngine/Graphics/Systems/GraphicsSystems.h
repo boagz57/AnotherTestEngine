@@ -10,7 +10,7 @@ namespace Blz
 		namespace System
 		{
 			PositionComponent ConvertWorldUnitsToScreenPixels(PositionComponent fighterPositionToConvert, uint16 const windowWidth);
-			SpriteTileSheetComponent SetSpriteScreenLocation(PositionComponent fighterTransform, SpriteTileSheetComponent fighterSprite, Texture textureToSet);
+			SpriteTileSheetComponent SetSpriteScreenLocation(PositionComponent fighterTransform, SpriteTileSheetComponent fighterSprite);
 		}
 	}
 }

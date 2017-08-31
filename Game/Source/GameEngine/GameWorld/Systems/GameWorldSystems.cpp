@@ -9,6 +9,18 @@ namespace Blz
 	{
 		namespace System
 		{
+			SpriteTileSheetComponent SetSpriteTexture(SpriteTileSheetComponent fighterSprite, Blz::Graphics::Texture texture)
+			{
+				fighterSprite.SetTextureID(texture.ID());
+				return fighterSprite;
+			}
+
+			SpriteComponent SetSpriteTexture(SpriteComponent fighterSprite, Blz::Graphics::Texture texture)
+			{
+				fighterSprite.SetTextureID(texture.ID());
+				return fighterSprite;
+			}
+
 			SpriteTileSheetComponent SetSpriteWidthAndHeight(SpriteTileSheetComponent fighterSprite, sfloat const spriteWidth, sfloat const spriteHeight)
 			{
 				fighterSprite.SetWidthAndHeight(spriteWidth, spriteHeight);

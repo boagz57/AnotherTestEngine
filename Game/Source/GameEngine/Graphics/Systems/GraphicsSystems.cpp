@@ -22,10 +22,9 @@ namespace Blz
 				return fighterTransformToConvert;
 			}
 
-			SpriteTileSheetComponent SetSpriteScreenLocation(PositionComponent fighterTransform, SpriteTileSheetComponent fighterSprite, Texture textureToSet)
+			SpriteTileSheetComponent SetSpriteScreenLocation(PositionComponent fighterTransform, SpriteTileSheetComponent fighterSprite)
 			{
 				fighterSprite.SetScreenTargetLocationAndTileDimensions(fighterTransform.GetCurrentPosition().x, fighterTransform.GetCurrentPosition().y, glm::ivec2{ 8, 4 });
-				fighterSprite.SetTextureID(textureToSet.ID());
 				return fighterSprite;
 			}
 		}
