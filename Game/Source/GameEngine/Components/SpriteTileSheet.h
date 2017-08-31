@@ -14,11 +14,11 @@ public:
 	void SetScreenTargetLocationAndTileDimensions(sfloat screenPositionX, sfloat screenPositionY, glm::ivec2 spriteSheetTileDimensions);
 	void SetWidthAndHeight(sfloat width, sfloat height);
 	void SetTextureID(GLuint id);
-	GLuint GetTextureID();
+	GLuint const GetTextureID() const;
 	void SetUVs(const uint16 startingIndex);
 	uint16 const CheckIndex() const;
 
-	Blz::SmallVector<Vector3D> GetVertexData();
+	Blz::SmallVector<Vector3D> const GetVertexData() const;
 
 private:
 	float width = 0.0f;

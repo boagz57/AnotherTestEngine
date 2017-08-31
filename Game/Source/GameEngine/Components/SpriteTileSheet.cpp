@@ -51,12 +51,12 @@ void SpriteTileSheetComponent::SetTextureID(GLuint id)
 	this->textureID = id;
 }
 
-GLuint SpriteTileSheetComponent::GetTextureID()
+GLuint const SpriteTileSheetComponent::GetTextureID() const
 {
 	return textureID;
 }
 
-Blz::SmallVector<Vector3D> SpriteTileSheetComponent::GetVertexData()
+Blz::SmallVector<Vector3D> const SpriteTileSheetComponent::GetVertexData() const
 {
 	return vertexData;
 }
