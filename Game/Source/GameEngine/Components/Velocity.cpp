@@ -1,6 +1,6 @@
 #include "Velocity.h"
 
-glm::vec3 VelocityComponent::GetCurrentState()
+glm::vec2 const VelocityComponent::GetCurrentState() const
 {
 	return currentVelocity;
 }
