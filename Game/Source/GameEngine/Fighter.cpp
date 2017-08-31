@@ -3,8 +3,7 @@
 
 Fighter::Fighter(sfloat startPositionX, sfloat startPositionY) 
 {
-	originalPosition.x = startPositionX;
-	originalPosition.y = startPositionY;
+	ComponentHolder<PositionComponent>::component.SetPosition(startPositionX, startPositionY);
 }
 
 bool Fighter::IsFighterControllable()

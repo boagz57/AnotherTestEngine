@@ -9,13 +9,6 @@ namespace Blz
 	{
 		namespace System
 		{
-			PositionComponent Blz::GameWorld::System::SetFighterStartingPosition(PositionComponent fighterPosition, glm::vec2 fighterStartingPositions)
-			{
-				fighterPosition.SetPosition(fighterStartingPositions.x, fighterStartingPositions.y);
-
-				return fighterPosition;
-			}
-
 			SpriteTileSheetComponent SetSpriteWidthAndHeight(SpriteTileSheetComponent fighterSprite, sfloat const spriteWidth, sfloat const spriteHeight)
 			{
 				fighterSprite.SetWidthAndHeight(spriteWidth, spriteHeight);

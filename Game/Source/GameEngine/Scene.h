@@ -13,7 +13,6 @@ public:
 	Fighter* CreatePlayerFighter(sfloat startingWorldPositionX, sfloat startingWorldPositionY);
 
 	Blz::SmallVector<Fighter> fighters;
-	Blz::SmallVector<glm::vec2> fighterStartingPositions;
 
 private:
 	uint16 numFighters = 0;

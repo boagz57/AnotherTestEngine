@@ -4,7 +4,6 @@
 Scene::Scene()
 {
 	fighters.reserve(2);
-	fighterStartingPositions.reserve(2);
 }
 
 Fighter* Scene::CreateAIFighter(sfloat startingPositionX, sfloat startingPositionY)
@@ -18,7 +17,6 @@ Fighter* Scene::CreateAIFighter(sfloat startingPositionX, sfloat startingPositio
 	Fighter fighter(startingPositionX, startingPositionY);
 
 	fighters.push_back(fighter);
-	fighterStartingPositions.push_back(glm::vec2{ startingPositionX, startingPositionY });
 	
 	return &fighters.at(this->numFighters++);
 }
@@ -36,7 +34,6 @@ Fighter* Scene::CreatePlayerFighter(sfloat startingPositionX, sfloat startingPos
 	fighter.SetFighterToBeControllable();
 
 	fighters.push_back(fighter);
-	fighterStartingPositions.push_back(glm::vec2{ startingPositionX, startingPositionY });
 	
 	return &fighters.at(this->numFighters++);
 }

@@ -9,7 +9,6 @@ namespace Blz
 	{
 		namespace System
 		{
-			PositionComponent SetFighterStartingPosition(PositionComponent fighterPosition, glm::vec2 fighterStartingPositions);
 			SpriteTileSheetComponent SetSpriteWidthAndHeight(SpriteTileSheetComponent fighterSprite, const sfloat spriteWidth, const sfloat spriteHeight);
 		}
 	}
