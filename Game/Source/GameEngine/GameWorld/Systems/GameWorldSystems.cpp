@@ -9,7 +9,7 @@ namespace Blz
 	{
 		namespace System
 		{
-			TransformComponent Blz::GameWorld::System::SetFighterStartingPosition(TransformComponent fighterPosition, glm::vec2 fighterStartingPositions)
+			PositionComponent Blz::GameWorld::System::SetFighterStartingPosition(PositionComponent fighterPosition, glm::vec2 fighterStartingPositions)
 			{
 				fighterPosition.SetPosition(fighterStartingPositions.x, fighterStartingPositions.y);
 

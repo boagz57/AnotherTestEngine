@@ -6,14 +6,12 @@ class TransformComponent
 public:
 	TransformComponent() = default;
 
-	glm::vec2 GetCurrentPosition() const;
+	glm::vec2 const GetCurrentTranslation() const;
 
-	void TranslatePosition(sfloat amountToTranslateX, sfloat amountToTranslateY);
-	void MultiplyPosition(int16 const amountToMultipyX, int16 const amountToMultiplyY);
-	void SetPosition(sfloat locationX, sfloat locationY);
+	void Translate(sfloat amountToTranslateX, sfloat amountToTranslateY);
 
 private:
-	glm::vec2 position{ 0.0f, 0.0f };
+	glm::vec2 translation{ 0.0f, 0.0f };
 	glm::vec2 rotation{ 0.0f, 0.0f };
 	glm::vec2 scale{ 0.0f, 0.0f };
 };

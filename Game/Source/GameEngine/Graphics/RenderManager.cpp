@@ -30,8 +30,8 @@ namespace Blz
 				//and doing necessary math for conversion. My logical screen grid contains 160 'world units' in the x and 90 in 
 				//the y and this 160x90 unit subdivision is a common factor of both 720p and 1080p screens. This way I will get a whole 
 				//number of pixels per unit in both cases which is important to avoid fractional scales that can distort artwork.
-				TransformComponent newTransform = System::ConvertWorldUnitsToScreenPixels(fighter.GetComponent<TransformComponent>(), window.width);
-				SpriteTileSheetComponent newSprite = System::SetSpriteScreenLocation(newTransform, fighter.GetComponent<SpriteTileSheetComponent>(), texture);
+				PositionComponent newPosition = System::ConvertWorldUnitsToScreenPixels(fighter.GetComponent<PositionComponent>(), window.width);
+				SpriteTileSheetComponent newSprite = System::SetSpriteScreenLocation(newPosition, fighter.GetComponent<SpriteTileSheetComponent>(), texture);
 
 				fighter.Insert(newSprite);
 
@@ -62,7 +62,7 @@ namespace Blz
 				++vboID;
 				SpriteTileSheetComponent fighterSprite = fighter.GetComponent<SpriteTileSheetComponent>();
 
-				glm::vec2 translationAmount = fighter.GetComponent<TransformComponent>().GetCurrentPosition() - fighter.originalPosition;
+				glm::vec2 translationAmount = fighter.GetComponent<TransformComponent>().GetCurrentTranslation();
 
 				//Round values to nearest int value to avoid fractional values which can create distorted art work
 				translationAmount.x = rint(translationAmount.x);

@@ -20,9 +20,9 @@ namespace Blz
 		{
 			for (Fighter& fighter : scene.fighters)
 			{
-				TransformComponent newFighterPosition = System::MoveFighter(fighter.GetComponent<TransformComponent>(), fighter.GetComponent<VelocityComponent>());
+				TransformComponent newFighterTranslation = System::MoveFighter(fighter.GetComponent<TransformComponent>(), fighter.GetComponent<VelocityComponent>());
 
-				fighter.Insert<TransformComponent>(newFighterPosition);
+				fighter.Insert<TransformComponent>(newFighterTranslation);
 			}
 		}
 	}

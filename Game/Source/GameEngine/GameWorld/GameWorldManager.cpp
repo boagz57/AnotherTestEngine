@@ -1,5 +1,5 @@
 #include "GameWorldManager.h"
-#include "../Components/Transform.h"
+#include "Components\Position.h"
 #include "Systems\GameWorldSystems.h"
 
 namespace Blz
@@ -10,7 +10,7 @@ namespace Blz
 		{
 			for (uint16 i = 0; i < scene.fighters.size(); ++i)
 			{
-				TransformComponent startingFighterPosition = System::SetFighterStartingPosition(scene.fighters.at(i).GetComponent<TransformComponent>(), scene.fighterStartingPositions.at(i));
+				PositionComponent startingFighterPosition = System::SetFighterStartingPosition(scene.fighters.at(i).GetComponent<PositionComponent>(), scene.fighterStartingPositions.at(i));
 				SpriteTileSheetComponent newSprite = System::SetSpriteWidthAndHeight(scene.fighters.at(i).GetComponent<SpriteTileSheetComponent>(), 200.0f, 200.0f);
 
 				scene.fighters.at(i).Insert(newSprite);

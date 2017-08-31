@@ -6,12 +6,13 @@
 #include "Components/SpriteTileSheet.h"
 #include "Components/Velocity.h"
 #include "Components/Transform.h"
-#include "Components\SpriteTileSheet.h"
+#include "Components\Position.h"
 
 class Fighter :
 	public ComponentHolder<TransformComponent>,
 	public ComponentHolder<VelocityComponent>,
-	public ComponentHolder<SpriteTileSheetComponent>
+	public ComponentHolder<SpriteTileSheetComponent>,
+	public ComponentHolder<PositionComponent>
 {
 public:
 	Fighter() = default;

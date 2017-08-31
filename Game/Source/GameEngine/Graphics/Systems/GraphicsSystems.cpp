@@ -1,4 +1,5 @@
 #include "GraphicsSystems.h"
+#include "Components/Position.h"
 #include "../Window.h"
 
 namespace Blz
@@ -7,24 +8,24 @@ namespace Blz
 	{
 		namespace System
 		{
-			TransformComponent ConvertWorldUnitsToScreenPixels(TransformComponent fighterTransform, uint16 const windowWidth)
+			PositionComponent ConvertWorldUnitsToScreenPixels(PositionComponent fighterTransformToConvert, uint16 const windowWidth)
 			{
 				if (windowWidth == 1920)
 				{
-					fighterTransform.MultiplyPosition(12, 12);
+					fighterTransformToConvert.MultiplyPositionBy(12, 12);
 				}
 				else if (windowWidth == 1280)
 				{
-					fighterTransform.MultiplyPosition(8, 8);
+					fighterTransformToConvert.MultiplyPositionBy(8, 8);
 				}
 
-				return fighterTransform;
+				return fighterTransformToConvert;
 			}
 
-			SpriteTileSheetComponent SetSpriteScreenLocation(TransformComponent fighterTransform, SpriteTileSheetComponent fighterSprite, Texture texture)
+			SpriteTileSheetComponent SetSpriteScreenLocation(PositionComponent fighterTransform, SpriteTileSheetComponent fighterSprite, Texture textureToSet)
 			{
 				fighterSprite.SetScreenTargetLocationAndTileDimensions(fighterTransform.GetCurrentPosition().x, fighterTransform.GetCurrentPosition().y, glm::ivec2{ 8, 4 });
-				fighterSprite.SetTextureID(texture.ID());
+				fighterSprite.SetTextureID(textureToSet.ID());
 				return fighterSprite;
 			}
 		}

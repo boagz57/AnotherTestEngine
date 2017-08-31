@@ -21,9 +21,6 @@
 #include "GameEngine\AI\AIManager.h"
 #include "GameEngine\Physics\PhysicsManager.h"
 
-//TODO: Still have to change aspect ratio of window. Right now objects will move faster going upward then left or right since longer distance must
-//be traveled when screens have 1920 by 1080 pixel ratios. Check Jamie King videos for more explaination
-
 int main(int agrc, char** argv)
 {
 	Blz::Graphics::Window window(1280, 720);
