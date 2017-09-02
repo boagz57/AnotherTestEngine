@@ -11,19 +11,22 @@ namespace Blz
 		{
 			Comp::SpriteTileSheet SetSpriteTexture(Comp::SpriteTileSheet fighterSprite, Blz::Graphics::Texture texture)
 			{
-				fighterSprite.SetTextureID(texture.ID());
+				fighterSprite.SetTexture(texture);
+
 				return fighterSprite;
 			}
 
 			Comp::Sprite SetSpriteTexture(Comp::Sprite fighterSprite, Blz::Graphics::Texture texture)
 			{
-				fighterSprite.SetTextureID(texture.ID());
+				fighterSprite.SetTexture(texture);
+
 				return fighterSprite;
 			}
 
 			Comp::SpriteTileSheet SetSpriteWidthAndHeight(Comp::SpriteTileSheet fighterSprite, sfloat const spriteWidth, sfloat const spriteHeight)
 			{
 				fighterSprite.SetWidthAndHeight(spriteWidth, spriteHeight);
+
 				return fighterSprite;
 			}
 		}

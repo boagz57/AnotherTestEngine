@@ -10,7 +10,7 @@ namespace Comp
 
 		glm::vec2 const GetCurrentTranslation() const;
 
-		void Translate(sfloat amountToTranslateX, sfloat amountToTranslateY);
+		void TranslateBy(sfloat amountToTranslateX, sfloat amountToTranslateY);
 
 	private:
 		glm::vec2 translation{ 0.0f, 0.0f };

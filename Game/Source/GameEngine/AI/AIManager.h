@@ -8,8 +8,8 @@ namespace Blz
 		class AIManager
 		{
 		public:
-			AIManager();
-			~AIManager();
+			AIManager() = default;
+			~AIManager() = default;
 
 			void Init();
 			void Shutdown();

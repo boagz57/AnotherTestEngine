@@ -1,11 +1,12 @@
 #include <GL/glew.h>
 #include <GLM\detail\type_vec2.hpp>
 #include <GLM\detail\type_vec3.hpp>
+#include "Graphics\Texture.h"
 #include "SpriteTileSheet.h"
 
 namespace Comp
 {
-	SpriteTileSheet::SpriteTileSheet()
+	SpriteTileSheet::SpriteTileSheet() 
 	{
 		vertexData.resize(6);
 	}
@@ -48,9 +49,9 @@ namespace Comp
 		this->height = height;
 	}
 
-	void SpriteTileSheet::SetTextureID(GLuint id)
+	void SpriteTileSheet::SetTexture(Blz::Graphics::Texture texture)
 	{
-		this->textureID = id;
+		this->textureID = texture.ID();
 	}
 
 	GLuint const SpriteTileSheet::GetTextureID() const

@@ -47,6 +47,9 @@ namespace Blz
 
 			//Send down imageData to openGL and set some default parameters for image
 			glGenTextures(1, &(this->id));
+
+			ERRASSERT(this->id != 0, "Texture was not properly generated!");
+
 			glActiveTexture(GL_TEXTURE0);
 			glBindTexture(GL_TEXTURE_2D, this->id);
 			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, this->width, this->height, 0, GL_RGBA, GL_UNSIGNED_BYTE, p_ImageData);

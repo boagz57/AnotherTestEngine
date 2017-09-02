@@ -12,7 +12,7 @@ namespace Blz
 			Comp::Transform MoveFighter(Comp::Transform fighterTransform, Comp::Velocity fighterVelocity)
 			{
 				//Move fighter position according to current velocity applied 
-				fighterTransform.Translate(fighterVelocity.GetCurrentState().x, fighterVelocity.GetCurrentState().y);
+				fighterTransform.TranslateBy(fighterVelocity.GetCurrentState().x, fighterVelocity.GetCurrentState().y);
 
 				return fighterTransform;
 			}

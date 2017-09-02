@@ -40,8 +40,10 @@ int main(int agrc, char** argv)
 	colorShaderProgram.Link();
 	colorShaderProgram.Bind();
 
-	auto* p_Player = scene.CreatePlayerFighter(160.0f, 0.0f);
-	auto* p_Enemy = scene.CreateAIFighter(80.0f, 45.0f);
+	Blz::Graphics::Texture fighterTexture("Girl.png");
+
+	auto* p_Player = scene.CreatePlayerFighter(160.0f, 0.0f, fighterTexture);
+	auto* p_Enemy = scene.CreateAIFighter(80.0f, 45.0f, fighterTexture);
 
 	//Initialize systems
 	gameWolrd.Init(scene);

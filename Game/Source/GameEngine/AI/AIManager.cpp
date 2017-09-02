@@ -10,14 +10,6 @@ namespace Blz
 	{
 		Blz::SmallVector<Fighter> MoveAI(Blz::SmallVector<Fighter> fighters);
 
-		AIManager::AIManager()
-		{
-		}
-
-		AIManager::~AIManager()
-		{
-		}
-
 		void AIManager::Init()
 		{
 

@@ -7,7 +7,7 @@ namespace Comp
 		return translation;
 	}
 
-	void Transform::Translate(sfloat amountToTranslateX, sfloat amountToTranslateY)
+	void Transform::TranslateBy(sfloat amountToTranslateX, sfloat amountToTranslateY)
 	{
 		translation.x += amountToTranslateX;
 		translation.y += amountToTranslateY;

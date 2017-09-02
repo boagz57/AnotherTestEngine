@@ -1,8 +1,9 @@
+#include "Graphics\Texture.h"
 #include "Sprite.h"
 
 namespace Comp
 {
-	Sprite::Sprite()
+	Sprite::Sprite() 
 	{
 		vertexData.resize(6);
 	}
@@ -33,9 +34,9 @@ namespace Comp
 		this->height = height;
 	}
 
-	void Sprite::SetTextureID(GLuint id)
+	void Sprite::SetTexture(Blz::Graphics::Texture texture)
 	{
-		this->textureID = id;
+		this->textureID = texture.ID();
 	}
 
 	GLuint const Sprite::GetTextureID() const

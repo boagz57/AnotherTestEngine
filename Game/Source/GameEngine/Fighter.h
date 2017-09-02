@@ -1,6 +1,7 @@
 #pragma once
 #include <memory>
 #include <GLM/vec3.hpp>
+#include "Graphics/Texture.h"
 #include "Containers/Map.h"
 #include "Components\ComponentHolder.h"
 #include "Components/SpriteTileSheet.h"
@@ -16,7 +17,7 @@ class Fighter :
 {
 public:
 	Fighter() = default;
-	Fighter(sfloat startingWorldPositionX, sfloat startingWorldPositionY);
+	Fighter(sfloat startingWorldPositionX, sfloat startingWorldPositionY, Blz::Graphics::Texture texture);
 	~Fighter() = default;
 
 	template<class T>
