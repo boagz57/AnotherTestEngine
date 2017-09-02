@@ -23,26 +23,12 @@ namespace Blz
 
 			for (Fighter& fighter : scene.fighters)
 			{
-				//Convert my theoretical world units to actual screen pixels by deciphering if window is 1080p or 720p
-				//and doing necessary math for conversion. My logical screen grid contains 160 'world units' in the x and 90 in 
-				//the y and this 160x90 unit subdivision is a common factor of both 720p and 1080p screens. This way I will get a whole 
-				//number of pixels per unit in both cases which is important to avoid fractional scales that can distort artwork.
-				PositionComponent newPosition = System::ConvertWorldUnitsToScreenPixels(fighter.GetComponent<PositionComponent>(), window.width);
+				PositionComponent ConvertedPixelPosition = System::ConvertWorldUnitsToScreenPixels(fighter.GetComponent<PositionComponent>(), window.width);
 
-				SpriteTileSheetComponent newSprite = System::SetSpriteScreenLocation(newPosition, fighter.GetComponent<SpriteTileSheetComponent>());
+				SpriteTileSheetComponent UpdatedSpriteLocation = System::SetSpriteScreenLocation(ConvertedPixelPosition, fighter.GetComponent<SpriteTileSheetComponent>());
+				System::SendFighterSpriteDataToGPU(UpdatedSpriteLocation);
 
-				fighter.Insert(newSprite);
-
-				GLuint vboID = 0;
-				glGenBuffers(1, &vboID);
-
-				glBindBuffer(GL_ARRAY_BUFFER, vboID);
-				glBufferData(GL_ARRAY_BUFFER, (sizeof(Vector3D) * fighter.GetComponent<SpriteTileSheetComponent>().GetVertexData().size()), &fighter.GetComponent<SpriteTileSheetComponent>().GetVertexData().front(), GL_DYNAMIC_DRAW);
-
-				glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vector3D), (void*)offsetof(Vector3D, position));
-				glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(Vector3D), (void*)offsetof(Vector3D, textureCoordinates));
-
-				glBindBuffer(GL_ARRAY_BUFFER, 0);
+				fighter.Insert(UpdatedSpriteLocation);
 			}
 		}
 
@@ -58,23 +44,29 @@ namespace Blz
 			for (Fighter& fighter : scene.fighters)
 			{
 				++vboID;
-				SpriteTileSheetComponent fighterSprite = fighter.GetComponent<SpriteTileSheetComponent>();
 
-				glm::vec2 translationAmount = fighter.GetComponent<TransformComponent>().GetCurrentTranslation();
+				//Translate vertices of fighter to move him
+				{
+					glm::vec2 translationAmount = fighter.GetComponent<TransformComponent>().GetCurrentTranslation();
 
-				//Round values to nearest int value to avoid fractional values which can create distorted art work
-				translationAmount.x = rint(translationAmount.x);
-				translationAmount.y = rint(translationAmount.y);
+					//Round values to nearest int value to avoid fractional values which can create distorted art work
+					translationAmount.x = rint(translationAmount.x);
+					translationAmount.y = rint(translationAmount.y);
 
-				glm::mat4 transformationMatrix = glm::translate(orthoProjection, glm::vec3{ translationAmount.x, translationAmount.y, 0.0f });
-				glUniformMatrix4fv(transformationMatrixUniformLocation, 1, GL_FALSE, &(transformationMatrix[0][0]));
+					glm::mat4 transformationMatrix = glm::translate(orthoProjection, glm::vec3{ translationAmount.x, translationAmount.y, 0.0f });
+					glUniformMatrix4fv(transformationMatrixUniformLocation, 1, GL_FALSE, &(transformationMatrix[0][0]));
+				}
 
 				glBindTexture(GL_TEXTURE_2D, fighter.GetComponent<SpriteTileSheetComponent>().GetTextureID());
-				glBindBuffer(GL_ARRAY_BUFFER, vboID);
 
-				glBufferData(GL_ARRAY_BUFFER, (sizeof(Vector3D) * fighter.GetComponent<SpriteTileSheetComponent>().GetVertexData().size()), &fighter.GetComponent<SpriteTileSheetComponent>().GetVertexData().front(), GL_DYNAMIC_DRAW);
-				glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vector3D), (void*)offsetof(Vector3D, position));
-				glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(Vector3D), (void*)offsetof(Vector3D, textureCoordinates));
+				//Send new 
+				{
+					glBindBuffer(GL_ARRAY_BUFFER, vboID);
+
+					glBufferData(GL_ARRAY_BUFFER, (sizeof(Vector3D) * fighter.GetComponent<SpriteTileSheetComponent>().GetVertexData().size()), &fighter.GetComponent<SpriteTileSheetComponent>().GetVertexData().front(), GL_DYNAMIC_DRAW);
+					glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vector3D), (void*)offsetof(Vector3D, position));
+					glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(Vector3D), (void*)offsetof(Vector3D, textureCoordinates));
+				}
 
 				glDrawArrays(GL_TRIANGLES, 0, 6);
 
@@ -84,7 +76,6 @@ namespace Blz
 				VelocityComponent vel = fighter.GetComponent<VelocityComponent>();
 				vel.ZeroOut();
 				fighter.Insert(vel);
-				fighter.Insert(fighterSprite);
 			}
 		}
 	}

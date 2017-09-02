@@ -9,7 +9,7 @@ namespace Blz
 		{
 			Blz::Err::ErrorContext ec("When constructing texture from", c_imageFilePath);
 
-			int32 forceChannels = 4;															 //out param
+			int32 forceChannels = 4;							   //out param	 //outparm	    //out param
 			auto* p_ImageData = stbi_load(c_imageFilePath.c_str(), &this->width, &this->height, &channels, forceChannels);
 
 			RUNTIME_ASSERT(this->width >= 0, "Image width <= 0!");
