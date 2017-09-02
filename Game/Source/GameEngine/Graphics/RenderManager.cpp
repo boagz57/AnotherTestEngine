@@ -26,7 +26,6 @@ namespace Blz
 				Comp::Position ConvertedPixelPosition = CompSystem::ConvertWorldUnitsToScreenPixels(fighter.GetComponent<Comp::Position>(), window.width);
 
 				Comp::SpriteTileSheet UpdatedSpriteLocation = CompSystem::SetSpriteScreenLocation(ConvertedPixelPosition, fighter.GetComponent<Comp::SpriteTileSheet>());
-				CompSystem::SendFighterSpriteDataToGPU(UpdatedSpriteLocation);
 
 				fighter.Insert(UpdatedSpriteLocation);
 			}
