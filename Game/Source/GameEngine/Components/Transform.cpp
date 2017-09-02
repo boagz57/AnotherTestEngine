@@ -1,12 +1,15 @@
 #include "Transform.h"
 
-glm::vec2 const TransformComponent::GetCurrentTranslation() const
+namespace Comp
 {
-	return translation;
-}
+	glm::vec2 const Transform::GetCurrentTranslation() const
+	{
+		return translation;
+	}
 
-void TransformComponent::Translate(sfloat amountToTranslateX, sfloat amountToTranslateY)
-{
-	translation.x += amountToTranslateX;
-	translation.y += amountToTranslateY;
+	void Transform::Translate(sfloat amountToTranslateX, sfloat amountToTranslateY)
+	{
+		translation.x += amountToTranslateX;
+		translation.y += amountToTranslateY;
+	}
 }

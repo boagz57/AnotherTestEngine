@@ -1,17 +1,20 @@
 #include "Velocity.h"
 
-glm::vec2 const VelocityComponent::GetCurrentState() const
+namespace Comp
 {
-	return currentVelocity;
-}
+	glm::vec2 const Velocity::GetCurrentState() const
+	{
+		return currentVelocity;
+	}
 
-void VelocityComponent::Add(sfloat x, sfloat y)
-{
-	this->currentVelocity.x += x;
-	this->currentVelocity.y += y;
-}
+	void Velocity::Add(sfloat x, sfloat y)
+	{
+		this->currentVelocity.x += x;
+		this->currentVelocity.y += y;
+	}
 
-void VelocityComponent::ZeroOut()
-{
-	currentVelocity *= 0.0f;
+	void Velocity::ZeroOut()
+	{
+		currentVelocity *= 0.0f;
+	}
 }

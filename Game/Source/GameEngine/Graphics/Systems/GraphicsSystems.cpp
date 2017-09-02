@@ -6,9 +6,9 @@ namespace Blz
 {
 	namespace Graphics
 	{
-		namespace System
+		namespace CompSystem
 		{
-			PositionComponent ConvertWorldUnitsToScreenPixels(PositionComponent fighterTransformToConvert, uint16 const windowWidth)
+			Comp::Position ConvertWorldUnitsToScreenPixels(Comp::Position fighterTransformToConvert, uint16 const windowWidth)
 			{
 				if (windowWidth == 1920)
 				{
@@ -22,13 +22,13 @@ namespace Blz
 				return fighterTransformToConvert;
 			}
 
-			SpriteTileSheetComponent SetSpriteScreenLocation(PositionComponent fighterTransform, SpriteTileSheetComponent fighterSprite)
+			Comp::SpriteTileSheet SetSpriteScreenLocation(Comp::Position fighterTransform, Comp::SpriteTileSheet fighterSprite)
 			{
 				fighterSprite.SetScreenTargetLocationAndTileDimensions(fighterTransform.GetCurrentPosition().x, fighterTransform.GetCurrentPosition().y, glm::ivec2{ 8, 4 });
 				return fighterSprite;
 			}
 
-			void SendFighterSpriteDataToGPU(SpriteTileSheetComponent fighterSprite)
+			void SendFighterSpriteDataToGPU(Comp::SpriteTileSheet fighterSprite)
 			{
 				GLuint vboID = 0;
 				glGenBuffers(1, &vboID);
@@ -42,7 +42,7 @@ namespace Blz
 				glBindBuffer(GL_ARRAY_BUFFER, 0);
 			}
 
-			void SendFighterSpriteDataToGPU(SpriteComponent fighterSprite)
+			void SendFighterSpriteDataToGPU(Comp::Sprite fighterSprite)
 			{
 				GLuint vboID = 0;
 				glGenBuffers(1, &vboID);

@@ -6,11 +6,11 @@ namespace Blz
 {
 	namespace Physics
 	{
-		namespace System
+		namespace CompSystem
 		{
-			TransformComponent MoveFighter(TransformComponent fighterTransform, VelocityComponent fighterVelocity);
+			Comp::Transform MoveFighter(Comp::Transform fighterTransform, Comp::Velocity fighterVelocity);
 			//TODO: Will most likely want to remove small utility functions like this eventually by ironing out component/system architecture 
-			VelocityComponent ZeroOutVelocity(VelocityComponent fighterVelocity);
+			Comp::Velocity ZeroOutVelocity(Comp::Velocity fighterVelocity);
 		}
 	}
 }

@@ -13,8 +13,8 @@ namespace Blz
 
 			for (uint16 i = 0; i < scene.fighters.size(); ++i)
 			{
-				SpriteTileSheetComponent newSprite = System::SetSpriteWidthAndHeight(scene.fighters.at(i).GetComponent<SpriteTileSheetComponent>(), 200.0f, 200.0f);
-				SpriteTileSheetComponent newSprite2 = System::SetSpriteTexture(newSprite, fighterTexture);
+				Comp::SpriteTileSheet newSprite = CompSystem::SetSpriteWidthAndHeight(scene.fighters.at(i).GetComponent<Comp::SpriteTileSheet>(), 200.0f, 200.0f);
+				Comp::SpriteTileSheet newSprite2 = CompSystem::SetSpriteTexture(newSprite, fighterTexture);
 
 				scene.fighters.at(i).Insert(newSprite2);
 			}

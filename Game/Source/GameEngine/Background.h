@@ -3,7 +3,7 @@
 #include "Components/ComponentHolder.h"
 
 class Background :
-	ComponentHolder<SpriteComponent>
+	ComponentHolder<Comp::Sprite>
 {
 public:
 	Background() = default;

@@ -6,9 +6,9 @@ namespace Blz
 {
 	namespace Input
 	{
-		namespace System
+		namespace CompSystem
 		{
-			VelocityComponent GatherDirectionalInput(VelocityComponent fighterVelocity, Blz::Map<uint, bool>& keyMap)
+			Comp::Velocity GatherDirectionalInput(Comp::Velocity fighterVelocity, Blz::Map<uint, bool>& keyMap)
 			{
 				if (keyMap[SDLK_w])
 					fighterVelocity.Add(0.0f, 1.0f);

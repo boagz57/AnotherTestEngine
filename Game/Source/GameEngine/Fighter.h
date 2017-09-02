@@ -9,10 +9,10 @@
 #include "Components\Position.h"
 
 class Fighter :
-	public ComponentHolder<TransformComponent>,
-	public ComponentHolder<VelocityComponent>,
-	public ComponentHolder<SpriteTileSheetComponent>,
-	public ComponentHolder<PositionComponent>
+	public ComponentHolder<Comp::Transform>,
+	public ComponentHolder<Comp::Velocity>,
+	public ComponentHolder<Comp::SpriteTileSheet>,
+	public ComponentHolder<Comp::Position>
 {
 public:
 	Fighter() = default;

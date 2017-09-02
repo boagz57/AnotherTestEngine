@@ -30,7 +30,7 @@ namespace Blz
 			{
 				if (fighter.IsFighterControllable())
 				{
-					fighter.Insert(System::GatherDirectionalInput(fighter.GetComponent<VelocityComponent>(), keyMap));
+					fighter.Insert(CompSystem::GatherDirectionalInput(fighter.GetComponent<Comp::Velocity>(), keyMap));
 				};
 			}
 		}

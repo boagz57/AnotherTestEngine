@@ -12,9 +12,9 @@ namespace Blz
 	{
 		void AnimationManager::Init(Scene& scene)
 		{
-			AnimClip walkingUp = System::CreateAnimation(0, 7);
-			AnimClip walkingRight= System::CreateAnimation(8, 7);
-			AnimClip idle = System::CreateAnimation(24, 7);
+			AnimClip walkingUp = CompSystem::CreateAnimation(0, 7);
+			AnimClip walkingRight= CompSystem::CreateAnimation(8, 7);
+			AnimClip idle = CompSystem::CreateAnimation(24, 7);
 
 			animationMap[AnimationState::WALKINGUP] = walkingUp;
 			animationMap[AnimationState::WALKINGRIGHT] = walkingRight;
@@ -25,19 +25,19 @@ namespace Blz
 		{
 			for (Fighter& fighter : scene.fighters)
 			{
-				SpriteTileSheetComponent newSprite;
+				Comp::SpriteTileSheet newSprite;
 
-				if (fighter.GetComponent<VelocityComponent>().GetCurrentState().x > 0.0f)
+				if (fighter.GetComponent<Comp::Velocity>().GetCurrentState().x > 0.0f)
 				{
-					newSprite = System::SetAnimation(fighter.GetComponent<SpriteTileSheetComponent>(), animationMap.at(AnimationState::WALKINGRIGHT));
+					newSprite = CompSystem::SetAnimation(fighter.GetComponent<Comp::SpriteTileSheet>(), animationMap.at(AnimationState::WALKINGRIGHT));
 				}
-				else if (fighter.GetComponent<VelocityComponent>().GetCurrentState().y > 0.0f)
+				else if (fighter.GetComponent<Comp::Velocity>().GetCurrentState().y > 0.0f)
 				{
-					newSprite = System::SetAnimation(fighter.GetComponent<SpriteTileSheetComponent>(), animationMap.at(AnimationState::WALKINGUP));
+					newSprite = CompSystem::SetAnimation(fighter.GetComponent<Comp::SpriteTileSheet>(), animationMap.at(AnimationState::WALKINGUP));
 				}
 				else
 				{
-					newSprite = System::SetAnimation(fighter.GetComponent<SpriteTileSheetComponent>(), animationMap.at(AnimationState::IDLE));
+					newSprite = CompSystem::SetAnimation(fighter.GetComponent<Comp::SpriteTileSheet>(), animationMap.at(AnimationState::IDLE));
 				}
 
 				fighter.Insert(newSprite);

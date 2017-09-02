@@ -1,23 +1,25 @@
 #pragma once
 #include "Vector3D.h"
 
-class SpriteComponent
+namespace Comp
 {
-public:
-	SpriteComponent();
-	~SpriteComponent() = default;
+	class Sprite
+	{
+	public:
+		Sprite();
+		~Sprite() = default;
 
-	void SetScreenTargetLocation(sfloat screenPositionX, sfloat screenPositionY);
-	void SetWidthAndHeight(sfloat width, sfloat height);
-	void SetTextureID(GLuint id);
-	GLuint const GetTextureID() const;
+		void SetScreenTargetLocation(sfloat screenPositionX, sfloat screenPositionY);
+		void SetWidthAndHeight(sfloat width, sfloat height);
+		void SetTextureID(GLuint id);
+		GLuint const GetTextureID() const;
 
-	Blz::SmallVector<Vector3D> const GetVertexData() const;
+		Blz::SmallVector<Vector3D> const GetVertexData() const;
 
-private:
-	float width = 0.0f;
-	float height = 0.0f;
-	GLuint textureID = 0;
-	Blz::SmallVector<Vector3D> vertexData;
-};
-
+	private:
+		float width = 0.0f;
+		float height = 0.0f;
+		GLuint textureID = 0;
+		Blz::SmallVector<Vector3D> vertexData;
+	};
+}

@@ -1,15 +1,18 @@
 #pragma once
 #include <GLM/vec2.hpp>
 
-class VelocityComponent 
+namespace Comp
 {
-public:
-	VelocityComponent() = default;
+	class Velocity
+	{
+	public:
+		Velocity() = default;
 
-	glm::vec2 const GetCurrentState() const;
-	void Add(sfloat x, sfloat y);
-	void ZeroOut();
-	
-private:
-	glm::vec2 currentVelocity{ 0.0f, 0.0f };
-};
+		glm::vec2 const GetCurrentState() const;
+		void Add(sfloat x, sfloat y);
+		void ZeroOut();
+
+	private:
+		glm::vec2 currentVelocity{ 0.0f, 0.0f };
+	};
+}

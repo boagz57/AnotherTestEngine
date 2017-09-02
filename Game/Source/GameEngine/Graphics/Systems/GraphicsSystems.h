@@ -8,12 +8,12 @@ namespace Blz
 {
 	namespace Graphics 
 	{
-		namespace System
+		namespace CompSystem
 		{
-			PositionComponent ConvertWorldUnitsToScreenPixels(PositionComponent fighterPositionToConvert, uint16 const windowWidth);
-			SpriteTileSheetComponent SetSpriteScreenLocation(PositionComponent fighterTransform, SpriteTileSheetComponent fighterSprite);
-			void SendFighterSpriteDataToGPU(SpriteTileSheetComponent fighterSprite);
-			void SendFighterSpriteDataToGPU(SpriteComponent fighterSprite);
+			Comp::Position ConvertWorldUnitsToScreenPixels(Comp::Position fighterPositionToConvert, uint16 const windowWidth);
+			Comp::SpriteTileSheet SetSpriteScreenLocation(Comp::Position fighterTransform, Comp::SpriteTileSheet fighterSprite);
+			void SendFighterSpriteDataToGPU(Comp::SpriteTileSheet fighterSprite);
+			void SendFighterSpriteDataToGPU(Comp::Sprite fighterSprite);
 		}
 	}
 }

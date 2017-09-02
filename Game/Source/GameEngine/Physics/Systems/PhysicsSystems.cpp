@@ -7,9 +7,9 @@ namespace Blz
 {
 	namespace Physics
 	{
-		namespace System
+		namespace CompSystem
 		{
-			TransformComponent MoveFighter(TransformComponent fighterTransform, VelocityComponent fighterVelocity)
+			Comp::Transform MoveFighter(Comp::Transform fighterTransform, Comp::Velocity fighterVelocity)
 			{
 				//Move fighter position according to current velocity applied 
 				fighterTransform.Translate(fighterVelocity.GetCurrentState().x, fighterVelocity.GetCurrentState().y);
@@ -17,7 +17,7 @@ namespace Blz
 				return fighterTransform;
 			}
 
-			VelocityComponent ZeroOutVelocity(VelocityComponent fighterVelocity)
+			Comp::Velocity ZeroOutVelocity(Comp::Velocity fighterVelocity)
 			{
 				fighterVelocity.ZeroOut();
 				return fighterVelocity;

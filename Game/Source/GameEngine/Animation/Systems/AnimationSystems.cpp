@@ -7,7 +7,7 @@ namespace Blz
 {
 	namespace Animation 
 	{
-		namespace System
+		namespace CompSystem
 		{
 			Blz::Animation::AnimClip CreateAnimation(const uint16 startingIndex, const uint16 numTilesToAnimate)
 			{
@@ -19,7 +19,7 @@ namespace Blz
 				return animation;
 			}
 
-			SpriteTileSheetComponent SetAnimation(SpriteTileSheetComponent fighterSprite, AnimClip& animation)
+			Comp::SpriteTileSheet SetAnimation(Comp::SpriteTileSheet fighterSprite, AnimClip& animation)
 			{
 				fighterSprite.SetUVs(animation.GetCurrentClipIndex());
 				animation.IncrementIndex();

@@ -7,21 +7,21 @@ namespace Blz
 {
 	namespace GameWorld
 	{
-		namespace System
+		namespace CompSystem
 		{
-			SpriteTileSheetComponent SetSpriteTexture(SpriteTileSheetComponent fighterSprite, Blz::Graphics::Texture texture)
+			Comp::SpriteTileSheet SetSpriteTexture(Comp::SpriteTileSheet fighterSprite, Blz::Graphics::Texture texture)
 			{
 				fighterSprite.SetTextureID(texture.ID());
 				return fighterSprite;
 			}
 
-			SpriteComponent SetSpriteTexture(SpriteComponent fighterSprite, Blz::Graphics::Texture texture)
+			Comp::Sprite SetSpriteTexture(Comp::Sprite fighterSprite, Blz::Graphics::Texture texture)
 			{
 				fighterSprite.SetTextureID(texture.ID());
 				return fighterSprite;
 			}
 
-			SpriteTileSheetComponent SetSpriteWidthAndHeight(SpriteTileSheetComponent fighterSprite, sfloat const spriteWidth, sfloat const spriteHeight)
+			Comp::SpriteTileSheet SetSpriteWidthAndHeight(Comp::SpriteTileSheet fighterSprite, sfloat const spriteWidth, sfloat const spriteHeight)
 			{
 				fighterSprite.SetWidthAndHeight(spriteWidth, spriteHeight);
 				return fighterSprite;

@@ -7,10 +7,10 @@ namespace Blz
 {
 	namespace Animation 
 	{
-		namespace System
+		namespace CompSystem
 		{
 			AnimClip CreateAnimation(const uint16 startingIndex, const uint16 numTilesToAnimate);
-			SpriteTileSheetComponent SetAnimation(SpriteTileSheetComponent fighterSprite, AnimClip& animation);
+			Comp::SpriteTileSheet SetAnimation(Comp::SpriteTileSheet fighterSprite, AnimClip& animation);
 		}
 	}
 }
