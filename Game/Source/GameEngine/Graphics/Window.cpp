@@ -29,9 +29,9 @@ namespace Blz
 			//info to console (using a callback func) upon errors. This context can also be queried for versions lower than 4.3
 			//using extensions. This SDL function queries these extensions to help guarantee a debug context will be used
 
-#if (DEBUG) 
-			SDL_GL_SetAttribute(SDL_GL_CONTEXT_FLAGS, SDL_GL_CONTEXT_DEBUG_FLAG);
-#endif
+			#if (DEBUG) 
+				SDL_GL_SetAttribute(SDL_GL_CONTEXT_FLAGS, SDL_GL_CONTEXT_DEBUG_FLAG);
+			#endif
 
 			p_window = SDL_CreateWindow("Shadow Gods", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, this->width, this->height, SDL_WINDOW_OPENGL);
 			if (!p_window)

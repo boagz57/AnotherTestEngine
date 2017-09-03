@@ -9,10 +9,10 @@ namespace Blz
 		{
 		public:
 			Texture() = default;
-			Texture(const Blz::string imageFilePath);
+			explicit Texture(const Blz::string imageFilePath);
 			~Texture() = default;
 
-			GLuint ID() { return id; };
+			GLuint const ID() const { return id; };
 
 		private:
 			GLuint id = 0;

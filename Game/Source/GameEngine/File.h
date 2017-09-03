@@ -7,7 +7,7 @@ namespace Blz
 	public:
 		File() = default;
 		//Opens or creates(if not already created) a file for writing
-		File(char* fileName);
+		explicit File(char* fileName);
 		~File();
 
 		void Open(const char* fileName, const char* mode);

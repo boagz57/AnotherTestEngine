@@ -6,6 +6,8 @@ namespace Comp
 	class AABBComponent
 	{
 	public:
+		AABBComponent() = default;
+
 		inline glm::vec2 GetCurrentMinCoordinateOffset();
 		inline glm::vec2 GetCurrentMaxCoordinateOffset();
 

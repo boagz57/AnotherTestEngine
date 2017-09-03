@@ -7,7 +7,7 @@ class Vector3D
 {
 public:
 	inline Vector3D();
-	inline Vector3D(glm::vec3 position);
+	explicit inline Vector3D(glm::vec3 position);
 	inline Vector3D(glm::vec3 position, glm::vec2 textureCoordinates);
 
 	//Functions used for easier setting of attributes. Instead of having to write vec.position.x = blah, vec.position.y = blah, etc. 
