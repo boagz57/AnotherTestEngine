@@ -1,5 +1,6 @@
 #pragma once
 #include "Components\Sprite.h"
+#include "Containers\Array.h"
 #include "Components\SpriteTileSheet.h"
 
 namespace Blz
@@ -8,8 +9,7 @@ namespace Blz
 	{
 		namespace SysHelper
 		{
-			void SendFighterSpriteDataToGPU(Comp::SpriteTileSheet fighterSprite);
-			void SendFighterSpriteDataToGPU(Comp::Sprite fighterSprite);
+			void InitializeGLBuffer(Blz::Array<Vector3D, 6> vertexData);
 		}
 	}
 }

@@ -2,7 +2,7 @@
 #include <GL\glew.h>
 #include <GLM\vec4.hpp>
 #include <GLM\vec2.hpp>
-#include "Containers/SmallVector.h"
+#include "Containers/Array.h"
 #include "Graphics\Texture.h"
 #include "../Vector3D.h"
 
@@ -11,7 +11,7 @@ namespace Comp
 	class SpriteTileSheet
 	{
 	public:
-		SpriteTileSheet();
+		SpriteTileSheet() = default;
 		~SpriteTileSheet() = default;
 
 		void SetScreenTargetLocationAndTileDimensions(sfloat screenPositionX, sfloat screenPositionY, glm::ivec2 spriteSheetTileDimensions);
@@ -21,13 +21,13 @@ namespace Comp
 		void SetUVs(const uint16 startingIndex);
 		uint16 const CheckIndex() const;
 
-		Blz::SmallVector<Vector3D> const GetVertexData() const;
+		Blz::Array<Vector3D, 6> const GetVertexData() const;
 
 	private:
 		float width = 200.0f;
 		float height = 200.0f;
 		GLuint textureID = 0;
-		Blz::SmallVector<Vector3D> vertexData;
+		Blz::Array<Vector3D, 6> vertexData;
 		glm::ivec2 tileDimensions;
 		uint16 index = 0;
 	};

@@ -440,6 +440,7 @@ copy /y  "$(SolutionDir)ThirdParty\SDL\Lib\x86\SDL2.dll" "$(SolutionDir)Game\Bin
     <ClInclude Include="Source\GameEngine\Background.h" />
     <ClInclude Include="Source\GameEngine\Components\Position.h" />
     <ClInclude Include="Source\GameEngine\Components\Sprite.h" />
+    <ClInclude Include="Source\GameEngine\Containers\Array.h" />
     <ClInclude Include="Source\GameEngine\GameWorld\GameWorldManager.h" />
     <ClInclude Include="Source\GameEngine\Components\AABB.h" />
     <ClInclude Include="Source\GameEngine\Components\ComponentHolder.h" />

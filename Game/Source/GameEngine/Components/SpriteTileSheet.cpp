@@ -6,11 +6,6 @@
 
 namespace Comp
 {
-	SpriteTileSheet::SpriteTileSheet() 
-	{
-		vertexData.resize(6);
-	}
-
 	void SpriteTileSheet::SetScreenTargetLocationAndTileDimensions(sfloat screenPositionX, sfloat screenPositionY, glm::ivec2 spriteSheetTileDimensions)
 	{
 		tileDimensions = spriteSheetTileDimensions;
@@ -59,7 +54,7 @@ namespace Comp
 		return textureID;
 	}
 
-	Blz::SmallVector<Vector3D> const SpriteTileSheet::GetVertexData() const
+	Blz::Array<Vector3D, 6> const SpriteTileSheet::GetVertexData() const
 	{
 		return vertexData;
 	}

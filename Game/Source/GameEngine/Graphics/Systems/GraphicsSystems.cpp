@@ -27,7 +27,7 @@ namespace Blz
 			{
 				fighterSprite.SetScreenTargetLocationAndTileDimensions(fighterTransform.GetCurrentPosition().x, fighterTransform.GetCurrentPosition().y, glm::ivec2{ 8, 4 });
 				
-				SysHelper::SendFighterSpriteDataToGPU(fighterSprite);
+				SysHelper::InitializeGLBuffer(fighterSprite.GetVertexData());
 
 				return fighterSprite;
 			}

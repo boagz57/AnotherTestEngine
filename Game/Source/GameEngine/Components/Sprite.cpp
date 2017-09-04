@@ -3,11 +3,6 @@
 
 namespace Comp
 {
-	Sprite::Sprite() 
-	{
-		vertexData.resize(6);
-	}
-
 	void Sprite::SetScreenTargetLocation(sfloat screenPositionX, sfloat screenPositionY)
 	{
 		sfloat halfWidth = this->width / 2;
@@ -44,7 +39,7 @@ namespace Comp
 		return textureID;
 	}
 
-	Blz::SmallVector<Vector3D> const Sprite::GetVertexData() const
+	Blz::Array<Vector3D, 6> const Sprite::GetVertexData() const
 	{
 		return vertexData;
 	}
