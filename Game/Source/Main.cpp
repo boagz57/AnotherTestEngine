@@ -44,8 +44,23 @@ int main(int agrc, char** argv)
 			}
 		}
 
+		GLfloat verts[] =
+		{
+			0.0f, 1.0f,
+			-1.0f, -1.0f,
+			1.0f, -1.0f,
+		};
+
+		GLuint vboID;
+		glGenBuffers(1, &vboID);
+		glBindBuffer(GL_ARRAY_BUFFER, vboID);
+		glBufferData(GL_ARRAY_BUFFER, sizeof(verts), verts, GL_STATIC_DRAW);
+		glEnableVertexAttribArray(0);
+		glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 3, 0);
+
 		window.ClearBuffers();
 
+		glDrawArrays(GL_TRIANGLES, 0, 3);
 
 		window.SwapBuffers();
 	}
