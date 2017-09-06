@@ -12,14 +12,15 @@ namespace Blz
 	{
 		void AnimationManager::Init(Scene& scene)
 		{
-			uint16 walkingUp = CreateAnimation(0, 7);
 		}
 
 		void AnimationManager::Update(Scene& scene)
 		{
 			for (Fighter& fighter : scene.fighters)
 			{
-				
+				Comp::SpriteTileSheet newSprite = CompSystem::SetAnimation(fighter.GetComponent<Comp::SpriteTileSheet>(), *finalPose);
+
+				fighter.Insert(newSprite);
 			}
 		}
 
@@ -30,14 +31,14 @@ namespace Blz
 			animation.SetIndex(startingIndex);
 			animation.SetTotalTilesForAnimation(numTilesToAnimate);
 
-			this->animationMap[animation.ID()] = animation;
+			this->animationMap.insert(std::pair<uint16, AnimClip>(animation.ID(), animation));
 
 			return animation.ID();
 		}
 
 		void AnimationManager::PlayAnimation(uint16 animationToPlay)
 		{
-			finalPose = this->animationMap[animationToPlay];
+			finalPose = &this->animationMap[animationToPlay];
 		}
 	}
 }

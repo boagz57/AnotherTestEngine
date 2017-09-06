@@ -1,6 +1,6 @@
 #pragma once
 #include "AnimationClip.h"
-#include "Containers/Map.h"
+#include "Containers/Vector.h"
 #include "Scene.h"
 
 namespace Blz
@@ -21,7 +21,7 @@ namespace Blz
 
 		private:
 			Blz::Map<uint16, AnimClip> animationMap;
-			AnimClip finalPose;
+			AnimClip* finalPose;
 		};
 	}
 }

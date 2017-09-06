@@ -9,7 +9,7 @@ namespace Blz
 	{
 		namespace CompSystem
 		{
-			Comp::SpriteTileSheet SetAnimation(Comp::SpriteTileSheet fighterSprite, AnimClip animation);
+			Comp::SpriteTileSheet SetAnimation(Comp::SpriteTileSheet fighterSprite, AnimClip& animation);
 		}
 	}
 }

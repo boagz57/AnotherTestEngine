@@ -60,9 +60,6 @@ int main(int agrc, char** argv)
 	{
 		Input.Update(scene);
 
-		for (int i = 0; i < 100; i++)
-			LOG("Hello");
-
 		game.Update(p_Player);
 
 		Physics.Update(scene);

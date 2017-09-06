@@ -1,5 +1,11 @@
 #pragma once
+#include "Containers/Map.h"
 #include "Fighter.h"
+
+enum class AnimationState
+{
+	WALKINGUP
+};
 
 class Game
 {
@@ -11,6 +17,6 @@ public:
 	void Shutdown();
 
 private:
-
+	Blz::Map<AnimationState, uint16> animationMap;
 };
 
