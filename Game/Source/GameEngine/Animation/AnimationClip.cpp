@@ -4,6 +4,13 @@ namespace Blz
 {
 	namespace Animation
 	{
+		uint16 AnimClip::id = 0;
+
+		AnimClip::AnimClip()
+		{
+			this->id++;
+		}
+
 		void AnimClip::SetIndex(uint16 index)
 		{
 			this->currentIndex = index;
@@ -35,6 +42,11 @@ namespace Blz
 		const uint16 AnimClip::GetCurrentClipIndex() const
 		{
 			return currentIndex;
+		}
+
+		const uint16 AnimClip::ID() const
+		{
+			return this->id;
 		}
 	}
 }

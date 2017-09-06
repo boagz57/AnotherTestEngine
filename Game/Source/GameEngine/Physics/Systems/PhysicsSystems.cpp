@@ -9,12 +9,11 @@ namespace Blz
 	{
 		namespace CompSystem
 		{
-			Comp::Transform MoveFighter(Comp::Transform fighterTransform, Comp::Velocity fighterVelocity)
+			Comp::Position MoveFighter(Comp::Transform fighterTransform, Comp::Position fighterPosition)
 			{
-				//Move fighter position according to current velocity applied 
-				fighterTransform.TranslateBy(fighterVelocity.GetCurrentState().x, fighterVelocity.GetCurrentState().y);
+				fighterPosition.AddBy(fighterTransform.GetCurrentTranslation().x, fighterTransform.GetCurrentTranslation().y);
 
-				return fighterTransform;
+				return fighterPosition;
 			}
 
 			Comp::Velocity ZeroOutVelocity(Comp::Velocity fighterVelocity)

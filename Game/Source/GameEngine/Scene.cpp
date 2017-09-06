@@ -11,7 +11,6 @@ Fighter* Scene::CreateAIFighter(sfloat startingPositionX, sfloat startingPositio
 	startingPositionX = rint(startingPositionX);
 	startingPositionY = rint(startingPositionY);
 
-	RUNTIME_ASSERT(this->numFighters <= 2, "Creating too many fighters for game to handle!");
 	RUNTIME_ASSERT(startingPositionX <= 160.0f && startingPositionY <= 90.0f, "Cannot position fighter outside specified world unit range of 160 units in x or 90 units in y");
 
 	Fighter fighter(startingPositionX, startingPositionY, texture);
@@ -26,7 +25,6 @@ Fighter* Scene::CreatePlayerFighter(sfloat startingPositionX, sfloat startingPos
 	startingPositionX = rint(startingPositionX);
 	startingPositionY = rint(startingPositionY);
 
-	RUNTIME_ASSERT(this->numFighters <= 2, "Creating too many fighters for game to handle!");
 	RUNTIME_ASSERT(startingPositionX <= 160.0f && startingPositionY <= 90.0f, "Cannot position fighter outside specified design unit range of 160 units in x or 90 units in y");
 
 	Fighter fighter(startingPositionX, startingPositionY, texture);

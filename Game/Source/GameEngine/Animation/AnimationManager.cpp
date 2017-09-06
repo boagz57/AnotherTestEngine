@@ -12,36 +12,32 @@ namespace Blz
 	{
 		void AnimationManager::Init(Scene& scene)
 		{
-			AnimClip walkingUp = CompSystem::CreateAnimation(0, 7);
-			AnimClip walkingRight= CompSystem::CreateAnimation(8, 7);
-			AnimClip idle = CompSystem::CreateAnimation(24, 7);
-
-			animationMap[AnimationState::WALKINGUP] = walkingUp;
-			animationMap[AnimationState::WALKINGRIGHT] = walkingRight;
-			animationMap[AnimationState::IDLE] = idle;
+			uint16 walkingUp = CreateAnimation(0, 7);
 		}
 
 		void AnimationManager::Update(Scene& scene)
 		{
 			for (Fighter& fighter : scene.fighters)
 			{
-				Comp::SpriteTileSheet newSprite;
-
-				if (fighter.GetComponent<Comp::Velocity>().GetCurrentState().x > 0.0f)
-				{
-					newSprite = CompSystem::SetAnimation(fighter.GetComponent<Comp::SpriteTileSheet>(), animationMap.at(AnimationState::WALKINGRIGHT));
-				}
-				else if (fighter.GetComponent<Comp::Velocity>().GetCurrentState().y > 0.0f)
-				{
-					newSprite = CompSystem::SetAnimation(fighter.GetComponent<Comp::SpriteTileSheet>(), animationMap.at(AnimationState::WALKINGUP));
-				}
-				else
-				{
-					newSprite = CompSystem::SetAnimation(fighter.GetComponent<Comp::SpriteTileSheet>(), animationMap.at(AnimationState::IDLE));
-				}
-
-				fighter.Insert(newSprite);
+				
 			}
+		}
+
+		uint16 AnimationManager::CreateAnimation(const uint16 startingIndex, const uint16 numTilesToAnimate)
+		{
+			AnimClip animation;
+
+			animation.SetIndex(startingIndex);
+			animation.SetTotalTilesForAnimation(numTilesToAnimate);
+
+			this->animationMap[animation.ID()] = animation;
+
+			return animation.ID();
+		}
+
+		void AnimationManager::PlayAnimation(uint16 animationToPlay)
+		{
+			finalPose = this->animationMap[animationToPlay];
 		}
 	}
 }

@@ -2,10 +2,16 @@
 
 namespace Comp
 {
-	void Position::MultiplyPositionBy(int16 const c_MultiplyX, int16 const c_MultiplyY)
+	void Position::MultiplyBy(int16 const c_MultiplyX, int16 const c_MultiplyY)
 	{
 		this->currentPosition.x *= c_MultiplyX;
 		this->currentPosition.y *= c_MultiplyY;
+	}
+
+	void Position::AddBy(sfloat amountToAddX, sfloat amountToAddY)
+	{
+		this->currentPosition.x += amountToAddX;
+		this->currentPosition.y += amountToAddY;
 	}
 
 	void Position::SetPosition(sfloat const positionX, sfloat const positionY)

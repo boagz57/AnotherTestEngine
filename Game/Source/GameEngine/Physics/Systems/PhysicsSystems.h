@@ -1,6 +1,7 @@
 #pragma once
 #include "../../Components/Transform.h"
 #include "../../Components/Velocity.h"
+#include "../../Components/Position.h"
 
 namespace Blz
 {
@@ -8,7 +9,7 @@ namespace Blz
 	{
 		namespace CompSystem
 		{
-			Comp::Transform MoveFighter(Comp::Transform fighterTransform, Comp::Velocity fighterVelocity);
+			Comp::Position MoveFighter(Comp::Transform fighterTransform, Comp::Position fighterPosition);
 			//TODO: Will most likely want to remove small utility functions like this eventually by ironing out component/system architecture 
 			Comp::Velocity ZeroOutVelocity(Comp::Velocity fighterVelocity);
 		}

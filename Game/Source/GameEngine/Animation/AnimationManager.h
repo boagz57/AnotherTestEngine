@@ -7,13 +7,6 @@ namespace Blz
 {
 	namespace Animation
 	{
-		enum class AnimationState
-		{
-			WALKINGUP,
-			WALKINGRIGHT,
-			IDLE
-		};
-
 		class AnimationManager
 		{
 		public:
@@ -23,8 +16,12 @@ namespace Blz
 			void Init(Scene& scene);
 			void Update(Scene& scene);
 
+			uint16 CreateAnimation(const uint16 startingIndex, const uint16 numTilesToAnimate);
+			void PlayAnimation(uint16 animationToPlay);
+
 		private:
-			Blz::Map<AnimationState, AnimClip> animationMap;
+			Blz::Map<uint16, AnimClip> animationMap;
+			AnimClip finalPose;
 		};
 	}
 }

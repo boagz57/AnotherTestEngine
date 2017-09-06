@@ -9,17 +9,7 @@ namespace Blz
 	{
 		namespace CompSystem
 		{
-			Blz::Animation::AnimClip CreateAnimation(const uint16 startingIndex, const uint16 numTilesToAnimate)
-			{
-				AnimClip animation;
-
-				animation.SetIndex(startingIndex);
-				animation.SetTotalTilesForAnimation(numTilesToAnimate);
-				
-				return animation;
-			}
-
-			Comp::SpriteTileSheet SetAnimation(Comp::SpriteTileSheet fighterSprite, AnimClip& animation)
+			Comp::SpriteTileSheet SetAnimation(Comp::SpriteTileSheet fighterSprite, AnimClip animation)
 			{
 				fighterSprite.SetUVs(animation.GetCurrentClipIndex());
 				animation.IncrementIndex();

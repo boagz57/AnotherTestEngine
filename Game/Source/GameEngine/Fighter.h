@@ -29,6 +29,8 @@ public:
 	bool IsFighterControllable();
 	void SetFighterToBeControllable();
 
+	glm::vec2 originalPosition{ 160.0f, 0.0f };
+
 private:
 	bool isControllable = false;
 };

@@ -6,7 +6,8 @@ namespace Comp
 	class Position
 	{
 	public:
-		void MultiplyPositionBy(int16 const amountToMultipyX, int16 const amountToMultiplyY);
+		void MultiplyBy(int16 const amountToMultipyX, int16 const amountToMultiplyY);
+		void AddBy(sfloat amountToAddX, sfloat amountToAddY);
 		void SetPosition(sfloat const positionX, sfloat const positionY);
 		glm::vec2 const GetCurrentPosition() const;
 

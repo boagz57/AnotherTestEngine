@@ -1,5 +1,6 @@
 #include "../Scene.h"
 #include "Systems/PhysicsSystems.h"
+#include "Components/Position.h"
 #include "Containers/SmallVector.h"
 #include "PhysicsManager.h"
 
@@ -20,9 +21,9 @@ namespace Blz
 		{
 			for (Fighter& fighter : scene.fighters)
 			{
-				Comp::Transform newFighterTranslation = CompSystem::MoveFighter(fighter.GetComponent<Comp::Transform>(), fighter.GetComponent<Comp::Velocity>());
+				Comp::Position newFighterPosition = CompSystem::MoveFighter(fighter.GetComponent<Comp::Transform>(), fighter.GetComponent<Comp::Position>());
 
-				fighter.Insert<Comp::Transform>(newFighterTranslation);
+				fighter.Insert<Comp::Position>(newFighterPosition);
 			}
 		}
 	}

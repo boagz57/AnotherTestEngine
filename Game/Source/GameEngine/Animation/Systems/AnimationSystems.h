@@ -9,8 +9,7 @@ namespace Blz
 	{
 		namespace CompSystem
 		{
-			AnimClip CreateAnimation(const uint16 startingIndex, const uint16 numTilesToAnimate);
-			Comp::SpriteTileSheet SetAnimation(Comp::SpriteTileSheet fighterSprite, AnimClip& animation);
+			Comp::SpriteTileSheet SetAnimation(Comp::SpriteTileSheet fighterSprite, AnimClip animation);
 		}
 	}
 }

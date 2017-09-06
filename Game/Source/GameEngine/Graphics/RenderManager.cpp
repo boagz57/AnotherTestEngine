@@ -46,7 +46,7 @@ namespace Blz
 
 				//Translate vertices of fighter to move him
 				{
-					glm::vec2 translationAmount = fighter.GetComponent<Comp::Transform>().GetCurrentTranslation();
+					glm::vec2 translationAmount = fighter.GetComponent<Comp::Position>().GetCurrentPosition() - fighter.originalPosition;
 
 					//Round values to nearest int value to avoid fractional values which can create distorted art work
 					translationAmount.x = rint(translationAmount.x);
@@ -73,8 +73,11 @@ namespace Blz
 
 				//TODO: Remove zeroing out velocity from Renderer update. 
 				Comp::Velocity vel = fighter.GetComponent<Comp::Velocity>();
+				Comp::Transform trans = fighter.GetComponent<Comp::Transform>();
+				trans.ZeroOut();
 				vel.ZeroOut();
 				fighter.Insert(vel);
+				fighter.Insert(trans);
 			}
 		}
 	}

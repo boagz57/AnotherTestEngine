@@ -12,6 +12,7 @@
 #include "GameEngine\Graphics\ShaderProgram.h"
 #include "GameEngine\Graphics\Window.h"
 #include "GameEngine\Scene.h"
+#include "Game.h"
 #include "GameEngine\Fighter.h"
 #include "GameEngine\Timing\Timing.h"
 #include "GameEngine\Animation\AnimationManager.h"
@@ -21,16 +22,19 @@
 #include "GameEngine\AI\AIManager.h"
 #include "GameEngine\Physics\PhysicsManager.h"
 
+Blz::Graphics::RenderManager Renderer;
+Blz::Input::InputManager Input;
+Blz::AI::AIManager AI;
+Blz::Animation::AnimationManager animation;
+Blz::Physics::PhysicsManager Physics;
+Blz::GameWorld::GameWorldManager gameWolrd;
+
 int main(int agrc, char** argv)
 {
 	Blz::Graphics::Window window(1280, 720);
 	Blz::Graphics::ShaderProgram colorShaderProgram;
-	Blz::Graphics::RenderManager Renderer;
-	Blz::Input::InputManager Input;
-	Blz::AI::AIManager AI;
-	Blz::Animation::AnimationManager Animation;
-	Blz::Physics::PhysicsManager Physics;
-	Blz::GameWorld::GameWorldManager gameWolrd;
+
+	Game game;
 	Scene scene;
 
 	colorShaderProgram.Init("Source/GameEngine/Shaders/VertexShader.glsl", "Source/GameEngine/Shaders/FragmentShader.glsl");
@@ -46,18 +50,24 @@ int main(int agrc, char** argv)
 	auto* p_Enemy = scene.CreateAIFighter(80.0f, 45.0f, fighterTexture);
 
 	//Initialize systems
+	game.Init(p_Player);
 	gameWolrd.Init(scene);
 	Renderer.Init(scene, window);
-	Animation.Init(scene);
+	animation.Init(scene);
 
 	//Game loop
 	while (true)
 	{
 		Input.Update(scene);
 
+		for (int i = 0; i < 100; i++)
+			LOG("Hello");
+
+		game.Update(p_Player);
+
 		Physics.Update(scene);
 		AI.Update(scene);
-		Animation.Update(scene);
+		animation.Update(scene);
 
 		window.ClearBuffers();
 

@@ -13,11 +13,11 @@ namespace Blz
 			{
 				if (windowWidth == 1920)
 				{
-					fighterTransformToConvert.MultiplyPositionBy(12, 12);
+					fighterTransformToConvert.MultiplyBy(12, 12);
 				}
 				else if (windowWidth == 1280)
 				{
-					fighterTransformToConvert.MultiplyPositionBy(8, 8);
+					fighterTransformToConvert.MultiplyBy(8, 8);
 				}
 
 				return fighterTransformToConvert;

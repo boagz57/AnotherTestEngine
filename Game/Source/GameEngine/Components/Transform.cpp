@@ -12,4 +12,10 @@ namespace Comp
 		translation.x += amountToTranslateX;
 		translation.y += amountToTranslateY;
 	}
+
+	void Transform::ZeroOut()
+	{
+		translation *= 0;
+	}
+
 }
