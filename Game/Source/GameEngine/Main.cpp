@@ -9,25 +9,23 @@
 	and make sure no exception based library is used. 
 */
 
-#include "GameEngine\Graphics\ShaderProgram.h"
-#include "GameEngine\Graphics\Window.h"
-#include "GameEngine\Scene.h"
-#include "Game.h"
-#include "GameEngine\Fighter.h"
-#include "GameEngine\Timing\Timing.h"
-#include "GameEngine\Animation\AnimationManager.h"
-#include "GameEngine\Input\InputManager.h"
-#include "GameEngine\GameWorld\GameWorldManager.h"
-#include "GameEngine\Graphics\RenderManager.h"
-#include "GameEngine\AI\AIManager.h"
-#include "GameEngine\Physics\PhysicsManager.h"
+#include "Graphics\ShaderProgram.h"
+#include "Graphics\Window.h"
+#include "Scene.h"
+#include "../Game.h"
+#include "Fighter.h"
+#include "Timing\Timing.h"
+#include "Animation\AnimationManager.h"
+#include "Input\InputManager.h"
+#include "Graphics\RenderManager.h"
+#include "AI\AIManager.h"
+#include "Physics\PhysicsManager.h"
 
 Blz::Graphics::RenderManager Renderer;
 Blz::Input::InputManager Input;
 Blz::AI::AIManager AI;
 Blz::Animation::AnimationManager animation;
 Blz::Physics::PhysicsManager Physics;
-Blz::GameWorld::GameWorldManager gameWolrd;
 
 int main(int agrc, char** argv)
 {
@@ -51,7 +49,6 @@ int main(int agrc, char** argv)
 
 	//Initialize systems
 	game.Init(p_Player);
-	gameWolrd.Init(scene);
 	Renderer.Init(scene, window);
 	animation.Init(scene);
 

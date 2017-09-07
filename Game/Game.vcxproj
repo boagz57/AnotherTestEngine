@@ -409,10 +409,8 @@ copy /y  "$(SolutionDir)ThirdParty\SDL\Lib\x86\SDL2.dll" "$(SolutionDir)Game\Bin
     <ClCompile Include="Source\GameEngine\Background.cpp" />
     <ClCompile Include="Source\GameEngine\Components\Position.cpp" />
     <ClCompile Include="Source\GameEngine\Components\Sprite.cpp" />
-    <ClCompile Include="Source\GameEngine\GameWorld\GameWorldManager.cpp" />
     <ClCompile Include="Source\GameEngine\Components\Transform.cpp" />
     <ClCompile Include="Source\GameEngine\Components\Velocity.cpp" />
-    <ClCompile Include="Source\GameEngine\GameWorld\Systems\GameWorldSystems.cpp" />
     <ClCompile Include="Source\GameEngine\Graphics\Systems\GraphicsSystems.cpp" />
     <ClCompile Include="Source\GameEngine\Graphics\Systems\SystemHelpers\SystemHelpers.cpp" />
     <ClCompile Include="Source\GameEngine\Input\Systems\InputSystems.cpp" />
@@ -431,7 +429,7 @@ copy /y  "$(SolutionDir)ThirdParty\SDL\Lib\x86\SDL2.dll" "$(SolutionDir)Game\Bin
     <ClCompile Include="Source\GameEngine\File.cpp" />
     <ClCompile Include="Source\GameEngine\Components\SpriteTileSheet.cpp" />
     <ClCompile Include="Source\GameEngine\Timing\Timing.cpp" />
-    <ClCompile Include="Source\Main.cpp" />
+    <ClCompile Include="Source\GameEngine\Main.cpp" />
     <ClCompile Include="Source\GameEngine\Graphics\Window.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -443,11 +441,9 @@ copy /y  "$(SolutionDir)ThirdParty\SDL\Lib\x86\SDL2.dll" "$(SolutionDir)Game\Bin
     <ClInclude Include="Source\GameEngine\Components\Position.h" />
     <ClInclude Include="Source\GameEngine\Components\Sprite.h" />
     <ClInclude Include="Source\GameEngine\Containers\Array.h" />
-    <ClInclude Include="Source\GameEngine\GameWorld\GameWorldManager.h" />
     <ClInclude Include="Source\GameEngine\Components\AABB.h" />
     <ClInclude Include="Source\GameEngine\Components\ComponentHolder.h" />
     <ClInclude Include="Source\GameEngine\Components\Transform.h" />
-    <ClInclude Include="Source\GameEngine\GameWorld\Systems\GameWorldSystems.h" />
     <ClInclude Include="Source\GameEngine\Graphics\Systems\GraphicsSystems.h" />
     <ClInclude Include="Source\GameEngine\Graphics\Systems\SystemHelpers\SystemHelpers.h" />
     <ClInclude Include="Source\GameEngine\Input\Systems\InputSystems.h" />

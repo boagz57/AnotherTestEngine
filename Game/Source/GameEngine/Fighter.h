@@ -21,7 +21,7 @@ public:
 	~Fighter() = default;
 
 	template<class T>
-	T GetComponent();
+	const T GetComponent() const;
 
 	template<class T>
 	void Insert(T comp);
@@ -36,7 +36,7 @@ private:
 };
 
 template<class T>
-inline T Fighter::GetComponent() 
+inline const T Fighter::GetComponent() const
 {
 	return this->ComponentHolder<T>::component;
 }

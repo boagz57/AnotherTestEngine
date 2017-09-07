@@ -1,4 +1,6 @@
 #include "Game.h"
+#include "Components/Transform.h"
+#include "Components/Velocity.h"
 #include "GameEngine/Animation/AnimationManager.h"
 
 extern Blz::Animation::AnimationManager animation;
