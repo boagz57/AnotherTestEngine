@@ -27,21 +27,6 @@ namespace Blz
 
 		Blz::SmallVector<Fighter> MoveAI(Blz::SmallVector<Fighter> fighters)
 		{
-			Fighter* player = nullptr;
-			Fighter* AI = nullptr;
-
-			for (Fighter& fighter : fighters)
-			{
-				if (fighter.IsFighterControllable())
-				{
-					player = &fighter;
-				}
-				else
-				{
-					AI = &fighter;
-				}
-			}
-
 			return fighters;
 		}
 	}

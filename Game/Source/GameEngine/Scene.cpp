@@ -29,8 +29,6 @@ Fighter* Scene::CreatePlayerFighter(sfloat startingPositionX, sfloat startingPos
 
 	Fighter fighter(startingPositionX, startingPositionY, texture);
 
-	fighter.SetFighterToBeControllable();
-
 	fighters.push_back(fighter);
 	
 	return &fighters.at(this->numFighters++);

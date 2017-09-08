@@ -26,6 +26,7 @@ Blz::Input::InputManager Input;
 Blz::AI::AIManager AI;
 Blz::Animation::AnimationManager animation;
 Blz::Physics::PhysicsManager Physics;
+Scene scene;
 
 int main(int agrc, char** argv)
 {
@@ -33,7 +34,6 @@ int main(int agrc, char** argv)
 	Blz::Graphics::ShaderProgram colorShaderProgram;
 
 	Game game;
-	Scene scene;
 
 	colorShaderProgram.Init("Source/GameEngine/Shaders/VertexShader.glsl", "Source/GameEngine/Shaders/FragmentShader.glsl");
 	colorShaderProgram.Compile();
@@ -42,13 +42,8 @@ int main(int agrc, char** argv)
 	colorShaderProgram.Link();
 	colorShaderProgram.Bind();
 
-	Blz::Graphics::Texture fighterTexture("Girl.png");
-
-	auto* p_Player = scene.CreatePlayerFighter(160.0f, 0.0f, fighterTexture);
-	auto* p_Enemy = scene.CreateAIFighter(80.0f, 45.0f, fighterTexture);
-
 	//Initialize systems
-	game.Init(p_Player);
+	game.Init();
 	Renderer.Init(scene, window);
 	animation.Init(scene);
 
@@ -57,7 +52,7 @@ int main(int agrc, char** argv)
 	{
 		Input.Update(scene);
 
-		game.Update(p_Player);
+		game.Update();
 
 		Physics.Update(scene);
 		AI.Update(scene);

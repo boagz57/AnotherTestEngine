@@ -6,6 +6,7 @@
 #include "Components\ComponentHolder.h"
 #include "Components/SpriteTileSheet.h"
 #include "Components/Velocity.h"
+#include "Components/Input.h"
 #include "Components/Transform.h"
 #include "Components\Position.h"
 
@@ -13,7 +14,8 @@ class Fighter :
 	public ComponentHolder<Comp::Transform>,
 	public ComponentHolder<Comp::Velocity>,
 	public ComponentHolder<Comp::SpriteTileSheet>,
-	public ComponentHolder<Comp::Position>
+	public ComponentHolder<Comp::Position>,
+	public ComponentHolder<Comp::Input>
 {
 public:
 	Fighter() = default;
@@ -26,13 +28,7 @@ public:
 	template<class T>
 	void Insert(T comp);
 
-	bool IsFighterControllable();
-	void SetFighterToBeControllable();
-
 	glm::vec2 originalPosition{ 160.0f, 0.0f };
-
-private:
-	bool isControllable = false;
 };
 
 template<class T>

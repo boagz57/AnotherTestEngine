@@ -1,6 +1,7 @@
 #pragma once
 #include "Containers/Map.h"
 #include "../../Components/Velocity.h"
+#include "../../Components/Input.h"
 
 namespace Blz
 {
@@ -8,7 +9,7 @@ namespace Blz
 	{
 		namespace CompSystem
 		{
-			Comp::Velocity GatherDirectionalInput(Comp::Velocity velocity, Blz::Map<uint, bool>& keyMap);
+			Comp::Velocity GatherDirectionalInput(Comp::Velocity velocity, Comp::Input input, Blz::Map<uint, bool>& keyMap);
 		}
 	}
 }

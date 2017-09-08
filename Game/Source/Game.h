@@ -12,11 +12,13 @@ class Game
 public:
 	Game() = default;
 
-	void Init(Fighter* fighter);
-	void Update(Fighter* fighter);
+	void Init();
+	void Update();
 	void Shutdown();
 
 private:
+	Fighter* p_Player;
+	Fighter* p_AI;
 	Blz::Map<AnimationState, uint16> animationMap;
 };
 

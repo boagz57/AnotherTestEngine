@@ -28,10 +28,7 @@ namespace Blz
 
 			for (Fighter& fighter : scene.fighters)
 			{
-				if (fighter.IsFighterControllable())
-				{
-					fighter.Insert(CompSystem::GatherDirectionalInput(fighter.GetComponent<Comp::Velocity>(), keyMap));
-				};
+				fighter.Insert(CompSystem::GatherDirectionalInput(fighter.GetComponent<Comp::Velocity>(), fighter.GetComponent<Comp::Input>(), keyMap));
 			}
 		}
 	}

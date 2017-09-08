@@ -7,13 +7,3 @@ Fighter::Fighter(sfloat startPositionX, sfloat startPositionY, Blz::Graphics::Te
 	ComponentHolder<Comp::Position>::component.SetPosition(startPositionX, startPositionY);
 	ComponentHolder<Comp::SpriteTileSheet>::component.SetTexture(texture);
 }
-
-bool Fighter::IsFighterControllable()
-{
-	return isControllable;
-}
-
-void Fighter::SetFighterToBeControllable()
-{
-	isControllable = true;
-}
