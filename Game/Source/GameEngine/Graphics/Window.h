@@ -10,7 +10,7 @@ namespace Blz
 {
 	namespace Graphics
 	{
-		class RenderManager;
+		class Engine;
 
 		class Window
 		{
@@ -25,7 +25,7 @@ namespace Blz
 			void SwapBuffers();
 
 		private:
-			friend class RenderManager;
+			friend class Engine;
 
 			const uint16 width;
 			const uint16 height;

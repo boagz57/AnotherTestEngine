@@ -7,7 +7,7 @@
 #include "../Components/SpriteTileSheet.h"
 #include "Texture.h"
 #include "../Vector3D.h"
-#include "RenderManager.h"
+#include "GraphicsEngine.h"
 #include "Systems\GraphicsSystems.h"
 #include "../Scene.h"
 #include "../Fighter.h"
@@ -16,7 +16,7 @@ namespace Blz
 {
 	namespace Graphics
 	{
-		void RenderManager::Init(Scene& scene, Window& window)
+		void Engine::Init(Scene& scene, Window& window)
 		{
 			//Turn OpenGL normalized device coodinates (-1 to 1) to pixel coordinates
 			orthoProjection = glm::ortho(0.0f, static_cast<sfloat>(window.width), 0.0f, static_cast<sfloat>(window.height));
@@ -31,7 +31,7 @@ namespace Blz
 			}
 		}
 
-		void RenderManager::Update(Scene& scene, ShaderProgram& shader)
+		void Engine::Update(Scene& scene, ShaderProgram& shader)
 		{
 			GLuint transformationMatrixUniformLocation = shader.GetUniformLocation("transformationMatrix");
 

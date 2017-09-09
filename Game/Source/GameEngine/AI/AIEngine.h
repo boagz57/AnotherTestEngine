@@ -5,11 +5,11 @@ namespace Blz
 {
 	namespace AI
 	{
-		class AIManager
+		class Engine
 		{
 		public:
-			AIManager() = default;
-			~AIManager() = default;
+			Engine() = default;
+			~Engine() = default;
 
 			void Init();
 			void Shutdown();

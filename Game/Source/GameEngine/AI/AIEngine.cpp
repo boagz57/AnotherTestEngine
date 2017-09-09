@@ -2,7 +2,7 @@
 #include "../Scene.h"
 #include "../Fighter.h"
 #include "Containers/SmallVector.h"
-#include "AIManager.h"
+#include "AIEngine.h"
 
 namespace Blz
 {
@@ -10,17 +10,17 @@ namespace Blz
 	{
 		Blz::SmallVector<Fighter> MoveAI(Blz::SmallVector<Fighter> fighters);
 
-		void AIManager::Init()
+		void Engine::Init()
 		{
 
 		}
 
-		void AIManager::Shutdown()
+		void Engine::Shutdown()
 		{
 
 		}
 
-		void AIManager::Update(Scene& scene)
+		void Engine::Update(Scene& scene)
 		{
 			Blz::SmallVector<Fighter> updatedFighters = MoveAI(scene.fighters);
 		}

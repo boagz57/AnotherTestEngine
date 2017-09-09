@@ -15,23 +15,24 @@
 #include "../Game.h"
 #include "Fighter.h"
 #include "Timing\Timing.h"
-#include "Animation\AnimationManager.h"
-#include "Input\InputManager.h"
-#include "Graphics\RenderManager.h"
-#include "AI\AIManager.h"
-#include "Physics\PhysicsManager.h"
+#include "Animation\AnimationEngine.h"
+#include "Input\InputEngine.h"
+#include "Graphics\GraphicsEngine.h"
+#include "AI\AIEngine.h"
+#include "Physics\PhysicsEngine.h"
 
-Blz::Graphics::RenderManager Renderer;
-Blz::Input::InputManager Input;
-Blz::AI::AIManager AI;
-Blz::Animation::AnimationManager animation;
-Blz::Physics::PhysicsManager Physics;
 Scene scene;
 
 int main(int agrc, char** argv)
 {
 	Blz::Graphics::Window window(1280, 720);
 	Blz::Graphics::ShaderProgram colorShaderProgram;
+
+	Blz::Graphics::Engine renderer;
+	Blz::Input::Engine input;
+	Blz::AI::Engine AI;
+	Blz::Animation::Engine animation;
+	Blz::Physics::Engine physics;
 
 	Game game;
 
@@ -44,23 +45,23 @@ int main(int agrc, char** argv)
 
 	//Initialize systems
 	game.Init();
-	Renderer.Init(scene, window);
+	renderer.Init(scene, window);
 	animation.Init(scene);
 
 	//Game loop
 	while (true)
 	{
-		Input.Update(scene);
+		input.Update(scene);
 
 		game.Update();
 
-		Physics.Update(scene);
+		physics.Update(scene);
 		AI.Update(scene);
 		animation.Update(scene);
 
 		window.ClearBuffers();
 
-		Renderer.Update(scene, colorShaderProgram);
+		renderer.Update(scene, colorShaderProgram);
 
 		window.SwapBuffers();
 

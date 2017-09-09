@@ -1,21 +1,15 @@
 #pragma once
-#include "../Scene.h"
+#include "Fighter.h"
 
 namespace Blz
 {
 	namespace Physics
 	{
-		class PhysicsManager
+		class Manager
 		{
 		public:
-			PhysicsManager() = default;
-			~PhysicsManager() = default;
-
 			void Move(Fighter* fighter, sfloat movementInX, sfloat movementInY);
-
-			void Init();
-			void Shutdown();
-			void Update(Scene& scene);
 		};
 	}
 }
+

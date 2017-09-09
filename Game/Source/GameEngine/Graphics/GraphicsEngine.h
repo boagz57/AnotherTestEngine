@@ -14,11 +14,11 @@ namespace Blz
 {
 	namespace Graphics
 	{
-		class RenderManager
+		class Engine
 		{
 		public:
-			RenderManager() = default;
-			~RenderManager() = default;
+			Engine() = default;
+			~Engine() = default;
 
 			void Init(Scene& scene, Window& window);
 			void Update(Scene& scene, ShaderProgram& shader);
