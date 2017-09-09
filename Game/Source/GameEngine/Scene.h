@@ -10,8 +10,7 @@ public:
 	Scene();
 	~Scene() = default;
 
-	Fighter* CreateAIFighter(sfloat startingWorldPositionX, sfloat startingWorldPositionY, Blz::Graphics::Texture texture);
-	Fighter* CreatePlayerFighter(sfloat startingWorldPositionX, sfloat startingWorldPositionY, Blz::Graphics::Texture texture);
+	Fighter* CreateFighter(sfloat startingWorldPositionX, sfloat startingWorldPositionY, Blz::Graphics::Texture texture);
 
 	Blz::SmallVector<Fighter> fighters;
 

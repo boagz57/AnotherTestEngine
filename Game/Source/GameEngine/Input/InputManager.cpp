@@ -7,6 +7,15 @@ namespace Blz
 {
 	namespace Input
 	{
+
+		void InputManager::SetFighterToBeControllable(Fighter* fighter)
+		{
+			Comp::Input input = fighter->GetComponent<Comp::Input>();
+			input.MakeFighterControllable();
+
+			fighter->Insert(input);
+		}
+
 		void InputManager::Update(Scene& scene)
 		{
 			while (SDL_PollEvent(&evnt))
@@ -28,7 +37,6 @@ namespace Blz
 
 			for (Fighter& fighter : scene.fighters)
 			{
-				fighter.Insert(CompSystem::GatherDirectionalInput(fighter.GetComponent<Comp::Velocity>(), fighter.GetComponent<Comp::Input>(), keyMap));
 			}
 		}
 	}

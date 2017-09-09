@@ -8,6 +8,16 @@ namespace Blz
 {
 	namespace Physics
 	{
+
+		void PhysicsManager::Move(Fighter* p_Fighter, sfloat movementInX, sfloat movementInY)
+		{
+			Comp::Transform fighterTransform = p_Fighter->GetComponent<Comp::Transform>();
+
+			fighterTransform.TranslateBy(movementInX, movementInY);
+
+			p_Fighter->Insert(fighterTransform);
+		}
+
 		void PhysicsManager::Init()
 		{
 		}

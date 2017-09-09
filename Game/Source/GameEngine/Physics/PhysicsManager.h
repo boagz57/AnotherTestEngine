@@ -11,6 +11,8 @@ namespace Blz
 			PhysicsManager() = default;
 			~PhysicsManager() = default;
 
+			void Move(Fighter* fighter, sfloat movementInX, sfloat movementInY);
+
 			void Init();
 			void Shutdown();
 			void Update(Scene& scene);

@@ -1,5 +1,6 @@
 #pragma once
 #include <SDL.h>
+#include "Fighter.h"
 #include "Containers/UnorderedMap.h"
 #include "../Scene.h"
 
@@ -17,6 +18,8 @@ namespace Blz
 		public:
 			InputManager() = default;
 			~InputManager() = default;
+
+			void SetFighterToBeControllable(Fighter* fighter);
 
 			void Update(Scene& scene);
 
