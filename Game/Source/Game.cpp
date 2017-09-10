@@ -1,10 +1,8 @@
 #include "Game.h"
+#include "GameEngine/Scene.h"
 #include "Components/Transform.h"
 #include "Components/Input.h"
 #include "Components/Velocity.h"
-#include "GameEngine/Animation/AnimationEngine.h"
-#include "GameEngine/Input/InputEngine.h"
-#include "GameEngine/Physics/PhysicsEngine.h"
 
 extern Scene scene;
 
@@ -16,6 +14,11 @@ void Game::Init()
 	p_AI = scene.CreateFighter(80.0f, 45.0f, fighterTexture);
 
 	input.SetFighterToBeControllable(p_Player);
+
+	uint16 animation1 = animation.CreateAnimation(p_Player, 0, 7);
+	uint16 animation2 = animation.CreateAnimation(p_AI, 0, 7);
+	animation.PlayAnimation(p_Player, animation1);
+	animation.PlayAnimation(p_AI, animation1);
 }
 
 void Game::Update()

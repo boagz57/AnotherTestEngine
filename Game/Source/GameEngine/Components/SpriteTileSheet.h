@@ -18,7 +18,7 @@ namespace Comp
 		void SetWidthAndHeight(sfloat width, sfloat height);
 		void SetTexture(Blz::Graphics::Texture texture);
 		GLuint const GetTextureID() const;
-		void SetUVs(const uint16 startingIndex);
+		void SetUVs(const uint16 displayTile);
 		uint16 const CheckIndex() const;
 
 		Blz::Array<Vector3D, 6> const GetVertexData() const;

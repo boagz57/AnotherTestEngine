@@ -15,9 +15,6 @@ namespace Blz
 
 			void Init(Scene& scene);
 			void Update(Scene& scene);
-
-		private:
-			
 		};
 	}
 }

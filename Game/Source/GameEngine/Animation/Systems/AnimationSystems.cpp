@@ -1,6 +1,7 @@
 #pragma once
 #include "Containers/SmallVector.h"
 #include "../../Components/SpriteTileSheet.h"
+#include "../../Components/Animation.h"
 #include "AnimationSystems.h"
 
 namespace Blz
@@ -9,10 +10,9 @@ namespace Blz
 	{
 		namespace CompSystem
 		{
-			Comp::SpriteTileSheet SetAnimation(Comp::SpriteTileSheet fighterSprite, AnimClip& animation)
+			Comp::SpriteTileSheet SetCurentAnimationPose(Comp::SpriteTileSheet fighterSprite, Comp::Animation fighterAnimations)
 			{
-				fighterSprite.SetUVs(animation.GetCurrentClipIndex());
-				animation.IncrementIndex();
+				fighterSprite.SetUVs(fighterAnimations.GetCurrentAnimationPose()->GetCurrentAnimationFrame());
 
 				return fighterSprite;
 			}

@@ -59,17 +59,17 @@ namespace Comp
 		return vertexData;
 	}
 
-	void SpriteTileSheet::SetUVs(const uint16 startingIndex)
+	void SpriteTileSheet::SetUVs(const uint16 displayTile)
 	{
 		glm::vec4 uvs;
 
-		this->index = startingIndex;
+		this->index = displayTile;
 
-		uint16 xTile = startingIndex % tileDimensions.x;
-		uint16 yTile = startingIndex / tileDimensions.x;
+		uint16 tileXCoordinate = displayTile% tileDimensions.x;
+		uint16 tileYCoordinate = displayTile/ tileDimensions.x;
 
-		uvs.x = xTile / static_cast<sfloat>(tileDimensions.x);
-		uvs.y = yTile / static_cast<sfloat>(tileDimensions.y);
+		uvs.x = tileXCoordinate / static_cast<sfloat>(tileDimensions.x);
+		uvs.y = tileYCoordinate / static_cast<sfloat>(tileDimensions.y);
 		uvs.w = 1.0f / tileDimensions.x;
 		uvs.z = 1.0f / tileDimensions.y;
 

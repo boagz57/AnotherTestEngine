@@ -4,6 +4,7 @@
 #include "Graphics/Texture.h"
 #include "Containers/Map.h"
 #include "Components\ComponentHolder.h"
+#include "Components/Animation.h"
 #include "Components/SpriteTileSheet.h"
 #include "Components/Velocity.h"
 #include "Components/Input.h"
@@ -14,6 +15,7 @@ class Fighter :
 	public ComponentHolder<Comp::Transform>,
 	public ComponentHolder<Comp::Velocity>,
 	public ComponentHolder<Comp::SpriteTileSheet>,
+	public ComponentHolder<Comp::Animation>,
 	public ComponentHolder<Comp::Position>,
 	public ComponentHolder<Comp::Input>
 {
