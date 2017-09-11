@@ -4,6 +4,6 @@
 
 Fighter::Fighter(sfloat startPositionX, sfloat startPositionY, Blz::Graphics::Texture texture) 
 {
-	ComponentHolder<Comp::Position>::component.SetPosition(startPositionX, startPositionY);
-	ComponentHolder<Comp::SpriteTileSheet>::component.SetTexture(texture);
+	position.SetPosition(startPositionX, startPositionY);
+	spriteSheet.SetTexture(texture);
 }

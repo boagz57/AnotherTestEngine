@@ -24,7 +24,7 @@ namespace Blz
 
 		void AnimationClip::IncrementIndex()
 		{
-			if (animationTime > 300.0f)
+			if (animationTime > 200.0f)
 			{
 				this->currentFrame++;
 

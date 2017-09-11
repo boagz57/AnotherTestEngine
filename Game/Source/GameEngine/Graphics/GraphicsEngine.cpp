@@ -23,11 +23,11 @@ namespace Blz
 
 			for (Fighter& fighter : scene.fighters)
 			{
-				Comp::Position ConvertedPixelPosition = CompSystem::ConvertWorldUnitsToScreenPixels(fighter.GetComponent<Comp::Position>(), window.width);
+				Comp::Position ConvertedPixelPosition = CompSystem::ConvertWorldUnitsToScreenPixels(fighter.position ,window.width);
 
-				Comp::SpriteTileSheet UpdatedSpriteLocation = CompSystem::SetSpriteScreenLocation(ConvertedPixelPosition, fighter.GetComponent<Comp::SpriteTileSheet>());
+				Comp::SpriteTileSheet UpdatedSpriteLocation = CompSystem::SetSpriteScreenLocation(ConvertedPixelPosition, fighter.spriteSheet);
 
-				fighter.Insert(UpdatedSpriteLocation);
+				fighter.spriteSheet = UpdatedSpriteLocation;
 			}
 		}
 
@@ -46,7 +46,7 @@ namespace Blz
 
 				//Translate vertices of fighter to move him
 				{
-					glm::vec2 translationAmount = fighter.GetComponent<Comp::Position>().GetCurrentPosition() - fighter.originalPosition;
+					glm::vec2 translationAmount = fighter.position.GetCurrentPosition() - fighter.originalPosition;
 
 					//Round values to nearest int value to avoid fractional values which can create distorted art work
 					translationAmount.x = rint(translationAmount.x);
@@ -56,13 +56,13 @@ namespace Blz
 					glUniformMatrix4fv(transformationMatrixUniformLocation, 1, GL_FALSE, &(transformationMatrix[0][0]));
 				}
 
-				glBindTexture(GL_TEXTURE_2D, fighter.GetComponent<Comp::SpriteTileSheet>().GetTextureID());
+				glBindTexture(GL_TEXTURE_2D, fighter.spriteSheet.GetTextureID());
 
 				//Send new 
 				{
 					glBindBuffer(GL_ARRAY_BUFFER, vboID);
 
-					glBufferData(GL_ARRAY_BUFFER, (sizeof(Vector3D) * fighter.GetComponent<Comp::SpriteTileSheet>().GetVertexData().size()), &fighter.GetComponent<Comp::SpriteTileSheet>().GetVertexData().front(), GL_DYNAMIC_DRAW);
+					glBufferData(GL_ARRAY_BUFFER, (sizeof(Vector3D) * fighter.spriteSheet.GetVertexData().size()), &fighter.spriteSheet.GetVertexData().front(), GL_DYNAMIC_DRAW);
 					glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vector3D), (void*)offsetof(Vector3D, position));
 					glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(Vector3D), (void*)offsetof(Vector3D, textureCoordinates));
 				}
@@ -72,12 +72,13 @@ namespace Blz
 				glBindBuffer(GL_ARRAY_BUFFER, 0);
 
 				//TODO: Remove zeroing out velocity from Renderer update. 
-				Comp::Velocity vel = fighter.GetComponent<Comp::Velocity>();
-				Comp::Transform trans = fighter.GetComponent<Comp::Transform>();
+				Comp::Velocity vel = fighter.velocity;
+				Comp::Transform trans = fighter.transform;
 				trans.ZeroOut();
 				vel.ZeroOut();
-				fighter.Insert(vel);
-				fighter.Insert(trans);
+				
+				fighter.velocity = vel;
+				fighter.transform = trans;
 			}
 		}
 	}

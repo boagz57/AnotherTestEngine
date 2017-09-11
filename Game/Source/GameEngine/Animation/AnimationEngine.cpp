@@ -18,9 +18,9 @@ namespace Blz
 		{
 			for (Fighter& fighter : scene.fighters)
 			{
-				Comp::SpriteTileSheet newSprite = CompSystem::SetAnimationFrameToDisplay(fighter.GetComponent<Comp::SpriteTileSheet>(), fighter.GetComponent<Comp::Animation>());
+				Comp::SpriteTileSheet newSprite = CompSystem::SetAnimationFrameToDisplay(fighter.spriteSheet, fighter.animation);
 
-				fighter.Insert(newSprite); 
+				fighter.spriteSheet = newSprite;
 			}
 		}
 	}

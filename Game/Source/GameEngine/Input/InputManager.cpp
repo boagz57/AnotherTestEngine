@@ -8,10 +8,7 @@ namespace Blz
 	{
 		void Manager::SetFighterToBeControllable(Fighter* fighter)
 		{
-			Comp::Input input = fighter->GetComponent<Comp::Input>();
-			input.MakeFighterControllable();
-
-			fighter->Insert(input);
+			fighter->input.MakeFighterControllable();
 		}
 	}
 }

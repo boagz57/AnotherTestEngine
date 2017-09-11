@@ -8,27 +8,19 @@ namespace Blz
 	{
 		uint16 Manager::CreateAnimation(Fighter* fighter, uint16 startingIndex, uint16 numTilesToAnimate)
 		{
-			Comp::Animation fighterAnimations = fighter->GetComponent<Comp::Animation>();
-
 			Blz::Animation::AnimationClip animation;
 
 			animation.SetIndex(startingIndex);
 			animation.SetTotalTilesForAnimation(numTilesToAnimate);
 
-			fighterAnimations.AddAnimation(animation);
-
-			fighter->Insert(fighterAnimations);
+			fighter->animation.AddAnimation(animation);
 
 			return animation.ID();
 		}
 
 		void Manager::PlayAnimation(Fighter* fighter, uint16 const animationID)
 		{
-			Comp::Animation fighterAnimComponent = fighter->GetComponent<Comp::Animation>();
-
-			fighterAnimComponent.SetFinalAnimation(animationID);
-
-			fighter->Insert(fighterAnimComponent);
+			fighter->animation.SetFinalAnimation(animationID);
 		}
 	}
 }
