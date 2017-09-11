@@ -27,6 +27,9 @@ private:
 	Fighter* p_Player;
 	Fighter* p_AI;
 
+	uint16 animation1;
+	uint16 animation2;
+
 	Blz::Map<AnimationState, uint16> animationMap;
 };
 

@@ -15,15 +15,15 @@ void Game::Init()
 
 	input.SetFighterToBeControllable(p_Player);
 
-	uint16 animation1 = animation.CreateAnimation(p_Player, 0, 7);
-	uint16 animation2 = animation.CreateAnimation(p_AI, 0, 7);
-	animation.PlayAnimation(p_Player, animation1);
-	animation.PlayAnimation(p_AI, animation1);
+	this->animation1 = animation.CreateAnimation(p_Player, 0, 7);
+	this->animation2 = animation.CreateAnimation(p_AI, 8, 7);
 }
 
 void Game::Update()
 {
 	physics.Move(p_Player, -0.1f, 0.1f);
+	animation.PlayAnimation(p_Player, animation1);
+	animation.PlayAnimation(p_AI, animation2);
 }
 
 void Game::Shutdown()

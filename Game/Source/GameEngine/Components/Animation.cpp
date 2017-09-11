@@ -7,14 +7,14 @@ namespace Comp
 		animationMap.insert(std::pair<uint16, Blz::Animation::AnimationClip>(animation.ID(), animation));
 	}
 
-	void Animation::SetFinalAnimationPoseTo(uint16 animationID)
+	void Animation::SetFinalAnimation(uint16 animationID)
 	{
-		finalPose = &this->animationMap[animationID];
-		this->animationMap[animationID].IncrementIndex();
+		finalAnimation = animationMap.find(animationID)->second;
+		animationMap.at(animationID).IncrementIndex();
 	}
 
-	Blz::Animation::AnimationClip* const Animation::GetCurrentAnimationPose() const
+	Blz::Animation::AnimationClip const Animation::GetCurrentAnimation() const
 	{
-		return finalPose;
+		return finalAnimation;
 	}
 }

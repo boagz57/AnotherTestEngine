@@ -10,7 +10,7 @@ namespace Blz
 	{
 		namespace CompSystem
 		{
-			Comp::SpriteTileSheet SetCurentAnimationPose(Comp::SpriteTileSheet fighterSprite, Comp::Animation fighterAnimations);
+			Comp::SpriteTileSheet SetAnimationFrameToDisplay(Comp::SpriteTileSheet fighterSprite, Comp::Animation fighterAnimations);
 		}
 	}
 }

@@ -24,10 +24,11 @@ namespace Blz
 
 		void Manager::PlayAnimation(Fighter* fighter, uint16 const animationID)
 		{
-			Comp::Animation fighterAnimations = fighter->GetComponent<Comp::Animation>();
-			fighterAnimations.SetFinalAnimationPoseTo(animationID);
+			Comp::Animation fighterAnimComponent = fighter->GetComponent<Comp::Animation>();
 
-			fighter->Insert(fighterAnimations);
+			fighterAnimComponent.SetFinalAnimation(animationID);
+
+			fighter->Insert(fighterAnimComponent);
 		}
 	}
 }
