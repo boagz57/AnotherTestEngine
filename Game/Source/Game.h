@@ -19,9 +19,12 @@ public:
 	void Update();
 	void Shutdown();
 
+	void MoveRight(Fighter* fighter);
+
 private:
 	Blz::Input::Manager input;
 	Blz::Animation::Manager animation;
+	Blz::Physics::Manager physics;
 
 	Fighter* p_Player;
 	Fighter* p_AI;

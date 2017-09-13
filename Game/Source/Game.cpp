@@ -1,4 +1,5 @@
 #include <SDL.h>
+#include <functional>
 #include "Game.h"
 #include "GameEngine/Scene.h"
 #include "Components/Transform.h"
@@ -6,9 +7,6 @@
 #include "Components/Velocity.h"
 
 extern Scene scene;
-extern Blz::Physics::Manager physics;
-
-void MoveRight(Fighter* fighter);
 
 void Game::Init()
 {
@@ -20,7 +18,7 @@ void Game::Init()
 	this->animation1 = animation.CreateAnimation(p_Player, 0, 7);
 	this->animation2 = animation.CreateAnimation(p_AI, 8, 7);
 
-	input.BindAxis(SDLK_d, p_Player, &MoveRight);
+	input.BindAxis(SDLK_d, p_Player, std::bind(&Game::MoveRight, this, p_Player));
 }
 
 void Game::Update()
@@ -34,7 +32,7 @@ void Game::Shutdown()
 
 }
 
-void MoveRight(Fighter* fighter)
+void Game::MoveRight(Fighter* fighter)
 {
 	physics.Move(fighter, 0.1f, 0.0f);
 }

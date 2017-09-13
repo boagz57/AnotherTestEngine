@@ -22,7 +22,6 @@
 #include "Physics\PhysicsEngine.h"
 
 Scene scene;
-Blz::Physics::Manager physics;
 
 int main(int agrc, char** argv)
 {
