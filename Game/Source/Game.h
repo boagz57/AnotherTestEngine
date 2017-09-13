@@ -21,7 +21,6 @@ public:
 
 private:
 	Blz::Input::Manager input;
-	Blz::Physics::Manager physics;
 	Blz::Animation::Manager animation;
 
 	Fighter* p_Player;
@@ -29,7 +28,5 @@ private:
 
 	uint16 animation1;
 	uint16 animation2;
-
-	Blz::Map<AnimationState, uint16> animationMap;
 };
 

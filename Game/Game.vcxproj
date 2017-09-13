@@ -417,7 +417,6 @@ copy /y  "$(SolutionDir)ThirdParty\SDL\Lib\x86\SDL2.dll" "$(SolutionDir)Game\Bin
     <ClCompile Include="Source\GameEngine\Graphics\Systems\GraphicsSystems.cpp" />
     <ClCompile Include="Source\GameEngine\Graphics\Systems\SystemHelpers\SystemHelpers.cpp" />
     <ClCompile Include="Source\GameEngine\Input\InputManager.cpp" />
-    <ClCompile Include="Source\GameEngine\Input\Systems\InputSystems.cpp" />
     <ClCompile Include="Source\GameEngine\Physics\PhysicsEngine.cpp" />
     <ClCompile Include="Source\GameEngine\AI\AIEngine.cpp" />
     <ClCompile Include="Source\GameEngine\Graphics\GraphicsEngine.cpp" />
@@ -454,7 +453,6 @@ copy /y  "$(SolutionDir)ThirdParty\SDL\Lib\x86\SDL2.dll" "$(SolutionDir)Game\Bin
     <ClInclude Include="Source\GameEngine\Graphics\Systems\GraphicsSystems.h" />
     <ClInclude Include="Source\GameEngine\Graphics\Systems\SystemHelpers\SystemHelpers.h" />
     <ClInclude Include="Source\GameEngine\Input\InputManager.h" />
-    <ClInclude Include="Source\GameEngine\Input\Systems\InputSystems.h" />
     <ClInclude Include="Source\GameEngine\Logging\Logger.h" />
     <ClInclude Include="Source\GameEngine\Physics\PhysicsEngine.h" />
     <ClInclude Include="Source\GameEngine\AI\AIEngine.h" />

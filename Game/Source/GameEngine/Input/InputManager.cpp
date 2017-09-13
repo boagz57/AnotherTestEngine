@@ -6,9 +6,10 @@ namespace Blz
 {
 	namespace Input
 	{
-		void Manager::SetFighterToBeControllable(Fighter* fighter)
+		void Manager::BindAxis(int32 key, Fighter* fighter, std::function<void(Fighter*)> movementFunction)
 		{
 			fighter->input.MakeFighterControllable();
+			fighter->input.SetKeyBinding(key, movementFunction);
 		}
 	}
 }

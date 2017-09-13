@@ -1,4 +1,5 @@
 #pragma once
+#include <functional>
 #include "Fighter.h"
 
 namespace Blz
@@ -8,7 +9,7 @@ namespace Blz
 		class Manager
 		{
 		public:
-			void SetFighterToBeControllable(Fighter* fighter);
+			void BindAxis(int32 key, Fighter* fighter, std::function<void(Fighter*)> movementFunction);
 		};
 	}
 }
