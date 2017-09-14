@@ -6,28 +6,36 @@ namespace Blz
 {
 	namespace Err
 	{
-		Blz::SmallVector<Blz::string> ErrorContext::errorContextDescriptions;
-		Blz::SmallVector<Blz::string> ErrorContext::errorContextData;
-		uint16 ErrorContext::numContexts = 0;
+		Blz::SmallVector<Blz::string> ErrContext::errorContextDescriptions;
+		Blz::SmallVector<Blz::string> ErrContext::errorContextData;
+		uint16 ErrContext::numContexts = 0;
 
-		ErrorContext::ErrorContext(const Blz::string p_Description, const Blz::string p_Data /* default value = "" */)
+		ErrContext::ErrContext()
 		{
 			errorContextDescriptions.reserve(40);
 			errorContextData.reserve(40);
-
-			errorContextDescriptions.push_back(p_Description);
-			errorContextData.push_back(p_Data);
-			++numContexts;
 		}
 
-		ErrorContext::~ErrorContext()
+		ErrContext::~ErrContext()
 		{
 			errorContextDescriptions.pop_back();
 			errorContextData.pop_back();
 			--numContexts;
 		}
 
-		void ErrorContext::LogContext()
+		void ErrContext::AddContext(const Blz::string c_ErrorContextDescription, const Blz::string c_ErrorContexData /* default value = "" */)
+		{
+			#if (DEBUG)
+				errorContextDescriptions.push_back(c_ErrorContextDescription);
+				errorContextData.push_back(c_ErrorContexData);
+				++numContexts;
+
+			#elif (PROFILE)
+
+			#endif
+		}
+
+		void ErrContext::LogContext()
 		{
 			for (int i = 0; i < numContexts; ++i)
 			{
@@ -36,3 +44,5 @@ namespace Blz
 		}
 	}
 }
+
+Blz::Err::ErrContext ec;

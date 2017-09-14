@@ -7,7 +7,7 @@ namespace Blz
 	{
 		Texture::Texture(const Blz::string c_imageFilePath)
 		{
-			Blz::Err::ErrorContext ec("When constructing texture from", c_imageFilePath);
+			ec.AddContext("When constructing texture from", c_imageFilePath);
 
 			int32 forceChannels = 4;							   //out param	 //outparm	    //out param
 			auto* p_ImageData = stbi_load(c_imageFilePath.c_str(), &this->width, &this->height, &channels, forceChannels);

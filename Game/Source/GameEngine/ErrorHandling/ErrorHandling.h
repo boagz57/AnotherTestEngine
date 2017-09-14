@@ -47,7 +47,7 @@ namespace Blz
 			//Combinging both 'condition' message and 'c_errMessage' first to keep everything on one line in console
 			Blz::string combinedErrMessages("Assertion failed: " + Blz::string(condition) + " \n         " + c_errMessage);
 
-			ErrorContext::LogContext();
+			ErrContext::LogContext();
 
 			console->error(combinedErrMessages.c_str(), args...);
 			console->info("In function {}() \n        {}: {}", functionName, file, lineNumber);

@@ -5,14 +5,15 @@ namespace Blz
 {
 	namespace Err
 	{
-		class ErrorContext
+		class ErrContext
 		{
 		public:
-			ErrorContext(const Blz::string errorContextDescription, const Blz::string errorContextData = "");
-			~ErrorContext();
-			ErrorContext(const ErrorContext& copy) = delete;
-			void operator=(const ErrorContext& copy) = delete;
+			ErrContext();
+			~ErrContext();
+			ErrContext(const ErrContext& copy) = delete;
+			void operator=(const ErrContext& copy) = delete;
 
+			void AddContext(const Blz::string errorContextDescription, const Blz::string errorContexData = "");
 			static void LogContext();
 
 		private:
@@ -22,4 +23,3 @@ namespace Blz
 		};
 	};
 }
-
