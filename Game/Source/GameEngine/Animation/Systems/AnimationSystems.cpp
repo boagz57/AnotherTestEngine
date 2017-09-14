@@ -12,6 +12,8 @@ namespace Blz
 		{
 			Comp::SpriteTileSheet SetAnimationFrameToDisplay(Comp::SpriteTileSheet fighterSprite, Comp::Animation fighterAnimations)
 			{
+				ec.AddContext("When trying to set next animation frame to display");
+
 				uint16 currentFrame = fighterAnimations.GetCurrentAnimation().GetCurrentAnimationFrame();
 
 				fighterSprite.SetUVs(currentFrame);

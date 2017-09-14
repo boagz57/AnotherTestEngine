@@ -33,6 +33,8 @@ namespace Blz
 
 		void Engine::Update(Scene& scene, ShaderProgram& shader)
 		{
+			ec.AddContext("When updating graphics engine");
+
 			GLuint transformationMatrixUniformLocation = shader.GetUniformLocation("transformationMatrix");
 
 			GLuint uniformLocation = shader.GetUniformLocation("basicTexture");

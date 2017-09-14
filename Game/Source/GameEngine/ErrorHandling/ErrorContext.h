@@ -13,12 +13,12 @@ namespace Blz
 			ErrContext(const ErrContext& copy) = delete;
 			void operator=(const ErrContext& copy) = delete;
 
-			void AddContext(const Blz::string errorContextDescription, const Blz::string errorContexData = "");
+			void AddContext(const char* errorContextDescription, const char* errorContexData = "");
 			static void LogContext();
 
 		private:
-			static Blz::SmallVector<Blz::string> errorContextDescriptions;
-			static Blz::SmallVector<Blz::string> errorContextData;
+			static Blz::SmallVector<const char*> errorContextDescriptions;
+			static Blz::SmallVector<const char*> errorContextData;
 			static uint16 numContexts;
 		};
 	};

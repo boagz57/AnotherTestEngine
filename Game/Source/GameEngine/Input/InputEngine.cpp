@@ -8,6 +8,8 @@ namespace Blz
 	{
 		void Engine::Update(Scene& scene)
 		{
+			ec.AddContext("When updating input engine");
+
 			while (SDL_PollEvent(&evnt))
 			{
 				switch (evnt.type)

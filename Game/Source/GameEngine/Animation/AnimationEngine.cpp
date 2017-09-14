@@ -16,6 +16,8 @@ namespace Blz
 
 		void Engine::Update(Scene& scene)
 		{
+			ec.AddContext("When updating Animation engine");
+
 			for (Fighter& fighter : scene.fighters)
 			{
 				Comp::SpriteTileSheet newSprite = CompSystem::SetAnimationFrameToDisplay(fighter.spriteSheet, fighter.animation);
