@@ -29,9 +29,6 @@ namespace Blz
 				errorContextDescriptions.push_back(c_ErrorContextDescription);
 				errorContextData.push_back(c_ErrorContexData);
 				++numContexts;
-
-			#elif (PROFILE)
-
 			#endif
 		}
 

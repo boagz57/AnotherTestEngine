@@ -30,6 +30,7 @@
 	#define NDEBUG
 	#define RUNTIME_ASSERT 
 	#define COMPILETIME_ASSERT(expr, msg)
+	#define ERRASSERT(condition, msg, ...)
 #endif
 
 namespace Blz
