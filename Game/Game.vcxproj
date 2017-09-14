@@ -322,6 +322,7 @@ copy /y  "$(SolutionDir)ThirdParty\SDL\Lib\x86\SDL2.dll" "$(SolutionDir)Game\Bin
       <PreprocessorDefinitions>GLEW_STATIC;_CRT_SECURE_NO_WARNINGS;STB_IMAGE_IMPLEMENTATION;PROFILE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ForcedIncludeFiles>$(ProjectDir)Source\GameEngine\Logging\Logger.h;$(ProjectDir)Source\Universal\PrimitiveTypes.h;$(ProjectDir)Source\GameEngine\ErrorHandling\ErrorContext.h;$(ProjectDir)Source\GameEngine\ErrorHandling\ErrorHandling.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>

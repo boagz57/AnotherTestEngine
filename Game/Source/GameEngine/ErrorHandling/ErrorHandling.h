@@ -7,27 +7,30 @@
 #include <boost/assert.hpp>
 #include "ErrorContext.h"
 
-#define ERRASSERT(condition, msg, ...) \
-	 do { if (!(condition)) Blz::Err::ErrorReport(#condition, __func__, __FILE__, __LINE__, msg, __VA_ARGS__); } while (0)
+#if (DEBUG)
+	#define ERRASSERT(condition, msg, ...) \
+		do { if (!(condition)) Blz::Err::ErrorReport(#condition, __func__, __FILE__, __LINE__, msg, __VA_ARGS__); } while (0)
 
-#if (DEBUG) || (PROFILE)
-
-#define RUNTIME_ASSERT \
-	BOOST_ASSERT_MSG 
-
-#define COMPILETIME_ASSERT(expr, msg) \
-	static_assert(expr, msg) 
-
-#elif (DEBUGUNIT) || (PROFILEUNIT)
-
-#define RUNTIME_ASSERT 
-
-#else
-#define NDEBUG
-#define RUNTIME_ASSERT 
-#define COMPILETIME_ASSERT(expr, msg)
+#elif (PROFILE)
+	#define ERRASSERT(condition, msg, ...)
 #endif
 
+#if (DEBUG) || (PROFILE)
+	#define RUNTIME_ASSERT \
+		BOOST_ASSERT_MSG 
+
+	#define COMPILETIME_ASSERT(expr, msg) \
+		static_assert(expr, msg) 
+
+//Turn off log messages when unit testing to console log (To prevent log messages from getting in the way of unit tests assert messages)
+#elif (DEBUGUNIT) || (PROFILEUNIT)
+	#define RUNTIME_ASSERT 
+
+#else
+	#define NDEBUG
+	#define RUNTIME_ASSERT 
+	#define COMPILETIME_ASSERT(expr, msg)
+#endif
 
 namespace Blz
 {
