@@ -19,6 +19,8 @@ namespace Comp
 
 	void Input::KeyPressed(int32 key, Fighter* fighter)
 	{
+		ERRASSERT(keyMovementBindings.find(key) != keyMovementBindings.end(), "Key not specified!");
+
 		auto movementFunc = keyMovementBindings[key];
 		movementFunc(fighter);
 	}

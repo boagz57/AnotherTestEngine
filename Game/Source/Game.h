@@ -20,6 +20,9 @@ public:
 	void Shutdown();
 
 	void MoveRight(Fighter* fighter);
+	void MoveLeft(Fighter* fighter);
+	void MoveUp(Fighter* fighter);
+	void MoveDown(Fighter* fighter);
 
 private:
 	Blz::Input::Manager input;
