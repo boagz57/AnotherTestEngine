@@ -19,10 +19,10 @@ public:
 	void Update();
 	void Shutdown();
 
-	void MoveRight(Fighter* fighter);
-	void MoveLeft(Fighter* fighter);
-	void MoveUp(Fighter* fighter);
-	void MoveDown(Fighter* fighter);
+	void MoveRight(Fighter* const fighter);
+	void MoveLeft(Fighter* const fighter);
+	void MoveUp(Fighter* const fighter);
+	void MoveDown(Fighter* const fighter);
 
 private:
 	Blz::Input::Manager input;

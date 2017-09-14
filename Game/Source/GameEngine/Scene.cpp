@@ -8,6 +8,8 @@ Scene::Scene()
 
 Fighter* Scene::CreateFighter(sfloat startingPositionX, sfloat startingPositionY, Blz::Graphics::Texture texture)
 {
+	ec.AddContext("When Creating a fighter");
+
 	startingPositionX = rint(startingPositionX);
 	startingPositionY = rint(startingPositionY);
 

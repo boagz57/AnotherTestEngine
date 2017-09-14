@@ -10,6 +10,8 @@ extern Scene scene;
 
 void Game::Init()
 {
+	ec.AddContext("When initializing Game");
+
 	Blz::Graphics::Texture fighterTexture("Girl.png");
 
 	p_Player = scene.CreateFighter(160.0f, 0.0f, fighterTexture);
@@ -26,6 +28,8 @@ void Game::Init()
 
 void Game::Update()
 {
+	ec.AddContext("When updating Game");
+
 	animation.PlayAnimation(p_Player, animation1);
 	animation.PlayAnimation(p_AI, animation2);
 }
@@ -35,22 +39,22 @@ void Game::Shutdown()
 
 }
 
-void Game::MoveRight(Fighter* fighter)
+void Game::MoveRight(Fighter* const fighter) 
 {
 	physics.Move(fighter, 0.1f, 0.0f);
 }
 
-void Game::MoveLeft(Fighter* fighter)
+void Game::MoveLeft(Fighter* const fighter) 
 {
 	physics.Move(fighter, -0.1f, 0.0f);
 }
 
-void Game::MoveUp(Fighter* fighter)
+void Game::MoveUp(Fighter* const fighter) 
 {
 	physics.Move(fighter, 0.0f, 0.1f);
 }
 
-void Game::MoveDown(Fighter* fighter)
+void Game::MoveDown(Fighter* const fighter)
 {
 	physics.Move(fighter, 0.0f, -0.1f);
 }

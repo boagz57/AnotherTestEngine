@@ -29,16 +29,18 @@ namespace Blz
 
 			for (Fighter& fighter : scene.fighters)
 			{
-				if (fighter.input.IsFighterControllable())
-				{
-					if (keyMap[SDLK_d])
-						fighter.input.KeyPressed(SDLK_d, &fighter);
-					if (keyMap[SDLK_a])
-						fighter.input.KeyPressed(SDLK_a, &fighter);
-					if (keyMap[SDLK_w])
-						fighter.input.KeyPressed(SDLK_w, &fighter);
-					if (keyMap[SDLK_s])
-						fighter.input.KeyPressed(SDLK_s, &fighter);
+				{//Take action on input
+					if (fighter.input.IsFighterControllable())
+					{
+						if (this->keyMap[SDLK_d])
+							fighter.input.KeyPressed(SDLK_d, &fighter);
+						if (this->keyMap[SDLK_a])
+							fighter.input.KeyPressed(SDLK_a, &fighter);
+						if (this->keyMap[SDLK_w])
+							fighter.input.KeyPressed(SDLK_w, &fighter);
+						if (this->keyMap[SDLK_s])
+							fighter.input.KeyPressed(SDLK_s, &fighter);
+					}
 				}
 			}
 		}
