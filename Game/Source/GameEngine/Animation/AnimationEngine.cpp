@@ -3,26 +3,35 @@
 #include "Components/Transform.h"
 #include "Components/Velocity.h"
 #include "Scene.h"
-#include "Systems/AnimationSystems.h"
 #include "AnimationEngine.h"
 
 namespace Blz
 {
 	namespace Animation
 	{
-		void Engine::Init(Scene& scene)
+		auto Engine::Init(Scene& scene) -> void
 		{
 		}
 
-		void Engine::Update(Scene& scene)
+		auto Engine::Update(Scene& scene) -> void
 		{
 			ec.AddContext("When updating Animation engine");
 
 			for (Fighter& fighter : scene.fighters)
 			{
-				Comp::SpriteTileSheet newSprite = CompSystem::SetAnimationFrameToDisplay(fighter.spriteSheet, fighter.animation);
+				//Set current spriteAnimation frame
+				Comp::SpriteTileSheet newSprite = [](Comp::SpriteTileSheet& fighterSprite, const Comp::Animation& fighterAnimations) -> Comp::SpriteTileSheet
+				{
+					ec.AddContext("When trying to set next animation frame to display");
 
-				fighter.spriteSheet = newSprite;
+					uint16 currentFrame = fighterAnimations.GetCurrentAnimation().GetCurrentAnimationFrame();
+
+					fighterSprite.SetUVs(currentFrame);
+
+					return fighterSprite;
+				}(fighter.GetSpriteSheet(), fighter.GetAnimation());
+
+				fighter.Insert(newSprite);
 			}
 		}
 	}

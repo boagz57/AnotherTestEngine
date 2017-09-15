@@ -9,7 +9,7 @@ namespace Blz
 		class Manager
 		{
 		public:
-			void BindAxis(int32 key, Fighter* fighter, std::function<void(Fighter*)> movementFunction);
+			auto BindAxis(int32 key, Fighter* fighter, std::function<void(Fighter*)> movementFunction) -> void;
 		};
 	}
 }

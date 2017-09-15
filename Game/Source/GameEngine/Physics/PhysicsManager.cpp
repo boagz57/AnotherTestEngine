@@ -6,7 +6,7 @@ namespace Blz
 {
 	namespace Physics
 	{
-		void Manager::Move(Fighter* p_Fighter, sfloat movementInX, sfloat movementInY)
+		auto Manager::Move(Fighter* p_Fighter, sfloat movementInX, sfloat movementInY) -> void
 		{
 			p_Fighter->transform.TranslateBy(movementInX, movementInY);
 		}

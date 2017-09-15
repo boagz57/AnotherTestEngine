@@ -21,8 +21,8 @@ namespace Blz
 			Window(const Window& copy) = delete;
 			void operator=(const Window& copy) = delete;
 
-			void ClearBuffers();
-			void SwapBuffers();
+			auto ClearBuffers() -> void;
+			auto SwapBuffers() -> void;
 
 		private:
 			friend class Engine;

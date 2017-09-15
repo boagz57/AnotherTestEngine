@@ -11,18 +11,18 @@ namespace Blz
 			this->id++;
 		}
 
-		void AnimationClip::SetIndex(uint16 index)
+		auto AnimationClip::SetIndex(uint16 index) -> void
 		{
 			this->currentFrame = index;
 			this->initalFrame = index;
 		}
 
-		void AnimationClip::SetTotalTilesForAnimation(uint16 numTiles)
+		auto AnimationClip::SetTotalTilesForAnimation(uint16 numTiles) -> void
 		{
 			this->numTilesToAnimate = numTiles;
 		}
 
-		void AnimationClip::IncrementIndex()
+		auto AnimationClip::IncrementIndex() -> void
 		{
 			if (animationTime > 200.0f)
 			{
@@ -39,12 +39,12 @@ namespace Blz
 			animationTime++;
 		}
 
-		const uint16 AnimationClip::GetCurrentAnimationFrame() const
+		auto AnimationClip::GetCurrentAnimationFrame() const -> const uint16
 		{
 			return currentFrame;
 		}
 
-		const uint16 AnimationClip::ID() const
+		auto AnimationClip::ID() const -> const uint16
 		{
 			return this->id;
 		}

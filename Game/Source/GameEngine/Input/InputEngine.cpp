@@ -6,7 +6,7 @@ namespace Blz
 {
 	namespace Input
 	{
-		void Engine::Update(Scene& scene)
+		auto Engine::Update(Scene& scene) -> void
 		{
 			ec.AddContext("When updating input engine");
 
@@ -30,16 +30,16 @@ namespace Blz
 			for (Fighter& fighter : scene.fighters)
 			{
 				{//Take action on input
-					if (fighter.input.IsFighterControllable())
+					if (fighter.GetInput().IsFighterControllable())
 					{
 						if (this->keyMap[SDLK_d])
-							fighter.input.KeyPressed(SDLK_d, &fighter);
+							fighter.GetInput().KeyPressed(SDLK_d, &fighter);
 						if (this->keyMap[SDLK_a])
-							fighter.input.KeyPressed(SDLK_a, &fighter);
+							fighter.GetInput().KeyPressed(SDLK_a, &fighter);
 						if (this->keyMap[SDLK_w])
-							fighter.input.KeyPressed(SDLK_w, &fighter);
+							fighter.GetInput().KeyPressed(SDLK_w, &fighter);
 						if (this->keyMap[SDLK_s])
-							fighter.input.KeyPressed(SDLK_s, &fighter);
+							fighter.GetInput().KeyPressed(SDLK_s, &fighter);
 					}
 				}
 			}

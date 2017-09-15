@@ -13,8 +13,8 @@ namespace Blz
 			Engine() = default;
 			~Engine() = default;
 
-			void Init(Scene& scene);
-			void Update(Scene& scene);
+			auto Init(Scene& scene) -> void;
+			auto Update(Scene& scene) -> void;
 		};
 	}
 }

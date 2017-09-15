@@ -1,5 +1,4 @@
 #include "../Scene.h"
-#include "Systems/PhysicsSystems.h"
 #include "Components/Position.h"
 #include "PhysicsEngine.h"
 
@@ -7,24 +6,29 @@ namespace Blz
 {
 	namespace Physics
 	{
-		void Engine::Init()
+		auto Engine::Init() -> void
 		{
 		}
 
-		void Engine::Shutdown()
+		auto Engine::Shutdown() -> void
 		{
 
 		}
 
-		void Engine::Update(Scene& scene)
+		auto Engine::Update(Scene& scene) -> void
 		{
 			ec.AddContext("When updating Physics engine");
 
 			for (Fighter& fighter : scene.fighters)
 			{
-				Comp::Position newFighterPosition = CompSystem::MoveFighter(fighter.transform, fighter.position);
+				Comp::Position newFighterPosition = [](const Comp::Transform& fighterTransform, Comp::Position& fighterPosition) -> Comp::Position
+				{
+					fighterPosition.AddBy(fighterTransform.GetCurrentTranslation().x, fighterTransform.GetCurrentTranslation().y);
 
-				fighter.position = newFighterPosition;
+					return fighterPosition;
+				}(fighter.GetTransform(), fighter.GetPosition());
+
+				fighter.Insert(newFighterPosition);
 			}
 		}
 	}

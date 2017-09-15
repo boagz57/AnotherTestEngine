@@ -6,23 +6,31 @@ namespace Blz
 {
 	namespace Graphics
 	{
-		//Class Helper functions
-		Blz::string ReadShaderSource(const char* c_ShaderFilePath, const char* c_TypeOfShader);
-
 		ShaderProgram::~ShaderProgram()
 		{
 			glDeleteProgram(programID);
 		}
 
-		void ShaderProgram::Init(Blz::string vertexShaderFilePath, Blz::string fragmentShaderFilePath)
+		auto ShaderProgram::Init(Blz::string vertexShaderFilePath, Blz::string fragmentShaderFilePath) -> void
 		{
 			vertexShaderFile = vertexShaderFilePath;
 			fragmentShaderFile = fragmentShaderFilePath;
 			programID = glCreateProgram();
 		}
 
-		void ShaderProgram::Compile()
+		auto ShaderProgram::Compile() -> void
 		{
+			auto ReadShaderSourceFile = [](const char* c_ShaderFilePath, const char* c_TypeOfShader) -> Blz::string
+			{
+				std::ifstream shaderFileInputStream(c_ShaderFilePath);
+				if (!shaderFileInputStream.good())
+				{
+					LOG("%s Shader File failed to load!\n", c_TypeOfShader);
+				};
+
+				return Blz::string(std::istreambuf_iterator<char>(shaderFileInputStream), std::istreambuf_iterator<char>());
+			};
+
 			//Create GL Shaders
 			vertexShaderID = glCreateShader(GL_VERTEX_SHADER);
 			fragmentShaderID = glCreateShader(GL_FRAGMENT_SHADER);
@@ -30,11 +38,11 @@ namespace Blz
 			const GLchar* cAdapter[1];
 
 			//Add source or text file to shader object
-			Blz::string temp = ReadShaderSource(vertexShaderFile.c_str(), "Vertex").c_str();
+			Blz::string temp = ReadShaderSourceFile(vertexShaderFile.c_str(), "Vertex").c_str();
 			cAdapter[0] = temp.c_str();
 			glShaderSource(vertexShaderID, 1, cAdapter, 0);
 
-			temp = ReadShaderSource(fragmentShaderFile.c_str(), "Fragment").c_str();
+			temp = ReadShaderSourceFile(fragmentShaderFile.c_str(), "Fragment").c_str();
 			cAdapter[0] = temp.c_str();
 			glShaderSource(fragmentShaderID, 1, cAdapter, 0);
 
@@ -45,18 +53,18 @@ namespace Blz
 				return;
 		}
 
-		void ShaderProgram::AddAttribute(Blz::string attributeName)
+		auto ShaderProgram::AddAttribute(Blz::string attributeName) -> void
 		{
 			glBindAttribLocation(programID, numAttributes++, attributeName.c_str());
 		}
 
-		GLuint ShaderProgram::GetUniformLocation(Blz::string uniformNameFromShader)
+		auto ShaderProgram::GetUniformLocation(Blz::string uniformNameFromShader) -> GLuint
 		{
 			GLuint location = glGetUniformLocation(programID, uniformNameFromShader.c_str());
 			return location;
 		}
 
-		void ShaderProgram::Link()
+		auto ShaderProgram::Link() -> void
 		{
 			glAttachShader(programID, vertexShaderID);
 			glAttachShader(programID, fragmentShaderID);
@@ -75,7 +83,7 @@ namespace Blz
 			glDeleteShader(fragmentShaderID);
 		}
 
-		void ShaderProgram::Bind()
+		auto ShaderProgram::Bind() -> void 
 		{
 			glUseProgram(programID);
 			for (int i = 0; i < numAttributes; ++i)
@@ -84,7 +92,7 @@ namespace Blz
 			};
 		}
 
-		void ShaderProgram::UnBind()
+		auto ShaderProgram::UnBind() -> void
 		{
 			//Setting to 0 will effectively unbind program in OpenGL
 			glUseProgram(0);
@@ -94,7 +102,7 @@ namespace Blz
 			}
 		}
 
-		bool ShaderProgram::CheckShaderStatus(GLuint shaderID)
+		auto ShaderProgram::CheckShaderStatus(GLuint shaderID) -> bool
 		{
 			GLint compileStatus;
 			glGetShaderiv(shaderID, GL_COMPILE_STATUS, &compileStatus);
@@ -118,7 +126,7 @@ namespace Blz
 			return true;
 		}
 
-		bool ShaderProgram::CheckShaderProgramStatus(GLuint programID)
+		auto ShaderProgram::CheckShaderProgramStatus(GLuint programID) -> bool
 		{
 			GLint linkStatus;
 			glGetProgramiv(programID, GL_LINK_STATUS, &linkStatus);
@@ -143,18 +151,6 @@ namespace Blz
 			}
 
 			return true;
-		}
-
-		//Class helper function definitions
-		Blz::string ReadShaderSource(const char* cShaderFilePath, const char* cTypeOfShader)
-		{
-			std::ifstream shaderFileInputStream(cShaderFilePath);
-			if (!shaderFileInputStream.good())
-			{
-				LOG("%s Shader File failed to load!\n", cTypeOfShader);
-			};
-
-			return Blz::string(std::istreambuf_iterator<char>(shaderFileInputStream), std::istreambuf_iterator<char>());
 		}
 	}
 }

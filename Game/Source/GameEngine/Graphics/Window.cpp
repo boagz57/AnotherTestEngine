@@ -87,12 +87,12 @@ namespace Blz
 			SDL_Quit();
 		}
 
-		void Window::ClearBuffers()
+		auto Window::ClearBuffers() -> void
 		{
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		}
 
-		void Window::SwapBuffers()
+		auto Window::SwapBuffers() -> void
 		{
 			SDL_GL_SwapWindow(p_window);
 		}

@@ -4,11 +4,11 @@
 #include <math.h>
 #include <GLM\vec2.hpp>
 #include "ShaderProgram.h"
+#include "SystemHelpers\SystemHelpers.h"
 #include "../Components/SpriteTileSheet.h"
 #include "Texture.h"
 #include "../Vector3D.h"
 #include "GraphicsEngine.h"
-#include "Systems\GraphicsSystems.h"
 #include "../Scene.h"
 #include "../Fighter.h"
 
@@ -16,22 +16,48 @@ namespace Blz
 {
 	namespace Graphics
 	{
-		void Engine::Init(Scene& scene, Window& window)
+		auto Engine::Init(Scene& scene, Window& window) -> void
 		{
 			//Turn OpenGL normalized device coodinates (-1 to 1) to pixel coordinates
 			orthoProjection = glm::ortho(0.0f, static_cast<sfloat>(window.width), 0.0f, static_cast<sfloat>(window.height));
 
 			for (Fighter& fighter : scene.fighters)
 			{
-				Comp::Position ConvertedPixelPosition = CompSystem::ConvertWorldUnitsToScreenPixels(fighter.position ,window.width);
+				//Convert my world units to actual screen pixels
+				Comp::Position ConvertedPixelPosition = [](Comp::Position positionCoordsToConvert, const uint16 windowWidth) -> Comp::Position
+				{
+					ec.AddContext("When converting my world units to screen pixels");
 
-				Comp::SpriteTileSheet UpdatedSpriteLocation = CompSystem::SetSpriteScreenLocation(ConvertedPixelPosition, fighter.spriteSheet);
+					if (windowWidth == 1920)
+					{
+						positionCoordsToConvert.MultiplyBy(12, 12);
+					}
+					else if (windowWidth == 1280)
+					{
+						positionCoordsToConvert.MultiplyBy(8, 8);
+					}
 
-				fighter.spriteSheet = UpdatedSpriteLocation;
+					return positionCoordsToConvert;
+				}(fighter.GetPosition(), window.width);
+
+
+				//Set new sprite screen location based on new coordinates
+				Comp::SpriteTileSheet updatedSpriteLocation = [](Comp::SpriteTileSheet fighterSprite, Comp::Position fighterPosition) -> Comp::SpriteTileSheet
+				{
+					ec.AddContext("When setting sprite screen location");
+
+					fighterSprite.SetScreenTargetLocationAndTileDimensions(fighterPosition.GetCurrentPosition().x, fighterPosition.GetCurrentPosition().y, glm::ivec2{ 8, 4 });
+
+					SysHelper::InitializeGLBuffer(fighterSprite.GetVertexData());
+
+					return fighterSprite;
+				}(fighter.GetSpriteSheet(), ConvertedPixelPosition);
+
+				fighter.Insert(updatedSpriteLocation);
 			}
 		}
 
-		void Engine::Update(Scene& scene, ShaderProgram& shader)
+		auto Engine::Update(Scene& scene, ShaderProgram& shader) -> void
 		{
 			ec.AddContext("When updating graphics engine");
 
@@ -48,7 +74,7 @@ namespace Blz
 
 				//Translate vertices of fighter to move him
 				{
-					glm::vec2 translationAmount = fighter.position.GetCurrentPosition() - fighter.originalPosition;
+					glm::vec2 translationAmount = fighter.GetPosition().GetCurrentPosition() - fighter.originalPosition;
 
 					//Round values to nearest int value to avoid fractional values which can create distorted art work
 					translationAmount.x = rint(translationAmount.x);
@@ -58,13 +84,13 @@ namespace Blz
 					glUniformMatrix4fv(transformationMatrixUniformLocation, 1, GL_FALSE, &(transformationMatrix[0][0]));
 				}
 
-				glBindTexture(GL_TEXTURE_2D, fighter.spriteSheet.GetTextureID());
+				glBindTexture(GL_TEXTURE_2D, fighter.GetSpriteSheet().GetTextureID());
 
 				//Send new 
 				{
 					glBindBuffer(GL_ARRAY_BUFFER, vboID);
 
-					glBufferData(GL_ARRAY_BUFFER, (sizeof(Vector3D) * fighter.spriteSheet.GetVertexData().size()), &fighter.spriteSheet.GetVertexData().front(), GL_DYNAMIC_DRAW);
+					glBufferData(GL_ARRAY_BUFFER, (sizeof(Vector3D) * fighter.GetSpriteSheet().GetVertexData().size()), &fighter.GetSpriteSheet().GetVertexData().front(), GL_DYNAMIC_DRAW);
 					glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vector3D), (void*)offsetof(Vector3D, position));
 					glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(Vector3D), (void*)offsetof(Vector3D, textureCoordinates));
 				}
@@ -74,13 +100,13 @@ namespace Blz
 				glBindBuffer(GL_ARRAY_BUFFER, 0);
 
 				//TODO: Remove zeroing out velocity from Renderer update. 
-				Comp::Velocity vel = fighter.velocity;
-				Comp::Transform trans = fighter.transform;
+				Comp::Velocity vel = fighter.GetVelocity();
+				Comp::Transform trans = fighter.GetTransform();
 				trans.ZeroOut();
 				vel.ZeroOut();
 				
-				fighter.velocity = vel;
-				fighter.transform = trans;
+				fighter.Insert(vel);
+				fighter.Insert(trans);
 			}
 		}
 	}

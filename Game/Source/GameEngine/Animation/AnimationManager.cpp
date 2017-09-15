@@ -6,7 +6,7 @@ namespace Blz
 {
 	namespace Animation
 	{
-		uint16 Manager::CreateAnimation(Fighter* fighter, uint16 startingIndex, uint16 numTilesToAnimate)
+		auto Manager::CreateAnimation(Fighter* fighter, uint16 startingIndex, uint16 numTilesToAnimate) -> uint16
 		{
 			Blz::Animation::AnimationClip animation;
 
@@ -18,7 +18,7 @@ namespace Blz
 			return animation.ID();
 		}
 
-		void Manager::PlayAnimation(Fighter* fighter, uint16 const animationID)
+		auto Manager::PlayAnimation(Fighter* fighter, uint16 const animationID) -> void
 		{
 			fighter->animation.SetFinalAnimation(animationID);
 		}

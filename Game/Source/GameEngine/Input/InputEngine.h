@@ -19,7 +19,7 @@ namespace Blz
 			Engine() = default;
 			~Engine() = default;
 
-			void Update(Scene& scene);
+			auto Update(Scene& scene) -> void;
 
 		private:
 			Blz::Map<uint, bool> keyMap;

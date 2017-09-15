@@ -9,11 +9,11 @@ namespace Blz
 		public:
 			AnimationClip();
 
-			void SetIndex(uint16 index);
-			void SetTotalTilesForAnimation(uint16 numTiles);
-			void IncrementIndex();
-			const uint16 GetCurrentAnimationFrame() const;
-			const uint16 ID() const;
+			auto SetIndex(uint16 index) -> void;
+			auto SetTotalTilesForAnimation(uint16 numTiles) -> void;
+			auto IncrementIndex() -> void;
+			auto GetCurrentAnimationFrame() const -> const uint16;
+			auto ID() const -> const uint16;
 
 		private:
 			sfloat animationTime = 0.0f;

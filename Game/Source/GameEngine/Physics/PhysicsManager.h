@@ -8,7 +8,7 @@ namespace Blz
 		class Manager
 		{
 		public:
-			void Move(Fighter* fighter, sfloat movementInX, sfloat movementInY);
+			auto Move(Fighter* fighter, sfloat movementInX, sfloat movementInY) -> void;
 		};
 	}
 }
