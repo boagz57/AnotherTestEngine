@@ -25,8 +25,18 @@ namespace Blz
 					ec.AddContext("When trying to set next animation frame to display");
 
 					uint16 currentFrame = fighterAnimations.GetCurrentAnimation().GetCurrentAnimationFrame();
+					glm::ivec2 tileDimensions = fighterSprite.GetTileDimensions();
+					glm::vec4 newFrameUVs{ 0.0f };
 
-					fighterSprite.SetUVs(currentFrame);
+					uint16 tileXCoordinate = currentFrame % tileDimensions.x;
+					uint16 tileYCoordinate = currentFrame / tileDimensions.x;
+
+					newFrameUVs.x = tileXCoordinate / static_cast<sfloat>(tileDimensions.x);
+					newFrameUVs.y = tileYCoordinate / static_cast<sfloat>(tileDimensions.y);
+					newFrameUVs.w = 1.0f / tileDimensions.x;
+					newFrameUVs.z = 1.0f / tileDimensions.y;
+
+					fighterSprite.SetUVCoordinates(newFrameUVs);
 
 					return fighterSprite;
 				}(fighter.GetSpriteSheet(), fighter.GetAnimation());

@@ -5,6 +5,7 @@
 #include "Components/Transform.h"
 #include "Components/Input.h"
 #include "Components/Velocity.h"
+#include "Components/Animation.h"
 
 extern Scene scene;
 
@@ -30,7 +31,9 @@ void Game::Update()
 {
 	ec.AddContext("When updating Game");
 
-	animation.PlayAnimation(p_Player, animation1);
+	if (p_Player->GetVelocity().GetCurrentState().x > 0)
+		animation.PlayAnimation(p_Player, animation1);
+
 	animation.PlayAnimation(p_AI, animation2);
 }
 

@@ -22,8 +22,8 @@ namespace Comp
 
 		glm::vec4 uvs;
 
-		uint16 xTile = index % tileDimensions.x;
-		uint16 yTile = index / tileDimensions.x;
+		uint16 xTile = 0 % tileDimensions.x;
+		uint16 yTile = 0 / tileDimensions.x;
 
 		uvs.x = xTile / static_cast<sfloat>(tileDimensions.x);
 		uvs.y = yTile / static_cast<sfloat>(tileDimensions.y);
@@ -59,30 +59,13 @@ namespace Comp
 		return vertexData;
 	}
 
-	void SpriteTileSheet::SetUVs(const uint16 displayTile)
+	auto SpriteTileSheet::SetUVCoordinates(glm::vec4 uvs) -> void
 	{
-		glm::vec4 uvs;
-
-		this->index = displayTile;
-
-		uint16 tileXCoordinate = displayTile% tileDimensions.x;
-		uint16 tileYCoordinate = displayTile/ tileDimensions.x;
-
-		uvs.x = tileXCoordinate / static_cast<sfloat>(tileDimensions.x);
-		uvs.y = tileYCoordinate / static_cast<sfloat>(tileDimensions.y);
-		uvs.w = 1.0f / tileDimensions.x;
-		uvs.z = 1.0f / tileDimensions.y;
-
 		this->vertexData.at(0).SetUV(glm::vec2{ uvs.x + uvs.w, uvs.y + uvs.z });
 		this->vertexData.at(1).SetUV(glm::vec2{ uvs.x, uvs.y + uvs.z });
 		this->vertexData.at(2).SetUV(glm::vec2{ uvs.x, uvs.y });
 		this->vertexData.at(3).SetUV(glm::vec2{ uvs.x, uvs.y });
 		this->vertexData.at(4).SetUV(glm::vec2{ uvs.x + uvs.w, uvs.y });
 		this->vertexData.at(5).SetUV(glm::vec2{ uvs.x + uvs.w, uvs.y + uvs.z });
-	}
-
-	uint16 const SpriteTileSheet::CheckIndex() const
-	{
-		return this->index;
 	}
 }

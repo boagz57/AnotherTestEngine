@@ -11,7 +11,6 @@ namespace Comp
 
 		void AddAnimation(Blz::Animation::AnimationClip animation);
 		void SetFinalAnimation(uint16 animationID);
-		void MoveAnimationToNextFrame(uint16 animationID);
 		Blz::Animation::AnimationClip const GetCurrentAnimation() const;
 
 	private:

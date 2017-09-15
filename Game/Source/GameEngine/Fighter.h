@@ -21,17 +21,22 @@ public:
 	Fighter(sfloat startingWorldPositionX, sfloat startingWorldPositionY, Blz::Graphics::Texture texture);
 	~Fighter() = default;
 
-	Comp::Transform GetTransform() { return transform; };
+	Comp::Transform GetTransform() const { return transform; };
 	void Insert(Comp::Transform newTransform) { transform = newTransform; };
-	Comp::SpriteTileSheet GetSpriteSheet() { return spriteSheet; };
+
+	Comp::SpriteTileSheet GetSpriteSheet() const { return spriteSheet; };
 	void Insert(Comp::SpriteTileSheet newSpriteSheet) { spriteSheet = newSpriteSheet; };
-	Comp::Animation GetAnimation() { return animation; };
+
+	Comp::Animation GetAnimation() const { return animation; };
 	void Insert(Comp::Animation newAnimation) { animation = newAnimation; };
+
 	Comp::Input GetInput() { return input; };
 	void Insert(Comp::Input newInput) { input = newInput; };
-	Comp::Velocity GetVelocity() { return velocity; };
+
+	Comp::Velocity GetVelocity() const { return velocity; };
 	void Insert(Comp::Velocity newVelocity) { velocity = newVelocity; };
-	Comp::Position GetPosition() { return position; };
+
+	Comp::Position GetPosition() const { return position; };
 	void Insert(Comp::Position newPosition) { position = newPosition; };
 
 	glm::vec2 originalPosition{ 160.0f, 0.0f };
