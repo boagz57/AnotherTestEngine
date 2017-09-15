@@ -18,8 +18,12 @@ void Game::Init()
 	p_Player = scene.CreateFighter(160.0f, 0.0f, fighterTexture);
 	p_AI = scene.CreateFighter(80.0f, 45.0f, fighterTexture);
 
-	this->animation1 = animation.CreateAnimation(p_Player, 0, 7);
-	this->animation2 = animation.CreateAnimation(p_AI, 8, 7);
+	this->walkingUp = animation.CreateAnimation(p_Player, 0, 7);
+	this->walkingDown = animation.CreateAnimation(p_Player, 24, 7);
+	this->walkingRight = animation.CreateAnimation(p_Player, 8, 7);
+	this->walkingLeft= animation.CreateAnimation(p_Player, 16, 7);
+
+	this->AIWalkingRight = animation.CreateAnimation(p_AI, 8, 7);
 
 	input.BindAxis(SDLK_d, p_Player, std::bind(&Game::MoveRight, this, p_Player));
 	input.BindAxis(SDLK_a, p_Player, std::bind(&Game::MoveLeft, this, p_Player));
@@ -31,10 +35,16 @@ void Game::Update()
 {
 	ec.AddContext("When updating Game");
 
-	if (p_Player->GetVelocity().GetCurrentState().x > 0)
-		animation.PlayAnimation(p_Player, animation1);
+	if (p_Player->GetVelocity().GetCurrentState().y > 0)
+		animation.PlayAnimation(p_Player, walkingUp);
+	else if (p_Player->GetVelocity().GetCurrentState().y < 0)
+		animation.PlayAnimation(p_Player, walkingDown);
+	else if (p_Player->GetVelocity().GetCurrentState().x > 0)
+		animation.PlayAnimation(p_Player, walkingRight);
+	else if (p_Player->GetVelocity().GetCurrentState().x < 0)
+		animation.PlayAnimation(p_Player, walkingLeft);
 
-	animation.PlayAnimation(p_AI, animation2);
+	animation.PlayAnimation(p_AI, AIWalkingRight);
 }
 
 void Game::Shutdown()

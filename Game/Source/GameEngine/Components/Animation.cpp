@@ -4,11 +4,13 @@ namespace Comp
 {
 	void Animation::AddAnimation(Blz::Animation::AnimationClip animation)
 	{
-		animationMap.insert(std::pair<uint16, Blz::Animation::AnimationClip>(animation.ID(), animation));
+		animationMap.insert(std::pair<const uint16, Blz::Animation::AnimationClip>(animation.ID(), animation));
 	}
 
-	void Animation::SetFinalAnimation(uint16 animationID)
+	void Animation::SetFinalAnimation(uint16 const animationID)
 	{
+		RUNTIME_ASSERT(animationMap.find(animationID) != animationMap.end(), "Animation not found!");
+
 		finalAnimation = animationMap.find(animationID)->second;
 		animationMap.at(animationID).IncrementIndex();
 	}

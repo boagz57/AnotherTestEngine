@@ -20,28 +20,31 @@ namespace Blz
 			for (Fighter& fighter : scene.fighters)
 			{
 				//Set current spriteAnimation frame
-				Comp::SpriteTileSheet newSprite = [](Comp::SpriteTileSheet fighterSprite, const Comp::Animation& fighterAnimations) -> Comp::SpriteTileSheet
+				Comp::SpriteTileSheet newAnimatedSprite = [](Comp::SpriteTileSheet fighterSprite, const Comp::Animation& fighterAnimations) -> Comp::SpriteTileSheet
 				{
 					ec.AddContext("When trying to set next animation frame to display");
 
-					uint16 currentFrame = fighterAnimations.GetCurrentAnimation().GetCurrentAnimationFrame();
-					glm::ivec2 tileDimensions = fighterSprite.GetTileDimensions();
 					glm::vec4 newFrameUVs{ 0.0f };
 
-					uint16 tileXCoordinate = currentFrame % tileDimensions.x;
-					uint16 tileYCoordinate = currentFrame / tileDimensions.x;
+					{//Calculate current uvs to display 
+						uint16 currentFrame = fighterAnimations.GetCurrentAnimation().GetCurrentAnimationFrame();
+						glm::ivec2 tileDimensions = fighterSprite.GetTileDimensions();
 
-					newFrameUVs.x = tileXCoordinate / static_cast<sfloat>(tileDimensions.x);
-					newFrameUVs.y = tileYCoordinate / static_cast<sfloat>(tileDimensions.y);
-					newFrameUVs.w = 1.0f / tileDimensions.x;
-					newFrameUVs.z = 1.0f / tileDimensions.y;
+						uint16 tileXCoordinate = currentFrame % tileDimensions.x;
+						uint16 tileYCoordinate = currentFrame / tileDimensions.x;
+
+						newFrameUVs.x = tileXCoordinate / static_cast<sfloat>(tileDimensions.x);
+						newFrameUVs.y = tileYCoordinate / static_cast<sfloat>(tileDimensions.y);
+						newFrameUVs.w = 1.0f / tileDimensions.x;
+						newFrameUVs.z = 1.0f / tileDimensions.y;
+					}
 
 					fighterSprite.SetUVCoordinates(newFrameUVs);
 
 					return fighterSprite;
 				}(fighter.GetSpriteSheet(), fighter.GetAnimation());
 
-				fighter.Insert(newSprite);
+				fighter.Insert(newAnimatedSprite);
 			}
 		}
 	}

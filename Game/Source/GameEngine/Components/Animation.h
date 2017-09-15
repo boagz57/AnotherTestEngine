@@ -10,11 +10,11 @@ namespace Comp
 		Animation() = default;
 
 		void AddAnimation(Blz::Animation::AnimationClip animation);
-		void SetFinalAnimation(uint16 animationID);
+		void SetFinalAnimation(uint16 const animationID);
 		Blz::Animation::AnimationClip const GetCurrentAnimation() const;
 
 	private:
-		Blz::Map<uint16, Blz::Animation::AnimationClip> animationMap;
+		Blz::Map<const uint16, Blz::Animation::AnimationClip> animationMap;
 		Blz::Animation::AnimationClip finalAnimation;
 	};
 }

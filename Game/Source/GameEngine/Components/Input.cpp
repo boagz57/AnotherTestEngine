@@ -7,6 +7,7 @@ namespace Comp
 	{
 		isControllable = true;
 	}
+
 	bool Input::IsFighterControllable()
 	{
 		return isControllable;
@@ -19,7 +20,7 @@ namespace Comp
 
 	void Input::KeyPressed(int32 key, Fighter* fighter)
 	{
-		ERRASSERT(keyMovementBindings.find(key) != keyMovementBindings.end(), "Key not specified!");
+		RUNTIME_ASSERT(keyMovementBindings.find(key) != keyMovementBindings.end(), "Input key has not been assigned!");
 
 		auto movementFunc = keyMovementBindings[key];
 		movementFunc(fighter);
