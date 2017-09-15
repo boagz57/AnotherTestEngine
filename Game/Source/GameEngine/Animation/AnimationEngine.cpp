@@ -20,7 +20,7 @@ namespace Blz
 			for (Fighter& fighter : scene.fighters)
 			{
 				//Set current spriteAnimation frame
-				Comp::SpriteTileSheet newSprite = [](Comp::SpriteTileSheet& fighterSprite, const Comp::Animation& fighterAnimations) -> Comp::SpriteTileSheet
+				Comp::SpriteTileSheet newSprite = [](Comp::SpriteTileSheet fighterSprite, const Comp::Animation& fighterAnimations) -> Comp::SpriteTileSheet
 				{
 					ec.AddContext("When trying to set next animation frame to display");
 

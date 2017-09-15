@@ -21,7 +21,7 @@ namespace Blz
 
 			for (Fighter& fighter : scene.fighters)
 			{
-				Comp::Position newFighterPosition = [](const Comp::Transform& fighterTransform, Comp::Position& fighterPosition) -> Comp::Position
+				Comp::Position newFighterPosition = [](const Comp::Transform& fighterTransform, Comp::Position fighterPosition) -> Comp::Position
 				{
 					fighterPosition.AddBy(fighterTransform.GetCurrentTranslation().x, fighterTransform.GetCurrentTranslation().y);
 
