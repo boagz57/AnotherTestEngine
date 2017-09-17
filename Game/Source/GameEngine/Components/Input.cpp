@@ -13,12 +13,12 @@ namespace Comp
 		return isControllable;
 	}
 
-	void Input::SetKeyBinding(int32 key, std::function<void(Fighter*)> movementFunction)
+	void Input::SetKeyBinding(const int32 key, std::function<void(Fighter*)> movementFunction)
 	{
 		keyMovementBindings.emplace(key, movementFunction);
 	}
 
-	void Input::KeyPressed(int32 key, Fighter* fighter)
+	void Input::KeyPressed(const int32 key, Fighter * const fighter)
 	{
 		RUNTIME_ASSERT(keyMovementBindings.find(key) != keyMovementBindings.end(), "Input key has not been assigned!");
 

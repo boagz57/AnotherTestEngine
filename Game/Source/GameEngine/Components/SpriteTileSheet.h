@@ -18,10 +18,10 @@ namespace Comp
 		auto GetTileDimensions() const->glm::ivec2 { return tileDimensions; };
 		Blz::Array<Vector3D, 6> const GetVertexData() const;
 
-		void SetScreenTargetLocationAndTileDimensions(sfloat screenPositionX, sfloat screenPositionY, glm::ivec2 spriteSheetTileDimensions);
-		void SetWidthAndHeight(sfloat width, sfloat height);
-		void SetTexture(Blz::Graphics::Texture texture);
-		auto SetUVCoordinates(glm::vec4 uvs) -> void;
+		void SetScreenTargetLocationAndTileDimensions(const sfloat screenPositionX, const sfloat screenPositionY, const glm::ivec2 spriteSheetTileDimensions);
+		void SetWidthAndHeight(const sfloat width, const sfloat height);
+		void SetTexture(const Blz::Graphics::Texture& texture);
+		auto SetUVCoordinates(const glm::vec4 uvs) -> void;
 
 
 	private:

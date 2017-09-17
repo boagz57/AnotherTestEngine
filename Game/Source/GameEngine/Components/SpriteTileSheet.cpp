@@ -6,7 +6,7 @@
 
 namespace Comp
 {
-	void SpriteTileSheet::SetScreenTargetLocationAndTileDimensions(sfloat screenPositionX, sfloat screenPositionY, glm::ivec2 spriteSheetTileDimensions)
+	void SpriteTileSheet::SetScreenTargetLocationAndTileDimensions(const sfloat screenPositionX, const sfloat screenPositionY, const glm::ivec2 spriteSheetTileDimensions)
 	{
 		tileDimensions = spriteSheetTileDimensions;
 
@@ -38,13 +38,13 @@ namespace Comp
 		this->vertexData.at(5).SetUV(glm::vec2{ uvs.x + uvs.w, uvs.y + uvs.z });
 	}
 
-	void SpriteTileSheet::SetWidthAndHeight(sfloat width, sfloat height)
+	void SpriteTileSheet::SetWidthAndHeight(const sfloat width, const sfloat height)
 	{
 		this->width = width;
 		this->height = height;
 	}
 
-	void SpriteTileSheet::SetTexture(Blz::Graphics::Texture texture)
+	void SpriteTileSheet::SetTexture(const Blz::Graphics::Texture& texture)
 	{
 		this->textureID = texture.ID();
 	}
@@ -59,7 +59,7 @@ namespace Comp
 		return vertexData;
 	}
 
-	auto SpriteTileSheet::SetUVCoordinates(glm::vec4 uvs) -> void
+	auto SpriteTileSheet::SetUVCoordinates(const glm::vec4 uvs) -> void
 	{
 		this->vertexData.at(0).SetUV(glm::vec2{ uvs.x + uvs.w, uvs.y + uvs.z });
 		this->vertexData.at(1).SetUV(glm::vec2{ uvs.x, uvs.y + uvs.z });

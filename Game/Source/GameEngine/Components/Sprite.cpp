@@ -3,7 +3,7 @@
 
 namespace Comp
 {
-	void Sprite::SetScreenTargetLocation(sfloat screenPositionX, sfloat screenPositionY)
+	void Sprite::SetScreenTargetLocation(const sfloat screenPositionX, const sfloat screenPositionY)
 	{
 		sfloat halfWidth = this->width / 2;
 
@@ -23,13 +23,13 @@ namespace Comp
 		this->vertexData.at(5).SetUV(glm::vec2{ 1.0f, 1.0f });
 	}
 
-	void Sprite::SetWidthAndHeight(sfloat width, sfloat height)
+	void Sprite::SetWidthAndHeight(const sfloat width, const sfloat height)
 	{
 		this->width = width;
 		this->height = height;
 	}
 
-	void Sprite::SetTexture(Blz::Graphics::Texture texture)
+	void Sprite::SetTexture(const Blz::Graphics::Texture& texture)
 	{
 		this->textureID = texture.ID();
 	}

@@ -9,7 +9,7 @@ namespace Comp
 		Velocity() = default;
 
 		glm::vec2 const GetCurrentState() const;
-		void Add(sfloat x, sfloat y);
+		void Add(const sfloat x, const sfloat y);
 		void ZeroOut();
 
 	private:

@@ -11,9 +11,9 @@ namespace Comp
 		Sprite() = default;
 		~Sprite() = default;
 
-		void SetScreenTargetLocation(sfloat screenPositionX, sfloat screenPositionY);
-		void SetWidthAndHeight(sfloat width, sfloat height);
-		void SetTexture(Blz::Graphics::Texture texture);
+		void SetScreenTargetLocation(const sfloat screenPositionX, const sfloat screenPositionY);
+		void SetWidthAndHeight(const sfloat width, const sfloat height);
+		void SetTexture(const Blz::Graphics::Texture& texture);
 		GLuint const GetTextureID() const;
 
 		Blz::Array<Vector3D, 6> const GetVertexData() const;

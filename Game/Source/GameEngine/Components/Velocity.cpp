@@ -7,7 +7,7 @@ namespace Comp
 		return currentVelocity;
 	}
 
-	void Velocity::Add(sfloat x, sfloat y)
+	void Velocity::Add(const sfloat x, const sfloat y)
 	{
 		this->currentVelocity.x += x;
 		this->currentVelocity.y += y;

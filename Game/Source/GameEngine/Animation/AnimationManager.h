@@ -10,8 +10,8 @@ namespace Blz
 		{
 		public:
 			//TODO: How to link texture to animation?
-			auto CreateAnimation(Fighter* fighter, uint16 startingIndex, uint16 numberOfTilesToAnimate) -> uint16;
-			auto PlayAnimation(Fighter* fighter, uint16 const animationToPlay) -> void;
+			auto CreateAnimation(Fighter* const fighter, const uint16 startingIndex, const uint16 numberOfTilesToAnimate) -> uint16;
+			auto PlayAnimation(Fighter* const fighter, uint16 const animationToPlay) -> void;
 		};
 	}
 }
