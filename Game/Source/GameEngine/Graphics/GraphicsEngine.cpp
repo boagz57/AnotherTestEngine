@@ -48,8 +48,6 @@ namespace Blz
 
 					fighterSprite.SetScreenTargetLocationAndTileDimensions(fighterPosition.GetCurrentPosition().x, fighterPosition.GetCurrentPosition().y, glm::ivec2{ 8, 4 });
 
-					SysHelper::InitializeGLBuffer(fighterSprite.GetVertexData());
-
 					return fighterSprite;
 				}(fighter.GetSpriteSheet(), ConvertedPixelPosition);
 
@@ -76,11 +74,28 @@ namespace Blz
 				{
 					glm::vec2 translationAmount = fighter.GetPosition().GetCurrentPosition() - fighter.originalPosition;
 
-					//Round values to nearest int value to avoid fractional values which can create distorted art work
-					translationAmount.x = rint(translationAmount.x);
-					translationAmount.y = rint(translationAmount.y);
+					//Convert translation from design units to screen pixels
+					glm::vec2 ConvertedTranslationPosition = [](glm::vec2 translationToConvert, const uint16 windowWidth) -> glm::vec2
+					{
+						ec.AddContext("When converting my world units to screen pixels");
 
-					glm::mat4 transformationMatrix = glm::translate(orthoProjection, glm::vec3{ translationAmount.x, translationAmount.y, 0.0f });
+						if (windowWidth == 1920)
+						{
+							translationToConvert *= 12;
+						}
+						else if (windowWidth == 1280)
+						{
+							translationToConvert *= 8;
+						}
+
+						return translationToConvert;
+					}(translationAmount, window.width);
+
+					//Round values to nearest int value to avoid fractional values which can create distorted art work
+					translationAmount.x = rint(ConvertedTranslationPosition.x);
+					translationAmount.y = rint(ConvertedTranslationPosition.y);
+
+					glm::mat4 transformationMatrix = glm::translate(orthoProjection, glm::vec3{ ConvertedTranslationPosition.x, ConvertedTranslationPosition.y, 0.0f });
 					glUniformMatrix4fv(transformationMatrixUniformLocation, 1, GL_FALSE, &(transformationMatrix[0][0]));
 				}
 

@@ -40,12 +40,9 @@ namespace Blz
 
 
 				{//Stop fighter from moving outside window bounds
-					if (newFighterPosition.GetCurrentPosition().x > 160.0f)
-						newFighterPosition.ClampMaxPositionTo(160.0f);
-					else if (newFighterPosition.GetCurrentPosition().x < -160.0f)
-						newFighterPosition.ClampMinPositionTo(-160.0f);
-				};
-
+					newFighterPosition.ClampMaxPositionTo(160.0f, 90.0f);
+					newFighterPosition.ClampMinPositionTo(0.0f, 0.0f);
+				}
 
 				fighter.Insert(newFighterPosition);
 				fighter.Insert(newFighterTransform);

@@ -39,7 +39,7 @@ public:
 	Comp::Position const GetPosition() const { return position; };
 	void Insert(Comp::Position newPosition) { position = newPosition; };
 
-	glm::vec2 originalPosition{ 160.0f, 0.0f };
+	glm::vec2 originalPosition{ 0.0f, 0.0f };
 
 private:
 	friend class Blz::Physics::Manager;

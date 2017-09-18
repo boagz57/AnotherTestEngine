@@ -14,16 +14,20 @@ namespace Comp
 		this->currentPosition.y += amountToAddY;
 	}
 
-	void Position::ClampMaxPositionTo(sfloat const maxPositionX)
+	void Position::ClampMaxPositionTo(sfloat const maxPositionX, sfloat const maxPositionY)
 	{
 		if (currentPosition.x > maxPositionX)
 			currentPosition.x = maxPositionX;
+		if (currentPosition.y > maxPositionY)
+			currentPosition.y = maxPositionY;
 	}
 
-	void Position::ClampMinPositionTo(sfloat const minPositionX)
+	void Position::ClampMinPositionTo(sfloat const minPositionX, sfloat const minPositionY)
 	{
 		if (currentPosition.x < minPositionX)
 			currentPosition.x = minPositionX;
+		if (currentPosition.y < minPositionY)
+			currentPosition.y = minPositionY;
 	}
 
 	glm::vec2 const Position::GetCurrentPosition() const

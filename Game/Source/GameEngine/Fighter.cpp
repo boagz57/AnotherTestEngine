@@ -6,4 +6,6 @@ Fighter::Fighter(sfloat startPositionX, sfloat startPositionY, Blz::Graphics::Te
 {
 	position.Add(startPositionX, startPositionY);
 	spriteSheet.SetTexture(texture);
+	this->originalPosition.x = startPositionX;
+	this->originalPosition.y = startPositionY;
 }
