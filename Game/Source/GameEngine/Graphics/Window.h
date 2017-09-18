@@ -1,11 +1,6 @@
 #include <SDL.h>
 #pragma once
 
-/*
-	Responsible for Creating and managing an opengl window context as well as initializing and shutting down 
-	third party systems.
-*/
-
 namespace Blz
 {
 	namespace Graphics

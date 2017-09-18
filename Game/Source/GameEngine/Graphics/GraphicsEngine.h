@@ -20,8 +20,8 @@ namespace Blz
 			Engine() = default;
 			~Engine() = default;
 
-			auto Init(Scene& scene, Window& window) -> void;
-			auto Update(Scene& scene, ShaderProgram& shader) -> void;
+			auto Init(Scene& scene, const Window& window) -> void;
+			auto Update(Scene& scene, ShaderProgram& shader, const Window& window) -> void;
 
 		private:
 			glm::mat4 orthoProjection;

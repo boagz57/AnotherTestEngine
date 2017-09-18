@@ -8,16 +8,22 @@ namespace Comp
 		this->currentPosition.y *= c_MultiplyY;
 	}
 
-	void Position::AddBy(sfloat amountToAddX, sfloat amountToAddY)
+	void Position::Add(sfloat amountToAddX, sfloat amountToAddY)
 	{
 		this->currentPosition.x += amountToAddX;
 		this->currentPosition.y += amountToAddY;
 	}
 
-	void Position::SetPosition(sfloat const positionX, sfloat const positionY)
+	void Position::ClampMaxPositionTo(sfloat const maxPositionX)
 	{
-		currentPosition.x = positionX;
-		currentPosition.y = positionY;
+		if (currentPosition.x > maxPositionX)
+			currentPosition.x = maxPositionX;
+	}
+
+	void Position::ClampMinPositionTo(sfloat const minPositionX)
+	{
+		if (currentPosition.x < minPositionX)
+			currentPosition.x = minPositionX;
 	}
 
 	glm::vec2 const Position::GetCurrentPosition() const

@@ -7,8 +7,9 @@ namespace Comp
 	{
 	public:
 		void MultiplyBy(int16 const amountToMultipyX, int16 const amountToMultiplyY);
-		void AddBy(sfloat amountToAddX, sfloat amountToAddY);
-		void SetPosition(sfloat const positionX, sfloat const positionY);
+		void Add(sfloat amountToAddX, sfloat amountToAddY);
+		void ClampMaxPositionTo(sfloat const maxPositionX);
+		void ClampMinPositionTo(sfloat const minPositionX);
 		glm::vec2 const GetCurrentPosition() const;
 
 	private:

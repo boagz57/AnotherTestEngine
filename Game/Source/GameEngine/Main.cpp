@@ -61,7 +61,7 @@ int main(int agrc, char** argv)
 
 		window.ClearBuffers();
 
-		renderer.Update(scene, colorShaderProgram);
+		renderer.Update(scene, colorShaderProgram, window);
 
 		window.SwapBuffers();
 

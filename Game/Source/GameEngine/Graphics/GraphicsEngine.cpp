@@ -16,7 +16,7 @@ namespace Blz
 {
 	namespace Graphics
 	{
-		auto Engine::Init(Scene& scene, Window& window) -> void
+		auto Engine::Init(Scene& scene, const Window& window) -> void
 		{
 			//Turn OpenGL normalized device coodinates (-1 to 1) to pixel coordinates
 			orthoProjection = glm::ortho(0.0f, static_cast<sfloat>(window.width), 0.0f, static_cast<sfloat>(window.height));
@@ -57,7 +57,7 @@ namespace Blz
 			}
 		}
 
-		auto Engine::Update(Scene& scene, ShaderProgram& shader) -> void
+		auto Engine::Update(Scene& scene, ShaderProgram& shader, const Window& window) -> void
 		{
 			ec.AddContext("When updating graphics engine");
 
@@ -86,7 +86,7 @@ namespace Blz
 
 				glBindTexture(GL_TEXTURE_2D, fighter.GetSpriteSheet().GetTextureID());
 
-				//Send new 
+				//Send updated Verts
 				{
 					glBindBuffer(GL_ARRAY_BUFFER, vboID);
 
@@ -101,12 +101,9 @@ namespace Blz
 
 				//TODO: Remove zeroing out velocity from Renderer update. 
 				Comp::Velocity vel = fighter.GetVelocity();
-				Comp::Transform trans = fighter.GetTransform();
-				trans.ZeroOut();
 				vel.ZeroOut();
 				
 				fighter.Insert(vel);
-				fighter.Insert(trans);
 			}
 		}
 	}

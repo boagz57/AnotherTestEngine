@@ -15,8 +15,8 @@ void Game::Init()
 
 	Blz::Graphics::Texture fighterTexture("Girl.png");
 
-	p_Player = scene.CreateFighter(160.0f, 0.0f, fighterTexture);
-	p_AI = scene.CreateFighter(80.0f, 45.0f, fighterTexture);
+	p_Player = scene.CreateFighter(50.0f, 0.0f, fighterTexture);
+	p_AI = scene.CreateFighter(40.0f, 45.0f, fighterTexture);
 
 	this->walkingUp = animation.CreateAnimation(p_Player, 0, 7);
 	this->walkingDown = animation.CreateAnimation(p_Player, 24, 7);
