@@ -12,10 +12,15 @@
 #include "../Scene.h"
 #include "../Fighter.h"
 
+
 namespace Blz
 {
 	namespace Graphics
 	{
+		//Helper functions
+		auto ConvertWorldUnitsToScreenPixels(Comp::Position positionToConvert, uint16 windowWidth)->Comp::Position;
+		auto ConvertWorldUnitsToScreenPixels(glm::vec2 positionToConvert, uint16 windowWidth)->glm::vec2;
+
 		auto Engine::Init(Scene& scene, const Window& window) -> void
 		{
 			//Turn OpenGL normalized device coodinates (-1 to 1) to pixel coordinates
@@ -23,25 +28,8 @@ namespace Blz
 
 			for (Fighter& fighter : scene.fighters)
 			{
-				//Convert my world units to actual screen pixels
-				Comp::Position ConvertedPixelPosition = [](Comp::Position positionCoordsToConvert, const uint16 windowWidth) -> Comp::Position
-				{
-					ec.AddContext("When converting my world units to screen pixels");
+				Comp::Position actualScreenPixelPositions = ConvertWorldUnitsToScreenPixels(fighter.GetPosition(), window.width);
 
-					if (windowWidth == 1920)
-					{
-						positionCoordsToConvert.MultiplyBy(12, 12);
-					}
-					else if (windowWidth == 1280)
-					{
-						positionCoordsToConvert.MultiplyBy(8, 8);
-					}
-
-					return positionCoordsToConvert;
-				}(fighter.GetPosition(), window.width);
-
-
-				//Set new sprite screen location based on new coordinates
 				Comp::SpriteTileSheet updatedSpriteLocation = [](Comp::SpriteTileSheet fighterSprite, Comp::Position fighterPosition) -> Comp::SpriteTileSheet
 				{
 					ec.AddContext("When setting sprite screen location");
@@ -49,7 +37,7 @@ namespace Blz
 					fighterSprite.SetScreenTargetLocationAndTileDimensions(fighterPosition.GetCurrentPosition().x, fighterPosition.GetCurrentPosition().y, glm::ivec2{ 8, 4 });
 
 					return fighterSprite;
-				}(fighter.GetSpriteSheet(), ConvertedPixelPosition);
+				}(fighter.GetSpriteSheet(), actualScreenPixelPositions);
 
 				fighter.Insert(updatedSpriteLocation);
 			}
@@ -74,22 +62,7 @@ namespace Blz
 				{
 					glm::vec2 translationAmount = fighter.GetPosition().GetCurrentPosition() - fighter.originalPosition;
 
-					//Convert translation from design units to screen pixels
-					glm::vec2 ConvertedTranslationPosition = [](glm::vec2 translationToConvert, const uint16 windowWidth) -> glm::vec2
-					{
-						ec.AddContext("When converting my world units to screen pixels");
-
-						if (windowWidth == 1920)
-						{
-							translationToConvert *= 12;
-						}
-						else if (windowWidth == 1280)
-						{
-							translationToConvert *= 8;
-						}
-
-						return translationToConvert;
-					}(translationAmount, window.width);
+					glm::vec2 ConvertedTranslationPosition = ConvertWorldUnitsToScreenPixels(translationAmount, window.width);
 
 					//Round values to nearest int value to avoid fractional values which can create distorted art work
 					translationAmount.x = rint(ConvertedTranslationPosition.x);
@@ -117,9 +90,41 @@ namespace Blz
 				//TODO: Remove zeroing out velocity from Renderer update. 
 				Comp::Velocity vel = fighter.GetVelocity();
 				vel.ZeroOut();
-				
+
 				fighter.Insert(vel);
 			}
+		}
+
+		auto ConvertWorldUnitsToScreenPixels(Comp::Position position, uint16 windowWidth) -> Comp::Position
+		{
+			ec.AddContext("When converting my world units to screen pixels");
+
+			if (windowWidth == 1920)
+			{
+				position.MultiplyBy(12, 12);
+			}
+			else if (windowWidth == 1280)
+			{
+				position.MultiplyBy(8, 8);
+			}
+
+			return position;
+		}
+
+		auto ConvertWorldUnitsToScreenPixels(glm::vec2 positionToConvert, uint16 windowWidth) -> glm::vec2
+		{
+			ec.AddContext("When converting my world units to screen pixels");
+
+			if (windowWidth == 1920)
+			{
+				positionToConvert*= 12;
+			}
+			else if (windowWidth == 1280)
+			{
+				positionToConvert*= 8;
+			}
+
+			return positionToConvert;
 		}
 	}
 }
