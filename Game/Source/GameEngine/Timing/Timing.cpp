@@ -1,4 +1,5 @@
 #include <SDL.h>
+#include "Timing.h"
 
 namespace Blz
 {
@@ -30,5 +31,20 @@ namespace Blz
 				LOG("FPS: %f\n", FPS);
 			}
 		}
+
+		void EngineClock::Init()
+		{
+			timePointLastFrame = SDL_GetTicks();
+		}
+
+		void EngineClock::UpdateTime()
+		{
+			auto timePointThisFrame = SDL_GetTicks();
+			auto timeDifference = timePointThisFrame - timePointLastFrame;
+			deltaTime = timeDifference;
+			timePointLastFrame = timePointThisFrame;
+		}
 	}
 }
+
+Blz::Timing::EngineClock engineClock;

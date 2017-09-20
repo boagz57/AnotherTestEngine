@@ -44,6 +44,7 @@ int main(int agrc, char** argv)
 	colorShaderProgram.Bind();
 
 	//Initialize systems
+	engineClock.Init();
 	game.Init();
 	renderer.Init(scene, window);
 	animation.Init(scene);
@@ -51,6 +52,8 @@ int main(int agrc, char** argv)
 	//Game loop
 	while (true)
 	{
+		engineClock.UpdateTime();
+
 		input.Update(scene);
 
 		game.Update();
