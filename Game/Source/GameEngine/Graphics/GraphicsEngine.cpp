@@ -64,6 +64,8 @@ namespace Blz
 				{
 					glm::vec2 translationAmount = fighter.GetPosition().GetCurrentPosition() - fighter.originalPosition;
 
+					//LOG("%f\n", translationAmount.x);
+
 					glm::vec2 ConvertedTranslationPosition = ConvertWorldUnitsToScreenPixels(translationAmount, window.width);
 
 					glm::mat4 transformationMatrix = glm::translate(orthoProjection, glm::vec3{ ConvertedTranslationPosition.x, ConvertedTranslationPosition.y, 0.0f });

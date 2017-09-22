@@ -49,20 +49,20 @@ void Game::Shutdown()
 
 void Game::MoveRight(Fighter* const fighter) 
 {
-	physics.Move(fighter, 2.0f, 0.0f);
+	physics.Move(fighter, 10.0f, 0.0f);
 }
 
 void Game::MoveLeft(Fighter* const fighter) 
 {
-	physics.Move(fighter, -2.0f, 0.0f);
+	physics.Move(fighter, -10.0f, 0.0f);
 }
 
 void Game::MoveUp(Fighter* const fighter) 
 {
-	physics.Move(fighter, 0.0f, 2.f);
+	physics.Move(fighter, 0.0f, 10.f);
 }
 
 void Game::MoveDown(Fighter* const fighter)
 {
-	physics.Move(fighter, 0.0f, -2.0f);
+	physics.Move(fighter, 0.0f, -10.0f);
 }

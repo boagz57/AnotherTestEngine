@@ -37,14 +37,6 @@ namespace Blz
 					return fighterVelocity;
 				}(fighter.GetVelocity());
 
-
-				{//Stop fighter from moving outside window bounds
-					newFighterPosition.ClampMaxPositionTo(160.0f, 90.0f);
-
-					//Create higher Y bounds to simulate the ground of a level
-					newFighterPosition.ClampMinPositionTo(0.0f, 5.0f);
-				}
-
 				fighter.Insert(newFighterPosition);
 				fighter.Insert(newFighterVel);
 			}

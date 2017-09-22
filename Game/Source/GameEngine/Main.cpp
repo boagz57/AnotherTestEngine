@@ -70,7 +70,6 @@ int main(int agrc, char** argv)
 		window.SwapBuffers();
 
 		Blz::Timing::CalculateAndDisplayFPS();
-		SDL_Delay(20);
 	}
 
 	return 0;
