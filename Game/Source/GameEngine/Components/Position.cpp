@@ -30,7 +30,7 @@ namespace Comp
 			currentPosition.y = minPositionY;
 	}
 
-	glm::vec2 const Position::GetCurrentPosition() const
+	glm::vec2 Position::GetCurrentPosition() const
 	{
 		return currentPosition;
 	}

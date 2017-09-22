@@ -15,15 +15,12 @@ void Game::Init()
 
 	Blz::Graphics::Texture fighterTexture("Girl.png");
 
-	p_Player = scene.CreateFighter(160.0f, 0.0f, fighterTexture);
-	p_AI = scene.CreateFighter(80.0f, 45.0f, fighterTexture);
+	p_Player = scene.CreateFighter(80.0f, 0.0f, fighterTexture);
 
 	this->walkingUp = animation.CreateAnimation(p_Player, 0, 7);
 	this->walkingDown = animation.CreateAnimation(p_Player, 24, 7);
 	this->walkingRight = animation.CreateAnimation(p_Player, 8, 7);
 	this->walkingLeft= animation.CreateAnimation(p_Player, 16, 7);
-
-	this->AIWalkingRight = animation.CreateAnimation(p_AI, 8, 7);
 
 	input.BindAxis(SDLK_d, p_Player, std::bind(&Game::MoveRight, this, p_Player));
 	input.BindAxis(SDLK_a, p_Player, std::bind(&Game::MoveLeft, this, p_Player));
@@ -43,8 +40,6 @@ void Game::Update()
 		animation.PlayAnimation(p_Player, walkingRight);
 	else if (p_Player->GetVelocity().GetCurrentState().x < 0)
 		animation.PlayAnimation(p_Player, walkingLeft);
-
-	animation.PlayAnimation(p_AI, AIWalkingRight);
 }
 
 void Game::Shutdown()
@@ -54,20 +49,20 @@ void Game::Shutdown()
 
 void Game::MoveRight(Fighter* const fighter) 
 {
-	physics.Move(fighter, 0.1f, 0.0f);
+	physics.Move(fighter, 2.0f, 0.0f);
 }
 
 void Game::MoveLeft(Fighter* const fighter) 
 {
-	physics.Move(fighter, -0.1f, 0.0f);
+	physics.Move(fighter, -2.0f, 0.0f);
 }
 
 void Game::MoveUp(Fighter* const fighter) 
 {
-	physics.Move(fighter, 0.0f, 0.1f);
+	physics.Move(fighter, 0.0f, 2.f);
 }
 
 void Game::MoveDown(Fighter* const fighter)
 {
-	physics.Move(fighter, 0.0f, -0.1f);
+	physics.Move(fighter, 0.0f, -2.0f);
 }

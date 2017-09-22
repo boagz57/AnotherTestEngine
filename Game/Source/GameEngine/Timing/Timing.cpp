@@ -41,7 +41,7 @@ namespace Blz
 		{
 			auto timePointThisFrame = SDL_GetTicks();
 			auto timeDifference = timePointThisFrame - timePointLastFrame;
-			deltaTime = timeDifference;
+			frameTime = (timeDifference * .001);
 			timePointLastFrame = timePointThisFrame;
 		}
 	}

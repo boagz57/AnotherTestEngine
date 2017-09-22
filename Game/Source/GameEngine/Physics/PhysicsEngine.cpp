@@ -22,21 +22,20 @@ namespace Blz
 			for (Fighter& fighter : scene.fighters)
 			{
 				//Move fighter by current translation
-				Comp::Position newFighterPosition = [](const Comp::Transform& fighterTransform, Comp::Position fighterPosition) -> Comp::Position
+				Comp::Position newFighterPosition = [](const Comp::Velocity& fighterVelocity, Comp::Position fighterPosition) -> Comp::Position
 				{
-					fighterPosition.Add(fighterTransform.GetCurrentTranslation().x, fighterTransform.GetCurrentTranslation().y);
+					fighterPosition.Add(fighterVelocity.GetCurrentState().x * engineClock.GetFrameTime(),fighterVelocity.GetCurrentState().y * engineClock.GetFrameTime());
 
 					return fighterPosition;
-				}(fighter.GetTransform(), fighter.GetPosition());
+				}(fighter.GetVelocity(), fighter.GetPosition());
 
 
-				//Zero out translation
-				Comp::Transform newFighterTransform = [](Comp::Transform fighterTransform) -> Comp::Transform
+				Comp::Velocity newFighterVel = [](Comp::Velocity fighterVelocity) -> Comp::Velocity
 				{
-					fighterTransform.ZeroOut();
+					fighterVelocity.ZeroOut();
 
-					return fighterTransform;
-				}(fighter.GetTransform());
+					return fighterVelocity;
+				}(fighter.GetVelocity());
 
 
 				{//Stop fighter from moving outside window bounds
@@ -47,7 +46,7 @@ namespace Blz
 				}
 
 				fighter.Insert(newFighterPosition);
-				fighter.Insert(newFighterTransform);
+				fighter.Insert(newFighterVel);
 			}
 		}
 	}

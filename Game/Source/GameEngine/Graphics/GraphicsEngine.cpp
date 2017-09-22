@@ -36,6 +36,8 @@ namespace Blz
 
 					fighterSprite.SetScreenTargetLocationAndTileDimensions(fighterPosition.GetCurrentPosition().x, fighterPosition.GetCurrentPosition().y, glm::ivec2{ 8, 4 });
 
+					SysHelper::InitializeGLBuffer(fighterSprite.GetVertexData());
+
 					return fighterSprite;
 				}(fighter.GetSpriteSheet(), actualScreenPixelPositions);
 
@@ -64,34 +66,17 @@ namespace Blz
 
 					glm::vec2 ConvertedTranslationPosition = ConvertWorldUnitsToScreenPixels(translationAmount, window.width);
 
-					//Round values to nearest int value to avoid fractional values which can create distorted art work
-					translationAmount.x = rint(ConvertedTranslationPosition.x);
-					translationAmount.y = rint(ConvertedTranslationPosition.y);
-
 					glm::mat4 transformationMatrix = glm::translate(orthoProjection, glm::vec3{ ConvertedTranslationPosition.x, ConvertedTranslationPosition.y, 0.0f });
 					glUniformMatrix4fv(transformationMatrixUniformLocation, 1, GL_FALSE, &(transformationMatrix[0][0]));
 				}
 
 				glBindTexture(GL_TEXTURE_2D, fighter.GetSpriteSheet().GetTextureID());
 
-				//Send updated Verts
-				{
-					glBindBuffer(GL_ARRAY_BUFFER, vboID);
-
-					glBufferData(GL_ARRAY_BUFFER, (sizeof(Vector3D) * fighter.GetSpriteSheet().GetVertexData().size()), &fighter.GetSpriteSheet().GetVertexData().front(), GL_DYNAMIC_DRAW);
-					glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vector3D), (void*)offsetof(Vector3D, position));
-					glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(Vector3D), (void*)offsetof(Vector3D, textureCoordinates));
-				}
+				glBindBuffer(GL_ARRAY_BUFFER, vboID);
 
 				glDrawArrays(GL_TRIANGLES, 0, 6);
 
 				glBindBuffer(GL_ARRAY_BUFFER, 0);
-
-				//TODO: Remove zeroing out velocity from Renderer update. 
-				Comp::Velocity vel = fighter.GetVelocity();
-				vel.ZeroOut();
-
-				fighter.Insert(vel);
 			}
 		}
 

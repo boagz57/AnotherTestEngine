@@ -14,10 +14,10 @@ namespace Blz
 			void Init();
 			void UpdateTime();
 
-			uint32 const GetDeltaTime() const { return deltaTime; };
+			uint32 const GetFrameTime() const { return frameTime; };
 
 		private:
-			uint32 deltaTime = 0;
+			uint32 frameTime = 0;
 			uint32 timePointLastFrame = 0;
 		};
 	}
