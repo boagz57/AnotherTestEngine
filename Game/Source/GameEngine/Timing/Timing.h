@@ -14,7 +14,7 @@ namespace Blz
 			void Init();
 			void UpdateTime();
 
-			sfloat const GetFrameTime() const { return frameTime; };
+			sfloat const GetPreviousFrameTime() const { return frameTime; };
 
 		private:
 			sfloat frameTime = 0;

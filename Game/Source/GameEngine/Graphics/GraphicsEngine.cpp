@@ -68,6 +68,8 @@ namespace Blz
 
 					glm::vec2 ConvertedTranslationPosition = ConvertWorldUnitsToScreenPixels(translationAmount, window.width);
 
+					//TODO: perform rounding of final pixels to avoid fractional values which could cause distorted sprites
+
 					glm::mat4 transformationMatrix = glm::translate(orthoProjection, glm::vec3{ ConvertedTranslationPosition.x, ConvertedTranslationPosition.y, 0.0f });
 					glUniformMatrix4fv(transformationMatrixUniformLocation, 1, GL_FALSE, &(transformationMatrix[0][0]));
 				}
@@ -75,6 +77,8 @@ namespace Blz
 				glBindTexture(GL_TEXTURE_2D, fighter.GetSpriteSheet().GetTextureID());
 
 				glBindBuffer(GL_ARRAY_BUFFER, vboID);
+
+				//Send down new text coords to draw
 				glBufferData(GL_ARRAY_BUFFER, (sizeof(Vector3D) * fighter.GetSpriteSheet().GetVertexData().size()), &fighter.GetSpriteSheet().GetVertexData().front(), GL_DYNAMIC_DRAW);
 				glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(Vector3D), (void*)offsetof(Vector3D, textureCoordinates));
 

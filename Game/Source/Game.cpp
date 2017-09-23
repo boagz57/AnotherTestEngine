@@ -59,10 +59,10 @@ void Game::MoveLeft(Fighter* const fighter)
 
 void Game::MoveUp(Fighter* const fighter) 
 {
-	physics.Move(fighter, 0.0f, 10.f);
+	physics.Move(fighter, 0.0f, 5.0f);
 }
 
 void Game::MoveDown(Fighter* const fighter)
 {
-	physics.Move(fighter, 0.0f, -10.0f);
+	physics.Move(fighter, 0.0f, -5.0f);
 }

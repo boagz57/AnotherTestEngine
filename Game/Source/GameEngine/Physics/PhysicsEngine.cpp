@@ -22,20 +22,20 @@ namespace Blz
 			for (Fighter& fighter : scene.fighters)
 			{
 				//Move fighter by current translation
-				Comp::Position newFighterPosition = [](const Comp::Velocity& fighterVelocity, Comp::Position fighterPosition) -> Comp::Position
+				Comp::Position newFighterPosition = [](const Comp::Velocity& fighterVelocity, Comp::Position fighterPosition, Comp::Movement fighterMovement) -> Comp::Position
 				{
-					fighterPosition.Add(fighterVelocity.GetCurrentState().x * engineClock.GetFrameTime(),fighterVelocity.GetCurrentState().y * engineClock.GetFrameTime());
+					fighterPosition.Add(fighterVelocity.GetCurrentState().x * engineClock.GetPreviousFrameTime(), fighterVelocity.GetCurrentState().y * engineClock.GetPreviousFrameTime());
 
 					return fighterPosition;
-				}(fighter.GetVelocity(), fighter.GetPosition());
+				}(fighter.GetVelocity(), fighter.GetPosition(), fighter.GetMovement());
 
 
-				Comp::Velocity newFighterVel = [](Comp::Velocity fighterVelocity) -> Comp::Velocity
+				Comp::Velocity newFighterVel = [](Comp::Velocity fighterVelocity, Comp::Movement fighterMovement) -> Comp::Velocity
 				{
-					fighterVelocity.ZeroOut();
+					fighterVelocity.Add(0.0f, (fighterMovement.GetGravity() * engineClock.GetPreviousFrameTime()));
 
 					return fighterVelocity;
-				}(fighter.GetVelocity());
+				}(fighter.GetVelocity(), fighter.GetMovement());
 
 				fighter.Insert(newFighterPosition);
 				fighter.Insert(newFighterVel);

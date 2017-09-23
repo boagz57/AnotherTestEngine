@@ -4,6 +4,7 @@
 #include "Graphics/Texture.h"
 #include "Containers/Map.h"
 #include "Components/Animation.h"
+#include "Components\Movement.h"
 #include "Components/SpriteTileSheet.h"
 #include "Components/Velocity.h"
 #include "Components/Input.h"
@@ -39,6 +40,9 @@ public:
 	Comp::Position const GetPosition() const { return position; };
 	void Insert(Comp::Position newPosition) { position = newPosition; };
 
+	Comp::Movement const GetMovement() const { return movement; };
+	void Insert(Comp::Movement newMovement) { movement = newMovement; };
+
 	glm::vec2 originalPosition{ 0.0f, 0.0f };
 
 private:
@@ -52,4 +56,5 @@ private:
 	Comp::Animation animation;
 	Comp::Position position;
 	Comp::Input input;
+	Comp::Movement movement;
 };

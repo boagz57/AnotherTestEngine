@@ -410,6 +410,7 @@ copy /y  "$(SolutionDir)ThirdParty\SDL\Lib\x86\SDL2.dll" "$(SolutionDir)Game\Bin
     <ClCompile Include="Source\GameEngine\Background.cpp" />
     <ClCompile Include="Source\GameEngine\Components\Animation.cpp" />
     <ClCompile Include="Source\GameEngine\Components\Input.cpp" />
+    <ClCompile Include="Source\GameEngine\Components\Movement.cpp" />
     <ClCompile Include="Source\GameEngine\Components\Position.cpp" />
     <ClCompile Include="Source\GameEngine\Components\Sprite.cpp" />
     <ClCompile Include="Source\GameEngine\Components\Transform.cpp" />
@@ -442,6 +443,7 @@ copy /y  "$(SolutionDir)ThirdParty\SDL\Lib\x86\SDL2.dll" "$(SolutionDir)Game\Bin
     <ClInclude Include="Source\GameEngine\Background.h" />
     <ClInclude Include="Source\GameEngine\Components\Animation.h" />
     <ClInclude Include="Source\GameEngine\Components\Input.h" />
+    <ClInclude Include="Source\GameEngine\Components\Movement.h" />
     <ClInclude Include="Source\GameEngine\Components\Position.h" />
     <ClInclude Include="Source\GameEngine\Components\Sprite.h" />
     <ClInclude Include="Source\GameEngine\Containers\Array.h" />

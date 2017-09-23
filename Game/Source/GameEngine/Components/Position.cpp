@@ -14,6 +14,12 @@ namespace Comp
 		this->currentPosition.y += amountToAddY;
 	}
 
+	auto Position::SetPosition(sfloat x, sfloat y) -> void
+	{
+		this->currentPosition.x = x;
+		this->currentPosition.y = y;
+	}
+
 	void Position::ClampMaxPositionTo(sfloat const maxPositionX, sfloat const maxPositionY)
 	{
 		if (currentPosition.x > maxPositionX)
