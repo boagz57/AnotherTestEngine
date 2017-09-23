@@ -15,7 +15,7 @@ namespace Blz
 		//Helper functions
 		const char* GLTypeToString(GLenum type);
 
-		bool RestartGLLogFile()
+		auto RestartGLLogFile() -> bool 
 		{
 			//Will create a NEW gl.log file, or replace old one, each compilation. 
 			//Will use this log file to dump opengl info into to help with debugging
@@ -37,7 +37,7 @@ namespace Blz
 			return true;
 		}
 
-		void LogCurrentGPUCapabilites()
+		auto LogCurrentGPUCapabilites() -> void
 		{
 			GLenum params[] =
 			{
@@ -83,7 +83,7 @@ namespace Blz
 			};
 		}
 
-		void LogShaderProgramProperties(GLuint shaderProgramID)
+		auto LogShaderProgramProperties(GLuint shaderProgramID) -> void
 		{
 			//Header
 			Graphics::LogToFile("-------------------------------------------------\n");
@@ -169,7 +169,7 @@ namespace Blz
 			Graphics::LogToFile("Program info log for GL index %u:\n%s", shaderProgramID, log);
 		}
 
-		bool IsProgramValid(GLuint shaderProgramID)
+		auto IsProgramValid(GLuint shaderProgramID) -> bool
 		{
 			glValidateProgram(shaderProgramID);
 
@@ -191,7 +191,7 @@ namespace Blz
 			return true;
 		}
 
-		bool LogToFile(const char* c_Message, ...)
+		auto LogToFile(const char* c_Message, ...) -> bool
 		{
 			File glLogFile;
 			glLogFile.Open(GL_LOG_FILE, "a");
@@ -219,7 +219,7 @@ namespace Blz
 		//Helper function definitions
 
 		//Used to make GL types printable and readable in the log file
-		const char* GLTypeToString(GLenum type)
+		auto GLTypeToString(GLenum type) -> const char*
 		{
 			switch (type)
 			{

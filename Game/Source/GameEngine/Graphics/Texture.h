@@ -12,7 +12,7 @@ namespace Blz
 			explicit Texture(const Blz::string imageFilePath);
 			~Texture() = default;
 
-			GLuint const ID() const { return id; };
+			auto ID() const -> GLuint { return id; };
 
 		private:
 			GLuint id = 0;

@@ -6,7 +6,7 @@ Scene::Scene()
 	fighters.reserve(2);
 }
 
-Fighter* Scene::CreateFighter(sfloat startingPositionX, sfloat startingPositionY, Blz::Graphics::Texture texture)
+auto Scene::CreateFighter(sfloat startingPositionX, sfloat startingPositionY, Blz::Graphics::Texture texture) -> Fighter*
 {
 	ec.AddContext("When Creating a fighter");
 

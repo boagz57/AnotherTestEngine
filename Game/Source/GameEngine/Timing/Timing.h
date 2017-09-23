@@ -11,10 +11,10 @@ namespace Blz
 		class EngineClock
 		{
 		public:
-			void Init();
-			void UpdateTime();
+			auto Init() -> void;
+			auto UpdateTime() -> void;
 
-			sfloat const GetPreviousFrameTime() const { return frameTime; };
+			auto GetPreviousFrameTime() const -> sfloat { return frameTime; };
 
 		private:
 			sfloat frameTime = 0;

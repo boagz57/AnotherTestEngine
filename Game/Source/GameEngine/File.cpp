@@ -17,17 +17,17 @@ namespace Blz
 		fclose(p_OutputFile);
 	}
 
-	void File::Open(const char* c_FileName, const char* mode)
+	auto File::Open(const char* c_FileName, const char* mode) -> void
 	{
 		p_OutputFile = fopen(c_FileName, mode);
 	}
 
-	void File::Close()
+	auto File::Close() -> void
 	{
 		fclose(p_OutputFile);
 	}
 
-	bool File::Good()
+	auto File::Good() -> bool
 	{
 		if (!p_OutputFile)
 		{
@@ -38,7 +38,7 @@ namespace Blz
 		return true;
 	}
 
-	void File::Write(const char * cp_Message, ...)
+	auto File::Write(const char * cp_Message, ...) -> void
 	{
 		//Believe this captures the ellipsis parameter in your function
 		va_list argptr;
@@ -49,7 +49,7 @@ namespace Blz
 		va_end(argptr);//Cleans up the va_list
 	}
 
-	void File::Write(const char * cp_Message, va_list argptr)
+	auto File::Write(const char * cp_Message, va_list argptr) -> void
 	{
 		vfprintf(p_OutputFile, cp_Message, argptr);
 

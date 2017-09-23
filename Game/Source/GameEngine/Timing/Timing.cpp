@@ -5,7 +5,7 @@ namespace Blz
 {
 	namespace Timing
 	{
-		void CalculateAndDisplayFPS()
+		auto CalculateAndDisplayFPS() -> void
 		{
 			static sfloat FPS = 0.0f;
 			static uint32 frames = 0;
@@ -32,12 +32,12 @@ namespace Blz
 			}
 		}
 
-		void EngineClock::Init()
+		auto EngineClock::Init() -> void
 		{
 			timePointLastFrame = SDL_GetTicks();
 		}
 
-		void EngineClock::UpdateTime()
+		auto EngineClock::UpdateTime() -> void
 		{
 			auto timePointThisFrame = SDL_GetTicks();
 			auto timeDifference = timePointThisFrame - timePointLastFrame;

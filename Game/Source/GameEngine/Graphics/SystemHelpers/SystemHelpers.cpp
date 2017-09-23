@@ -7,7 +7,7 @@ namespace Blz
 	{
 		namespace SysHelper
 		{
-			void InitializeGLBuffer(Blz::Array<Vector3D, 6> vertexData)
+			auto InitializeGLBuffer(Blz::Array<Vector3D, 6> vertexData) -> void
 			{
 				GLuint vboID = 0;
 				glGenBuffers(1, &vboID);

@@ -64,11 +64,11 @@ namespace Blz
 				{
 					glm::vec2 translationAmount = fighter.GetPosition().GetCurrentPosition() - fighter.originalPosition;
 
-					//LOG("%f\n", translationAmount.x);
-
 					glm::vec2 ConvertedTranslationPosition = ConvertWorldUnitsToScreenPixels(translationAmount, window.width);
 
-					//TODO: perform rounding of final pixels to avoid fractional values which could cause distorted sprites
+					//Round final pixel positions so fractional pixel values can't cause distorted artwork
+					ConvertedTranslationPosition.x = rint(ConvertedTranslationPosition.x);
+					ConvertedTranslationPosition.y = rint(ConvertedTranslationPosition.y);
 
 					glm::mat4 transformationMatrix = glm::translate(orthoProjection, glm::vec3{ ConvertedTranslationPosition.x, ConvertedTranslationPosition.y, 0.0f });
 					glUniformMatrix4fv(transformationMatrixUniformLocation, 1, GL_FALSE, &(transformationMatrix[0][0]));

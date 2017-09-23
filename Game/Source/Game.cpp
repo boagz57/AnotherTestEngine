@@ -48,15 +48,15 @@ void Game::Shutdown()
 
 void Game::MoveRight(Fighter* const fighter) 
 {
-	physics.Move(fighter, 10.0f, 0.0f);
+	physics.Move(fighter, 90.0f, 0.0f);
 }
 
 void Game::MoveLeft(Fighter* const fighter) 
 {
-	physics.Move(fighter, -10.0f, 0.0f);
+	physics.Move(fighter, -90.0f, 0.0f);
 }
 
 void Game::Jump(Fighter* const fighter)
 {
-	physics.Jump(fighter, 40.0f);
+	physics.Jump(fighter, 50.0f);
 }

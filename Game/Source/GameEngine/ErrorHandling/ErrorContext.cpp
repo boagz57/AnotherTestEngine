@@ -23,7 +23,7 @@ namespace Blz
 			--numContexts;
 		}
 
-		void ErrContext::AddContext(const char* c_ErrorContextDescription, const char* c_ErrorContexData /* default value = "" */)
+		auto ErrContext::AddContext(const char* c_ErrorContextDescription, const char* c_ErrorContexData /* default value = "" */) -> void
 		{
 			#if (DEBUG)
 				errorContextDescriptions.push_back(c_ErrorContextDescription);
@@ -32,7 +32,7 @@ namespace Blz
 			#endif
 		}
 
-		void ErrContext::LogContext()
+		auto ErrContext::LogContext() -> void
 		{
 			for (int i = 0; i < numContexts; ++i)
 			{

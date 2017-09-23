@@ -10,13 +10,13 @@ namespace Blz
 	namespace Graphics
 	{
 		//Creates new log file each compilation
-		bool RestartGLLogFile();
+		auto RestartGLLogFile() -> bool;
 
-		void LogCurrentGPUCapabilites();
-		void LogShaderProgramProperties(GLuint shaderProgramID);
-		bool IsProgramValid(GLuint shaderProgramID);
+		auto LogCurrentGPUCapabilites() -> void;
+		auto LogShaderProgramProperties(GLuint shaderProgramID) -> void;
+		auto IsProgramValid(GLuint shaderProgramID) -> bool;
 
 		//Log openGL messages/errors to GL log file
-		bool LogToFile(const char* Message, ...);
+		auto LogToFile(const char* Message, ...) -> bool;
 	}
 }

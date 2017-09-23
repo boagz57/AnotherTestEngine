@@ -38,7 +38,7 @@ namespace Blz
 	namespace Err
 	{
 		template<typename... ArgTypes>
-		inline void ErrorReport(const char* condition, const char* functionName, const char* file, int32 lineNumber, const Blz::string& c_errMessage, ArgTypes... args)
+		inline auto ErrorReport(const char* condition, const char* functionName, const char* file, int32 lineNumber, const Blz::string& c_errMessage, ArgTypes... args) -> void
 		{
 			//Create console object with spdlog
 			auto console = spdlog::stdout_color_mt("console");

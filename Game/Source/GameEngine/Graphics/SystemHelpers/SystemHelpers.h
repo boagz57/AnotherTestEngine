@@ -9,7 +9,7 @@ namespace Blz
 	{
 		namespace SysHelper
 		{
-			void InitializeGLBuffer(Blz::Array<Vector3D, 6> vertexData);
+			auto InitializeGLBuffer(Blz::Array<Vector3D, 6> vertexData) -> void;
 		}
 	}
 }

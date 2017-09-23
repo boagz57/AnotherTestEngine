@@ -10,9 +10,9 @@ namespace Blz
 		explicit File(char* fileName);
 		~File();
 
-		void Open(const char* fileName, const char* mode);
-		void Close();
-		bool Good();
+		auto Open(const char* fileName, const char* mode) -> void;
+		auto Close() -> void;
+		auto Good() -> bool;
 
 		void Write(const char* message, ...);
 

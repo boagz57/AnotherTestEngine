@@ -8,7 +8,7 @@ namespace Blz
 {
 	namespace Graphics
 	{
-		void GLAPIENTRY glDebugOutput(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar *message, const void *userParam);
+		auto GLAPIENTRY glDebugOutput(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar *message, const void *userParam) -> void;
 
 		Window::Window(uint16 width, uint16 height) :
 			width(width),
@@ -97,7 +97,7 @@ namespace Blz
 			SDL_GL_SwapWindow(p_window);
 		}
 
-		void GLAPIENTRY glDebugOutput(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar *message, const void *userParam)
+		auto GLAPIENTRY glDebugOutput(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar *message, const void *userParam) -> void
 		{
 			// ignore non-significant error/warning codes
 			if (id == 131169 || id == 131185 || id == 131218 || id == 131204) return;
