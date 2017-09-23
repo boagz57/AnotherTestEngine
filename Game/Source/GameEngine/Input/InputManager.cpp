@@ -6,7 +6,7 @@ namespace Blz
 {
 	namespace Input
 	{
-		auto Manager::BindAxis(const int32 key, Fighter* const fighter, std::function<void(Fighter*)> movementFunction) -> void
+		auto Manager::Bind(const int32 key, Fighter* const fighter, std::function<void(Fighter*)> movementFunction) -> void
 		{
 			fighter->input.MakeFighterControllable();
 			fighter->input.SetKeyBinding(key, movementFunction);

@@ -22,9 +22,9 @@ void Game::Init()
 	this->walkingRight = animation.CreateAnimation(p_Player, 8, 7);
 	this->walkingLeft= animation.CreateAnimation(p_Player, 16, 7);
 
-	input.BindAxis(SDLK_d, p_Player, std::bind(&Game::MoveRight, this, p_Player));
-	input.BindAxis(SDLK_a, p_Player, std::bind(&Game::MoveLeft, this, p_Player));
-	input.BindAxis(SDLK_SPACE, p_Player, std::bind(&Game::Jump, this, p_Player));
+	input.Bind(SDLK_d, p_Player, std::bind(&Game::MoveRight, this, p_Player));
+	input.Bind(SDLK_a, p_Player, std::bind(&Game::MoveLeft, this, p_Player));
+	input.Bind(SDLK_SPACE, p_Player, std::bind(&Game::Jump, this, p_Player));
 }
 
 void Game::Update()

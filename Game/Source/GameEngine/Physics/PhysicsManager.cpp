@@ -8,12 +8,17 @@ namespace Blz
 	{
 		auto Manager::Move(Fighter* const p_Fighter, const sfloat movementInX, const sfloat movementInY) -> void
 		{
-			p_Fighter->velocity.SetVelocity(movementInX, movementInY);
+			if (movementInX != 0.0f)
+				p_Fighter->velocity.SetVelocityX(movementInX);
+			if (movementInY != 0.0f)
+				p_Fighter->velocity.SetVelocityY(movementInY);
 		}
 
 		auto Manager::Jump(Fighter * const p_Fighter, const sfloat jumpVelocity) -> void
 		{
-			if (p_Fighter->position.GetCurrentPosition().y == 5.0f)
+			sfloat groundLevel = 5.0f;
+
+			if (p_Fighter->position.GetCurrentPosition().y == groundLevel)
 			{
 				p_Fighter->velocity.SetVelocityY(jumpVelocity);
 			}
