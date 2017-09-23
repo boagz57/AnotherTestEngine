@@ -8,7 +8,8 @@ namespace Blz
 		class Manager
 		{
 		public:
-			auto Move(Fighter* const p_Fighter, const sfloat movementInX, const sfloat movementInY) -> void;
+			auto Move(Fighter* const fighter, const sfloat movementInX, const sfloat movementInY) -> void;
+			auto Jump(Fighter* const fighter, const sfloat jumpVelocity) -> void;
 		};
 	}
 }

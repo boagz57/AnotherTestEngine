@@ -36,10 +36,8 @@ namespace Blz
 							fighter.GetInput().KeyPressed(SDLK_d, &fighter);
 						if (this->keyMap[SDLK_a])
 							fighter.GetInput().KeyPressed(SDLK_a, &fighter);
-						if (this->keyMap[SDLK_w])
-							fighter.GetInput().KeyPressed(SDLK_w, &fighter);
-						if (this->keyMap[SDLK_s])
-							fighter.GetInput().KeyPressed(SDLK_s, &fighter);
+						if (this->keyMap[SDLK_SPACE])
+							fighter.GetInput().KeyPressed(SDLK_SPACE, &fighter);
 					}
 				}
 			}

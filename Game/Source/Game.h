@@ -21,8 +21,7 @@ public:
 
 	void MoveRight(Fighter* const fighter);
 	void MoveLeft(Fighter* const fighter);
-	void MoveUp(Fighter* const fighter);
-	void MoveDown(Fighter* const fighter);
+	void Jump(Fighter* const fighter);
 
 private:
 	Blz::Input::Manager input;

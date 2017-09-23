@@ -24,8 +24,7 @@ void Game::Init()
 
 	input.BindAxis(SDLK_d, p_Player, std::bind(&Game::MoveRight, this, p_Player));
 	input.BindAxis(SDLK_a, p_Player, std::bind(&Game::MoveLeft, this, p_Player));
-	input.BindAxis(SDLK_w, p_Player, std::bind(&Game::MoveUp, this, p_Player));
-	input.BindAxis(SDLK_s, p_Player, std::bind(&Game::MoveDown, this, p_Player));
+	input.BindAxis(SDLK_SPACE, p_Player, std::bind(&Game::Jump, this, p_Player));
 }
 
 void Game::Update()
@@ -57,12 +56,7 @@ void Game::MoveLeft(Fighter* const fighter)
 	physics.Move(fighter, -10.0f, 0.0f);
 }
 
-void Game::MoveUp(Fighter* const fighter) 
+void Game::Jump(Fighter* const fighter)
 {
-	physics.Move(fighter, 0.0f, 5.0f);
-}
-
-void Game::MoveDown(Fighter* const fighter)
-{
-	physics.Move(fighter, 0.0f, -5.0f);
+	physics.Jump(fighter, 40.0f);
 }

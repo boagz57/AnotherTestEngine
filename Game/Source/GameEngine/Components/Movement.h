@@ -8,6 +8,6 @@ namespace Comp
 		auto GetGravity() const -> sfloat { return gravity; };
 
 	private:
-		sfloat gravity{ -7.0f };
+		sfloat gravity{ -40.8f };
 	};
 }
