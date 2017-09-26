@@ -36,6 +36,8 @@ private:
 	uint16 walkingLeft;
 	uint16 walkingDown;
 
+	uint16 AIwalkingUp;
+
 	uint16 AIWalkingRight;
 };
 

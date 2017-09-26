@@ -21,7 +21,7 @@ namespace Blz
 
 			for (Fighter& fighter : scene.fighters)
 			{
-				//Move fighter by current translation
+				//Move fighter 
 				Comp::Position newFighterPosition = [](Comp::Velocity fighterVelocity, Comp::Position fighterPosition, Comp::Movement fighterMovement) -> Comp::Position
 				{
 					fighterPosition.Add(fighterVelocity.GetCurrentState().x * engineClock.GetPreviousFrameTime(), fighterVelocity.GetCurrentState().y * engineClock.GetPreviousFrameTime());
@@ -30,10 +30,12 @@ namespace Blz
 				}(fighter.GetVelocity(), fighter.GetPosition(), fighter.GetMovement());
 
 
-				//Add Gravity and prevent velocity from continually sliding by zeroing out velocity x
+				//Add Gravity 
 				Comp::Velocity newFighterVel = [](Comp::Velocity fighterVelocity, Comp::Movement fighterMovement) -> Comp::Velocity
 				{
 					fighterVelocity.Add(0.0f, (fighterMovement.GetGravity() * engineClock.GetPreviousFrameTime()));
+
+					//Zero out velocity to prevent fighter sliding
 					fighterVelocity.ZeroOutX();
 
 					return fighterVelocity;

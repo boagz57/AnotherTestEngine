@@ -46,6 +46,7 @@ public:
 	glm::vec2 originalPosition{ 0.0f, 0.0f };
 
 private:
+	//Give Managers direct access to Fighter members for quicker/easier highlevel logic functions
 	friend class Blz::Physics::Manager;
 	friend class Blz::Input::Manager;
 	friend class Blz::Animation::Manager;

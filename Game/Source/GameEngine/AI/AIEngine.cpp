@@ -8,8 +8,6 @@ namespace Blz
 {
 	namespace AI
 	{
-		Blz::SmallVector<Fighter> MoveAI(Blz::SmallVector<Fighter> fighters);
-
 		void Engine::Init()
 		{
 
@@ -22,12 +20,6 @@ namespace Blz
 
 		void Engine::Update(Scene& scene)
 		{
-			Blz::SmallVector<Fighter> updatedFighters = MoveAI(scene.fighters);
-		}
-
-		Blz::SmallVector<Fighter> MoveAI(Blz::SmallVector<Fighter> fighters)
-		{
-			return fighters;
 		}
 	}
 }
