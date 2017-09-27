@@ -6,9 +6,9 @@ namespace Blz
 	{
 		uint16 AnimationClip::id = 0;
 
-		AnimationClip::AnimationClip()
+		auto AnimationClip::Init() -> void
 		{
-			this->id++;
+			++id;
 		}
 
 		auto AnimationClip::SetIndex(uint16 index) -> void

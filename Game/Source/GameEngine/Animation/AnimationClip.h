@@ -7,8 +7,9 @@ namespace Blz
 		class AnimationClip
 		{
 		public:
-			AnimationClip();
+			AnimationClip() = default;
 
+			auto Init() -> void;
 			auto SetIndex(uint16 index) -> void;
 			auto SetTotalTilesForAnimation(uint16 numTiles) -> void;
 			auto IncrementIndex() -> void;

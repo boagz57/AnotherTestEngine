@@ -47,6 +47,10 @@ namespace Blz
 					newFighterPosition.ClampMinPositionTo(0.0f, 5.0f);
 				}
 
+				//Prevent velocity from going more and more negative when on the ground
+				if (newFighterPosition.GetCurrentPosition().y == 5.0f)
+					newFighterVel.ZeroOutY();
+
 				fighter.Insert(newFighterPosition);
 				fighter.Insert(newFighterVel);
 			}

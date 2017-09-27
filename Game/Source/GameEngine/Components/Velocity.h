@@ -10,7 +10,8 @@ namespace Comp
 
 		glm::vec2 const GetCurrentState() const;
 		void Add(const sfloat x, const sfloat y);
-		void ZeroOutX();
+		auto ZeroOutX() -> void;
+		auto ZeroOutY() -> void;
 		auto SetVelocity(sfloat x, sfloat y) -> void;
 		auto SetVelocityY(sfloat y) -> void;
 		auto SetVelocityX(sfloat x) -> void;

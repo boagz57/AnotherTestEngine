@@ -18,6 +18,11 @@ namespace Comp
 		currentVelocity.x *= 0.0f;
 	}
 
+	auto Velocity::ZeroOutY() -> void
+	{
+		currentVelocity.y *= 0.0f;
+	}
+
 	auto Velocity::SetVelocity(sfloat x, sfloat y) -> void
 	{
 		this->currentVelocity.x = x;

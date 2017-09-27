@@ -31,13 +31,13 @@ private:
 	Fighter* p_Player;
 	Fighter* p_AI;
 
-	uint16 walkingUp;
-	uint16 walkingRight;
-	uint16 walkingLeft;
-	uint16 walkingDown;
+	uint16 walkingUp = 0;
+	uint16 walkingRight = 0;
+	uint16 walkingLeft = 0;
+	uint16 walkingDown = 0;
 
-	uint16 AIwalkingUp;
+	uint16 AIwalkingUp = 0;
 
-	uint16 AIWalkingRight;
+	uint16 AIWalkingRight = 0;
 };
 

@@ -10,6 +10,7 @@ namespace Blz
 		{
 			Blz::Animation::AnimationClip animation;
 
+			animation.Init();
 			animation.SetIndex(startingIndex);
 			animation.SetTotalTilesForAnimation(numTilesToAnimate);
 
