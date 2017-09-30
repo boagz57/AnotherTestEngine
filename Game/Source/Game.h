@@ -22,6 +22,7 @@ public:
 	void MoveRight(Fighter* const fighter);
 	void MoveLeft(Fighter* const fighter);
 	void Jump(Fighter* const fighter);
+	void Punch(Fighter* const fighter);
 
 private:
 	Blz::Input::Manager input;
@@ -35,6 +36,7 @@ private:
 	uint16 walkingRight = 0;
 	uint16 walkingLeft = 0;
 	uint16 walkingDown = 0;
+	uint16 punching = 0;
 
 	uint16 AIwalkingUp = 0;
 

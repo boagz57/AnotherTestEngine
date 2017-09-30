@@ -34,7 +34,8 @@ namespace Blz
 				{
 					ec.AddContext("When setting sprite screen location");
 
-					fighterSprite.SetScreenTargetLocationAndTileDimensions(fighterPosition.GetCurrentPosition().x, fighterPosition.GetCurrentPosition().y, glm::ivec2{ 8, 4 });
+					fighterSprite.SetScreenTargetLocationAndTileDimensions(fighterPosition.GetCurrentPosition().x, 
+						fighterPosition.GetCurrentPosition().y, glm::ivec2{ 10, 4 });
 
 					SysHelper::InitializeGLBuffer(fighterSprite.GetVertexData());
 

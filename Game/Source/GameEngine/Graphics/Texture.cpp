@@ -9,11 +9,11 @@ namespace Blz
 		{
 			ec.AddContext("When constructing texture from", c_imageFilePath.c_str());
 
-			int32 forceChannels = 4;							   //out param	 //outparm	    //out param
+			int32 forceChannels = 4;							   
 			auto* p_ImageData = stbi_load(c_imageFilePath.c_str(), &this->width, &this->height, &channels, forceChannels);
 
-			RUNTIME_ASSERT(this->width >= 0, "Image width <= 0!");
-			RUNTIME_ASSERT(this->height >= 0, "Image height <= 0!");
+			RUNTIME_ASSERT(this->width >= 0, "Image width not specified!");
+			RUNTIME_ASSERT(this->height >= 0, "Image height not specified!");
 
 			ERRASSERT(p_ImageData != nullptr, "Image data {} did not load properly!", c_imageFilePath);
 
@@ -57,6 +57,10 @@ namespace Blz
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+			
+			//Enable alpha channel for transparency
+			glEnable(GL_BLEND);
+			glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 			//Unbind Texture
 			glBindTexture(GL_TEXTURE_2D, 0);
