@@ -2,10 +2,13 @@
 #include "Graphics\Texture.h"
 #include "Components/SpriteTileSheet.h"
 
-Fighter::Fighter(sfloat startPositionX, sfloat startPositionY, Blz::Graphics::Texture texture) 
+void Fighter::Init(sfloat startingWorldPositionX, sfloat startingWorldPositionY, Blz::Graphics::Texture texture)
 {
-	position.Add(startPositionX, startPositionY);
+	RUNTIME_ASSERT(startingWorldPositionX <= 160.0f && startingWorldPositionY <= 90.0f, "Trying to start fighter's position outside world bounds!");
+	RUNTIME_ASSERT(startingWorldPositionX >= 0.0f && startingWorldPositionY >= 0.0f, "Trying to start fighter's position outside world bounds!");
+
+	position.Add(startingWorldPositionX, startingWorldPositionY);
 	spriteSheet.SetTexture(texture);
-	this->originalPosition.x = startPositionX;
-	this->originalPosition.y = startPositionY;
+	this->originalPosition.x = startingWorldPositionX;
+	this->originalPosition.y = startingWorldPositionY;
 }

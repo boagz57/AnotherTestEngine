@@ -10,9 +10,9 @@ public:
 	Scene();
 	~Scene() = default;
 
-	auto CreateFighter(sfloat startingWorldPositionX, sfloat startingWorldPositionY, Blz::Graphics::Texture texture) -> Fighter*;
+	auto AddFighter(Fighter* fighter) -> void;
 
-	Blz::SmallVector<Fighter> fighters;
+	Blz::SmallVector<Fighter*> fighters;
 
 private:
 	uint16 numFighters = 0;

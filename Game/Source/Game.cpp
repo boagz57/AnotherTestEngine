@@ -2,12 +2,17 @@
 #include <functional>
 #include "Game.h"
 #include "GameEngine/Scene.h"
-#include "Components/Transform.h"
-#include "Components/Input.h"
-#include "Components/Velocity.h"
-#include "Components/Animation.h"
+#include "GameEngine/AI/AIEngine.h"
+#include "GameEngine/Input/InputEngine.h"
+#include "GameEngine/Animation/AnimationEngine.h"
+#include "GameEngine/Physics/PhysicsEngine.h"
 
 extern Scene scene;
+
+extern Blz::Input::Engine input;
+extern Blz::AI::Engine AI;
+extern Blz::Animation::Engine animation;
+extern Blz::Physics::Engine physics;
 
 void Game::Init()
 {
@@ -15,24 +20,27 @@ void Game::Init()
 
 	Blz::Graphics::Texture fighterTexture("CatFighter.png");
 
-	p_Player = scene.CreateFighter(80.0f, 30.0f, fighterTexture);
-	p_AI = scene.CreateFighter(45.0f, 0.0f, fighterTexture);
+	player.Init(110.0f, 10.0f, fighterTexture);
+	enemy.Init(40.0f, 20.0f, fighterTexture);
 
-	this->walkingRight = animation.CreateAnimation(p_Player, 10, 7);
-	this->punching= animation.CreateAnimation(p_Player, 20, 9);
+	scene.AddFighter(&player);
+	scene.AddFighter(&enemy);
 
-	input.Bind(SDLK_d, p_Player, std::bind(&Game::MoveRight, this, p_Player));
-	input.Bind(SDLK_a, p_Player, std::bind(&Game::MoveLeft, this, p_Player));
-	input.Bind(SDLK_SPACE, p_Player, std::bind(&Game::Jump, this, p_Player));
-	input.Bind(SDLK_p, p_Player, std::bind(&Game::Punch, this, p_Player));
+	this->walkingRight = animation.CreateAnimation(&player, 10, 7);
+	this->punching= animation.CreateAnimation(&player, 20, 9);
+
+	input.Bind(SDLK_d, &player, std::bind(&Game::MoveRight, this, &player));
+	input.Bind(SDLK_a, &player, std::bind(&Game::MoveLeft, this, &player));
+	input.Bind(SDLK_SPACE, &player, std::bind(&Game::Jump, this, &player));
+	input.Bind(SDLK_p, &player, std::bind(&Game::Punch, this, &player));
 }
 
 void Game::Update()
 {
-	ec.AddContext("When updating Game");
+	if (player.GetVelocity().GetCurrentState().x > 0)
+		animation.PlayAnimation(&player, walkingRight);
 
-	if (p_Player->GetVelocity().GetCurrentState().x > 0)
-		animation.PlayAnimation(p_Player, walkingRight);
+	ec.AddContext("When updating Game");
 }
 
 void Game::Shutdown()

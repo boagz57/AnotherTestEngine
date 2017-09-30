@@ -12,6 +12,9 @@ namespace Blz
 			Engine() = default;
 			~Engine() = default;
 
+			auto CreateAnimation(Fighter* const fighter, const uint16 startingIndex, const uint16 numberOfTilesToAnimate)->uint16;
+			auto PlayAnimation(Fighter* const fighter, uint16 const animationToPlay) -> void;
+
 			auto Init(Scene& scene) -> void;
 			auto Update(Scene& scene) -> void;
 		};

@@ -26,9 +26,9 @@ namespace Blz
 			//Turn OpenGL normalized device coodinates (-1 to 1) to pixel coordinates
 			orthoProjection = glm::ortho(0.0f, static_cast<sfloat>(window.width), 0.0f, static_cast<sfloat>(window.height));
 
-			for (Fighter& fighter : scene.fighters)
+			for (Fighter* fighter : scene.fighters)
 			{
-				Comp::Position actualScreenPixelPositions = ConvertWorldUnitsToScreenPixels(fighter.GetPosition(), window.width);
+				Comp::Position actualScreenPixelPositions = ConvertWorldUnitsToScreenPixels(fighter->position, window.width);
 
 				Comp::SpriteTileSheet updatedSpriteLocation = [](Comp::SpriteTileSheet fighterSprite, Comp::Position fighterPosition) -> Comp::SpriteTileSheet
 				{
@@ -40,9 +40,9 @@ namespace Blz
 					SysHelper::InitializeGLBuffer(fighterSprite.GetVertexData());
 
 					return fighterSprite;
-				}(fighter.GetSpriteSheet(), actualScreenPixelPositions);
+				}(fighter->spriteSheet, actualScreenPixelPositions);
 
-				fighter.Insert(updatedSpriteLocation);
+				fighter->spriteSheet = updatedSpriteLocation;
 			}
 		}
 
@@ -57,13 +57,13 @@ namespace Blz
 
 			GLuint vboID = 0;
 
-			for (Fighter& fighter : scene.fighters)
+			for (Fighter* fighter : scene.fighters)
 			{
 				++vboID;
 
 				//Translate vertices of fighter to move him
 				{
-					glm::vec2 translationAmount = fighter.GetPosition().GetCurrentPosition() - fighter.originalPosition;
+					glm::vec2 translationAmount = fighter->position.GetCurrentPosition() - fighter->originalPosition;
 
 					glm::vec2 ConvertedTranslationPosition = ConvertWorldUnitsToScreenPixels(translationAmount, window.width);
 
@@ -75,12 +75,12 @@ namespace Blz
 					glUniformMatrix4fv(transformationMatrixUniformLocation, 1, GL_FALSE, &(transformationMatrix[0][0]));
 				}
 
-				glBindTexture(GL_TEXTURE_2D, fighter.GetSpriteSheet().GetTextureID());
+				glBindTexture(GL_TEXTURE_2D, fighter->spriteSheet.GetTextureID());
 
 				glBindBuffer(GL_ARRAY_BUFFER, vboID);
 
 				//Send down new text coords to draw
-				glBufferData(GL_ARRAY_BUFFER, (sizeof(Vector3D) * fighter.GetSpriteSheet().GetVertexData().size()), &fighter.GetSpriteSheet().GetVertexData().front(), GL_DYNAMIC_DRAW);
+				glBufferData(GL_ARRAY_BUFFER, (sizeof(Vector3D) * fighter->spriteSheet.GetVertexData().size()), &fighter->spriteSheet.GetVertexData().front(), GL_DYNAMIC_DRAW);
 				glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vector3D), (void*)offsetof(Vector3D, position));
 				glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(Vector3D), (void*)offsetof(Vector3D, textureCoordinates));
 

@@ -9,6 +9,25 @@ namespace Blz
 {
 	namespace Animation
 	{
+
+		auto Engine::CreateAnimation(Fighter* const fighter, const uint16 startingIndex, const uint16 numTilesToAnimate) ->uint16
+		{
+			Blz::Animation::AnimationClip animation;
+
+			animation.Init();
+			animation.SetIndex(startingIndex);
+			animation.SetTotalTilesForAnimation(numTilesToAnimate);
+
+			fighter->animation.AddAnimation(animation);
+
+			return animation.ID();
+		}
+
+		auto Engine::PlayAnimation(Fighter* const fighter, uint16 const animationID) -> void
+		{
+			fighter->animation.SetFinalAnimation(animationID);
+		}
+
 		auto Engine::Init(Scene& scene) -> void
 		{
 		}
@@ -17,7 +36,7 @@ namespace Blz
 		{
 			ec.AddContext("When updating Animation engine");
 
-			for (Fighter& fighter : scene.fighters)
+			for (Fighter* fighter : scene.fighters)
 			{
 				//Set current spriteAnimation frame
 				Comp::SpriteTileSheet newAnimatedSprite = [](Comp::SpriteTileSheet fighterSprite, const Comp::Animation& fighterAnimations) -> Comp::SpriteTileSheet
@@ -42,9 +61,9 @@ namespace Blz
 					fighterSprite.SetUVCoordinates(newFrameUVs);
 
 					return fighterSprite;
-				}(fighter.GetSpriteSheet(), fighter.GetAnimation());
+				}(fighter->spriteSheet, fighter->animation);
 
-				fighter.Insert(newAnimatedSprite);
+				fighter->spriteSheet = newAnimatedSprite;
 			}
 		}
 	}

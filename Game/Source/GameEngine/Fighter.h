@@ -1,6 +1,5 @@
 #pragma once
-#include <memory>
-#include <GLM/vec3.hpp>
+#include <GLM/vec2.hpp>
 #include "Graphics/Texture.h"
 #include "Containers/Map.h"
 #include "Components/Animation.h"
@@ -11,45 +10,34 @@
 #include "Components/Transform.h"
 #include "Components\Position.h"
 
-namespace Blz { namespace Physics { class Manager; }; };
-namespace Blz { namespace Input { class Manager; }; };
-namespace Blz { namespace Animation { class Manager; }; };
+namespace Blz { namespace Input { class Engine; }; };
+namespace Blz { namespace Graphics { class Engine; }; };
+namespace Blz { namespace Animation { class Engine; }; };
+namespace Blz { namespace Physics { class Engine; }; };
 
 class Fighter 
 {
 public:
 	Fighter() = default;
-	Fighter(sfloat startingWorldPositionX, sfloat startingWorldPositionY, Blz::Graphics::Texture texture);
-	~Fighter() = default;
 
-	Comp::Transform const GetTransform() const { return transform; };
-	void Insert(Comp::Transform newTransform) { transform = newTransform; };
-
-	Comp::SpriteTileSheet const GetSpriteSheet() const { return spriteSheet; };
-	void Insert(Comp::SpriteTileSheet newSpriteSheet) { spriteSheet = newSpriteSheet; };
-
-	Comp::Animation const GetAnimation() const { return animation; };
-	void Insert(Comp::Animation newAnimation) { animation = newAnimation; };
-
-	Comp::Input GetInput() const { return input; };
-	void Insert(Comp::Input newInput) { input = newInput; };
-
-	Comp::Velocity const GetVelocity() const { return velocity; };
-	void Insert(Comp::Velocity newVelocity) { velocity = newVelocity; };
-
-	Comp::Position const GetPosition() const { return position; };
-	void Insert(Comp::Position newPosition) { position = newPosition; };
-
-	Comp::Movement const GetMovement() const { return movement; };
-	void Insert(Comp::Movement newMovement) { movement = newMovement; };
+	void Init(sfloat startingWorldPositionX, sfloat startingWorldPositionY, Blz::Graphics::Texture texture);
 
 	glm::vec2 originalPosition{ 0.0f, 0.0f };
 
+protected:
+	Comp::Transform const GetTransform() const { return transform; };
+	Comp::SpriteTileSheet const GetSpriteSheet() const { return spriteSheet; };
+	Comp::Animation const GetAnimation() const { return animation; };
+	Comp::Input GetInput() const { return input; };
+	Comp::Velocity const GetVelocity() const { return velocity; };
+	Comp::Position const GetPosition() const { return position; };
+	Comp::Movement const GetMovement() const { return movement; };
+
 private:
-	//Give Managers direct access to Fighter members for quicker/easier highlevel logic functions
-	friend class Blz::Physics::Manager;
-	friend class Blz::Input::Manager;
-	friend class Blz::Animation::Manager;
+	friend class Blz::Graphics::Engine;
+	friend class Blz::Input::Engine;
+	friend class Blz::Animation::Engine;
+	friend class Blz::Physics::Engine;
 
 	Comp::Transform transform;
 	Comp::Velocity velocity;

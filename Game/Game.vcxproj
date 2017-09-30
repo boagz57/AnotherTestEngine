@@ -403,10 +403,10 @@ copy /y  "$(SolutionDir)ThirdParty\SDL\Lib\x86\SDL2.dll" "$(SolutionDir)Game\Bin
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\ThirdParty\STB_Image\Source\stb_image.cpp" />
+    <ClCompile Include="Source\BlueGod.cpp" />
     <ClCompile Include="Source\Game.cpp" />
     <ClCompile Include="Source\GameEngine\Animation\AnimationClip.cpp" />
     <ClCompile Include="Source\GameEngine\Animation\AnimationEngine.cpp" />
-    <ClCompile Include="Source\GameEngine\Animation\AnimationManager.cpp" />
     <ClCompile Include="Source\GameEngine\Background.cpp" />
     <ClCompile Include="Source\GameEngine\Components\Animation.cpp" />
     <ClCompile Include="Source\GameEngine\Components\Input.cpp" />
@@ -416,12 +416,10 @@ copy /y  "$(SolutionDir)ThirdParty\SDL\Lib\x86\SDL2.dll" "$(SolutionDir)Game\Bin
     <ClCompile Include="Source\GameEngine\Components\Transform.cpp" />
     <ClCompile Include="Source\GameEngine\Components\Velocity.cpp" />
     <ClCompile Include="Source\GameEngine\Graphics\SystemHelpers\SystemHelpers.cpp" />
-    <ClCompile Include="Source\GameEngine\Input\InputManager.cpp" />
     <ClCompile Include="Source\GameEngine\Physics\PhysicsEngine.cpp" />
     <ClCompile Include="Source\GameEngine\AI\AIEngine.cpp" />
     <ClCompile Include="Source\GameEngine\Graphics\GraphicsEngine.cpp" />
     <ClCompile Include="Source\GameEngine\Input\InputEngine.cpp" />
-    <ClCompile Include="Source\GameEngine\Physics\PhysicsManager.cpp" />
     <ClCompile Include="Source\GameEngine\Scene.cpp" />
     <ClCompile Include="Source\GameEngine\Fighter.cpp" />
     <ClCompile Include="Source\GameEngine\Graphics\Texture.cpp" />
@@ -436,10 +434,10 @@ copy /y  "$(SolutionDir)ThirdParty\SDL\Lib\x86\SDL2.dll" "$(SolutionDir)Game\Bin
     <ClCompile Include="Source\GameEngine\Graphics\Window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Source\BlueGod.h" />
     <ClInclude Include="Source\Game.h" />
     <ClInclude Include="Source\GameEngine\Animation\AnimationClip.h" />
     <ClInclude Include="Source\GameEngine\Animation\AnimationEngine.h" />
-    <ClInclude Include="Source\GameEngine\Animation\AnimationManager.h" />
     <ClInclude Include="Source\GameEngine\Background.h" />
     <ClInclude Include="Source\GameEngine\Components\Animation.h" />
     <ClInclude Include="Source\GameEngine\Components\Input.h" />
@@ -451,13 +449,11 @@ copy /y  "$(SolutionDir)ThirdParty\SDL\Lib\x86\SDL2.dll" "$(SolutionDir)Game\Bin
     <ClInclude Include="Source\GameEngine\Components\Transform.h" />
     <ClInclude Include="Source\Universal\Globals.h" />
     <ClInclude Include="Source\GameEngine\Graphics\SystemHelpers\SystemHelpers.h" />
-    <ClInclude Include="Source\GameEngine\Input\InputManager.h" />
     <ClInclude Include="Source\GameEngine\Logging\Logger.h" />
     <ClInclude Include="Source\GameEngine\Physics\PhysicsEngine.h" />
     <ClInclude Include="Source\GameEngine\AI\AIEngine.h" />
     <ClInclude Include="Source\GameEngine\Graphics\GraphicsEngine.h" />
     <ClInclude Include="Source\GameEngine\Input\InputEngine.h" />
-    <ClInclude Include="Source\GameEngine\Physics\PhysicsManager.h" />
     <ClInclude Include="Source\GameEngine\Scene.h" />
     <ClInclude Include="Source\GameEngine\ErrorHandling\ErrorContext.h" />
     <ClInclude Include="Source\GameEngine\ErrorHandling\ErrorHandling.h" />

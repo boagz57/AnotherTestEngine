@@ -6,6 +6,28 @@ namespace Blz
 {
 	namespace Physics
 	{
+		auto Engine::Move(Fighter* const p_fighter, const sfloat movementInX, const sfloat movementInY) -> void
+		{
+			if (movementInX != 0.0f)
+				p_fighter->velocity.SetVelocityX(movementInX);
+			if (movementInY != 0.0f)
+				p_fighter->velocity.SetVelocityY(movementInY);
+		}
+
+		auto Engine::Jump(Fighter* const p_fighter, const sfloat jumpVelocity) -> void
+		{
+			sfloat groundLevel = 5.0f;
+
+			if (p_fighter->position.GetCurrentPosition().y == groundLevel)
+			{
+				p_fighter->velocity.SetVelocityY(jumpVelocity);
+			}
+			else
+			{
+				return;
+			}
+		}
+
 		auto Engine::Init() -> void
 		{
 		}
@@ -19,7 +41,7 @@ namespace Blz
 		{
 			ec.AddContext("When updating Physics engine");
 
-			for (Fighter& fighter : scene.fighters)
+			for (Fighter* fighter : scene.fighters)
 			{
 				//Move fighter 
 				Comp::Position newFighterPosition = [](Comp::Velocity fighterVelocity, Comp::Position fighterPosition, Comp::Movement fighterMovement) -> Comp::Position
@@ -27,7 +49,7 @@ namespace Blz
 					fighterPosition.Add(fighterVelocity.GetCurrentState().x * engineClock.GetPreviousFrameTime(), fighterVelocity.GetCurrentState().y * engineClock.GetPreviousFrameTime());
 
 					return fighterPosition;
-				}(fighter.GetVelocity(), fighter.GetPosition(), fighter.GetMovement());
+				}(fighter->velocity, fighter->position, fighter->movement);
 
 
 				//Add Gravity 
@@ -39,7 +61,7 @@ namespace Blz
 					fighterVelocity.ZeroOutX();
 
 					return fighterVelocity;
-				}(fighter.GetVelocity(), fighter.GetMovement());
+				}(fighter->velocity, fighter->movement);
 
 
 				{//Set window borders
@@ -51,8 +73,8 @@ namespace Blz
 				if (newFighterPosition.GetCurrentPosition().y == 5.0f)
 					newFighterVel.ZeroOutY();
 
-				fighter.Insert(newFighterPosition);
-				fighter.Insert(newFighterVel);
+				fighter->position = newFighterPosition;
+				fighter->velocity = newFighterVel;
 			}
 		}
 	}

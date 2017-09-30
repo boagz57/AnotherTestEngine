@@ -13,6 +13,9 @@ namespace Blz
 			Engine() = default;
 			~Engine() = default;
 
+			auto Move(Fighter* const fighter, const sfloat movementInX, const sfloat movementInY) -> void;
+			auto Jump(Fighter* const fighter, const sfloat jumpVelocity) -> void;
+
 			auto Init() -> void;
 			auto Shutdown() -> void;
 			auto Update(Scene& scene) -> void;

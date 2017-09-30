@@ -4,11 +4,6 @@
 #include "Containers/UnorderedMap.h"
 #include "../Scene.h"
 
-/*
-	Input System Responsible for the Gathering of input and changing only those components which do not directly effect Fighter. So This system would
-	never manipulate a Fighter's position directly for exmaple. 
-*/
-
 namespace Blz
 {
 	namespace Input
@@ -18,6 +13,8 @@ namespace Blz
 		public:
 			Engine() = default;
 			~Engine() = default;
+
+			auto Bind(const int32 key, Fighter* const fighter, std::function<void(Fighter*)> movementFunction) -> void;
 
 			auto Update(Scene& scene) -> void;
 

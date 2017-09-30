@@ -24,16 +24,16 @@
 
 Scene scene;
 
+Blz::Graphics::Engine renderer;
+Blz::Input::Engine input;
+Blz::AI::Engine AI;
+Blz::Animation::Engine animation;
+Blz::Physics::Engine physics;
+
 int main(int agrc, char** argv)
 {
 	Blz::Graphics::Window window(1280, 720);
 	Blz::Graphics::ShaderProgram colorShaderProgram;
-
-	Blz::Graphics::Engine renderer;
-	Blz::Input::Engine input;
-	Blz::AI::Engine AI;
-	Blz::Animation::Engine animation;
-	Blz::Physics::Engine physics;
 
 	Game game;
 
