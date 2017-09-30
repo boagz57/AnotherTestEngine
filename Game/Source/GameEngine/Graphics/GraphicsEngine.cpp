@@ -18,8 +18,8 @@ namespace Blz
 	namespace Graphics
 	{
 		//Helper functions
-		auto ConvertWorldUnitsToScreenPixels(Comp::Position positionToConvert, uint16 windowWidth)->Comp::Position;
-		auto ConvertWorldUnitsToScreenPixels(glm::vec2 positionToConvert, uint16 windowWidth)->glm::vec2;
+		static auto ConvertWorldUnitsToScreenPixels(Comp::Position positionToConvert, uint16 windowWidth)->Comp::Position;
+		static auto ConvertWorldUnitsToScreenPixels(glm::vec2 positionToConvert, uint16 windowWidth)->glm::vec2;
 
 		auto Engine::Init(Scene& scene, const Window& window) -> void
 		{
@@ -30,7 +30,7 @@ namespace Blz
 			{
 				Comp::Position actualScreenPixelPositions = ConvertWorldUnitsToScreenPixels(fighter->position, window.width);
 
-				Comp::SpriteTileSheet updatedSpriteLocation = [](Comp::SpriteTileSheet fighterSprite, Comp::Position fighterPosition) -> Comp::SpriteTileSheet
+				[](Comp::SpriteTileSheet& fighterSprite, Comp::Position& fighterPosition) -> void
 				{
 					ec.AddContext("When setting sprite screen location");
 
@@ -39,10 +39,7 @@ namespace Blz
 
 					SysHelper::InitializeGLBuffer(fighterSprite.GetVertexData());
 
-					return fighterSprite;
 				}(fighter->spriteSheet, actualScreenPixelPositions);
-
-				fighter->spriteSheet = updatedSpriteLocation;
 			}
 		}
 

@@ -44,37 +44,31 @@ namespace Blz
 			for (Fighter* fighter : scene.fighters)
 			{
 				//Move fighter 
-				Comp::Position newFighterPosition = [](Comp::Velocity fighterVelocity, Comp::Position fighterPosition, Comp::Movement fighterMovement) -> Comp::Position
+				[](Comp::Velocity& fighterVelocity, Comp::Position& fighterPosition, Comp::Movement& fighterMovement) -> void
 				{
 					fighterPosition.Add(fighterVelocity.GetCurrentState().x * engineClock.GetPreviousFrameTime(), fighterVelocity.GetCurrentState().y * engineClock.GetPreviousFrameTime());
 
-					return fighterPosition;
 				}(fighter->velocity, fighter->position, fighter->movement);
 
 
 				//Add Gravity 
-				Comp::Velocity newFighterVel = [](Comp::Velocity fighterVelocity, Comp::Movement fighterMovement) -> Comp::Velocity
+				[](Comp::Velocity& fighterVelocity, Comp::Movement& fighterMovement) -> void
 				{
 					fighterVelocity.Add(0.0f, (fighterMovement.GetGravity() * engineClock.GetPreviousFrameTime()));
 
 					//Zero out velocity to prevent fighter sliding
 					fighterVelocity.ZeroOutX();
-
-					return fighterVelocity;
 				}(fighter->velocity, fighter->movement);
 
 
 				{//Set window borders
-					newFighterPosition.ClampMaxPositionTo(160.0f, 90.0f);
-					newFighterPosition.ClampMinPositionTo(0.0f, 5.0f);
+					fighter->position.ClampMaxPositionTo(160.0f, 90.0f);
+					fighter->position.ClampMinPositionTo(0.0f, 5.0f);
 				}
 
 				//Prevent velocity from going more and more negative when on the ground
-				if (newFighterPosition.GetCurrentPosition().y == 5.0f)
-					newFighterVel.ZeroOutY();
-
-				fighter->position = newFighterPosition;
-				fighter->velocity = newFighterVel;
+				if (fighter->position.GetCurrentPosition().y == 5.0f)
+					fighter->velocity.ZeroOutY();
 			}
 		}
 	}
