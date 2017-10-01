@@ -12,9 +12,12 @@ namespace Comp
 		Input() = default;
 
 		void MakeFighterControllable();
-		bool IsFighterControllable();
+		bool IsControllable();
+		const bool isKeyPressed();
 		void SetKeyBinding(const int32 key, std::function<void(Fighter*)> movementFunction);
 		void KeyPressed(const int32 key, Fighter * const fighter);
+
+		Blz::Map<uint, bool> keyMap;
 
 	private:
 		bool isControllable = false;

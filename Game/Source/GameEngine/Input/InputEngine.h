@@ -19,7 +19,6 @@ namespace Blz
 			auto Update(Scene& scene) -> void;
 
 		private:
-			Blz::Map<uint, bool> keyMap;
 			SDL_Event evnt;
 		};
 	}

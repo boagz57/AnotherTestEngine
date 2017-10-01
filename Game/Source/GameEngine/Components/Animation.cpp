@@ -2,8 +2,11 @@
 
 namespace Comp
 {
-	void Animation::AddAnimation(Blz::Animation::AnimationClip animation)
+	void Animation::AddAnimation(Blz::Animation::AnimationClip animation, bool makeDefault)
 	{
+		if (makeDefault)
+			defaultAnimationID = animation.ID();
+
 		animationMap.insert(std::pair<const uint16, Blz::Animation::AnimationClip>(animation.ID(), animation));
 	}
 
@@ -12,7 +15,7 @@ namespace Comp
 		RUNTIME_ASSERT(animationMap.find(animationID) != animationMap.end(), "Animation not found!");
 
 		finalAnimation = animationMap.find(animationID)->second;
-		animationMap.at(animationID).IncrementIndex();
+		animationMap.at(animationID).CycleAnimation();
 	}
 
 	Blz::Animation::AnimationClip const Animation::GetCurrentAnimation() const

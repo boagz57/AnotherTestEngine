@@ -21,14 +21,9 @@ private:
 	BlueGod player{};
 	BlueGod enemy{};
 
-	uint16 walkingUp = 0;
 	uint16 walkingRight = 0;
-	uint16 walkingLeft = 0;
-	uint16 walkingDown = 0;
 	uint16 punching = 0;
+	uint16 idle = 0;
 
-	uint16 AIwalkingUp = 0;
-
-	uint16 AIWalkingRight = 0;
 };
 

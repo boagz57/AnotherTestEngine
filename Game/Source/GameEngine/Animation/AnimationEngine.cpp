@@ -10,7 +10,7 @@ namespace Blz
 {
 	namespace Animation
 	{
-		auto Engine::CreateAnimation(Fighter* const fighter, const uint16 startingIndex, const uint16 numTilesToAnimate) ->uint16
+		auto Engine::CreateAnimation(Fighter* const fighter, const uint16 startingIndex, const uint16 numTilesToAnimate, bool isDefault/* = fasle */) ->uint16
 		{
 			Blz::Animation::AnimationClip animation;
 
@@ -18,7 +18,7 @@ namespace Blz
 			animation.SetIndex(startingIndex);
 			animation.SetTotalTilesForAnimation(numTilesToAnimate);
 
-			fighter->animation.AddAnimation(animation);
+			fighter->animation.AddAnimation(animation, isDefault);
 
 			return animation.ID();
 		}
@@ -38,24 +38,37 @@ namespace Blz
 
 			for (Fighter* fighter : scene.fighters)
 			{
-				ec.AddContext("When trying to set next animation frame to display");
+				//Set next animation frame
+				[](Comp::Animation& fighterAnimation, Comp::SpriteTileSheet& fighterSprite, const Comp::Input& input)
+				{
+					ec.AddContext("When trying to set next animation frame to display");
 
-				glm::vec4 newFrameUVs{ 0.0f };
+					Comp::Input fighterInput = input;
 
-				{//Calculate current uvs to display 
-					uint16 currentFrame = fighter->animation.GetCurrentAnimation().GetCurrentAnimationFrame();
-					glm::ivec2 tileDimensions = fighter->spriteSheet.GetTileDimensions();
+					if (fighterInput.IsControllable())
+					{
+						if (!fighterInput.isKeyPressed())
+							fighterAnimation.SetFinalAnimation(fighterAnimation.GetDefaultAnimation());
+					};
 
-					uint16 tileXCoordinate = currentFrame % tileDimensions.x;
-					uint16 tileYCoordinate = currentFrame / tileDimensions.x;
+					glm::vec4 newFrameUVs{ 0.0f };
 
-					newFrameUVs.x = tileXCoordinate / static_cast<sfloat>(tileDimensions.x);
-					newFrameUVs.y = tileYCoordinate / static_cast<sfloat>(tileDimensions.y);
-					newFrameUVs.w = 1.0f / tileDimensions.x;
-					newFrameUVs.z = 1.0f / tileDimensions.y;
-				}
+					{//Calculate current uvs to display 
+						uint16 currentFrame = fighterAnimation.GetCurrentAnimation().GetCurrentAnimationFrame();
+						glm::ivec2 tileDimensions = fighterSprite.GetTileDimensions();
 
-				fighter->spriteSheet.SetUVCoordinates(newFrameUVs);
+						uint16 tileXCoordinate = currentFrame % tileDimensions.x;
+						uint16 tileYCoordinate = currentFrame / tileDimensions.x;
+
+						newFrameUVs.x = tileXCoordinate / static_cast<sfloat>(tileDimensions.x);
+						newFrameUVs.y = tileYCoordinate / static_cast<sfloat>(tileDimensions.y);
+						newFrameUVs.w = 1.0f / tileDimensions.x;
+						newFrameUVs.z = 1.0f / tileDimensions.y;
+					};
+
+					fighterSprite.SetUVCoordinates(newFrameUVs);
+
+				}(fighter->animation, fighter->spriteSheet, fighter->input);
 			}
 		}
 	}

@@ -22,7 +22,7 @@ namespace Blz
 			this->numTilesToAnimate = numTiles;
 		}
 
-		auto AnimationClip::IncrementIndex() -> void
+		auto AnimationClip::CycleAnimation() -> void
 		{
 			if (animationTime > 200.0f)
 			{

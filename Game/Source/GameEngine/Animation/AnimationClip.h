@@ -12,7 +12,7 @@ namespace Blz
 			auto Init() -> void;
 			auto SetIndex(uint16 index) -> void;
 			auto SetTotalTilesForAnimation(uint16 numTiles) -> void;
-			auto IncrementIndex() -> void;
+			auto CycleAnimation() -> void;
 			auto GetCurrentAnimationFrame() const -> const uint16;
 			auto ID() const -> const uint16;
 

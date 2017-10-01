@@ -28,6 +28,7 @@ void Game::Init()
 
 	this->walkingRight = animation.CreateAnimation(&player, 10, 7);
 	this->punching= animation.CreateAnimation(&player, 20, 9);
+	this->idle = animation.CreateAnimation(&player, 0, 3, true);
 
 	input.Bind(SDLK_d, &player, std::bind(&Game::MoveRight, this, &player));
 	input.Bind(SDLK_a, &player, std::bind(&Game::MoveLeft, this, &player));

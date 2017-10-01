@@ -6,6 +6,8 @@ namespace Blz
 {
 	namespace Physics
 	{
+		static const sfloat c_groundLevel = 5.0f;
+
 		auto Engine::Move(Fighter* const p_fighter, const sfloat movementInX, const sfloat movementInY) -> void
 		{
 			if (movementInX != 0.0f)
@@ -44,7 +46,7 @@ namespace Blz
 			for (Fighter* fighter : scene.fighters)
 			{
 				//Move fighter 
-				[](Comp::Velocity& fighterVelocity, Comp::Position& fighterPosition, Comp::Movement& fighterMovement) -> void
+				[](const Comp::Velocity& fighterVelocity, Comp::Position& fighterPosition, const Comp::Movement& fighterMovement) -> void
 				{
 					fighterPosition.Add(fighterVelocity.GetCurrentState().x * engineClock.GetPreviousFrameTime(), fighterVelocity.GetCurrentState().y * engineClock.GetPreviousFrameTime());
 
@@ -52,7 +54,7 @@ namespace Blz
 
 
 				//Add Gravity 
-				[](Comp::Velocity& fighterVelocity, Comp::Movement& fighterMovement) -> void
+				[](Comp::Velocity& fighterVelocity, const Comp::Movement& fighterMovement) -> void
 				{
 					fighterVelocity.Add(0.0f, (fighterMovement.GetGravity() * engineClock.GetPreviousFrameTime()));
 
@@ -63,11 +65,11 @@ namespace Blz
 
 				{//Set window borders
 					fighter->position.ClampMaxPositionTo(160.0f, 90.0f);
-					fighter->position.ClampMinPositionTo(0.0f, 5.0f);
+					fighter->position.ClampMinPositionTo(0.0f, c_groundLevel);
 				}
 
 				//Prevent velocity from going more and more negative when on the ground
-				if (fighter->position.GetCurrentPosition().y == 5.0f)
+				if (fighter->position.GetCurrentPosition().y == c_groundLevel)
 					fighter->velocity.ZeroOutY();
 			}
 		}

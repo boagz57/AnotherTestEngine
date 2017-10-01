@@ -8,9 +8,22 @@ namespace Comp
 		isControllable = true;
 	}
 
-	bool Input::IsFighterControllable()
+	bool Input::IsControllable()
 	{
 		return isControllable;
+	}
+
+	const bool Input::isKeyPressed()
+	{
+		bool isKeyPressed = false;
+
+		for(auto& keyPressed : keyMap)
+		{ 
+			if (keyPressed.second)
+				isKeyPressed = true;
+		}
+
+		return isKeyPressed;
 	}
 
 	void Input::SetKeyBinding(const int32 key, std::function<void(Fighter*)> movementFunction)
