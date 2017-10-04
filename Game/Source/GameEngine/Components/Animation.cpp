@@ -13,6 +13,7 @@ namespace Comp
 	void Animation::SetFinalAnimation(uint16 const animationID)
 	{
 		RUNTIME_ASSERT(animationMap.find(animationID) != animationMap.end(), "Animation not found!");
+		RUNTIME_ASSERT(animationMap.find(defaultAnimationID) != animationMap.end(), "No default animation specified for fighter!");
 
 		finalAnimation = animationMap.find(animationID)->second;
 		animationMap.at(animationID).CycleAnimation();

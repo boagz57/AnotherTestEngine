@@ -3,6 +3,7 @@
 #include "Components/SpriteTileSheet.h"
 #include "Components/Transform.h"
 #include "Components/Velocity.h"
+#include <math.h>
 #include "Scene.h"
 #include "AnimationEngine.h"
 
@@ -39,21 +40,22 @@ namespace Blz
 			for (Fighter* fighter : scene.fighters)
 			{
 				//Set next animation frame
-				[](Comp::Animation& fighterAnimation, Comp::SpriteTileSheet& fighterSprite, const Comp::Input& input)
+				[](Comp::Animation& fighterAnimation, Comp::SpriteTileSheet& fighterSprite, const Comp::Velocity& fighterVelocity, const Comp::Position& fighterPosition, const Comp::Input& input)
 				{
 					ec.AddContext("When trying to set next animation frame to display");
 
 					Comp::Input fighterInput = input;
-
-					if (fighterInput.IsControllable())
+					
+					if (std::abs(std::floor(fighterVelocity.GetCurrentState().x)) == 0.0f &&
+						std::abs(std::floor(fighterPosition.GetCurrentPosition().y)) == 5.0f &&
+						!fighterInput.IsKeyPressed())
 					{
-						if (!fighterInput.isKeyPressed())
-							fighterAnimation.SetFinalAnimation(fighterAnimation.GetDefaultAnimation());
-					};
+						fighterAnimation.SetFinalAnimation(fighterAnimation.GetDefaultAnimationID());
+					}
 
 					glm::vec4 newFrameUVs{ 0.0f };
 
-					{//Calculate current uvs to display 
+					{//Calculate current uvs to display from sprite sheet
 						uint16 currentFrame = fighterAnimation.GetCurrentAnimation().GetCurrentAnimationFrame();
 						glm::ivec2 tileDimensions = fighterSprite.GetTileDimensions();
 
@@ -68,7 +70,7 @@ namespace Blz
 
 					fighterSprite.SetUVCoordinates(newFrameUVs);
 
-				}(fighter->animation, fighter->spriteSheet, fighter->input);
+				}(fighter->animation, fighter->spriteSheet, fighter->velocity, fighter->position, fighter->input);
 			}
 		}
 	}

@@ -5,25 +5,27 @@ namespace Comp
 {
 	void Input::MakeFighterControllable()
 	{
-		isControllable = true;
+		Controllable = true;
 	}
 
 	bool Input::IsControllable()
 	{
-		return isControllable;
+		return Controllable;
 	}
 
-	const bool Input::isKeyPressed()
+	const bool Input::IsKeyPressed()
 	{
-		bool isKeyPressed = false;
+		bool keyPressed = false;
 
-		for(auto& keyPressed : keyMap)
+		for(auto& key : keyMap)
 		{ 
-			if (keyPressed.second)
-				isKeyPressed = true;
+			keyPressed = key.second;
+
+			if (keyPressed)
+				return true;
 		}
 
-		return isKeyPressed;
+		return false;
 	}
 
 	void Input::SetKeyBinding(const int32 key, std::function<void(Fighter*)> movementFunction)

@@ -53,13 +53,11 @@ namespace Blz
 				}(fighter->velocity, fighter->position, fighter->movement);
 
 
-				//Add Gravity 
+				//Apply Gravity 
 				[](Comp::Velocity& fighterVelocity, const Comp::Movement& fighterMovement) -> void
 				{
 					fighterVelocity.Add(0.0f, (fighterMovement.GetGravity() * engineClock.GetPreviousFrameTime()));
 
-					//Zero out velocity to prevent fighter sliding
-					fighterVelocity.ZeroOutX();
 				}(fighter->velocity, fighter->movement);
 
 

@@ -84,6 +84,10 @@ namespace Blz
 				glDrawArrays(GL_TRIANGLES, 0, 6);
 
 				glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+				//Zero out velocity to prevent fighter sliding
+				//TODO: Remove from rendering code
+				fighter->velocity.ZeroOutX();
 			}
 		}
 

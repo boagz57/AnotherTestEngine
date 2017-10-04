@@ -25,5 +25,8 @@ private:
 	uint16 punching = 0;
 	uint16 idle = 0;
 
+	uint16 AIWalkingRight = 0;
+	uint16 AIIdle = 0;
+
 };
 

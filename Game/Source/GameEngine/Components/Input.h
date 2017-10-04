@@ -13,14 +13,14 @@ namespace Comp
 
 		void MakeFighterControllable();
 		bool IsControllable();
-		const bool isKeyPressed();
+		const bool IsKeyPressed();
 		void SetKeyBinding(const int32 key, std::function<void(Fighter*)> movementFunction);
 		void KeyPressed(const int32 key, Fighter * const fighter);
 
 		Blz::Map<uint, bool> keyMap;
 
 	private:
-		bool isControllable = false;
+		bool Controllable = false;
 		Blz::Map<const int32, std::function<void(Fighter*)>> keyMovementBindings;
 	};
 }
