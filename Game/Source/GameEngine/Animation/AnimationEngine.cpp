@@ -40,14 +40,15 @@ namespace Blz
 			for (Fighter* fighter : scene.fighters)
 			{
 				//Set next animation frame
-				[](Comp::Animation& fighterAnimation, Comp::SpriteTileSheet& fighterSprite, const Comp::Velocity& fighterVelocity, const Comp::Position& fighterPosition, const Comp::Input& input)
+				[](Comp::Animation& fighterAnimation, Comp::SpriteTileSheet& fighterSprite, const Comp::Velocity& fighterVelocity, 
+			   	   const Comp::Position& fighterPosition, const Comp::Input& input)
 				{
 					ec.AddContext("When trying to set next animation frame to display");
 
 					Comp::Input fighterInput = input;
 					
 					if (std::abs(std::floor(fighterVelocity.GetCurrentState().x)) == 0.0f &&
-						std::abs(std::floor(fighterPosition.GetCurrentPosition().y)) == 5.0f &&
+						std::abs(std::floor(fighterPosition.GetCurrentPosition().y)) == c_groundLevel &&
 						!fighterInput.IsKeyPressed())
 					{
 						fighterAnimation.SetFinalAnimation(fighterAnimation.GetDefaultAnimationID());

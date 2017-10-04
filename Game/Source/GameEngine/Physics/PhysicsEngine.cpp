@@ -6,8 +6,6 @@ namespace Blz
 {
 	namespace Physics
 	{
-		static const sfloat c_groundLevel = 5.0f;
-
 		auto Engine::Move(Fighter* const p_fighter, const sfloat movementInX, const sfloat movementInY) -> void
 		{
 			if (movementInX != 0.0f)
@@ -18,9 +16,7 @@ namespace Blz
 
 		auto Engine::Jump(Fighter* const p_fighter, const sfloat jumpVelocity) -> void
 		{
-			sfloat groundLevel = 5.0f;
-
-			if (p_fighter->position.GetCurrentPosition().y == groundLevel)
+			if (p_fighter->position.GetCurrentPosition().y == c_groundLevel)
 			{
 				p_fighter->velocity.SetVelocityY(jumpVelocity);
 			}
@@ -62,8 +58,8 @@ namespace Blz
 
 
 				{//Set window borders
-					fighter->position.ClampMaxPositionTo(160.0f, 90.0f);
-					fighter->position.ClampMinPositionTo(0.0f, c_groundLevel);
+					fighter->position.ClampMaxPositionTo(c_levelBorderMaxX, c_levelBorderMaxY);
+					fighter->position.ClampMinPositionTo(c_levelBorderMinX, c_groundLevel);
 				}
 
 				//Prevent velocity from going more and more negative when on the ground
