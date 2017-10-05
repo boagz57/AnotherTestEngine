@@ -31,7 +31,7 @@ namespace Comp
 
 	void Sprite::SetTexture(const Blz::Graphics::Texture& texture)
 	{
-		this->textureID = texture.ID();
+		this->textureID = texture.GetID();
 	}
 
 	GLuint const Sprite::GetTextureID() const

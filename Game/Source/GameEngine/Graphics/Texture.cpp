@@ -22,48 +22,52 @@ namespace Blz
 			//for openGL to work with). If check is done with bitwise operations to keep check as fast as possible
 			//RUNTIME_ASSERT((this->width & (this->width - 1)) == 0 || (this->height & (this->height - 1)) == 0, "Image dimensions are not a power of 2!");
 
-			//Flip image right side up before sending to OpenGL since openGL will read it in upside down. Following code is utilizing pointer
-			//arithmetic 
-			int32 widthInBytes = this->width * 4;
-			unsigned char* p_topRowOfTexels = nullptr;
-			unsigned char* p_bottomRowOfTexels = nullptr;
-			unsigned char temp = 0;
-			int32 halfHeight = this->height / 2;
 
-			for (int32 row = 0; row < halfHeight; ++row)
-			{
-				p_topRowOfTexels = p_ImageData + row * widthInBytes;
-				p_bottomRowOfTexels = p_ImageData + (this->height - row - 1) * widthInBytes;
+			{//Flip image right side up since OpenGL reads it upside down.
+				int32 widthInBytes = this->width * 4;
+				unsigned char* p_topRowOfTexels = nullptr;
+				unsigned char* p_bottomRowOfTexels = nullptr;
+				unsigned char temp = 0;
+				int32 halfHeight = this->height / 2;
 
-				for (int col = 0; col < widthInBytes; ++col)
+				for (int32 row = 0; row < halfHeight; ++row)
 				{
-					temp = *p_topRowOfTexels;
-					*p_topRowOfTexels = *p_bottomRowOfTexels;
-					*p_bottomRowOfTexels = temp;
-					p_topRowOfTexels++;
-					p_bottomRowOfTexels++;
+					p_topRowOfTexels = p_ImageData + row * widthInBytes;
+					p_bottomRowOfTexels = p_ImageData + (this->height - row - 1) * widthInBytes;
+
+					for (int col = 0; col < widthInBytes; ++col)
+					{
+						temp = *p_topRowOfTexels;
+						*p_topRowOfTexels = *p_bottomRowOfTexels;
+						*p_bottomRowOfTexels = temp;
+						p_topRowOfTexels++;
+						p_bottomRowOfTexels++;
+					}
 				}
 			}
 
-			//Send down imageData to openGL and set some default parameters for image
-			glGenTextures(1, &(this->id));
 
-			ERRASSERT(this->id != 0, "Texture was not properly generated!");
-
-			glActiveTexture(GL_TEXTURE0);
-			glBindTexture(GL_TEXTURE_2D, this->id);
-			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, this->width, this->height, 0, GL_RGBA, GL_UNSIGNED_BYTE, p_ImageData);
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 			
-			//Enable alpha channel for transparency
-			glEnable(GL_BLEND);
-			glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+			{//Send down imageData to openGL and set some default parameters for image
+				glGenTextures(1, &(this->id));
 
-			//Unbind Texture
-			glBindTexture(GL_TEXTURE_2D, 0);
+				ERRASSERT(this->id != 0, "Texture was not properly generated!");
+
+				glActiveTexture(GL_TEXTURE0);
+				glBindTexture(GL_TEXTURE_2D, this->id);
+				glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, this->width, this->height, 0, GL_RGBA, GL_UNSIGNED_BYTE, p_ImageData);
+				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+
+				//Enable alpha channel for transparency
+				glEnable(GL_BLEND);
+				glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+				//Unbind Texture
+				glBindTexture(GL_TEXTURE_2D, 0);
+			}
 		}
 	}
 }
