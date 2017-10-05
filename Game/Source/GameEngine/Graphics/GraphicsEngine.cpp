@@ -5,7 +5,7 @@
 #include <GLM\vec2.hpp>
 #include "ShaderProgram.h"
 #include "SystemHelpers\SystemHelpers.h"
-#include "../Components/SpriteTileSheet.h"
+#include "../Components/SpriteSheet.h"
 #include "Texture.h"
 #include "../Vector3D.h"
 #include "GraphicsEngine.h"
@@ -30,12 +30,26 @@ namespace Blz
 			{
 				Comp::Position actualScreenPixelPositions = ConvertWorldUnitsToScreenPixels(fighter->position, window.width);
 
-				[](Comp::SpriteTileSheet& fighterSprite, Comp::Position& fighterPosition) -> void
+				[](Comp::SpriteSheet& fighterSprite, Comp::Position& fighterPosition) -> void
 				{
-					ec.AddContext("When setting sprite screen location");
+					ec.AddContext("When setting inital sprite screen location and UVs");
 
-					fighterSprite.Init(fighterPosition.GetCurrentPosition().x, 
-						fighterPosition.GetCurrentPosition().y, glm::ivec2{ 10, 4 });
+					fighterSprite.SetSpriteScreenPosition(fighterPosition.GetCurrentPosition().x, fighterPosition.GetCurrentPosition().y);
+
+					{//Set initial sprite UV location
+						glm::ivec2 spriteSheetDimensions = fighterSprite.GetDimensions();
+						glm::vec4 initialSpriteUVs;
+
+						uint16 xTile = 0 % spriteSheetDimensions.x;
+						uint16 yTile = 0 / spriteSheetDimensions.y;
+
+						initialSpriteUVs.x = xTile / static_cast<sfloat>(spriteSheetDimensions.x);
+						initialSpriteUVs.y = yTile / static_cast<sfloat>(spriteSheetDimensions.y);
+						initialSpriteUVs.w = 1.0f / spriteSheetDimensions.x;
+						initialSpriteUVs.z = 1.0f / spriteSheetDimensions.y;
+
+						fighterSprite.SetUVCoordinates(initialSpriteUVs);
+					}
 
 					SysHelper::InitializeGLBuffer(fighterSprite.GetVertexData());
 

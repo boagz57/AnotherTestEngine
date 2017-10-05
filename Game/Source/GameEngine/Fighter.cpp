@@ -1,6 +1,5 @@
 #include "Fighter.h"
 #include "Graphics\Texture.h"
-#include "Components/SpriteTileSheet.h"
 
 void Fighter::Init(sfloat startingWorldPositionX, sfloat startingWorldPositionY, Blz::Graphics::Texture texture)
 {
@@ -8,7 +7,8 @@ void Fighter::Init(sfloat startingWorldPositionX, sfloat startingWorldPositionY,
 	RUNTIME_ASSERT(startingWorldPositionX >= 0.0f && startingWorldPositionY >= 0.0f, "Trying to start fighter's position outside world bounds!");
 
 	position.Add(startingWorldPositionX, startingWorldPositionY);
-	spriteSheet.SetTexture(texture);
+	spriteSheet.Init(texture, glm::ivec2{ 10, 4 }, 2);
+
 	this->originalPosition.x = startingWorldPositionX;
 	this->originalPosition.y = startingWorldPositionY;
 }

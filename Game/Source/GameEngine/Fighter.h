@@ -4,7 +4,7 @@
 #include "Containers/Map.h"
 #include "Components/Animation.h"
 #include "Components\Movement.h"
-#include "Components/SpriteTileSheet.h"
+#include "Components/SpriteSheet.h"
 #include "Components/Velocity.h"
 #include "Components/Input.h"
 #include "Components/Transform.h"
@@ -26,7 +26,7 @@ public:
 
 protected:
 	Comp::Transform const GetTransform() const { return transform; };
-	Comp::SpriteTileSheet const GetSpriteSheet() const { return spriteSheet; };
+	Comp::SpriteSheet const GetSpriteSheet() const { return spriteSheet; };
 	Comp::Animation const GetAnimation() const { return animation; };
 	Comp::Input GetInput() const { return input; };
 	Comp::Velocity const GetVelocity() const { return velocity; };
@@ -41,7 +41,7 @@ private:
 
 	Comp::Transform transform;
 	Comp::Velocity velocity;
-	Comp::SpriteTileSheet spriteSheet;
+	Comp::SpriteSheet spriteSheet;
 	Comp::Animation animation;
 	Comp::Position position;
 	Comp::Input input;

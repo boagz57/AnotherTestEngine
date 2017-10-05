@@ -1,7 +1,6 @@
 #pragma once
 #include "Components\Sprite.h"
 #include "Containers\Array.h"
-#include "Components\SpriteTileSheet.h"
 
 namespace Blz
 {

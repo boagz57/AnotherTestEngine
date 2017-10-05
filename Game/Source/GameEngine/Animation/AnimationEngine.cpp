@@ -1,6 +1,6 @@
 #include <tuple>
 #include "Fighter.h"
-#include "Components/SpriteTileSheet.h"
+#include "Components/SpriteSheet.h"
 #include "Components/Transform.h"
 #include "Components/Velocity.h"
 #include <math.h>
@@ -40,7 +40,7 @@ namespace Blz
 			for (Fighter* fighter : scene.fighters)
 			{
 				//Set next animation frame
-				[](Comp::Animation& fighterAnimation, Comp::SpriteTileSheet& fighterSprite, const Comp::Velocity& fighterVelocity, 
+				[](Comp::Animation& fighterAnimation, Comp::SpriteSheet& fighterSprite, const Comp::Velocity& fighterVelocity, 
 			   	   const Comp::Position& fighterPosition, const Comp::Input& input)
 				{
 					ec.AddContext("When trying to set next animation frame to display");
@@ -58,7 +58,7 @@ namespace Blz
 
 					{//Calculate current uvs to display from sprite sheet
 						uint16 currentFrame = fighterAnimation.GetCurrentAnimation().GetCurrentAnimationFrame();
-						glm::ivec2 tileDimensions = fighterSprite.GetTileDimensions();
+						glm::ivec2 tileDimensions = fighterSprite.GetDimensions();
 
 						uint16 tileXCoordinate = currentFrame % tileDimensions.x;
 						uint16 tileYCoordinate = currentFrame / tileDimensions.x;

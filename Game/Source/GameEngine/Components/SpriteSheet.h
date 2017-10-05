@@ -8,25 +8,30 @@
 
 namespace Comp
 {
-	class SpriteTileSheet
+	class SpriteSheet
 	{
 	public:
-		SpriteTileSheet() = default;
-		~SpriteTileSheet() = default;
+		SpriteSheet() = default;
+		~SpriteSheet() = default;
+
+		void Init(const Blz::Graphics::Texture& texture, const glm::ivec2 spriteSheetTileDimensions, uint16 scaleTextureBy = 1);
 
 		GLuint const GetTextureID() const;
-		auto GetTileDimensions() const->glm::ivec2 { return tileDimensions; };
+
+		auto GetDimensions() const->glm::ivec2 { return tileDimensions; };
+
 		Blz::Array<Vector3D, 6> const GetVertexData() const;
 
-		void Init(const sfloat startingScreenPositionX, const sfloat startingScreenPositionY, const glm::ivec2 spriteSheetTileDimensions,
-			      uint16 scale = 1);
+		void SetSpriteScreenPosition(const sfloat screenPositionX, const sfloat screenPosotionY);
 
 		void SetTexture(const Blz::Graphics::Texture& texture);
+
 		auto SetUVCoordinates(const glm::vec4 uvs) -> void;
 
 	private:
 		Blz::Graphics::Texture texture{};
 		Blz::Array<Vector3D, 6> vertexData;
 		glm::ivec2 tileDimensions;
+		uint16 scaleFactor{0};
 	};
 }
