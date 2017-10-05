@@ -14,17 +14,17 @@ namespace Comp
 		SpriteSheet() = default;
 		~SpriteSheet() = default;
 
-		void Init(const Blz::Graphics::Texture& texture, const glm::ivec2 spriteSheetTileDimensions, uint16 scaleTextureBy = 1);
+		auto Init(const Blz::Graphics::Texture& texture, const glm::ivec2 spriteSheetTileDimensions, uint16 scaleTextureBy = 1) -> void;
 
-		GLuint const GetTextureID() const;
+		auto GetTextureID() const -> const GLuint;
 
 		auto GetDimensions() const->glm::ivec2 { return tileDimensions; };
 
-		Blz::Array<Vector3D, 6> const GetVertexData() const;
+		auto GetVertexData() const -> const Blz::Array<Vector3D, 6>;
 
-		void SetSpriteScreenPosition(const sfloat screenPositionX, const sfloat screenPosotionY);
+		auto SetScreenPosition(const sfloat screenPositionX, const sfloat screenPosotionY) -> void;
 
-		void SetTexture(const Blz::Graphics::Texture& texture);
+		auto SetTexture(const Blz::Graphics::Texture& texture) -> void;
 
 		auto SetUVCoordinates(const glm::vec4 uvs) -> void;
 
@@ -32,6 +32,6 @@ namespace Comp
 		Blz::Graphics::Texture texture{};
 		Blz::Array<Vector3D, 6> vertexData;
 		glm::ivec2 tileDimensions;
-		uint16 scaleFactor{0};
+		uint16 scaleFactor{1};
 	};
 }

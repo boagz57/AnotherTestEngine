@@ -20,6 +20,7 @@ namespace Comp
 
 	GLuint const SpriteSheet::GetTextureID() const
 	{
+		ERRASSERT(texture.GetID() != 0, "Spritesheet Texture has not been initialized properly!");
 		return texture.GetID();
 	}
 
@@ -28,7 +29,7 @@ namespace Comp
 		return vertexData;
 	}
 
-	void SpriteSheet::SetSpriteScreenPosition(const sfloat screenPositionX, const sfloat screenPositionY)
+	void SpriteSheet::SetScreenPosition(const sfloat screenPositionX, const sfloat screenPositionY)
 	{
 		uint16 singleSpriteWidth = texture.GetWidth() / tileDimensions.x;
 		uint16 singleSpriteHeight = texture.GetHeight() / tileDimensions.y;

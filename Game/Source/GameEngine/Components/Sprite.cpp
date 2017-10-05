@@ -3,17 +3,29 @@
 
 namespace Comp
 {
-	void Sprite::SetScreenTargetLocation(const sfloat screenPositionX, const sfloat screenPositionY)
+	auto Sprite::Init(Blz::Graphics::Texture& texture, uint16 scale /* = 1*/) -> void
 	{
-		sfloat halfWidth = this->width / 2;
+		this->texture = texture;
+		scaleFactor = scale;
+	}
+
+	void Sprite::SetScreenPosition(const sfloat screenPositionX, const sfloat screenPositionY)
+	{
+		uint16 textureWidth = this->texture.GetWidth();
+		uint16 textureHeight = this->texture.GetHeight();
+
+		textureWidth *= scaleFactor;
+		textureHeight *= scaleFactor;
+
+		sfloat halfTextureWidth = static_cast<sfloat>(textureWidth / 2);
 
 		//Setting sprite origin at bottom middle of image by subtracting half width 
-		this->vertexData.at(0).SetPosition(glm::vec3{ screenPositionX + (this->width - halfWidth), screenPositionY + this->height, 0.0f });//Top right corner
-		this->vertexData.at(1).SetPosition(glm::vec3{ screenPositionX - halfWidth, screenPositionY + height, 0.0f });//Top left corner
-		this->vertexData.at(2).SetPosition(glm::vec3{ screenPositionX - halfWidth, screenPositionY, 0.0f });//Bottom left corner
-		this->vertexData.at(3).SetPosition(glm::vec3{ screenPositionX - halfWidth, screenPositionY, 0.0f });//Bottom left corner
-		this->vertexData.at(4).SetPosition(glm::vec3{ screenPositionX + (this->width - halfWidth), screenPositionY, 0.0f });//Bottom right corner
-		this->vertexData.at(5).SetPosition(glm::vec3{ screenPositionX + (this->width - halfWidth), screenPositionY + this->height, 0.0f });//Top right corner
+		this->vertexData.at(0).SetPosition(glm::vec3{ screenPositionX + halfTextureWidth, screenPositionY + textureHeight, 0.0f });//Top right corner
+		this->vertexData.at(1).SetPosition(glm::vec3{ screenPositionX - halfTextureWidth, screenPositionY + textureHeight, 0.0f });//Top left corner
+		this->vertexData.at(2).SetPosition(glm::vec3{ screenPositionX - halfTextureWidth, screenPositionY, 0.0f });//Bottom left corner
+		this->vertexData.at(3).SetPosition(glm::vec3{ screenPositionX - halfTextureWidth, screenPositionY, 0.0f });//Bottom left corner
+		this->vertexData.at(4).SetPosition(glm::vec3{ screenPositionX + halfTextureWidth, screenPositionY, 0.0f });//Bottom right corner
+		this->vertexData.at(5).SetPosition(glm::vec3{ screenPositionX + halfTextureWidth, screenPositionY + textureHeight, 0.0f });//Top right corner
 
 		this->vertexData.at(0).SetUV(glm::vec2{ 1.0f, 1.0f });
 		this->vertexData.at(1).SetUV(glm::vec2{ 0.0f, 1.0f });
@@ -23,20 +35,15 @@ namespace Comp
 		this->vertexData.at(5).SetUV(glm::vec2{ 1.0f, 1.0f });
 	}
 
-	void Sprite::SetWidthAndHeight(const sfloat width, const sfloat height)
-	{
-		this->width = width;
-		this->height = height;
-	}
-
 	void Sprite::SetTexture(const Blz::Graphics::Texture& texture)
 	{
-		this->textureID = texture.GetID();
+		this->texture = texture;
 	}
 
 	GLuint const Sprite::GetTextureID() const
 	{
-		return textureID;
+		ERRASSERT(texture.GetID() != 0, "Spritesheet Texture has not been initialized properly!");
+		return texture.GetID();
 	}
 
 	Blz::Array<Vector3D, 6> const Sprite::GetVertexData() const

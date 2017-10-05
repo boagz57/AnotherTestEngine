@@ -34,7 +34,7 @@ namespace Blz
 				{
 					ec.AddContext("When setting inital sprite screen location and UVs");
 
-					fighterSprite.SetSpriteScreenPosition(fighterPosition.GetCurrentPosition().x, fighterPosition.GetCurrentPosition().y);
+					fighterSprite.SetScreenPosition(fighterPosition.GetCurrentPosition().x, fighterPosition.GetCurrentPosition().y);
 
 					{//Set initial sprite UV location
 						glm::ivec2 spriteSheetDimensions = fighterSprite.GetDimensions();

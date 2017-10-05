@@ -46,7 +46,6 @@ namespace Blz
 				}
 			}
 
-
 			
 			{//Send down imageData to openGL and set some default parameters for image
 				glGenTextures(1, &(this->id));

@@ -11,17 +11,19 @@ namespace Comp
 		Sprite() = default;
 		~Sprite() = default;
 
-		void SetScreenTargetLocation(const sfloat screenPositionX, const sfloat screenPositionY);
-		void SetWidthAndHeight(const sfloat width, const sfloat height);
-		void SetTexture(const Blz::Graphics::Texture& texture);
-		GLuint const GetTextureID() const;
+		auto Init(Blz::Graphics::Texture& texture, uint16 scaleImageBy = 1) -> void;
 
-		Blz::Array<Vector3D, 6> const GetVertexData() const;
+		auto SetScreenPosition(const sfloat screenPositionX, const sfloat screenPositionY) -> void;
+
+		auto SetTexture(const Blz::Graphics::Texture& texture) -> void;
+
+		auto GetTextureID() const -> const GLuint;
+
+		auto GetVertexData() const -> const Blz::Array<Vector3D, 6>;
 
 	private:
-		float width = 200.0f;
-		float height = 200.0f;
-		GLuint textureID = 0;
+		uint16 scaleFactor{ 1 };
+		Blz::Graphics::Texture texture;
 		Blz::Array<Vector3D, 6> vertexData;
 	};
 }
