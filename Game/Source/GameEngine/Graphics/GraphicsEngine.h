@@ -5,6 +5,7 @@
 #include "Texture.h"
 #include "../Vector3D.h"
 #include "../Scene.h"
+#include "Components\Sprite.h"
 
 /*
 	Responsible for the actual drawing of everything on screen.
@@ -25,6 +26,7 @@ namespace Blz
 
 		private:
 			glm::mat4 orthoProjection;
+			Comp::Sprite backGroundSprite;
 		};
 	}
 }

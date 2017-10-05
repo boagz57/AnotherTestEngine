@@ -26,6 +26,11 @@ namespace Blz
 			//Turn OpenGL normalized device coodinates (-1 to 1) to pixel coordinates
 			orthoProjection = glm::ortho(0.0f, static_cast<sfloat>(window.width), 0.0f, static_cast<sfloat>(window.height));
 
+			backGroundSprite.Init(scene.backgroundTexture);
+			backGroundSprite.SetScreenPosition(static_cast<sfloat>(window.width / 2), 120.0f);
+
+			SysHelper::InitializeGLBuffer(backGroundSprite.GetVertexData());
+
 			for (Fighter* fighter : scene.fighters)
 			{
 				Comp::Position actualScreenPixelPositions = ConvertWorldUnitsToScreenPixels(fighter->position, window.width);
@@ -66,11 +71,26 @@ namespace Blz
 			GLuint uniformLocation = shader.GetUniformLocation("basicTexture");
 			glUniform1i(uniformLocation, 0);
 
-			GLuint vboID = 0;
+			glBindTexture(GL_TEXTURE_2D, backGroundSprite.GetTextureID());
+
+			glBindBuffer(GL_ARRAY_BUFFER, 1);
+
+			//Send down new text coords to draw
+			glBufferData(GL_ARRAY_BUFFER, (sizeof(Vector3D) * backGroundSprite.GetVertexData().size()), &backGroundSprite.GetVertexData().front(), GL_STATIC_DRAW);
+			glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vector3D), (void*)offsetof(Vector3D, position));
+			glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(Vector3D), (void*)offsetof(Vector3D, textureCoordinates));
+
+			glDrawArrays(GL_TRIANGLES, 0, 6);
+
+			glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+
+			//TODO: Find best way to associate VBOs to fighters
+			GLuint fighterVBO = 1;
 
 			for (Fighter* fighter : scene.fighters)
 			{
-				++vboID;
+				++fighterVBO;
 
 				//Translate vertices of fighter to move him
 				{
@@ -88,7 +108,7 @@ namespace Blz
 
 				glBindTexture(GL_TEXTURE_2D, fighter->spriteSheet.GetTextureID());
 
-				glBindBuffer(GL_ARRAY_BUFFER, vboID);
+				glBindBuffer(GL_ARRAY_BUFFER, fighterVBO);
 
 				//Send down new text coords to draw
 				glBufferData(GL_ARRAY_BUFFER, (sizeof(Vector3D) * fighter->spriteSheet.GetVertexData().size()), &fighter->spriteSheet.GetVertexData().front(), GL_DYNAMIC_DRAW);

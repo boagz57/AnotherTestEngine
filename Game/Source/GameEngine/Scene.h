@@ -4,6 +4,11 @@
 #include "Containers/SmallVector.h"
 #include "Fighter.h"
 
+namespace Blz { namespace Input { class Engine; }; };
+namespace Blz { namespace Animation { class Engine; }; };
+namespace Blz { namespace Physics { class Engine; }; };
+namespace Blz { namespace Graphics { class Engine; }; };
+
 class Scene
 {
 public:
@@ -12,9 +17,16 @@ public:
 
 	auto AddFighter(Fighter* fighter) -> void;
 
-	Blz::SmallVector<Fighter*> fighters;
+	auto SetBackground(Blz::Graphics::Texture backgroundTexture) -> void;
 
 private:
 	uint16 numFighters = 0;
+	Blz::SmallVector<Fighter*> fighters;
+	Blz::Graphics::Texture backgroundTexture;
+
+	friend class Blz::Input::Engine;
+	friend class Blz::Animation::Engine;
+	friend class Blz::Physics::Engine;
+	friend class Blz::Graphics::Engine;
 };
 

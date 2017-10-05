@@ -7,7 +7,7 @@ void Fighter::Init(sfloat startingWorldPositionX, sfloat startingWorldPositionY,
 	RUNTIME_ASSERT(startingWorldPositionX >= 0.0f && startingWorldPositionY >= 0.0f, "Trying to start fighter's position outside world bounds!");
 
 	position.Add(startingWorldPositionX, startingWorldPositionY);
-	spriteSheet.Init(texture, glm::ivec2{ 10, 4 }, 2);
+	spriteSheet.Init(texture, glm::ivec2{ 10, 4 }, 3);
 
 	this->originalPosition.x = startingWorldPositionX;
 	this->originalPosition.y = startingWorldPositionY;
