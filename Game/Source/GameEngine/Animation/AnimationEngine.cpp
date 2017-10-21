@@ -26,7 +26,7 @@ namespace Blz
 
 		auto Engine::PlayAnimation(Fighter* const fighter, uint16 const animationID) -> void
 		{
-			fighter->animation.SetFinalAnimation(animationID);
+			fighter->animation.SetCurrentAnimation(animationID);
 		}
 
 		auto Engine::Init(Scene& scene) -> void
@@ -51,13 +51,13 @@ namespace Blz
 						std::abs(std::floor(fighterPosition.GetCurrentPosition().y)) == c_groundLevel &&
 						!fighterInput.IsKeyPressed())
 					{
-						fighterAnimation.SetFinalAnimation(fighterAnimation.GetDefaultAnimationID());
+						fighterAnimation.SetCurrentAnimation(fighterAnimation.DefaultAnimation());
 					}
 
 					glm::vec4 newFrameUVs{ 0.0f };
 
 					{//Calculate current uvs to display from sprite sheet
-						uint16 currentFrame = fighterAnimation.GetCurrentAnimation().GetCurrentAnimationFrame();
+						uint16 currentFrame = fighterAnimation.CurrentAnimation().GetCurrentAnimationFrame();
 						glm::ivec2 tileDimensions = fighterSprite.GetDimensions();
 
 						uint16 tileXCoordinate = currentFrame % tileDimensions.x;
