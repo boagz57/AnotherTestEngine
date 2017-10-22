@@ -94,7 +94,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)ThirdParty\SDL\Include;$(SolutionDir)ThirdParty\GLEW\Include\;$(SolutionDir)ThirdParty\Boost\Include;$(SolutionDir)ThirdParty\STB_Image\Include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)ThirdParty\SDL\Include;$(SolutionDir)ThirdParty\GLEW\Include\;$(SolutionDir)ThirdParty\Boost\Include;$(SolutionDir)ThirdParty\STB_Image\Include\;$(SolutionDir)ThirdParty\spine\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>$(ProjectDir)Source\Universal\Macro.h;$(ProjectDir)Source\Universal\PrimitiveTypes.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
       <PreprocessorDefinitions>GLEW_STATIC;STB_IMAGE_IMPLEMENTATION;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
@@ -172,14 +172,56 @@ copy /y  "$(SolutionDir)ThirdParty\SDL\Lib\x86\SDL2.dll" "$(SolutionDir)Game\Bin
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\ThirdParty\STB_Image\Source\stb_image.cpp" />
+    <ClCompile Include="..\ThirdParty\spine\src\spine\Animation.cpp" />
+    <ClCompile Include="..\ThirdParty\spine\src\spine\AnimationState.cpp" />
+    <ClCompile Include="..\ThirdParty\spine\src\spine\AnimationStateData.cpp" />
+    <ClCompile Include="..\ThirdParty\spine\src\spine\Array.cpp" />
+    <ClCompile Include="..\ThirdParty\spine\src\spine\Atlas.cpp" />
+    <ClCompile Include="..\ThirdParty\spine\src\spine\AtlasAttachmentLoader.cpp" />
+    <ClCompile Include="..\ThirdParty\spine\src\spine\Attachment.cpp" />
+    <ClCompile Include="..\ThirdParty\spine\src\spine\AttachmentLoader.cpp" />
+    <ClCompile Include="..\ThirdParty\spine\src\spine\Bone.cpp" />
+    <ClCompile Include="..\ThirdParty\spine\src\spine\BoneData.cpp" />
+    <ClCompile Include="..\ThirdParty\spine\src\spine\BoundingBoxAttachment.cpp" />
+    <ClCompile Include="..\ThirdParty\spine\src\spine\ClippingAttachment.cpp" />
+    <ClCompile Include="..\ThirdParty\spine\src\spine\Color.cpp" />
+    <ClCompile Include="..\ThirdParty\spine\src\spine\Event.cpp" />
+    <ClCompile Include="..\ThirdParty\spine\src\spine\EventData.cpp" />
+    <ClCompile Include="..\ThirdParty\spine\src\spine\extension.cpp" />
+    <ClCompile Include="..\ThirdParty\spine\src\spine\IkConstraint.cpp" />
+    <ClCompile Include="..\ThirdParty\spine\src\spine\IkConstraintData.cpp" />
+    <ClCompile Include="..\ThirdParty\spine\src\spine\Json.cpp" />
+    <ClCompile Include="..\ThirdParty\spine\src\spine\MeshAttachment.cpp" />
+    <ClCompile Include="..\ThirdParty\spine\src\spine\PathAttachment.cpp" />
+    <ClCompile Include="..\ThirdParty\spine\src\spine\PathConstraint.cpp" />
+    <ClCompile Include="..\ThirdParty\spine\src\spine\PathConstraintData.cpp" />
+    <ClCompile Include="..\ThirdParty\spine\src\spine\PointAttachment.cpp" />
+    <ClCompile Include="..\ThirdParty\spine\src\spine\RegionAttachment.cpp" />
+    <ClCompile Include="..\ThirdParty\spine\src\spine\Skeleton.cpp" />
+    <ClCompile Include="..\ThirdParty\spine\src\spine\SkeletonBinary.cpp" />
+    <ClCompile Include="..\ThirdParty\spine\src\spine\SkeletonBounds.cpp" />
+    <ClCompile Include="..\ThirdParty\spine\src\spine\SkeletonClipping.cpp" />
+    <ClCompile Include="..\ThirdParty\spine\src\spine\SkeletonData.cpp" />
+    <ClCompile Include="..\ThirdParty\spine\src\spine\SkeletonJson.cpp" />
+    <ClCompile Include="..\ThirdParty\spine\src\spine\Skin.cpp" />
+    <ClCompile Include="..\ThirdParty\spine\src\spine\Slot.cpp" />
+    <ClCompile Include="..\ThirdParty\spine\src\spine\SlotData.cpp" />
+    <ClCompile Include="..\ThirdParty\spine\src\spine\TransformConstraint.cpp" />
+    <ClCompile Include="..\ThirdParty\spine\src\spine\TransformConstraintData.cpp" />
+    <ClCompile Include="..\ThirdParty\spine\src\spine\Triangulator.cpp" />
+    <ClCompile Include="..\ThirdParty\spine\src\spine\VertexAttachment.cpp" />
+    <ClCompile Include="..\ThirdParty\spine\src\spine\VertexEffect.cpp" />
     <ClCompile Include="Source\EngineFramework\GLLogging.cpp" />
     <ClCompile Include="Source\EngineFramework\File.cpp" />
     <ClCompile Include="Source\Main.cpp" />
     <ClCompile Include="Source\EngineFramework\Window.cpp" />
+    <ClCompile Include="Source\Spine.cpp" />
+    <ClCompile Include="Source\stb_image.cpp" />
     <ClCompile Include="Source\Texture.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\ThirdParty\spine\src\spine\Json.h" />
+    <ClInclude Include="..\ThirdParty\spine\src\spine\kvec.h" />
     <ClInclude Include="Source\EngineFramework\GLLogging.h" />
     <ClInclude Include="Source\EngineFramework\File.h" />
     <ClInclude Include="Source\Texture.h" />

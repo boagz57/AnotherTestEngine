@@ -3,15 +3,13 @@
 #include "EngineFramework/GLLogging.h"
 #include "GL/glew.h"
 #include <iostream>
+#include <spine/Atlas.h>
+#include <spine/Skeleton.h>
+#include <spine/SkeletonData.h>
+#include <spine/SkeletonBinary.h>
+#include <spine/SkeletonJson.h>
 
-SDL_Texture* texture;
-SDL_Renderer* renderer;
 Blz::Window window;
-
-//For RenderCopy function. ScreenRectanlge captures entire screen while imageRectangle
-//specifies the size you want to display the image
-SDL_Rect screenRectangle{ 0, 0, 1024, 768 };
-SDL_Rect imageRectangle{ 0, 0, 400, 100 };
 
 enum class GameState
 {
@@ -22,6 +20,28 @@ enum class GameState
 int main(int agrc, char** argv)
 {
 	window.Initialize();
+
+
+	spAtlas* atlas = spAtlas_createFromFile("spineboy.atlas", 0);
+
+	RUNTIME_ASSERT(atlas != nullptr, "Atlas not loading properly!");
+
+	spSkeletonBinary* binary = spSkeletonBinary_create(atlas);
+
+	spSkeletonData* skeletonData = spSkeletonBinary_readSkeletonDataFile(binary, "spineboy-ess.skel");
+
+	if (!skeletonData)
+	{
+		LOG("%s\n", binary->error);
+		spSkeletonBinary_dispose(binary);
+	};
+
+	spSkeletonBinary_dispose(binary);
+
+	spSkeleton* skeleton = spSkeleton_create(skeletonData);
+
+	spSkeleton_updateWorldTransform(skeleton);
+
 
 	GameState gamestate{ GameState::PLAY };
 
