@@ -8,8 +8,23 @@
 #include <spine/SkeletonData.h>
 #include <spine/SkeletonBinary.h>
 #include <spine/SkeletonJson.h>
+#include <spine/Slot.h>
+#include <spine/Attachment.h>
 
 Blz::Window window;
+
+typedef struct Vertex {
+	// Position in x/y plane
+	float x, y;
+
+	// UV coordinates
+	float u, v;
+
+	// Color, each channel in the range from 0-1
+	// (Should really be a 32-bit RGBA packed color)
+	float r, g, b, a;
+} Vertex;
+
 
 enum class GameState
 {
@@ -42,6 +57,12 @@ int main(int agrc, char** argv)
 
 	spSkeleton_updateWorldTransform(skeleton);
 
+	spSlot* slot = skeleton->drawOrder[0];
+
+	RUNTIME_ASSERT(slot != nullptr, "Slot not loaded properly!");
+
+	spAttachment* attachment = slot->attachment;
+
 
 	GameState gamestate{ GameState::PLAY };
 
@@ -72,6 +93,7 @@ int main(int agrc, char** argv)
 		};
 
 		GLuint vboID;
+
 		glGenBuffers(1, &vboID);
 		glBindBuffer(GL_ARRAY_BUFFER, vboID);
 		glBufferData(GL_ARRAY_BUFFER, sizeof(verts), verts, GL_STATIC_DRAW);
