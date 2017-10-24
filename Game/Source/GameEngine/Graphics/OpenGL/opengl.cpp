@@ -1,11 +1,12 @@
 #include <GL\glew.h>
-#include "SystemHelpers.h"
+#include "Vector3D.h"
+#include "OpenGL.h"
 
 namespace Blz
 {
 	namespace Graphics
 	{
-		namespace SysHelper
+		namespace GL 
 		{
 			auto InitializeGLBuffer(Blz::Array<Vector3D, 6> vertexData) -> void
 			{

@@ -4,7 +4,7 @@
 #include <math.h>
 #include <GLM\vec2.hpp>
 #include "ShaderProgram.h"
-#include "SystemHelpers\SystemHelpers.h"
+#include "OpenGL\OpenGL.h"
 #include "../Components/SpriteSheet.h"
 #include "Texture.h"
 #include "../Vector3D.h"
@@ -12,37 +12,39 @@
 #include "../Scene.h"
 #include "../Fighter.h"
 
+//Helper functions
+static auto ConvertWorldUnitsToScreenPixels(Comp::Position positionToConvert, uint16 windowWidth)->Comp::Position;
+static auto ConvertWorldUnitsToScreenPixels(glm::vec2 positionToConvert, uint16 windowWidth)->glm::vec2;
 
 namespace Blz
 {
 	namespace Graphics
 	{
-		//Helper functions
-		static auto ConvertWorldUnitsToScreenPixels(Comp::Position positionToConvert, uint16 windowWidth)->Comp::Position;
-		static auto ConvertWorldUnitsToScreenPixels(glm::vec2 positionToConvert, uint16 windowWidth)->glm::vec2;
-
 		auto Engine::Init(Scene& scene, const Window& window) -> void
 		{
 			//Turn OpenGL normalized device coodinates (-1 to 1) to pixel coordinates
 			orthoProjection = glm::ortho(0.0f, static_cast<sfloat>(window.width), 0.0f, static_cast<sfloat>(window.height));
 
-			backGroundSprite.Init(scene.backgroundTexture);
-			backGroundSprite.SetScreenPosition(static_cast<sfloat>(window.width / 2), 120.0f);
+			{
+				ec.AddContext("When setting background image location");
 
-			SysHelper::InitializeGLBuffer(backGroundSprite.GetVertexData());
+				backGroundSprite.Init(scene.backgroundTexture);
+				backGroundSprite.SetScreenPosition(static_cast<sfloat>(window.width / 2), 120.0f);
+
+				GL::InitializeGLBuffer(backGroundSprite.GetVertexData());
+			};
 
 			for (Fighter* fighter : scene.fighters)
 			{
-				Comp::Position actualScreenPixelPositions = ConvertWorldUnitsToScreenPixels(fighter->position, window.width);
-
-				[](Comp::SpriteSheet& fighterSprite, Comp::Position& fighterPosition) -> void
 				{
-					ec.AddContext("When setting inital sprite screen location and UVs");
+					ec.AddContext("When setting fighter sprite intial screen location and UVs");
 
-					fighterSprite.SetScreenPosition(fighterPosition.GetCurrentPosition().x, fighterPosition.GetCurrentPosition().y);
+					Comp::Position convertedFighterPosition = ConvertWorldUnitsToScreenPixels(fighter->position, window.width);
+
+					fighter->spriteSheet.SetScreenPosition(convertedFighterPosition.GetCurrentPosition().x, convertedFighterPosition.GetCurrentPosition().y);
 
 					{//Set initial sprite UV location
-						glm::ivec2 spriteSheetDimensions = fighterSprite.GetDimensions();
+						glm::ivec2 spriteSheetDimensions = fighter->spriteSheet.GetDimensions();
 						glm::vec4 initialSpriteUVs;
 
 						uint16 xTile = 0 % spriteSheetDimensions.x;
@@ -53,13 +55,12 @@ namespace Blz
 						initialSpriteUVs.w = 1.0f / spriteSheetDimensions.x;
 						initialSpriteUVs.z = 1.0f / spriteSheetDimensions.y;
 
-						fighterSprite.SetUVCoordinates(initialSpriteUVs);
+						fighter->spriteSheet.SetUVCoordinates(initialSpriteUVs);
 					}
 
-					SysHelper::InitializeGLBuffer(fighterSprite.GetVertexData());
-
-				}(fighter->spriteSheet, actualScreenPixelPositions);
-			}
+					GL::InitializeGLBuffer(fighter->spriteSheet.GetVertexData());
+				};
+			};
 		}
 
 		auto Engine::Update(Scene& scene, ShaderProgram& shader, const Window& window) -> void
@@ -124,37 +125,37 @@ namespace Blz
 				fighter->velocity.ZeroOutX();
 			}
 		}
-
-		auto ConvertWorldUnitsToScreenPixels(Comp::Position position, uint16 windowWidth) -> Comp::Position
-		{
-			ec.AddContext("When converting my world units to screen pixels");
-
-			if (windowWidth == 1920)
-			{
-				position.MultiplyBy(12, 12);
-			}
-			else if (windowWidth == 1280)
-			{
-				position.MultiplyBy(8, 8);
-			}
-
-			return position;
-		}
-
-		auto ConvertWorldUnitsToScreenPixels(glm::vec2 positionToConvert, uint16 windowWidth) -> glm::vec2
-		{
-			ec.AddContext("When converting my world units to screen pixels");
-
-			if (windowWidth == 1920)
-			{
-				positionToConvert*= 12;
-			}
-			else if (windowWidth == 1280)
-			{
-				positionToConvert*= 8;
-			}
-
-			return positionToConvert;
-		}
 	}
+}
+
+auto ConvertWorldUnitsToScreenPixels(Comp::Position position, uint16 windowWidth) -> Comp::Position
+{
+	ec.AddContext("When converting my world units to screen pixels");
+
+	if (windowWidth == 1920)
+	{
+		position.MultiplyBy(12, 12);
+	}
+	else if (windowWidth == 1280)
+	{
+		position.MultiplyBy(8, 8);
+	}
+
+	return position;
+}
+
+auto ConvertWorldUnitsToScreenPixels(glm::vec2 positionToConvert, uint16 windowWidth) -> glm::vec2
+{
+	ec.AddContext("When converting my world units to screen pixels");
+
+	if (windowWidth == 1920)
+	{
+		positionToConvert *= 12;
+	}
+	else if (windowWidth == 1280)
+	{
+		positionToConvert *= 8;
+	}
+
+	return positionToConvert;
 }

@@ -27,6 +27,7 @@ namespace Blz
 		private:
 			glm::mat4 orthoProjection;
 			Comp::Sprite backGroundSprite;
+
 		};
 	}
 }
