@@ -8,7 +8,7 @@ namespace Blz
 	{
 		namespace GL 
 		{
-			auto InitializeGLBuffer(Blz::Array<Vector3D, 6> vertexData) -> void
+			auto InitializeGPUBuffer(Blz::Array<Vector3D, 6> vertexData) -> GLuint
 			{
 				GLuint vboID = 0;
 				glGenBuffers(1, &vboID);
@@ -20,6 +20,8 @@ namespace Blz
 				glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(Vector3D), (void*)offsetof(Vector3D, textureCoordinates));
 
 				glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+				return vboID;
 			}
 		}
 	}

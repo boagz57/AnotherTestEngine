@@ -28,11 +28,13 @@ namespace Blz
 			{
 				ec.AddContext("When setting background image location");
 
-				backGroundSprite.Init(scene.backgroundTexture);
-				backGroundSprite.SetScreenPosition(static_cast<sfloat>(window.width / 2), 120.0f);
+				this->backGroundSprite.Init(scene.backgroundTexture);
+				this->backGroundSprite.SetScreenPosition(static_cast<sfloat>(window.width / 2), 120.0f);
 
-				GL::InitializeGLBuffer(backGroundSprite.GetVertexData());
+				this->backgroundVBO = GL::InitializeGPUBuffer(backGroundSprite.GetVertexData());
 			};
+
+			uint16 i = 0;
 
 			for (Fighter* fighter : scene.fighters)
 			{
@@ -58,7 +60,10 @@ namespace Blz
 						fighter->spriteSheet.SetUVCoordinates(initialSpriteUVs);
 					}
 
-					GL::InitializeGLBuffer(fighter->spriteSheet.GetVertexData());
+					GLuint fighterVBOID = GL::InitializeGPUBuffer(fighter->spriteSheet.GetVertexData());
+					this->fighterVBOs.at(i) = fighterVBOID;
+
+					++i;
 				};
 			};
 		}
@@ -74,7 +79,7 @@ namespace Blz
 
 			glBindTexture(GL_TEXTURE_2D, backGroundSprite.GetTextureID());
 
-			glBindBuffer(GL_ARRAY_BUFFER, 1);
+			glBindBuffer(GL_ARRAY_BUFFER, this->backgroundVBO);
 
 			//Send down new text coords to draw
 			glBufferData(GL_ARRAY_BUFFER, (sizeof(Vector3D) * backGroundSprite.GetVertexData().size()), &backGroundSprite.GetVertexData().front(), GL_STATIC_DRAW);
@@ -85,14 +90,10 @@ namespace Blz
 
 			glBindBuffer(GL_ARRAY_BUFFER, 0);
 
-
-			//TODO: Find best way to associate VBOs to fighters
-			GLuint fighterVBO = 1;
+			uint16 i = 0;
 
 			for (Fighter* fighter : scene.fighters)
 			{
-				++fighterVBO;
-
 				//Translate vertices of fighter to move him
 				{
 					glm::vec2 translationAmount = fighter->position.GetCurrentPosition() - fighter->originalPosition;
@@ -109,7 +110,7 @@ namespace Blz
 
 				glBindTexture(GL_TEXTURE_2D, fighter->spriteSheet.GetTextureID());
 
-				glBindBuffer(GL_ARRAY_BUFFER, fighterVBO);
+				glBindBuffer(GL_ARRAY_BUFFER, this->fighterVBOs.at(i));
 
 				//Send down new text coords to draw
 				glBufferData(GL_ARRAY_BUFFER, (sizeof(Vector3D) * fighter->spriteSheet.GetVertexData().size()), &fighter->spriteSheet.GetVertexData().front(), GL_DYNAMIC_DRAW);
@@ -124,6 +125,8 @@ namespace Blz
 				//TODO: Remove from rendering code
 				fighter->velocity.ZeroOutX();
 			}
+
+			++i;
 		}
 	}
 }

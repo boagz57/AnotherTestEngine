@@ -2,10 +2,10 @@
 #include <GLM/mat4x4.hpp>
 #include "ShaderProgram.h"
 #include "Window.h"
-#include "Texture.h"
 #include "../Vector3D.h"
 #include "../Scene.h"
 #include "Components\Sprite.h"
+#include "Containers\Array.h"
 
 /*
 	Responsible for the actual drawing of everything on screen.
@@ -27,6 +27,9 @@ namespace Blz
 		private:
 			glm::mat4 orthoProjection;
 			Comp::Sprite backGroundSprite;
+
+			GLuint backgroundVBO;
+			Blz::Array<GLuint, 2> fighterVBOs;
 
 		};
 	}

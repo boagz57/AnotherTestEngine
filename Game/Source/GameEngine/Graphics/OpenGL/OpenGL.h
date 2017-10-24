@@ -8,7 +8,7 @@ namespace Blz
 	{
 		namespace GL
 		{
-			auto InitializeGLBuffer(Blz::Array<Vector3D, 6> vertexData) -> void;
+			auto InitializeGPUBuffer(Blz::Array<Vector3D, 6> vertexData) -> GLuint;
 		}
 	}
 }
