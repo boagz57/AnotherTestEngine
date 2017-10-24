@@ -14,8 +14,6 @@ namespace Blz
 			Engine() = default;
 			~Engine() = default;
 
-			auto Bind(const int32 key, Fighter* const fighter, std::function<void(Fighter*)> movementFunction) -> void;
-
 			auto Update(Scene& scene) -> void;
 
 		private:

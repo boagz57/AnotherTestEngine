@@ -6,12 +6,6 @@ namespace Blz
 {
 	namespace Input
 	{
-		auto Engine::Bind(const int32 key, Fighter* const fighter, std::function<void(Fighter*)> movementFunction) -> void
-		{
-			fighter->input.MakeFighterControllable();
-			fighter->input.SetKeyBinding(key, movementFunction);
-		}
-
 		auto Engine::Update(Scene& scene) -> void
 		{
 			ec.AddContext("When updating input engine");

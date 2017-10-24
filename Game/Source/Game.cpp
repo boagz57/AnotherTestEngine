@@ -5,14 +5,13 @@
 #include "GameEngine/AI/AIEngine.h"
 #include "GameEngine/Input/InputEngine.h"
 #include "GameEngine/Animation/AnimationEngine.h"
-#include "GameEngine/Physics/PhysicsEngine.h"
+#include "GameEngine/Physics/GameLogic/PhysicsGameLogic.h"
+#include "GameEngine/Input/GameLogic/InputGameLogic.h"
 
 extern Scene scene;
 
-extern Blz::Input::Engine input;
 extern Blz::AI::Engine AI;
 extern Blz::Animation::Engine animation;
-extern Blz::Physics::Engine physics;
 
 void Game::Init()
 {
@@ -36,10 +35,10 @@ void Game::Init()
 
 	this->AIIdle = animation.CreateAnimation(&enemy, 0, 3, setAsDefaultAnimation);
 
-	input.Bind(SDLK_d, &player, std::bind(&Game::MoveRight, this, &player));
-	input.Bind(SDLK_a, &player, std::bind(&Game::MoveLeft, this, &player));
-	input.Bind(SDLK_SPACE, &player, std::bind(&Game::Jump, this, &player));
-	input.Bind(SDLK_p, &player, std::bind(&Game::Punch, this, &player));
+	BlzInput::Bind(SDLK_d, &player, std::bind(&Game::MoveRight, this, &player));
+	BlzInput::Bind(SDLK_a, &player, std::bind(&Game::MoveLeft, this, &player));
+	BlzInput::Bind(SDLK_SPACE, &player, std::bind(&Game::Jump, this, &player));
+	BlzInput::Bind(SDLK_p, &player, std::bind(&Game::Punch, this, &player));
 }
 
 void Game::Update()
@@ -57,17 +56,17 @@ void Game::Shutdown()
 
 void Game::MoveRight(Fighter* const fighter) 
 {
-	physics.Move(fighter, 90.0f, 0.0f);
+	BlzPhysics::Move(fighter, 90.0f, 0.0f);
 }
 
 void Game::MoveLeft(Fighter* const fighter) 
 {
-	physics.Move(fighter, -90.0f, 0.0f);
+	BlzPhysics::Move(fighter, -90.0f, 0.0f);
 }
 
 void Game::Jump(Fighter* const fighter)
 {
-	physics.Jump(fighter, 50.0f);
+	BlzPhysics::Jump(fighter, 50.0f);
 }
 
 void Game::Punch(Fighter* const fighter)
