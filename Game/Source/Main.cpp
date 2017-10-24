@@ -2,6 +2,7 @@
 #include "EngineFramework/Window.h"
 #include "EngineFramework/GLLogging.h"
 #include "GL/glew.h"
+#include "Texture.h"
 #include <iostream>
 #include <spine/Atlas.h>
 #include <spine/Skeleton.h>
@@ -10,9 +11,10 @@
 #include <spine/SkeletonJson.h>
 #include <spine/Slot.h>
 #include <spine/Attachment.h>
+#include <spine/RegionAttachment.h>
+#include <spine/AtlasAttachmentLoader.h>
 
-Blz::Window window;
-
+// A single vertex with UV 
 typedef struct Vertex {
 	// Position in x/y plane
 	float x, y;
@@ -25,6 +27,7 @@ typedef struct Vertex {
 	float r, g, b, a;
 } Vertex;
 
+Blz::Window window;
 
 enum class GameState
 {
@@ -36,22 +39,21 @@ int main(int agrc, char** argv)
 {
 	window.Initialize();
 
-
 	spAtlas* atlas = spAtlas_createFromFile("spineboy.atlas", 0);
 
 	RUNTIME_ASSERT(atlas != nullptr, "Atlas not loading properly!");
 
-	spSkeletonBinary* binary = spSkeletonBinary_create(atlas);
+	spSkeletonJson* json = spSkeletonJson_create(atlas);
 
-	spSkeletonData* skeletonData = spSkeletonBinary_readSkeletonDataFile(binary, "spineboy-ess.skel");
+	spSkeletonData* skeletonData = spSkeletonJson_readSkeletonDataFile(json, "spineboy-ess.json");
 
 	if (!skeletonData)
 	{
-		LOG("%s\n", binary->error);
-		spSkeletonBinary_dispose(binary);
+		LOG("%s\n", json->error);
+		spSkeletonJson_dispose(json);
 	};
 
-	spSkeletonBinary_dispose(binary);
+	spSkeletonJson_dispose(json);
 
 	spSkeleton* skeleton = spSkeleton_create(skeletonData);
 
@@ -63,6 +65,12 @@ int main(int agrc, char** argv)
 
 	spAttachment* attachment = slot->attachment;
 
+	if (attachment->type == SP_ATTACHMENT_REGION)
+	{
+		spRegionAttachment* regionAttachment = (spRegionAttachment*)attachment;
+
+		Blz::Graphics::Texture* texture = (Blz::Graphics::Texture*)((spAtlasRegion*)regionAttachment->rendererObject)->page->rendererObject;
+	}
 
 	GameState gamestate{ GameState::PLAY };
 
