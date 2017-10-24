@@ -77,25 +77,15 @@ namespace Blz
 			GLuint uniformLocation = shader.GetUniformLocation("basicTexture");
 			glUniform1i(uniformLocation, 0);
 
-			glBindTexture(GL_TEXTURE_2D, backGroundSprite.GetTextureID());
-
-			glBindBuffer(GL_ARRAY_BUFFER, this->backgroundVBO);
-
-			//Send down new text coords to draw
-			glBufferData(GL_ARRAY_BUFFER, (sizeof(Vector3D) * backGroundSprite.GetVertexData().size()), &backGroundSprite.GetVertexData().front(), GL_STATIC_DRAW);
-			glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vector3D), (void*)offsetof(Vector3D, position));
-			glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(Vector3D), (void*)offsetof(Vector3D, textureCoordinates));
-
-			glDrawArrays(GL_TRIANGLES, 0, 6);
-
-			glBindBuffer(GL_ARRAY_BUFFER, 0);
+			GL::DrawTexture(backGroundSprite.GetVertexData(), backGroundSprite.GetTextureID(), backgroundVBO);
 
 			uint16 i = 0;
 
 			for (Fighter* fighter : scene.fighters)
 			{
-				//Translate vertices of fighter to move him
 				{
+					ec.AddContext("When translating fighter verticies to move fighter");
+
 					glm::vec2 translationAmount = fighter->position.GetCurrentPosition() - fighter->originalPosition;
 
 					glm::vec2 ConvertedTranslationPosition = ConvertWorldUnitsToScreenPixels(translationAmount, window.width);
@@ -108,18 +98,7 @@ namespace Blz
 					glUniformMatrix4fv(transformationMatrixUniformLocation, 1, GL_FALSE, &(transformationMatrix[0][0]));
 				}
 
-				glBindTexture(GL_TEXTURE_2D, fighter->spriteSheet.GetTextureID());
-
-				glBindBuffer(GL_ARRAY_BUFFER, this->fighterVBOs.at(i));
-
-				//Send down new text coords to draw
-				glBufferData(GL_ARRAY_BUFFER, (sizeof(Vector3D) * fighter->spriteSheet.GetVertexData().size()), &fighter->spriteSheet.GetVertexData().front(), GL_DYNAMIC_DRAW);
-				glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vector3D), (void*)offsetof(Vector3D, position));
-				glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(Vector3D), (void*)offsetof(Vector3D, textureCoordinates));
-
-				glDrawArrays(GL_TRIANGLES, 0, 6);
-
-				glBindBuffer(GL_ARRAY_BUFFER, 0);
+				GL::DrawTexture(fighter->spriteSheet.GetVertexData(), fighter->spriteSheet.GetTextureID(), this->fighterVBOs.at(i));
 
 				//Zero out velocity to prevent fighter sliding
 				//TODO: Remove from rendering code

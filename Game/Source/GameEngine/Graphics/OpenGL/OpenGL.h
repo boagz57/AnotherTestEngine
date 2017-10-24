@@ -9,6 +9,7 @@ namespace Blz
 		namespace GL
 		{
 			auto InitializeGPUBuffer(Blz::Array<Vector3D, 6> vertexData) -> GLuint;
+			auto DrawTexture(Blz::Array <Vector3D, 6> vertexData, GLuint textureID, GLuint VBOID) -> void;
 		}
 	}
 }
