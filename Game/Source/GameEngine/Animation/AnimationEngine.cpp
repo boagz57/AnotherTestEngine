@@ -11,24 +11,6 @@ namespace Blz
 {
 	namespace Animation
 	{
-		auto Engine::CreateAnimation(Fighter* const fighter, const uint16 startingIndex, const uint16 numTilesToAnimate, bool isDefault/* = fasle */) ->uint16
-		{
-			Blz::Animation::AnimationClip animation;
-
-			animation.Init();
-			animation.SetIndex(startingIndex);
-			animation.SetTotalTilesForAnimation(numTilesToAnimate);
-
-			fighter->animation.AddAnimation(animation, isDefault);
-
-			return animation.ID();
-		}
-
-		auto Engine::PlayAnimation(Fighter* const fighter, uint16 const animationID) -> void
-		{
-			fighter->animation.SetCurrentAnimation(animationID);
-		}
-
 		auto Engine::Init(Scene& scene) -> void
 		{
 		}

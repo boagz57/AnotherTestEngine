@@ -17,6 +17,7 @@ namespace Blz { namespace Physics { class Engine; }; };
 
 namespace Blz { namespace Physics { class GameLogic; }; };
 namespace Blz { namespace Input { class GameLogic; }; };
+namespace Blz { namespace Animation { class GameLogic; }; };
 
 class Fighter 
 {
@@ -44,6 +45,7 @@ private:
 
 	friend class Blz::Physics::GameLogic;
 	friend class Blz::Input::GameLogic;
+	friend class Blz::Animation::GameLogic;
 
 	Comp::Transform transform;
 	Comp::Velocity velocity;

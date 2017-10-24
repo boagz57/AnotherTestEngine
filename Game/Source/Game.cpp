@@ -7,11 +7,9 @@
 #include "GameEngine/Animation/AnimationEngine.h"
 #include "GameEngine/Physics/GameLogic/PhysicsGameLogic.h"
 #include "GameEngine/Input/GameLogic/InputGameLogic.h"
+#include "GameEngine/Animation/GameLogic/AnimationGameLogic.h"
 
 extern Scene scene;
-
-extern Blz::AI::Engine AI;
-extern Blz::Animation::Engine animation;
 
 void Game::Init()
 {
@@ -29,11 +27,11 @@ void Game::Init()
 
 	bool setAsDefaultAnimation = true;
 
-	this->walkingRight = animation.CreateAnimation(&player, 10, 7);
-	this->punching= animation.CreateAnimation(&player, 20, 9);
-	this->idle = animation.CreateAnimation(&player, 0, 3, setAsDefaultAnimation);
+	this->walkingRight = BlzAnimation::CreateAnimation(&player, 10, 7);
+	this->punching= BlzAnimation::CreateAnimation(&player, 20, 9);
+	this->idle = BlzAnimation::CreateAnimation(&player, 0, 3, setAsDefaultAnimation);
 
-	this->AIIdle = animation.CreateAnimation(&enemy, 0, 3, setAsDefaultAnimation);
+	this->AIIdle = BlzAnimation::CreateAnimation(&enemy, 0, 3, setAsDefaultAnimation);
 
 	BlzInput::Bind(SDLK_d, &player, std::bind(&Game::MoveRight, this, &player));
 	BlzInput::Bind(SDLK_a, &player, std::bind(&Game::MoveLeft, this, &player));
@@ -44,7 +42,7 @@ void Game::Init()
 void Game::Update()
 {
 	if (player.GetVelocity().GetCurrentState().x > 0)
-		animation.PlayAnimation(&player, walkingRight);
+		BlzAnimation::PlayAnimation(&player, walkingRight);
 
 	ec.AddContext("When updating Game");
 }
@@ -71,5 +69,5 @@ void Game::Jump(Fighter* const fighter)
 
 void Game::Punch(Fighter* const fighter)
 {
-	animation.PlayAnimation(fighter, punching);
+	BlzAnimation::PlayAnimation(fighter, punching);
 }
