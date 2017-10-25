@@ -5,6 +5,7 @@
 #include "Texture.h"
 #include "ShaderProgram.h"
 #include <iostream>
+#include <cstddef>
 #include <spine/Atlas.h>
 #include <spine/Skeleton.h>
 #include <spine/SkeletonData.h>
@@ -18,31 +19,46 @@
 const uint16 maxVerticesPerAttachment = 2048;
 float worldVerticesPositions[maxVerticesPerAttachment];
 
+struct Position
+{
+	float x, y;
+};
+
+struct UVs
+{
+	float u, v;
+};
+
+struct Color
+{
+	float r, g, b, a;
+};
+
 // A single vertex with UV 
 typedef struct Vertex {
 	// Position in x/y plane
-	float x, y;
+	Position position{ 0.0f, 0.0f };
 
 	// UV coordinates
-	float u, v;
+	UVs uvs{ 0.0f, 0.0f };
 
 	// Color, each channel in the range from 0-1
 	// (Should really be a 32-bit RGBA packed color)
-	float r, g, b, a;
+	Color color{ 0.0f, 0.0f, 0.0f, 1.0f };
 } Vertex;
 
 Vertex vertices[maxVerticesPerAttachment];
 
 void addVertex(float x, float y, float u, float v, float r, float g, float b, float a, int* index) {
 	Vertex* vertex = &vertices[*index];
-	vertex->x = x;
-	vertex->y = y;
-	vertex->u = u;
-	vertex->v = v;
-	vertex->r = r;
-	vertex->g = g;
-	vertex->b = b;
-	vertex->a = a;
+	vertex->position.x = x;
+	vertex->position.y = y;
+	vertex->uvs.u = u;
+	vertex->uvs.v = v;
+	vertex->color.r = r;
+	vertex->color.g = g;
+	vertex->color.b = b;
+	vertex->color.a = a;
 	*index += 1;
 }
 
@@ -60,7 +76,7 @@ int main(int agrc, char** argv)
 
 	Blz::Graphics::ShaderProgram colorShaderProgram;
 
-	colorShaderProgram.Init("Source/GameEngine/Shaders/VertexShader.glsl", "Source/GameEngine/Shaders/FragmentShader.glsl");
+	colorShaderProgram.Init("Source/Shaders/VertexShader.glsl", "Source/Shaders/FragmentShader.glsl");
 	colorShaderProgram.Compile();
 	colorShaderProgram.AddAttribute("vertexPosition");
 	colorShaderProgram.AddAttribute("textCoord");
@@ -162,7 +178,8 @@ int main(int agrc, char** argv)
 		glBindTexture(GL_TEXTURE0, texture->GetID());
 		glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 		glEnableVertexAttribArray(0);
-		glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 2, 0);//Add offsetof() for stride parameter
+		glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, offsetof(Vertex, position), 0);
+		glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, offsetof(Vertex, uvs), 0);
 
 		window.ClearBuffers();
 
