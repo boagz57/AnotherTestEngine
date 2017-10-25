@@ -14,6 +14,9 @@
 #include <spine/RegionAttachment.h>
 #include <spine/AtlasAttachmentLoader.h>
 
+const uint16 maxVerticesPerAttachment = 2048;
+float worldVerticesPositions[maxVerticesPerAttachment];
+
 // A single vertex with UV 
 typedef struct Vertex {
 	// Position in x/y plane
@@ -26,6 +29,21 @@ typedef struct Vertex {
 	// (Should really be a 32-bit RGBA packed color)
 	float r, g, b, a;
 } Vertex;
+
+Vertex vertices[maxVerticesPerAttachment];
+
+void addVertex(float x, float y, float u, float v, float r, float g, float b, float a, int* index) {
+	Vertex* vertex = &vertices[*index];
+	vertex->x = x;
+	vertex->y = y;
+	vertex->u = u;
+	vertex->v = v;
+	vertex->r = r;
+	vertex->g = g;
+	vertex->b = b;
+	vertex->a = a;
+	*index += 1;
+}
 
 Blz::Window window;
 
@@ -65,11 +83,45 @@ int main(int agrc, char** argv)
 
 	spAttachment* attachment = slot->attachment;
 
+	Blz::Graphics::Texture* texture = nullptr;
+	int vertexIndex = 0;
 	if (attachment->type == SP_ATTACHMENT_REGION)
 	{
 		spRegionAttachment* regionAttachment = (spRegionAttachment*)attachment;
 
-		Blz::Graphics::Texture* texture = (Blz::Graphics::Texture*)((spAtlasRegion*)regionAttachment->rendererObject)->page->rendererObject;
+		texture = (Blz::Graphics::Texture*)((spAtlasRegion*)regionAttachment->rendererObject)->page->rendererObject;
+
+		spRegionAttachment_computeWorldVertices(regionAttachment, slot->bone, worldVerticesPositions, 0, 2);
+
+		addVertex(worldVerticesPositions[0], 
+			worldVerticesPositions[1], 
+			regionAttachment->uvs[0],
+			regionAttachment->uvs[1], 0.1, 0.1, 0.1, 1.0, &vertexIndex);
+
+		addVertex(worldVerticesPositions[2],
+			worldVerticesPositions[3],
+			regionAttachment->uvs[2],
+			regionAttachment->uvs[3], 0.1, 0.1, 0.1, 1.0, &vertexIndex);
+
+		addVertex(worldVerticesPositions[4],
+			worldVerticesPositions[5],
+			regionAttachment->uvs[4],
+			regionAttachment->uvs[5], 0.1, 0.1, 0.1, 1.0, &vertexIndex);
+
+		addVertex(worldVerticesPositions[4],
+			worldVerticesPositions[5],
+			regionAttachment->uvs[4],
+			regionAttachment->uvs[5], 0.1, 0.1, 0.1, 1.0, &vertexIndex);
+
+		addVertex(worldVerticesPositions[6],
+			worldVerticesPositions[7],
+			regionAttachment->uvs[6],
+			regionAttachment->uvs[7], 0.1, 0.1, 0.1, 1.0, &vertexIndex);
+
+		addVertex(worldVerticesPositions[0],
+			worldVerticesPositions[1],
+			regionAttachment->uvs[0],
+			regionAttachment->uvs[1], 0.1, 0.1, 0.1, 1.0, &vertexIndex);
 	}
 
 	GameState gamestate{ GameState::PLAY };
@@ -93,24 +145,18 @@ int main(int agrc, char** argv)
 			}
 		}
 
-		GLfloat verts[] =
-		{
-			0.0f, 1.0f,
-			-1.0f, -1.0f,
-			1.0f, -1.0f,
-		};
-
 		GLuint vboID;
 
 		glGenBuffers(1, &vboID);
 		glBindBuffer(GL_ARRAY_BUFFER, vboID);
-		glBufferData(GL_ARRAY_BUFFER, sizeof(verts), verts, GL_STATIC_DRAW);
+		glBindTexture(GL_TEXTURE0, texture->GetID());
+		glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 		glEnableVertexAttribArray(0);
-		glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 3, 0);
+		glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 2, 0);
 
 		window.ClearBuffers();
 
-		glDrawArrays(GL_TRIANGLES, 0, 3);
+		glDrawArrays(GL_TRIANGLES, 0, 6);
 
 		window.SwapBuffers();
 	}
