@@ -14,7 +14,7 @@ namespace Blz
 			RUNTIME_ASSERT(this->width >= 0, "Image width not specified!");
 			RUNTIME_ASSERT(this->height >= 0, "Image height not specified!");
 
-			RUNTIME_ASSERT(p_ImageData != nullptr, "Image data {} did not load properly!", c_imageFilePath);
+			RUNTIME_ASSERT(p_ImageData != nullptr, "Image data {} did not load properly!");
 
 			//TODO: uncomment RUNTIMEASSERT below so I check if images loaded are dimensions of 2
 			//Check if image is a power of 2 (which makes image compatible with older versions of opengl, also make things easier 

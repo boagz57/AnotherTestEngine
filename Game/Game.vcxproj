@@ -213,6 +213,7 @@ copy /y  "$(SolutionDir)ThirdParty\SDL\Lib\x86\SDL2.dll" "$(SolutionDir)Game\Bin
     <ClCompile Include="..\ThirdParty\spine\src\spine\VertexEffect.cpp" />
     <ClCompile Include="Source\EngineFramework\GLLogging.cpp" />
     <ClCompile Include="Source\EngineFramework\File.cpp" />
+    <ClCompile Include="Source\ShaderProgram.cpp" />
     <ClCompile Include="Source\Main.cpp" />
     <ClCompile Include="Source\EngineFramework\Window.cpp" />
     <ClCompile Include="Source\Spine.cpp" />
@@ -224,6 +225,7 @@ copy /y  "$(SolutionDir)ThirdParty\SDL\Lib\x86\SDL2.dll" "$(SolutionDir)Game\Bin
     <ClInclude Include="..\ThirdParty\spine\src\spine\kvec.h" />
     <ClInclude Include="Source\EngineFramework\GLLogging.h" />
     <ClInclude Include="Source\EngineFramework\File.h" />
+    <ClInclude Include="Source\ShaderProgram.h" />
     <ClInclude Include="Source\Texture.h" />
     <ClInclude Include="Source\Universal\Macro.h" />
     <ClInclude Include="Source\EngineFramework\Window.h" />

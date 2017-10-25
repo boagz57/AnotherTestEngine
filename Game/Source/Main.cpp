@@ -3,6 +3,7 @@
 #include "EngineFramework/GLLogging.h"
 #include "GL/glew.h"
 #include "Texture.h"
+#include "ShaderProgram.h"
 #include <iostream>
 #include <spine/Atlas.h>
 #include <spine/Skeleton.h>
@@ -56,6 +57,15 @@ enum class GameState
 int main(int agrc, char** argv)
 {
 	window.Initialize();
+
+	Blz::Graphics::ShaderProgram colorShaderProgram;
+
+	colorShaderProgram.Init("Source/GameEngine/Shaders/VertexShader.glsl", "Source/GameEngine/Shaders/FragmentShader.glsl");
+	colorShaderProgram.Compile();
+	colorShaderProgram.AddAttribute("vertexPosition");
+	colorShaderProgram.AddAttribute("textCoord");
+	colorShaderProgram.Link();
+	colorShaderProgram.Bind();
 
 	spAtlas* atlas = spAtlas_createFromFile("spineboy.atlas", 0);
 
@@ -152,7 +162,7 @@ int main(int agrc, char** argv)
 		glBindTexture(GL_TEXTURE0, texture->GetID());
 		glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 		glEnableVertexAttribArray(0);
-		glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 2, 0);
+		glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 2, 0);//Add offsetof() for stride parameter
 
 		window.ClearBuffers();
 
