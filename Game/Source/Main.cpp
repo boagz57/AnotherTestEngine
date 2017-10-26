@@ -84,6 +84,9 @@ int main(int agrc, char** argv)
 	colorShaderProgram.Link();
 	colorShaderProgram.Bind();
 
+	GLuint uniformLocation = colorShaderProgram.GetUniformLocation("basicTexture");
+	glUniform1i(uniformLocation, 0);
+
 	/*spAtlas* atlas = spAtlas_createFromFile("spineboy.atlas", 0);
 
 	RUNTIME_ASSERT(atlas != nullptr, "Atlas not loading properly!");
@@ -217,7 +220,7 @@ int main(int agrc, char** argv)
 
 		glGenBuffers(1, &vboID);
 		glBindBuffer(GL_ARRAY_BUFFER, vboID);
-		glBindTexture(GL_TEXTURE0, texture.GetID());
+		glBindTexture(GL_TEXTURE_2D, texture.GetID());
 		glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 		glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, position));
 		glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, uvs));
