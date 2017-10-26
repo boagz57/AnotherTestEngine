@@ -44,7 +44,7 @@ typedef struct Vertex {
 
 	// Color, each channel in the range from 0-1
 	// (Should really be a 32-bit RGBA packed color)
-	Color color{ 0.0f, 0.0f, 0.0f, 1.0f };
+	Color color{ 0.1f, 0.1f, 0.1f, 1.0f };
 } Vertex;
 
 Vertex vertices[maxVerticesPerAttachment];
@@ -80,10 +80,11 @@ int main(int agrc, char** argv)
 	colorShaderProgram.Compile();
 	colorShaderProgram.AddAttribute("vertexPosition");
 	colorShaderProgram.AddAttribute("textCoord");
+	colorShaderProgram.AddAttribute("color");
 	colorShaderProgram.Link();
 	colorShaderProgram.Bind();
 
-	spAtlas* atlas = spAtlas_createFromFile("spineboy.atlas", 0);
+	/*spAtlas* atlas = spAtlas_createFromFile("spineboy.atlas", 0);
 
 	RUNTIME_ASSERT(atlas != nullptr, "Atlas not loading properly!");
 
@@ -148,7 +149,7 @@ int main(int agrc, char** argv)
 			worldVerticesPositions[1],
 			regionAttachment->uvs[0],
 			regionAttachment->uvs[1], 0.1, 0.1, 0.1, 1.0, &vertexIndex);
-	}
+	}*/
 
 	GameState gamestate{ GameState::PLAY };
 
@@ -173,13 +174,54 @@ int main(int agrc, char** argv)
 
 		GLuint vboID;
 
+		vertices[0].position.x = 0.0;
+		vertices[0].position.y = 0.0;
+
+		vertices[1].position.x = 1.0;
+		vertices[1].position.y = 0.0;
+
+		vertices[2].position.x = 1.0;
+		vertices[2].position.y = 1.0;
+
+		vertices[3].position.x = 0.0;
+		vertices[3].position.y = 0.0;
+
+		vertices[4].position.x = 0.0;
+		vertices[4].position.y = 0.0;
+
+		vertices[5].position.y = 0.0;
+		vertices[5].position.y = 0.0;
+
+
+		vertices[0].uvs.u = 0.0;
+		vertices[0].uvs.v = 0.0;
+
+		vertices[1].uvs.u = 1.0;
+		vertices[1].uvs.v = 0.0;
+
+		vertices[2].uvs.u = 1.0;
+		vertices[2].uvs.v = 1.0;
+
+		vertices[3].uvs.u = 0.0;
+		vertices[3].uvs.v = 0.0;
+
+		vertices[4].uvs.u = 0.0;
+		vertices[4].uvs.v = 0.0;
+
+		vertices[5].uvs.u = 0.0;
+		vertices[5].uvs.v = 0.0;
+
+
+		Blz::Graphics::Texture texture("spineboy.png");
+
+
 		glGenBuffers(1, &vboID);
 		glBindBuffer(GL_ARRAY_BUFFER, vboID);
-		glBindTexture(GL_TEXTURE0, texture->GetID());
+		glBindTexture(GL_TEXTURE0, texture.GetID());
 		glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-		glEnableVertexAttribArray(0);
-		glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, offsetof(Vertex, position), 0);
-		glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, offsetof(Vertex, uvs), 0);
+		glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, position));
+		glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, uvs));
+		glVertexAttribPointer(2, 4, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, color));
 
 		window.ClearBuffers();
 
