@@ -205,11 +205,11 @@ int main(int agrc, char** argv)
 		vertices[2].uvs.u = 1.0;
 		vertices[2].uvs.v = 1.0;
 
-		vertices[3].uvs.u = 0.0;
-		vertices[3].uvs.v = 0.0;
+		vertices[3].uvs.u = 1.0;
+		vertices[3].uvs.v = 1.0;
 
 		vertices[4].uvs.u = 0.0;
-		vertices[4].uvs.v = 0.0;
+		vertices[4].uvs.v = 1.0;
 
 		vertices[5].uvs.u = 0.0;
 		vertices[5].uvs.v = 0.0;
