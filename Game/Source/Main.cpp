@@ -15,6 +15,7 @@
 #include <spine/Attachment.h>
 #include <spine/RegionAttachment.h>
 #include <spine/AtlasAttachmentLoader.h>
+#include <GLM\gtc\matrix_transform.hpp>
 
 const uint16 maxVerticesPerAttachment = 2048;
 float worldVerticesPositions[maxVerticesPerAttachment];
@@ -216,6 +217,8 @@ int main(int agrc, char** argv)
 
 
 		Blz::Graphics::Texture texture("spineboy.png");
+
+		glm::mat4x4 ortho = glm::ortho<float>(0.0f, static_cast<float>(1024), 0.0f, static_cast<float>(768));
 
 
 		glGenBuffers(1, &vboID);
