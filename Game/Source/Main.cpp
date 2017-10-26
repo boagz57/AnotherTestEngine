@@ -186,11 +186,11 @@ int main(int agrc, char** argv)
 		vertices[2].position.x = 1.0;
 		vertices[2].position.y = 1.0;
 
-		vertices[3].position.x = 0.0;
-		vertices[3].position.y = 0.0;
+		vertices[3].position.x = 1.0;
+		vertices[3].position.y = 1.0;
 
 		vertices[4].position.x = 0.0;
-		vertices[4].position.y = 0.0;
+		vertices[4].position.y = 1.0;
 
 		vertices[5].position.y = 0.0;
 		vertices[5].position.y = 0.0;
