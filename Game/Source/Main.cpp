@@ -88,7 +88,7 @@ int main(int agrc, char** argv)
 	GLuint uniformLocation = colorShaderProgram.GetUniformLocation("basicTexture");
 	glUniform1i(uniformLocation, 0);
 
-	/*spAtlas* atlas = spAtlas_createFromFile("spineboy.atlas", 0);
+	spAtlas* atlas = spAtlas_createFromFile("spineboy.atlas", 0);
 
 	RUNTIME_ASSERT(atlas != nullptr, "Atlas not loading properly!");
 
@@ -106,54 +106,82 @@ int main(int agrc, char** argv)
 
 	spSkeleton* skeleton = spSkeleton_create(skeletonData);
 
+	skeleton->x = 500.0f;
+	skeleton->y = 200.0f;
+
 	spSkeleton_updateWorldTransform(skeleton);
 
-	spSlot* slot = skeleton->drawOrder[0];
-
-	RUNTIME_ASSERT(slot != nullptr, "Slot not loaded properly!");
-
-	spAttachment* attachment = slot->attachment;
-
 	Blz::Graphics::Texture* texture = nullptr;
-	int vertexIndex = 0;
-	if (attachment->type == SP_ATTACHMENT_REGION)
+
+	for (int i = 0; i < 20; ++i)
 	{
-		spRegionAttachment* regionAttachment = (spRegionAttachment*)attachment;
+		spSlot* slot = skeleton->drawOrder[i];
 
-		texture = (Blz::Graphics::Texture*)((spAtlasRegion*)regionAttachment->rendererObject)->page->rendererObject;
+		RUNTIME_ASSERT(slot != nullptr, "Slot not loaded properly!");
 
-		spRegionAttachment_computeWorldVertices(regionAttachment, slot->bone, worldVerticesPositions, 0, 2);
+		spAttachment* attachment = slot->attachment;
 
-		addVertex(worldVerticesPositions[0], 
-			worldVerticesPositions[1], 
-			regionAttachment->uvs[0],
-			regionAttachment->uvs[1], 0.1, 0.1, 0.1, 1.0, &vertexIndex);
+		if (!attachment) continue;
 
-		addVertex(worldVerticesPositions[2],
-			worldVerticesPositions[3],
-			regionAttachment->uvs[2],
-			regionAttachment->uvs[3], 0.1, 0.1, 0.1, 1.0, &vertexIndex);
+		int vertexIndex = 0;
+		if (attachment->type == SP_ATTACHMENT_REGION)
+		{
+			spRegionAttachment* regionAttachment = (spRegionAttachment*)attachment;
 
-		addVertex(worldVerticesPositions[4],
-			worldVerticesPositions[5],
-			regionAttachment->uvs[4],
-			regionAttachment->uvs[5], 0.1, 0.1, 0.1, 1.0, &vertexIndex);
+			texture = (Blz::Graphics::Texture*)((spAtlasRegion*)regionAttachment->rendererObject)->page->rendererObject;
 
-		addVertex(worldVerticesPositions[4],
-			worldVerticesPositions[5],
-			regionAttachment->uvs[4],
-			regionAttachment->uvs[5], 0.1, 0.1, 0.1, 1.0, &vertexIndex);
+			spRegionAttachment_computeWorldVertices(regionAttachment, slot->bone, worldVerticesPositions, 0, 2);
 
-		addVertex(worldVerticesPositions[6],
-			worldVerticesPositions[7],
-			regionAttachment->uvs[6],
-			regionAttachment->uvs[7], 0.1, 0.1, 0.1, 1.0, &vertexIndex);
+			addVertex(worldVerticesPositions[0],
+				worldVerticesPositions[1],
+				regionAttachment->uvs[0],
+				regionAttachment->uvs[1], 0.1, 0.1, 0.1, 1.0, &vertexIndex);
 
-		addVertex(worldVerticesPositions[0],
-			worldVerticesPositions[1],
-			regionAttachment->uvs[0],
-			regionAttachment->uvs[1], 0.1, 0.1, 0.1, 1.0, &vertexIndex);
-	}*/
+			addVertex(worldVerticesPositions[2],
+				worldVerticesPositions[3],
+				regionAttachment->uvs[2],
+				regionAttachment->uvs[3], 0.1, 0.1, 0.1, 1.0, &vertexIndex);
+
+			addVertex(worldVerticesPositions[4],
+				worldVerticesPositions[5],
+				regionAttachment->uvs[4],
+				regionAttachment->uvs[5], 0.1, 0.1, 0.1, 1.0, &vertexIndex);
+
+			addVertex(worldVerticesPositions[4],
+				worldVerticesPositions[5],
+				regionAttachment->uvs[4],
+				regionAttachment->uvs[5], 0.1, 0.1, 0.1, 1.0, &vertexIndex);
+
+			addVertex(worldVerticesPositions[6],
+				worldVerticesPositions[7],
+				regionAttachment->uvs[6],
+				regionAttachment->uvs[7], 0.1, 0.1, 0.1, 1.0, &vertexIndex);
+
+			addVertex(worldVerticesPositions[0],
+				worldVerticesPositions[1],
+				regionAttachment->uvs[0],
+				regionAttachment->uvs[1], 0.1, 0.1, 0.1, 1.0, &vertexIndex);
+		}
+
+		GLuint vboID;
+
+		glm::mat4 ortho = glm::ortho<float>(0.0f, static_cast<float>(1024), 0.0f, static_cast<float>(768));
+
+		GLuint transformationMatrixUniformLocation = colorShaderProgram.GetUniformLocation("transformMatrix");
+
+		glm::mat4 transformationMatrix = glm::translate(ortho, glm::vec3{ 0.0f, 0.0f, 0.0f });
+		glUniformMatrix4fv(transformationMatrixUniformLocation, 1, GL_FALSE, &(transformationMatrix[0][0]));
+
+		glGenBuffers(1, &vboID);
+		glBindBuffer(GL_ARRAY_BUFFER, vboID);
+		glBindTexture(GL_TEXTURE_2D, texture->GetID());
+		glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+		glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, position));
+		glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, uvs));
+		glVertexAttribPointer(2, 4, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, color));
+
+		glDrawArrays(GL_TRIANGLES, 0, 6);
+	};
 
 	GameState gamestate{ GameState::PLAY };
 
@@ -176,62 +204,7 @@ int main(int agrc, char** argv)
 			}
 		}
 
-		GLuint vboID;
-
-		vertices[0].position.x = 0.0;
-		vertices[0].position.y = 0.0;
-
-		vertices[1].position.x = 1.0;
-		vertices[1].position.y = 0.0;
-
-		vertices[2].position.x = 1.0;
-		vertices[2].position.y = 1.0;
-
-		vertices[3].position.x = 1.0;
-		vertices[3].position.y = 1.0;
-
-		vertices[4].position.x = 0.0;
-		vertices[4].position.y = 1.0;
-
-		vertices[5].position.y = 0.0;
-		vertices[5].position.y = 0.0;
-
-
-		vertices[0].uvs.u = 0.0;
-		vertices[0].uvs.v = 0.0;
-
-		vertices[1].uvs.u = 1.0;
-		vertices[1].uvs.v = 0.0;
-
-		vertices[2].uvs.u = 1.0;
-		vertices[2].uvs.v = 1.0;
-
-		vertices[3].uvs.u = 1.0;
-		vertices[3].uvs.v = 1.0;
-
-		vertices[4].uvs.u = 0.0;
-		vertices[4].uvs.v = 1.0;
-
-		vertices[5].uvs.u = 0.0;
-		vertices[5].uvs.v = 0.0;
-
-
-		Blz::Graphics::Texture texture("spineboy.png");
-
-		glm::mat4x4 ortho = glm::ortho<float>(0.0f, static_cast<float>(1024), 0.0f, static_cast<float>(768));
-
-
-		glGenBuffers(1, &vboID);
-		glBindBuffer(GL_ARRAY_BUFFER, vboID);
-		glBindTexture(GL_TEXTURE_2D, texture.GetID());
-		glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-		glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, position));
-		glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, uvs));
-		glVertexAttribPointer(2, 4, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, color));
-
-		window.ClearBuffers();
-
-		glDrawArrays(GL_TRIANGLES, 0, 6);
+		
 
 		window.SwapBuffers();
 	}
