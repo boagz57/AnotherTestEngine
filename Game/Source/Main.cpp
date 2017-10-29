@@ -17,9 +17,6 @@
 #include <spine/AtlasAttachmentLoader.h>
 #include <GLM\gtc\matrix_transform.hpp>
 
-const uint16 maxVerticesPerAttachment = 2048;
-float worldVerticesPositions[maxVerticesPerAttachment];
-
 struct Position
 {
 	float x, y;
@@ -35,6 +32,7 @@ struct Color
 	float r, g, b, a;
 };
 
+
 // A single vertex with UV 
 typedef struct Vertex {
 	// Position in x/y plane
@@ -43,23 +41,26 @@ typedef struct Vertex {
 	// UV coordinates
 	UVs uvs{ 0.0f, 0.0f };
 
-	// Color, each channel in the range from 0-1
-	// (Should really be a 32-bit RGBA packed color)
+	//Don't care about color right now so just using default values
 	Color color{ 0.1f, 0.1f, 0.1f, 1.0f };
 } Vertex;
 
+const uint16 maxVerticesPerAttachment = 2048;
+float worldVerticesPositions[maxVerticesPerAttachment];
 Vertex vertices[maxVerticesPerAttachment];
 
-void addVertex(float x, float y, float u, float v, float r, float g, float b, float a, int* index) {
+
+
+void addVertex(float x, float y, float u, float v, int* index) {
 	Vertex* vertex = &vertices[*index];
 	vertex->position.x = x;
 	vertex->position.y = y;
 	vertex->uvs.u = u;
 	vertex->uvs.v = v;
-	vertex->color.r = r;
-	vertex->color.g = g;
-	vertex->color.b = b;
-	vertex->color.a = a;
+	vertex->color.r = .1f;
+	vertex->color.g = .1f;
+	vertex->color.b = .1f;
+	vertex->color.a = 1.0f;
 	*index += 1;
 }
 
@@ -90,98 +91,62 @@ int main(int agrc, char** argv)
 
 	spAtlas* atlas = spAtlas_createFromFile("spineboy.atlas", 0);
 
-	RUNTIME_ASSERT(atlas != nullptr, "Atlas not loading properly!");
+	spSkeletonBinary* json = spSkeletonBinary_create(atlas);
 
-	spSkeletonJson* json = spSkeletonJson_create(atlas);
+	spSkeletonData* skeletonData = spSkeletonBinary_readSkeletonDataFile(json, "spineboy-ess.skel");
 
-	spSkeletonData* skeletonData = spSkeletonJson_readSkeletonDataFile(json, "spineboy-ess.json");
-
-	if (!skeletonData)
-	{
-		LOG("%s\n", json->error);
-		spSkeletonJson_dispose(json);
-	};
-
-	spSkeletonJson_dispose(json);
+	spSkeletonBinary_dispose(json);
 
 	spSkeleton* skeleton = spSkeleton_create(skeletonData);
 
 	skeleton->x = 500.0f;
-	skeleton->y = 200.0f;
+	skeleton->y = 100.0f;
 
+	spSkeleton_setBonesToSetupPose(skeleton);
 	spSkeleton_updateWorldTransform(skeleton);
+
+	spBone* bone = spSkeleton_findBone(skeleton, "front-fist");
+	spSlot* slot = spSkeleton_findSlot(skeleton, "front-fist");
+
+	spAttachment* attachment = slot->attachment;
+
+	spRegionAttachment* regionAttachment = (spRegionAttachment*)attachment;
 
 	Blz::Graphics::Texture* texture = nullptr;
 
-	for (int i = 0; i < 20; ++i)
-	{
-		spSlot* slot = skeleton->drawOrder[i];
+	texture = (Blz::Graphics::Texture*)((spAtlasRegion*)regionAttachment->rendererObject)->page->rendererObject;
 
-		RUNTIME_ASSERT(slot != nullptr, "Slot not loaded properly!");
+	spRegionAttachment_computeWorldVertices(regionAttachment, bone, worldVerticesPositions, 0, 2);
 
-		spAttachment* attachment = slot->attachment;
+	int index = 0;
 
-		if (!attachment) continue;
+	addVertex(worldVerticesPositions[0], worldVerticesPositions[1], regionAttachment->uvs[0], regionAttachment->uvs[1], &index);
+	addVertex(worldVerticesPositions[2], worldVerticesPositions[3], regionAttachment->uvs[2], regionAttachment->uvs[3], &index);
+	addVertex(worldVerticesPositions[4], worldVerticesPositions[5], regionAttachment->uvs[4], regionAttachment->uvs[5], &index);
+	addVertex(worldVerticesPositions[4], worldVerticesPositions[5], regionAttachment->uvs[4], regionAttachment->uvs[5], &index);
+	addVertex(worldVerticesPositions[6], worldVerticesPositions[7], regionAttachment->uvs[6], regionAttachment->uvs[7], &index);
+	addVertex(worldVerticesPositions[0], worldVerticesPositions[1], regionAttachment->uvs[0], regionAttachment->uvs[1], &index);
 
-		int vertexIndex = 0;
-		if (attachment->type == SP_ATTACHMENT_REGION)
-		{
-			spRegionAttachment* regionAttachment = (spRegionAttachment*)attachment;
+	GLuint vboID;
 
-			texture = (Blz::Graphics::Texture*)((spAtlasRegion*)regionAttachment->rendererObject)->page->rendererObject;
+	glm::mat4 ortho = glm::ortho<float>(0.0f, static_cast<float>(1024), 0.0f, static_cast<float>(768));
 
-			spRegionAttachment_computeWorldVertices(regionAttachment, slot->bone, worldVerticesPositions, 0, 2);
+	GLuint transformationMatrixUniformLocation = colorShaderProgram.GetUniformLocation("transformMatrix");
 
-			addVertex(worldVerticesPositions[0],
-				worldVerticesPositions[1],
-				regionAttachment->uvs[0],
-				regionAttachment->uvs[1], 0.1, 0.1, 0.1, 1.0, &vertexIndex);
+	glm::mat4 transformationMatrix = glm::translate(ortho, glm::vec3{ 0.0f, 0.0f, 0.0f });
+	glUniformMatrix4fv(transformationMatrixUniformLocation, 1, GL_FALSE, &(transformationMatrix[0][0]));
 
-			addVertex(worldVerticesPositions[2],
-				worldVerticesPositions[3],
-				regionAttachment->uvs[2],
-				regionAttachment->uvs[3], 0.1, 0.1, 0.1, 1.0, &vertexIndex);
+	glGenBuffers(1, &vboID);
+	glBindBuffer(GL_ARRAY_BUFFER, vboID);
+	glBindTexture(GL_TEXTURE_2D, texture->GetID());
+	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, position));
+	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, uvs));
+	glVertexAttribPointer(2, 4, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, color));
 
-			addVertex(worldVerticesPositions[4],
-				worldVerticesPositions[5],
-				regionAttachment->uvs[4],
-				regionAttachment->uvs[5], 0.1, 0.1, 0.1, 1.0, &vertexIndex);
+	glDrawArrays(GL_TRIANGLES, 0, 6);
 
-			addVertex(worldVerticesPositions[4],
-				worldVerticesPositions[5],
-				regionAttachment->uvs[4],
-				regionAttachment->uvs[5], 0.1, 0.1, 0.1, 1.0, &vertexIndex);
-
-			addVertex(worldVerticesPositions[6],
-				worldVerticesPositions[7],
-				regionAttachment->uvs[6],
-				regionAttachment->uvs[7], 0.1, 0.1, 0.1, 1.0, &vertexIndex);
-
-			addVertex(worldVerticesPositions[0],
-				worldVerticesPositions[1],
-				regionAttachment->uvs[0],
-				regionAttachment->uvs[1], 0.1, 0.1, 0.1, 1.0, &vertexIndex);
-		}
-
-		GLuint vboID;
-
-		glm::mat4 ortho = glm::ortho<float>(0.0f, static_cast<float>(1024), 0.0f, static_cast<float>(768));
-
-		GLuint transformationMatrixUniformLocation = colorShaderProgram.GetUniformLocation("transformMatrix");
-
-		glm::mat4 transformationMatrix = glm::translate(ortho, glm::vec3{ 0.0f, 0.0f, 0.0f });
-		glUniformMatrix4fv(transformationMatrixUniformLocation, 1, GL_FALSE, &(transformationMatrix[0][0]));
-
-		glGenBuffers(1, &vboID);
-		glBindBuffer(GL_ARRAY_BUFFER, vboID);
-		glBindTexture(GL_TEXTURE_2D, texture->GetID());
-		glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-		glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, position));
-		glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, uvs));
-		glVertexAttribPointer(2, 4, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, color));
-
-		glDrawArrays(GL_TRIANGLES, 0, 6);
-	};
+	window.SwapBuffers();
 
 	GameState gamestate{ GameState::PLAY };
 
@@ -206,7 +171,6 @@ int main(int agrc, char** argv)
 
 		
 
-		window.SwapBuffers();
 	}
 
 	return 0;

@@ -43,7 +43,7 @@ namespace Blz
 		//Log current computer opengl version and capabilities
 		GLLogging::RestartGLLogFile();
 		GLLogging::LogToFile("OpenGL Version %s\n\n", glGetString(GL_VERSION));
-		LOG("OpenGL Version %s", glGetString(GL_VERSION));
+		LOG("OpenGL Version %s\n", glGetString(GL_VERSION));
 		GLLogging::LogCurrentGPUCapabilites();
 
 		glewExperimental = GL_TRUE;

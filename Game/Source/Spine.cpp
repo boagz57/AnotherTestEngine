@@ -4,6 +4,8 @@
 
 void _spAtlasPage_createTexture(spAtlasPage* page, const char* path)
 {
+	RUNTIME_ASSERT(page != nullptr, "Atlas Page was not loaded properly!");
+
 	Blz::Graphics::Texture* p_texture = new Blz::Graphics::Texture(path);
 
 	RUNTIME_ASSERT(p_texture != nullptr, "Atlas texture did no load properly!");
