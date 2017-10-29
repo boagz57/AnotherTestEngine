@@ -7,54 +7,51 @@
 #include "Scene.h"
 #include "AnimationEngine.h"
 
-namespace Blz
+namespace Blz::Animation
 {
-	namespace Animation
+	auto Engine::Init(Scene& scene) -> void
 	{
-		auto Engine::Init(Scene& scene) -> void
-		{
-		}
+	}
 
-		auto Engine::Update(Scene& scene) -> void
-		{
-			ec.AddContext("When updating Animation engine");
+	auto Engine::Update(Scene& scene) -> void
+	{
+		ec.AddContext("When updating Animation engine");
 
-			for (Fighter* fighter : scene.fighters)
+		for (Fighter* fighter : scene.fighters)
+		{
+			//Set next animation frame
+			[](Comp::Animation& fighterAnimation, Comp::SpriteSheet& fighterSprite, const Comp::Velocity& fighterVelocity,
+				const Comp::Position& fighterPosition, const Comp::Input& input)
 			{
-				//Set next animation frame
-				[](Comp::Animation& fighterAnimation, Comp::SpriteSheet& fighterSprite, const Comp::Velocity& fighterVelocity, 
-			   	   const Comp::Position& fighterPosition, const Comp::Input& input)
+				ec.AddContext("When trying to set next animation frame to display");
+
+				Comp::Input fighterInput = input;
+
+				if (std::abs(std::floor(fighterVelocity.GetCurrentState().x)) == 0.0f &&
+					std::abs(std::floor(fighterPosition.GetCurrentPosition().y)) == c_groundLevel &&
+					!fighterInput.IsKeyPressed())
 				{
-					ec.AddContext("When trying to set next animation frame to display");
+					fighterAnimation.SetCurrentAnimation(fighterAnimation.DefaultAnimation());
+				}
 
-					Comp::Input fighterInput = input;
-					
-					if (std::abs(std::floor(fighterVelocity.GetCurrentState().x)) == 0.0f &&
-						std::abs(std::floor(fighterPosition.GetCurrentPosition().y)) == c_groundLevel &&
-						!fighterInput.IsKeyPressed())
-					{
-						fighterAnimation.SetCurrentAnimation(fighterAnimation.DefaultAnimation());
-					}
+				glm::vec4 newFrameUVs{ 0.0f };
 
-					glm::vec4 newFrameUVs{ 0.0f };
+				{//Calculate current uvs to display from sprite sheet
+					uint16 currentFrame = fighterAnimation.CurrentAnimation().GetCurrentAnimationFrame();
+					glm::ivec2 tileDimensions = fighterSprite.GetDimensions();
 
-					{//Calculate current uvs to display from sprite sheet
-						uint16 currentFrame = fighterAnimation.CurrentAnimation().GetCurrentAnimationFrame();
-						glm::ivec2 tileDimensions = fighterSprite.GetDimensions();
+					uint16 tileXCoordinate = currentFrame % tileDimensions.x;
+					uint16 tileYCoordinate = currentFrame / tileDimensions.x;
 
-						uint16 tileXCoordinate = currentFrame % tileDimensions.x;
-						uint16 tileYCoordinate = currentFrame / tileDimensions.x;
+					newFrameUVs.x = tileXCoordinate / static_cast<sfloat>(tileDimensions.x);
+					newFrameUVs.y = tileYCoordinate / static_cast<sfloat>(tileDimensions.y);
+					newFrameUVs.w = 1.0f / tileDimensions.x;
+					newFrameUVs.z = 1.0f / tileDimensions.y;
+				};
 
-						newFrameUVs.x = tileXCoordinate / static_cast<sfloat>(tileDimensions.x);
-						newFrameUVs.y = tileYCoordinate / static_cast<sfloat>(tileDimensions.y);
-						newFrameUVs.w = 1.0f / tileDimensions.x;
-						newFrameUVs.z = 1.0f / tileDimensions.y;
-					};
+				fighterSprite.SetUVCoordinates(newFrameUVs);
 
-					fighterSprite.SetUVCoordinates(newFrameUVs);
-
-				}(fighter->animation, fighter->spriteSheet, fighter->velocity, fighter->position, fighter->input);
-			}
+			}(fighter->animation, fighter->spriteSheet, fighter->velocity, fighter->position, fighter->input);
 		}
 	}
 }

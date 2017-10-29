@@ -2,18 +2,15 @@
 #include "Containers/Vector.h"
 #include "Scene.h"
 
-namespace Blz
+namespace Blz::Animation
 {
-	namespace Animation
+	class Engine
 	{
-		class Engine
-		{
-		public:
-			Engine() = default;
-			~Engine() = default;
+	public:
+		Engine() = default;
+		~Engine() = default;
 
-			auto Init(Scene& scene) -> void;
-			auto Update(Scene& scene) -> void;
-		};
-	}
+		auto Init(Scene& scene) -> void;
+		auto Update(Scene& scene) -> void;
+	};
 }

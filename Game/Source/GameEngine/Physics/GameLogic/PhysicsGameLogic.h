@@ -1,17 +1,14 @@
 #pragma once
 #include "Fighter.h"
 
-namespace Blz
+namespace Blz::Physics
 {
-	namespace Physics
+	class GameLogic
 	{
-		class GameLogic
-		{
-		public:
-			static auto Move(Fighter* const fighter, const sfloat movementInX, const sfloat movementInY) -> void;
-			static auto Jump(Fighter* const fighter, const sfloat jumpVelocity) -> void;
-		};
-	}
+	public:
+		static auto Move(Fighter* const fighter, const sfloat movementInX, const sfloat movementInY) -> void;
+		static auto Jump(Fighter* const fighter, const sfloat jumpVelocity) -> void;
+	};
 }
 
 using BlzPhysics = Blz::Physics::GameLogic;

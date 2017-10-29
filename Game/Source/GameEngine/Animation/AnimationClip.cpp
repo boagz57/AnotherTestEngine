@@ -1,52 +1,49 @@
 #include "Animation/AnimationClip.h"
 
-namespace Blz
+namespace Blz::Animation
 {
-	namespace Animation
+	uint16 AnimationClip::id = 0;
+
+	auto AnimationClip::Init() -> void
 	{
-		uint16 AnimationClip::id = 0;
+		++id;
+	}
 
-		auto AnimationClip::Init() -> void
-		{
-			++id;
-		}
+	auto AnimationClip::SetIndex(uint16 index) -> void
+	{
+		this->currentFrame = index;
+		this->initalFrame = index;
+	}
 
-		auto AnimationClip::SetIndex(uint16 index) -> void
-		{
-			this->currentFrame = index;
-			this->initalFrame = index;
-		}
+	auto AnimationClip::SetTotalTilesForAnimation(uint16 numTiles) -> void
+	{
+		this->numTilesToAnimate = numTiles;
+	}
 
-		auto AnimationClip::SetTotalTilesForAnimation(uint16 numTiles) -> void
+	auto AnimationClip::CycleAnimation() -> void
+	{
+		if (animationTime > 200.0f)
 		{
-			this->numTilesToAnimate = numTiles;
-		}
+			this->currentFrame++;
 
-		auto AnimationClip::CycleAnimation() -> void
-		{
-			if (animationTime > 200.0f)
+			if (this->currentFrame > (this->initalFrame + this->numTilesToAnimate))
 			{
-				this->currentFrame++;
-
-				if (this->currentFrame > (this->initalFrame + this->numTilesToAnimate))
-				{
-					this->currentFrame = this->initalFrame;
-				}
-
-				animationTime = 0;
+				this->currentFrame = this->initalFrame;
 			}
 
-			animationTime++;
+			animationTime = 0;
 		}
 
-		auto AnimationClip::GetCurrentAnimationFrame() const -> const uint16
-		{
-			return currentFrame;
-		}
+		animationTime++;
+	}
+
+	auto AnimationClip::GetCurrentAnimationFrame() const -> const uint16
+	{
+		return currentFrame;
+	}
 
 		auto AnimationClip::ID() const -> const uint16
-		{
-			return this->id;
-		}
+	{
+		return this->id;
 	}
 }

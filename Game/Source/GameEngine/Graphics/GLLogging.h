@@ -5,18 +5,15 @@
 	the result for 'easy' problem identification
 */
 
-namespace Blz
+namespace Blz::Graphics
 {
-	namespace Graphics
-	{
-		//Creates new log file each compilation
-		auto RestartGLLogFile() -> bool;
+	//Creates new log file each compilation
+	auto RestartGLLogFile() -> bool;
 
-		auto LogCurrentGPUCapabilites() -> void;
-		auto LogShaderProgramProperties(GLuint shaderProgramID) -> void;
-		auto IsProgramValid(GLuint shaderProgramID) -> bool;
+	auto LogCurrentGPUCapabilites() -> void;
+	auto LogShaderProgramProperties(GLuint shaderProgramID) -> void;
+	auto IsProgramValid(GLuint shaderProgramID) -> bool;
 
-		//Log openGL messages/errors to GL log file
-		auto LogToFile(const char* Message, ...) -> bool;
-	}
+	//Log openGL messages/errors to GL log file
+	auto LogToFile(const char* Message, ...) -> bool;
 }

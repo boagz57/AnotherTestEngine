@@ -1,16 +1,13 @@
 #pragma once
 #include "Fighter.h"
 
-namespace Blz
+namespace Blz::Input
 {
-	namespace Input 
+	class GameLogic
 	{
-		class GameLogic
-		{
-		public:
-			static auto Bind(const int32 key, Fighter* const fighter, std::function<void(Fighter*)> movementFunction) -> void;
-		};
-	}
+	public:
+		static auto Bind(const int32 key, Fighter* const fighter, std::function<void(Fighter*)> movementFunction) -> void;
+	};
 }
 
 using BlzInput = Blz::Input::GameLogic;

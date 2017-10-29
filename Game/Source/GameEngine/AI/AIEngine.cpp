@@ -4,22 +4,19 @@
 #include "Containers/SmallVector.h"
 #include "AIEngine.h"
 
-namespace Blz
+namespace Blz::AI
 {
-	namespace AI
+	void Engine::Init()
 	{
-		void Engine::Init()
-		{
 
-		}
+	}
 
-		void Engine::Shutdown()
-		{
+	void Engine::Shutdown()
+	{
 
-		}
+	}
 
-		void Engine::Update(Scene& scene)
-		{
-		}
+	void Engine::Update(Scene& scene)
+	{
 	}
 }

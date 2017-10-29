@@ -4,20 +4,17 @@
 #include "Containers/UnorderedMap.h"
 #include "../Scene.h"
 
-namespace Blz
+namespace Blz::Input
 {
-	namespace Input
+	class Engine
 	{
-		class Engine
-		{
-		public:
-			Engine() = default;
-			~Engine() = default;
+	public:
+		Engine() = default;
+		~Engine() = default;
 
-			auto Update(Scene& scene) -> void;
+		auto Update(Scene& scene) -> void;
 
-		private:
-			SDL_Event evnt;
-		};
-	}
+	private:
+		SDL_Event evnt;
+	};
 }

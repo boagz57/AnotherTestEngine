@@ -3,20 +3,17 @@
 
 namespace Blz { namespace Graphics { class Window; }; };
 
-namespace Blz
+namespace Blz::Physics
 {
-	namespace Physics
+	class Engine
 	{
-		class Engine
-		{
-		public:
-			Engine() = default;
-			~Engine() = default;
+	public:
+		Engine() = default;
+		~Engine() = default;
 
 
-			auto Init() -> void;
-			auto Shutdown() -> void;
-			auto Update(Scene& scene) -> void;
-		};
-	}
+		auto Init() -> void;
+		auto Shutdown() -> void;
+		auto Update(Scene& scene) -> void;
+	};
 }

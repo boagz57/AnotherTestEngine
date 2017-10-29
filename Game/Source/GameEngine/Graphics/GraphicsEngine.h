@@ -11,26 +11,23 @@
 	Responsible for the actual drawing of everything on screen.
 */
 
-namespace Blz
+namespace Blz::Graphics
 {
-	namespace Graphics
+	class Engine
 	{
-		class Engine
-		{
-		public:
-			Engine() = default;
-			~Engine() = default;
+	public:
+		Engine() = default;
+		~Engine() = default;
 
-			auto Init(Scene& scene, const Window& window) -> void;
-			auto Update(Scene& scene, ShaderProgram& shader, const Window& window) -> void;
+		auto Init(Scene& scene, const Window& window) -> void;
+		auto Update(Scene& scene, ShaderProgram& shader, const Window& window) -> void;
 
-		private:
-			glm::mat4 orthoProjection;
-			Comp::Sprite backGroundSprite;
+	private:
+		glm::mat4 orthoProjection;
+		Comp::Sprite backGroundSprite;
 
-			GLuint backgroundVBO;
-			Blz::Array<GLuint, 2> fighterVBOs;
+		GLuint backgroundVBO;
+		Blz::Array<GLuint, 2> fighterVBOs;
 
-		};
-	}
+	};
 }

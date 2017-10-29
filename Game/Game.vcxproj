@@ -204,6 +204,7 @@
       <AdditionalIncludeDirectories>$(SolutionDir)ThirdParty\GLM\Include\;$(SolutionDir)ThirdParty\STB_Image\Include;$(SolutionDir)ThirdParty\SDL\Include;$(SolutionDir)ThirdParty\GLEW\Include\;$(SolutionDir)ThirdParty\Boost\Include;$(SolutionDir)ThirdParty\SpdLog\Include\;$(ProjectDir)Source\GameEngine\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>$(ProjectDir)Source\GameEngine\Logging\Logger.h;$(ProjectDir)Source\Universal\PrimitiveTypes.h;$(ProjectDir)Source\Universal\Globals.h;$(ProjectDir)Source\GameEngine\ErrorHandling\ErrorHandling.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
       <PreprocessorDefinitions>GLEW_STATIC;_CRT_SECURE_NO_WARNINGS;STB_IMAGE_IMPLEMENTATION;DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <PostBuildEvent>
       <Command>lib /NOLOGO /OUT:"$(ProjectDir)Binaries\$(PlatformName)-$(Configuration)\$(ProjectName).lib" "$(ProjectDir)Intermediate\$(PlatformName)-$(Configuration)\*.obj"
