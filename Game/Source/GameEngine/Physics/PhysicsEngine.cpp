@@ -4,13 +4,6 @@
 
 namespace Blz::Physics
 {
-	struct Components
-	{
-		Comp::Velocity velocity;
-		Comp::Position position;
-		Comp::Movement movement;
-	};
-
 	auto Engine::Init() -> void
 	{
 	}
@@ -20,7 +13,7 @@ namespace Blz::Physics
 
 	}
 
-	auto Engine::Update(Scene& scene) -> void
+	auto Engine::Update(Scene& scene) -> Components
 	{
 		ec.AddContext("When updating Physics engine");
 
@@ -52,6 +45,7 @@ namespace Blz::Physics
 			fighter->velocity = updatedFighterVelocity;
 			fighter->position = updatedFighterPosition;
 			fighter->movement = updatedFighterMovement;
+
 		}
 	}
 }
