@@ -25,6 +25,7 @@
 //Turn off log messages when unit testing to console log (To prevent log messages from getting in the way of unit tests assert messages)
 #elif (DEBUGUNIT) || (PROFILEUNIT)
 	#define RUNTIME_ASSERT 
+	#define ERRASSERT(condition, msg, ...)
 
 #else
 	#define NDEBUG

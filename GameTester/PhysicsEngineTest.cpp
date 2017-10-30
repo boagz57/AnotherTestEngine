@@ -23,4 +23,8 @@ TEST_F(PhysicsEngineTest, DoesPhysicsUpdateFighterVelocityProperly_True)
 	physics.Init();
 
 	auto[updatedVelocity, updatedPosition, updatedMovment] = Blz::Physics::PhysicsSystem(player1.GetVelocity(), player1.GetPosition(), player1.GetMovement());
+
+	auto playerUpdatedVelocity = player1.GetVelocity();
+
+	GTEST_ASSERT_EQ(playerUpdatedVelocity.GetCurrentState().y, 3.0f);
 }
