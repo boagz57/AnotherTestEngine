@@ -7,7 +7,7 @@ namespace Blz::Graphics
 	{
 	public:
 		Texture() = default;
-		explicit Texture(const Blz::string imageFilePath);
+		explicit Texture(const string imageFilePath);
 		~Texture() = default;
 
 		auto GetID() const -> GLuint { ERRASSERT(id != 0, "Texture not created properly!"); return id; };

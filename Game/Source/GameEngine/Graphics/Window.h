@@ -3,7 +3,7 @@
 
 namespace Blz::Graphics
 {
-	class Engine;
+	class Engine; 
 
 	class Window
 	{
