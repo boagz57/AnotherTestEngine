@@ -16,6 +16,8 @@
 #include <spine/RegionAttachment.h>
 #include <spine/AtlasAttachmentLoader.h>
 #include <GLM\gtc\matrix_transform.hpp>
+#include <spine\AnimationState.h>
+#include <spine\Animation.h>
 
 struct Position
 {
@@ -48,8 +50,6 @@ typedef struct Vertex {
 const uint16 maxVerticesPerAttachment = 2048;
 float worldVerticesPositions[maxVerticesPerAttachment];
 Vertex vertices[maxVerticesPerAttachment];
-
-
 
 void addVertex(float x, float y, float u, float v, int* index) {
 	Vertex* vertex = &vertices[*index];
@@ -89,20 +89,39 @@ int main(int agrc, char** argv)
 	GLuint uniformLocation = colorShaderProgram.GetUniformLocation("basicTexture");
 	glUniform1i(uniformLocation, 0);
 
-	spAtlas* atlas = spAtlas_createFromFile("spineboy-pma.atlas", 0);
+	spAtlas* atlas;
+	spSkeletonBinary* json;
+	spSkeletonData* skeletonData;
+	spSkeleton* skeleton;
+	spAnimationState* animationState;
+	spAnimationStateData* animationData;
 
-	spSkeletonBinary* json = spSkeletonBinary_create(atlas);
+	atlas = spAtlas_createFromFile("spineboy-pma.atlas", 0);
 
-	spSkeletonData* skeletonData = spSkeletonBinary_readSkeletonDataFile(json, "spineboy-ess.skel");
+	json = spSkeletonBinary_create(atlas);
+
+	skeletonData = spSkeletonBinary_readSkeletonDataFile(json, "spineboy-ess.skel");
 
 	spSkeletonBinary_dispose(json);
 
-	spSkeleton* skeleton = spSkeleton_create(skeletonData);
+	skeleton = spSkeleton_create(skeletonData);
 
 	skeleton->x = 500.0f;
-	skeleton->y = 100.0f;
+	skeleton->y = 50.0f;
 
-	spSkeleton_setBonesToSetupPose(skeleton);
+	animationData = spAnimationStateData_create(skeletonData);
+	animationState = spAnimationState_create(animationData);
+
+	int track = 0;
+	int loop = 1;
+	float delay = 0;
+
+	spAnimationState_addAnimationByName(animationState, track, "walk", loop, delay);
+
+	spAnimationState_update(animationState, .016);
+
+	spAnimationState_apply(animationState, skeleton);
+
 	spSkeleton_updateWorldTransform(skeleton);
 
 	Blz::Graphics::Texture* texture = nullptr;
@@ -113,46 +132,6 @@ int main(int agrc, char** argv)
 
 	glm::mat4 transformationMatrix = glm::translate(ortho, glm::vec3{ 0.0f, 0.0f, 0.0f });
 	glUniformMatrix4fv(transformationMatrixUniformLocation, 1, GL_FALSE, &(transformationMatrix[0][0]));
-
-	for (int i = 0; i < skeleton->slotsCount; ++i)
-	{
-		spSlot* slot = skeleton->drawOrder[i];
-
-		spAttachment* attachment = slot->attachment;
-
-		if(!attachment) continue;
-
-		spRegionAttachment* regionAttachment = (spRegionAttachment*)attachment;
-
-		texture = (Blz::Graphics::Texture*)((spAtlasRegion*)regionAttachment->rendererObject)->page->rendererObject;
-
-		spRegionAttachment_computeWorldVertices(regionAttachment, slot->bone, worldVerticesPositions, 0, 2);
-
-		int index = 0;
-
-		addVertex(worldVerticesPositions[0], worldVerticesPositions[1], regionAttachment->uvs[0], regionAttachment->uvs[1], &index);
-		addVertex(worldVerticesPositions[2], worldVerticesPositions[3], regionAttachment->uvs[2], regionAttachment->uvs[3], &index);
-		addVertex(worldVerticesPositions[4], worldVerticesPositions[5], regionAttachment->uvs[4], regionAttachment->uvs[5], &index);
-		addVertex(worldVerticesPositions[4], worldVerticesPositions[5], regionAttachment->uvs[4], regionAttachment->uvs[5], &index);
-		addVertex(worldVerticesPositions[6], worldVerticesPositions[7], regionAttachment->uvs[6], regionAttachment->uvs[7], &index);
-		addVertex(worldVerticesPositions[0], worldVerticesPositions[1], regionAttachment->uvs[0], regionAttachment->uvs[1], &index);
-
-		GLuint vboID = 0;
-
-		glGenBuffers(1, &vboID);
-		glBindBuffer(GL_ARRAY_BUFFER, vboID);
-		glBindTexture(GL_TEXTURE_2D, texture->GetID());
-		glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-		glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, position));
-		glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, uvs));
-		glVertexAttribPointer(2, 4, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, color));
-
-		glDrawArrays(GL_TRIANGLES, 0, 6);
-
-		glBindBuffer(GL_ARRAY_BUFFER, 0);
-	}
-
-	window.SwapBuffers();
 
 	GameState gamestate{ GameState::PLAY };
 
@@ -175,6 +154,53 @@ int main(int agrc, char** argv)
 			}
 		}
 
+		spAnimationState_update(animationState, .016);
+
+		spAnimationState_apply(animationState, skeleton);
+
+		spSkeleton_updateWorldTransform(skeleton);
+
+		for (int i = 0; i < skeleton->slotsCount; ++i)
+		{
+			spSlot* slot = skeleton->drawOrder[i];
+
+			spAttachment* attachment = slot->attachment;
+
+			if (!attachment) continue;
+
+			spRegionAttachment* regionAttachment = (spRegionAttachment*)attachment;
+
+			texture = (Blz::Graphics::Texture*)((spAtlasRegion*)regionAttachment->rendererObject)->page->rendererObject;
+
+			spRegionAttachment_computeWorldVertices(regionAttachment, slot->bone, worldVerticesPositions, 0, 2);
+
+			int index = 0;
+
+			addVertex(worldVerticesPositions[0], worldVerticesPositions[1], regionAttachment->uvs[0], regionAttachment->uvs[1], &index);
+			addVertex(worldVerticesPositions[2], worldVerticesPositions[3], regionAttachment->uvs[2], regionAttachment->uvs[3], &index);
+			addVertex(worldVerticesPositions[4], worldVerticesPositions[5], regionAttachment->uvs[4], regionAttachment->uvs[5], &index);
+			addVertex(worldVerticesPositions[4], worldVerticesPositions[5], regionAttachment->uvs[4], regionAttachment->uvs[5], &index);
+			addVertex(worldVerticesPositions[6], worldVerticesPositions[7], regionAttachment->uvs[6], regionAttachment->uvs[7], &index);
+			addVertex(worldVerticesPositions[0], worldVerticesPositions[1], regionAttachment->uvs[0], regionAttachment->uvs[1], &index);
+
+			GLuint vboID = 0;
+
+			glGenBuffers(1, &vboID);
+			glBindBuffer(GL_ARRAY_BUFFER, vboID);
+			glBindTexture(GL_TEXTURE_2D, texture->GetID());
+			glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+			glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, position));
+			glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, uvs));
+			glVertexAttribPointer(2, 4, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, color));
+
+			glDrawArrays(GL_TRIANGLES, 0, 6);
+
+			glBindBuffer(GL_ARRAY_BUFFER, 0);
+		}
+
+		window.SwapBuffers();
+
+		SDL_Delay(16);
 	}
 
 	return 0;

@@ -36,6 +36,7 @@ namespace Blz
 
 				//Enable alpha channel for transparency
 				glEnable(GL_BLEND);
+				//GL_ONE enables pma blending
 				glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
 
 				//Unbind Texture
