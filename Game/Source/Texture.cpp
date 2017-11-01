@@ -20,32 +20,7 @@ namespace Blz
 			//Check if image is a power of 2 (which makes image compatible with older versions of opengl, also make things easier 
 			//for openGL to work with). If check is done with bitwise operations to keep check as fast as possible
 			//RUNTIME_ASSERT((this->width & (this->width - 1)) == 0 || (this->height & (this->height - 1)) == 0, "Image dimensions are not a power of 2!");
-
-
-			{//Flip image right side up since OpenGL reads it upside down.
-				int32 widthInBytes = this->width * 4;
-				unsigned char* p_topRowOfTexels = nullptr;
-				unsigned char* p_bottomRowOfTexels = nullptr;
-				unsigned char temp = 0;
-				int32 halfHeight = this->height / 2;
-
-				for (int32 row = 0; row < halfHeight; ++row)
-				{
-					p_topRowOfTexels = p_ImageData + row * widthInBytes;
-					p_bottomRowOfTexels = p_ImageData + (this->height - row - 1) * widthInBytes;
-
-					for (int col = 0; col < widthInBytes; ++col)
-					{
-						temp = *p_topRowOfTexels;
-						*p_topRowOfTexels = *p_bottomRowOfTexels;
-						*p_bottomRowOfTexels = temp;
-						p_topRowOfTexels++;
-						p_bottomRowOfTexels++;
-					}
-				}
-			}
-
-			
+						
 			{//Send down imageData to openGL and set some default parameters for image
 				glGenTextures(1, &(this->id));
 

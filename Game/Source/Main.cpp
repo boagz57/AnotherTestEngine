@@ -105,29 +105,7 @@ int main(int agrc, char** argv)
 	spSkeleton_setBonesToSetupPose(skeleton);
 	spSkeleton_updateWorldTransform(skeleton);
 
-	spBone* bone = spSkeleton_findBone(skeleton, "front-fist");
-	spSlot* slot = spSkeleton_findSlot(skeleton, "front-fist");
-
-	spAttachment* attachment = slot->attachment;
-
-	spRegionAttachment* regionAttachment = (spRegionAttachment*)attachment;
-
 	Blz::Graphics::Texture* texture = nullptr;
-
-	texture = (Blz::Graphics::Texture*)((spAtlasRegion*)regionAttachment->rendererObject)->page->rendererObject;
-
-	spRegionAttachment_computeWorldVertices(regionAttachment, bone, worldVerticesPositions, 0, 2);
-
-	int index = 0;
-
-	addVertex(worldVerticesPositions[0], worldVerticesPositions[1], regionAttachment->uvs[0], regionAttachment->uvs[1], &index);
-	addVertex(worldVerticesPositions[2], worldVerticesPositions[3], regionAttachment->uvs[2], regionAttachment->uvs[3], &index);
-	addVertex(worldVerticesPositions[4], worldVerticesPositions[5], regionAttachment->uvs[4], regionAttachment->uvs[5], &index);
-	addVertex(worldVerticesPositions[4], worldVerticesPositions[5], regionAttachment->uvs[4], regionAttachment->uvs[5], &index);
-	addVertex(worldVerticesPositions[6], worldVerticesPositions[7], regionAttachment->uvs[6], regionAttachment->uvs[7], &index);
-	addVertex(worldVerticesPositions[0], worldVerticesPositions[1], regionAttachment->uvs[0], regionAttachment->uvs[1], &index);
-
-	GLuint vboID;
 
 	glm::mat4 ortho = glm::ortho<float>(0.0f, static_cast<float>(1024), 0.0f, static_cast<float>(768));
 
@@ -136,15 +114,43 @@ int main(int agrc, char** argv)
 	glm::mat4 transformationMatrix = glm::translate(ortho, glm::vec3{ 0.0f, 0.0f, 0.0f });
 	glUniformMatrix4fv(transformationMatrixUniformLocation, 1, GL_FALSE, &(transformationMatrix[0][0]));
 
-	glGenBuffers(1, &vboID);
-	glBindBuffer(GL_ARRAY_BUFFER, vboID);
-	glBindTexture(GL_TEXTURE_2D, texture->GetID());
-	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, position));
-	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, uvs));
-	glVertexAttribPointer(2, 4, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, color));
+	for (int i = 0; i < skeleton->slotsCount; ++i)
+	{
+		spSlot* slot = skeleton->drawOrder[i];
 
-	glDrawArrays(GL_TRIANGLES, 0, 6);
+		spAttachment* attachment = slot->attachment;
+
+		if(!attachment) continue;
+
+		spRegionAttachment* regionAttachment = (spRegionAttachment*)attachment;
+
+		texture = (Blz::Graphics::Texture*)((spAtlasRegion*)regionAttachment->rendererObject)->page->rendererObject;
+
+		spRegionAttachment_computeWorldVertices(regionAttachment, slot->bone, worldVerticesPositions, 0, 2);
+
+		int index = 0;
+
+		addVertex(worldVerticesPositions[0], worldVerticesPositions[1], regionAttachment->uvs[0], regionAttachment->uvs[1], &index);
+		addVertex(worldVerticesPositions[2], worldVerticesPositions[3], regionAttachment->uvs[2], regionAttachment->uvs[3], &index);
+		addVertex(worldVerticesPositions[4], worldVerticesPositions[5], regionAttachment->uvs[4], regionAttachment->uvs[5], &index);
+		addVertex(worldVerticesPositions[4], worldVerticesPositions[5], regionAttachment->uvs[4], regionAttachment->uvs[5], &index);
+		addVertex(worldVerticesPositions[6], worldVerticesPositions[7], regionAttachment->uvs[6], regionAttachment->uvs[7], &index);
+		addVertex(worldVerticesPositions[0], worldVerticesPositions[1], regionAttachment->uvs[0], regionAttachment->uvs[1], &index);
+
+		GLuint vboID = 0;
+
+		glGenBuffers(1, &vboID);
+		glBindBuffer(GL_ARRAY_BUFFER, vboID);
+		glBindTexture(GL_TEXTURE_2D, texture->GetID());
+		glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+		glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, position));
+		glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, uvs));
+		glVertexAttribPointer(2, 4, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, color));
+
+		glDrawArrays(GL_TRIANGLES, 0, 6);
+
+		glBindBuffer(GL_ARRAY_BUFFER, 0);
+	}
 
 	window.SwapBuffers();
 
@@ -168,8 +174,6 @@ int main(int agrc, char** argv)
 				break;
 			}
 		}
-
-		
 
 	}
 
