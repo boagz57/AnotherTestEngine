@@ -57,7 +57,7 @@ void addVertex(float x, float y, float u, float v, int* index) {
 	vertex->position.y = y;
 	vertex->uvs.u = u;
 	vertex->uvs.v = v;
-	vertex->color.r = .1f;
+	vertex->color.r = .0f;
 	vertex->color.g = .1f;
 	vertex->color.b = .1f;
 	vertex->color.a = 1.0f;
@@ -89,7 +89,7 @@ int main(int agrc, char** argv)
 	GLuint uniformLocation = colorShaderProgram.GetUniformLocation("basicTexture");
 	glUniform1i(uniformLocation, 0);
 
-	spAtlas* atlas = spAtlas_createFromFile("spineboy.atlas", 0);
+	spAtlas* atlas = spAtlas_createFromFile("spineboy-pma.atlas", 0);
 
 	spSkeletonBinary* json = spSkeletonBinary_create(atlas);
 
