@@ -3,9 +3,9 @@
 
 namespace Blz::Input
 {
-	auto GameLogic::Bind(const int32 key, Fighter* const fighter, std::function<void(Fighter*)> movementFunction) -> void
+	auto GameLogic::Bind(const int32 key, Fighter* const fighter, std::function<void(Fighter*)> action) -> void
 	{
 		fighter->input.MakeFighterControllable();
-		fighter->input.SetKeyBinding(key, movementFunction);
+		fighter->input.SetKeyBinding(key, action);
 	}
 }

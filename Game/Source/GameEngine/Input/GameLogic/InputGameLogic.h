@@ -6,7 +6,7 @@ namespace Blz::Input
 	class GameLogic
 	{
 	public:
-		static auto Bind(const int32 key, Fighter* const fighter, std::function<void(Fighter*)> movementFunction) -> void;
+		static auto Bind(const int32 key, Fighter* const fighter, std::function<void(Fighter*)> actionFunc) -> void;
 	};
 }
 

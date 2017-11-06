@@ -44,10 +44,8 @@ namespace Blz::Physics
 
 	auto PhysicsSystem(Comp::Velocity fighterVelocity, Comp::Position fighterPosition, Comp::Movement fighterMovement) -> Components
 	{
-		//Move fighter 
 		fighterPosition.Add(fighterVelocity.GetCurrentState().x * engineClock.GetPreviousFrameTime(), fighterVelocity.GetCurrentState().y * engineClock.GetPreviousFrameTime());
 
-		//Apply Gravity 
 		fighterVelocity.Add(0.0f, (fighterMovement.GetGravity() * engineClock.GetPreviousFrameTime()));
 
 		{//Set window borders

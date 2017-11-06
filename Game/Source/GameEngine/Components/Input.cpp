@@ -37,7 +37,7 @@ namespace Comp
 	{
 		RUNTIME_ASSERT(keyMovementBindings.find(key) != keyMovementBindings.end(), "Input key has not been assigned!");
 
-		auto movementFunc = keyMovementBindings[key];
-		movementFunc(fighter);
+		auto action = keyMovementBindings[key];
+		action(fighter);
 	}
 }
