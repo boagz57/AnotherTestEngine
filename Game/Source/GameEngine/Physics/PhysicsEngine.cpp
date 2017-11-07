@@ -11,8 +11,6 @@ namespace Blz::Physics
 		Comp::Movement movement;
 	};
 
-	static auto PhysicsSystem(Comp::Velocity vel, Comp::Position pos, Comp::Movement move) -> Components;
-
 	auto Engine::Init() -> void
 	{
 	}
@@ -29,34 +27,28 @@ namespace Blz::Physics
 		for (Fighter* fighter : scene.fighters)
 		{
 			//All accepted components of Physics system
-			[&fighter](const Comp::Velocity& fighterVelocity, const Comp::Position& fighterPosition, const Comp::Movement& fighterMovement) -> void 
+			auto [updatedFighterVelocity, updatedFighterPosition, updatedFighterMovement] = [&fighter](Comp::Velocity fighterVelocity, Comp::Position fighterPosition, Comp::Movement fighterMovement) -> Components
 			{
-				auto[updatedFighterVelocity, updatedFighterPosition, updatedFighterMovement] = 
-					PhysicsSystem(fighterVelocity, fighterPosition, fighterMovement);
+				fighterPosition.Add(fighterVelocity.GetCurrentState().x * engineClock.GetPreviousFrameTime(), fighterVelocity.GetCurrentState().y * engineClock.GetPreviousFrameTime());
 
-				fighter->velocity = updatedFighterVelocity;
-				fighter->position = updatedFighterPosition;
-				fighter->movement = updatedFighterMovement;
+				fighterVelocity.Add(0.0f, (fighterMovement.GetGravity() * engineClock.GetPreviousFrameTime()));
+
+				fighterPosition.ClampMaxPositionTo(c_levelBorderMaxX, c_levelBorderMaxY);
+				fighterPosition.ClampMinPositionTo(c_levelBorderMinX, c_groundLevel);
+
+				//Prevent velocity from going more and more negative when on the ground
+				if (fighterPosition.GetCurrentPosition().y == c_groundLevel)
+					fighterVelocity.ZeroOutY();
+
+				
+				
+				return { fighterVelocity, fighterPosition, fighterMovement };
 
 			}(fighter->velocity, fighter->position, fighter->movement);
+
+			fighter->velocity = updatedFighterVelocity;
+			fighter->position = updatedFighterPosition;
+			fighter->movement = updatedFighterMovement;
 		};
-	}
-
-	auto PhysicsSystem(Comp::Velocity fighterVelocity, Comp::Position fighterPosition, Comp::Movement fighterMovement) -> Components
-	{
-		fighterPosition.Add(fighterVelocity.GetCurrentState().x * engineClock.GetPreviousFrameTime(), fighterVelocity.GetCurrentState().y * engineClock.GetPreviousFrameTime());
-
-		fighterVelocity.Add(0.0f, (fighterMovement.GetGravity() * engineClock.GetPreviousFrameTime()));
-
-		{//Set window borders
-			fighterPosition.ClampMaxPositionTo(c_levelBorderMaxX, c_levelBorderMaxY);
-			fighterPosition.ClampMinPositionTo(c_levelBorderMinX, c_groundLevel);
-		}
-
-		//Prevent velocity from going more and more negative when on the ground
-		if (fighterPosition.GetCurrentPosition().y == c_groundLevel)
-			fighterVelocity.ZeroOutY();
-
-		return { fighterVelocity, fighterPosition, fighterMovement };
 	}
 }
