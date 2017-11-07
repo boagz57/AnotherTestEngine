@@ -40,8 +40,6 @@ namespace Blz::Physics
 				if (fighterPosition.GetCurrentPosition().y == c_groundLevel)
 					fighterVelocity.ZeroOutY();
 
-				
-				
 				return { fighterVelocity, fighterPosition, fighterMovement };
 
 			}(fighter->velocity, fighter->position, fighter->movement);
