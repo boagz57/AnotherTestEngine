@@ -11,10 +11,29 @@ namespace Blz::Physics
 		Comp::Movement movement;
 	};
 
-	static auto PhysicsSystem(Comp::Velocity vel, Comp::Position pos, Comp::Movement move) -> Components;
-
-	auto Engine::Init() -> void
+	auto Engine::Init(Scene& scene) -> void
 	{
+		for (Fighter* fighter : scene.fighters)
+		{
+			{//Initialize fighter collision boxes 
+				fighter->collisionBox.width = 64;
+				fighter->collisionBox.height = 54;
+				fighter->collisionBox.position = fighter->position.GetCurrentPosition();
+				fighter->collisionBox.bottomLeftCoords.x = fighter->position.GetCurrentPosition().x - (fighter->collisionBox.width / 2);
+				fighter->collisionBox.bottomLeftCoords.y = fighter->position.GetCurrentPosition().y;
+				fighter->collisionBox.topRightCoords.x = fighter->position.GetCurrentPosition().x + (fighter->collisionBox.width / 2);
+				fighter->collisionBox.topRightCoords.y = fighter->position.GetCurrentPosition().y + static_cast<sfloat>(fighter->collisionBox.height);
+			}
+		}
+
+		//caputre references to each individual fighter to check collisions in physics update
+		for (uint16 i = 0; i < scene.fighters.size(); ++i)
+		{
+			if (i == 0)
+				fighter1 = scene.fighters.at(i);
+			else
+				fighter2 = scene.fighters.at(i);
+		}
 	}
 
 	auto Engine::Shutdown() -> void
@@ -29,34 +48,60 @@ namespace Blz::Physics
 		for (Fighter* fighter : scene.fighters)
 		{
 			//All accepted components of Physics system
-			[&fighter](const Comp::Velocity& fighterVelocity, const Comp::Position& fighterPosition, const Comp::Movement& fighterMovement) -> void 
+			auto[updatedFighterVelocity, updatedFighterPosition, updatedFighterMovement] = [&fighter](Comp::Velocity fighterVelocity, Comp::Position fighterPosition, Comp::Movement fighterMovement) -> Components
 			{
-				auto[updatedFighterVelocity, updatedFighterPosition, updatedFighterMovement] = 
-					PhysicsSystem(fighterVelocity, fighterPosition, fighterMovement);
+				fighterPosition.Add(fighterVelocity.GetCurrentState().x * engineClock.GetPreviousFrameTime(), fighterVelocity.GetCurrentState().y * engineClock.GetPreviousFrameTime());
 
-				fighter->velocity = updatedFighterVelocity;
-				fighter->position = updatedFighterPosition;
-				fighter->movement = updatedFighterMovement;
+				fighterVelocity.Add(0.0f, (fighterMovement.GetGravity() * engineClock.GetPreviousFrameTime()));
+
+				{//Set window borders
+					fighterPosition.ClampMaxPositionTo(c_levelBorderMaxX, c_levelBorderMaxY);
+					fighterPosition.ClampMinPositionTo(c_levelBorderMinX, c_groundLevel);
+				}
+
+				//Prevent velocity from going more and more negative when on the ground
+				if (fighterPosition.GetCurrentPosition().y == c_groundLevel)
+					fighterVelocity.ZeroOutY();
+
+				return { fighterVelocity, fighterPosition, fighterMovement };
 
 			}(fighter->velocity, fighter->position, fighter->movement);
+
+			fighter->velocity = updatedFighterVelocity;
+			fighter->position = updatedFighterPosition;
+			fighter->movement = updatedFighterMovement;
 		};
-	}
 
-	auto PhysicsSystem(Comp::Velocity fighterVelocity, Comp::Position fighterPosition, Comp::Movement fighterMovement) -> Components
-	{
-		fighterPosition.Add(fighterVelocity.GetCurrentState().x * engineClock.GetPreviousFrameTime(), fighterVelocity.GetCurrentState().y * engineClock.GetPreviousFrameTime());
+		[&]()//AABB Collsion System
+		{
+			fighter1->collisionBox.position = scene.fighters.at(0)->position.GetCurrentPosition();
+			fighter2->collisionBox.position = scene.fighters.at(1)->position.GetCurrentPosition();
 
-		fighterVelocity.Add(0.0f, (fighterMovement.GetGravity() * engineClock.GetPreviousFrameTime()));
+			{//Update fighter collision box coordinates
+				fighter1->collisionBox.bottomLeftCoords.x = fighter1->collisionBox.position.x - (fighter1->collisionBox.width / 2);
+				fighter1->collisionBox.bottomLeftCoords.y = fighter1->collisionBox.position.y;
+				fighter1->collisionBox.topRightCoords.x = fighter1->collisionBox.position.x + (fighter1->collisionBox.width / 2);
+				fighter1->collisionBox.topRightCoords.y = fighter1->collisionBox.position.x + fighter1->collisionBox.height;
 
-		{//Set window borders
-			fighterPosition.ClampMaxPositionTo(c_levelBorderMaxX, c_levelBorderMaxY);
-			fighterPosition.ClampMinPositionTo(c_levelBorderMinX, c_groundLevel);
-		}
+				fighter2->collisionBox.bottomLeftCoords.x = fighter2->collisionBox.position.x - (fighter2->collisionBox.width / 2);
+				fighter2->collisionBox.bottomLeftCoords.y = fighter2->collisionBox.position.y;
+				fighter2->collisionBox.topRightCoords.x = fighter2->collisionBox.position.x + (fighter2->collisionBox.width / 2);
+				fighter2->collisionBox.topRightCoords.y = fighter2->collisionBox.position.x + fighter2->collisionBox.height;
+			}
 
-		//Prevent velocity from going more and more negative when on the ground
-		if (fighterPosition.GetCurrentPosition().y == c_groundLevel)
-			fighterVelocity.ZeroOutY();
+			if (fighter1->collisionBox.topRightCoords.x < fighter2->collisionBox.bottomLeftCoords.x ||
+				fighter1->collisionBox.bottomLeftCoords.x > fighter2->collisionBox.topRightCoords.x)
+			{
+				return;
+			}
 
-		return { fighterVelocity, fighterPosition, fighterMovement };
+			if (fighter1->collisionBox.topRightCoords.y < fighter2->collisionBox.bottomLeftCoords.y ||
+				fighter1->collisionBox.bottomLeftCoords.y > fighter2->collisionBox.topRightCoords.y)
+			{
+				return;
+			}
+
+			LOG("Collision!\n");
+		}();
 	}
 }

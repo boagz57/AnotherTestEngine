@@ -8,6 +8,7 @@
 #include "Components/Velocity.h"
 #include "Components/Input.h"
 #include "Components/Transform.h"
+#include "Components/RectangleCollision.h"
 #include "Components\Position.h"
 
 namespace Blz { namespace Input { class Engine; }; };
@@ -36,6 +37,7 @@ protected:
 	Comp::Velocity const GetVelocity() const { return velocity; };
 	Comp::Position const GetPosition() const { return position; };
 	Comp::Movement const GetMovement() const { return movement; };
+	Comp::RectangleCollision const GetCollisionBox() const { return collisionBox; };
 
 private:
 	friend class Blz::Graphics::Engine;
@@ -54,4 +56,5 @@ private:
 	Comp::Position position;
 	Comp::Input input;
 	Comp::Movement movement;
+	Comp::RectangleCollision collisionBox;
 };

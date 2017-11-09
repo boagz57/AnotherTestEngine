@@ -32,7 +32,7 @@ Blz::Physics::Engine physics;
 
 int main(int agrc, char** argv)
 {
-	Blz::Graphics::Window window(1280, 720);
+	Blz::Graphics::Window window(1920, 1080);
 	Blz::Graphics::ShaderProgram colorShaderProgram;
 
 	Game game;
@@ -47,6 +47,7 @@ int main(int agrc, char** argv)
 	//Initialize systems
 	engineClock.Init();
 	game.Init();
+	physics.Init(scene);
 	renderer.Init(scene, window);
 	animation.Init(scene);
 
