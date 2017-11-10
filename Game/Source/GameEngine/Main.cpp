@@ -54,13 +54,13 @@ int main(int agrc, char** argv)
 	//Game loop
 	while (true)
 	{
-		engineClock.UpdateTime();
+		sfloat previousFrameDeltaTime = engineClock.UpdateTime();
 
 		input.Update(scene);
 
 		game.Update();
 
-		physics.Update(scene);
+		physics.Update(scene, previousFrameDeltaTime);
 		AI.Update(scene);
 		animation.Update(scene);
 

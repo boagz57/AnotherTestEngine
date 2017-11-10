@@ -10,12 +10,12 @@ namespace Blz::Timing
 	{
 	public:
 		auto Init() -> void;
-		auto UpdateTime() -> void;
+		auto CalculatePreviousFrameTime() -> float;
 
-		auto GetPreviousFrameTime() const -> sfloat { return frameTime; };
+		auto GetPreviousFrameTime() const -> float { return frameTime; };
 
 	private:
-		sfloat frameTime = 0;
-		uint32 timePointLastFrame = 0;
+		float frameTime = 0;
+		unsigned int timePointLastFrame = 0;
 	};
 }

@@ -7,10 +7,10 @@ namespace Blz
 	{
 		auto CalculateAndDisplayFPS() -> void
 		{
-			static sfloat FPS = 0.0f;
-			static uint32 frames = 0;
+			static float FPS = 0.0f;
+			static unsigned int frames = 0;
 			static bool firstTimeCalculatingFPS = true;
-			static uint32 startTime = 0;
+			static unsigned int startTime = 0;
 
 			//Setup timing variables on first call of function
 			if (firstTimeCalculatingFPS)
@@ -25,7 +25,7 @@ namespace Blz
 			//Only display FPS after so many milliseconds
 			if (SDL_GetTicks() - startTime > 250 && frames > 10)
 			{
-				FPS = static_cast<sfloat>((frames / (.001 * (SDL_GetTicks() - startTime))));
+				FPS = static_cast<float>((frames / (.001 * (SDL_GetTicks() - startTime))));
 				startTime = SDL_GetTicks();
 				frames = 0;
 				LOG("FPS: %f\n", FPS);
@@ -37,12 +37,14 @@ namespace Blz
 			timePointLastFrame = SDL_GetTicks();
 		}
 
-		auto EngineClock::UpdateTime() -> void
+		auto EngineClock::UpdateTime() -> float 
 		{
 			auto timePointThisFrame = SDL_GetTicks();
 			auto timeDifference = timePointThisFrame - timePointLastFrame;
-			frameTime = (static_cast<sfloat>(timeDifference) * .001f);
+			frameTime = (static_cast<float>(timeDifference) * .001f);
 			timePointLastFrame = timePointThisFrame;
+
+			return frameTime;
 		}
 	}
 }

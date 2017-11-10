@@ -41,18 +41,18 @@ namespace Blz::Physics
 
 	}
 
-	auto Engine::Update(Scene& scene) -> void
+	auto Engine::Update(Scene& scene, sfloat deltaTime) -> void
 	{
 		ec.AddContext("When updating Physics engine");
 
 		for (Fighter* fighter : scene.fighters)
 		{
 			//All accepted components of Physics system
-			auto[updatedFighterVelocity, updatedFighterPosition, updatedFighterMovement] = [&fighter](Comp::Velocity fighterVelocity, Comp::Position fighterPosition, Comp::Movement fighterMovement) -> Components
+			auto[updatedFighterVelocity, updatedFighterPosition, updatedFighterMovement] = [&fighter, deltaTime](Comp::Velocity fighterVelocity, Comp::Position fighterPosition, Comp::Movement fighterMovement) -> Components
 			{
-				fighterPosition.Add(fighterVelocity.GetCurrentState().x * engineClock.GetPreviousFrameTime(), fighterVelocity.GetCurrentState().y * engineClock.GetPreviousFrameTime());
+				fighterPosition.Add(fighterVelocity.GetCurrentState().x * deltaTime, fighterVelocity.GetCurrentState().y * deltaTime);
 
-				fighterVelocity.Add(0.0f, (fighterMovement.GetGravity() * engineClock.GetPreviousFrameTime()));
+				fighterVelocity.Add(0.0f, (fighterMovement.GetGravity() * deltaTime));
 
 				{//Set window borders
 					fighterPosition.ClampMaxPositionTo(c_levelBorderMaxX, c_levelBorderMaxY);

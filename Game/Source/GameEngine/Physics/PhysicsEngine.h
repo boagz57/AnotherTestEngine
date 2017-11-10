@@ -13,7 +13,7 @@ namespace Blz::Physics
 
 		auto Init(Scene& scene) -> void;
 		auto Shutdown() -> void;
-		auto Update(Scene& scene) -> void;
+		auto Update(Scene& scene, sfloat deltaTime) -> void;
 
 	private:
 		Fighter* fighter1 = nullptr;
