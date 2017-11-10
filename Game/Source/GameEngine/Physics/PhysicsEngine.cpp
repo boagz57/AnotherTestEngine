@@ -16,8 +16,8 @@ namespace Blz::Physics
 		for (Fighter* fighter : scene.fighters)
 		{
 			{//Initialize fighter collision boxes 
-				fighter->collisionBox.width = 64;
-				fighter->collisionBox.height = 54;
+				fighter->collisionBox.width = 44;
+				fighter->collisionBox.height = 44;
 				fighter->collisionBox.position = fighter->position.GetCurrentPosition();
 				fighter->collisionBox.bottomLeftCoords.x = fighter->position.GetCurrentPosition().x - (fighter->collisionBox.width / 2);
 				fighter->collisionBox.bottomLeftCoords.y = fighter->position.GetCurrentPosition().y;
@@ -78,15 +78,23 @@ namespace Blz::Physics
 			fighter2->collisionBox.position = scene.fighters.at(1)->position.GetCurrentPosition();
 
 			{//Update fighter collision box coordinates
-				fighter1->collisionBox.bottomLeftCoords.x = fighter1->collisionBox.position.x - (fighter1->collisionBox.width / 2);
-				fighter1->collisionBox.bottomLeftCoords.y = fighter1->collisionBox.position.y;
-				fighter1->collisionBox.topRightCoords.x = fighter1->collisionBox.position.x + (fighter1->collisionBox.width / 2);
-				fighter1->collisionBox.topRightCoords.y = fighter1->collisionBox.position.x + fighter1->collisionBox.height;
+				fighter1->collisionBox.bottomLeftCoords.x = 
+					fighter1->collisionBox.position.x - (fighter1->collisionBox.width / 2);
+				fighter1->collisionBox.bottomLeftCoords.y = 
+					fighter1->collisionBox.position.y;
+				fighter1->collisionBox.topRightCoords.x = 
+					fighter1->collisionBox.position.x + (fighter1->collisionBox.width / 2);
+				fighter1->collisionBox.topRightCoords.y = 
+					fighter1->collisionBox.position.y + fighter1->collisionBox.height;
 
-				fighter2->collisionBox.bottomLeftCoords.x = fighter2->collisionBox.position.x - (fighter2->collisionBox.width / 2);
-				fighter2->collisionBox.bottomLeftCoords.y = fighter2->collisionBox.position.y;
-				fighter2->collisionBox.topRightCoords.x = fighter2->collisionBox.position.x + (fighter2->collisionBox.width / 2);
-				fighter2->collisionBox.topRightCoords.y = fighter2->collisionBox.position.x + fighter2->collisionBox.height;
+				fighter2->collisionBox.bottomLeftCoords.x = 
+					fighter2->collisionBox.position.x - (fighter2->collisionBox.width / 2);
+				fighter2->collisionBox.bottomLeftCoords.y = 
+					fighter2->collisionBox.position.y;
+				fighter2->collisionBox.topRightCoords.x = 
+					fighter2->collisionBox.position.x + (fighter2->collisionBox.width / 2);
+				fighter2->collisionBox.topRightCoords.y = 
+					fighter2->collisionBox.position.y + fighter2->collisionBox.height;
 			}
 
 			if (fighter1->collisionBox.topRightCoords.x < fighter2->collisionBox.bottomLeftCoords.x ||

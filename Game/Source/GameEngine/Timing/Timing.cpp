@@ -37,7 +37,7 @@ namespace Blz
 			timePointLastFrame = SDL_GetTicks();
 		}
 
-		auto EngineClock::UpdateTime() -> float 
+		auto EngineClock::CalculatePreviousFrameTime() -> float 
 		{
 			auto timePointThisFrame = SDL_GetTicks();
 			auto timeDifference = timePointThisFrame - timePointLastFrame;

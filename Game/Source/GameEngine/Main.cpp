@@ -54,7 +54,13 @@ int main(int agrc, char** argv)
 	//Game loop
 	while (true)
 	{
-		sfloat previousFrameDeltaTime = engineClock.UpdateTime();
+		sfloat previousFrameDeltaTime = engineClock.CalculatePreviousFrameTime();
+
+		#if (DEBUG)
+		    //helps to prevent overly large detlatimes from getting passed when using debugger and breakpoints
+			if (previousFrameDeltaTime > 1.0f)
+				previousFrameDeltaTime = 1.0f/60.0f;
+		#endif
 
 		input.Update(scene);
 
