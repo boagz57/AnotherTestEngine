@@ -3,8 +3,8 @@
 
 void Fighter::Init(sfloat startingWorldPositionX, sfloat startingWorldPositionY, Blz::Graphics::Texture texture)
 {
-	RUNTIME_ASSERT(startingWorldPositionX <= 160.0f && startingWorldPositionY <= 90.0f, "Trying to start fighter's position outside world bounds!");
-	RUNTIME_ASSERT(startingWorldPositionX >= 0.0f && startingWorldPositionY >= 0.0f, "Trying to start fighter's position outside world bounds!");
+	RUNTIME_ASSERT((uint16)startingWorldPositionX <= c_windowWidth && (uint16)startingWorldPositionY <= c_windowHeight, "Trying to start fighter's position outside screen bounds!");
+	RUNTIME_ASSERT((uint16)startingWorldPositionX >= 0 && (uint16)startingWorldPositionY >= 0, "Trying to start fighter's position outside screen bounds!");
 
 	position.Add(startingWorldPositionX, startingWorldPositionY);
 	spriteSheet.Init(texture, glm::ivec2{ 10, 4 }, 3);

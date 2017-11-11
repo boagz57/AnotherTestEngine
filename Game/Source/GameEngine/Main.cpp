@@ -32,7 +32,7 @@ Blz::Physics::Engine physics;
 
 int main(int agrc, char** argv)
 {
-	Blz::Graphics::Window window(1920, 1080);
+	Blz::Graphics::Window window(c_windowWidth, c_windowHeight);
 	Blz::Graphics::ShaderProgram colorShaderProgram;
 
 	Game game;
