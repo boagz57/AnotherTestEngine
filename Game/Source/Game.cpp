@@ -18,8 +18,8 @@ void Game::Init()
 	Blz::Graphics::Texture fighterTexture("CatFighter.png");
 	Blz::Graphics::Texture backgroundTexture("BackgroundStage.png");
 
-	player.Init(110.0f, 10.0f, fighterTexture);
-	enemy.Init(40.0f, 10.0f, fighterTexture);
+	player.Init(160.0f, 10.0f, fighterTexture);
+	enemy.Init(80.0f, 10.0f, fighterTexture);
 
 	scene.AddFighter(&player);
 	scene.AddFighter(&enemy);

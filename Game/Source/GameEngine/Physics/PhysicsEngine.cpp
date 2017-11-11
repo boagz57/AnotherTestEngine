@@ -16,13 +16,9 @@ namespace Blz::Physics
 		for (Fighter* fighter : scene.fighters)
 		{
 			{//Initialize fighter collision boxes 
-				fighter->collisionBox.width = 44;
-				fighter->collisionBox.height = 44;
+				fighter->collisionBox.width = 64.0f;
+				fighter->collisionBox.height = 64.0f;
 				fighter->collisionBox.position = fighter->position.GetCurrentPosition();
-				fighter->collisionBox.bottomLeftCoords.x = fighter->position.GetCurrentPosition().x - (fighter->collisionBox.width / 2);
-				fighter->collisionBox.bottomLeftCoords.y = fighter->position.GetCurrentPosition().y;
-				fighter->collisionBox.topRightCoords.x = fighter->position.GetCurrentPosition().x + (fighter->collisionBox.width / 2);
-				fighter->collisionBox.topRightCoords.y = fighter->position.GetCurrentPosition().y + static_cast<sfloat>(fighter->collisionBox.height);
 			}
 		}
 
@@ -77,38 +73,38 @@ namespace Blz::Physics
 			fighter1->collisionBox.position = scene.fighters.at(0)->position.GetCurrentPosition();
 			fighter2->collisionBox.position = scene.fighters.at(1)->position.GetCurrentPosition();
 
+			static glm::vec2 f1BottomLeftCoords{};
+			static glm::vec2 f1TopRightCoords{};
+			static glm::vec2 f2BottomLeftCoords{};
+			static glm::vec2 f2TopRightCoords{};
+
 			{//Update fighter collision box coordinates
-				fighter1->collisionBox.bottomLeftCoords.x = 
-					fighter1->collisionBox.position.x - (fighter1->collisionBox.width / 2);
-				fighter1->collisionBox.bottomLeftCoords.y = 
-					fighter1->collisionBox.position.y;
-				fighter1->collisionBox.topRightCoords.x = 
-					fighter1->collisionBox.position.x + (fighter1->collisionBox.width / 2);
-				fighter1->collisionBox.topRightCoords.y = 
-					fighter1->collisionBox.position.y + fighter1->collisionBox.height;
+				f1BottomLeftCoords = { fighter1->collisionBox.position.x - (fighter1->collisionBox.width / 2), 
+					fighter1->collisionBox.position.y };
+				f1TopRightCoords = { fighter1->collisionBox.position.x + (fighter1->collisionBox.width / 2), 
+					fighter1->collisionBox.position.y + fighter1->collisionBox.height };
 
-				fighter2->collisionBox.bottomLeftCoords.x = 
-					fighter2->collisionBox.position.x - (fighter2->collisionBox.width / 2);
-				fighter2->collisionBox.bottomLeftCoords.y = 
-					fighter2->collisionBox.position.y;
-				fighter2->collisionBox.topRightCoords.x = 
-					fighter2->collisionBox.position.x + (fighter2->collisionBox.width / 2);
-				fighter2->collisionBox.topRightCoords.y = 
-					fighter2->collisionBox.position.y + fighter2->collisionBox.height;
+				f2BottomLeftCoords = { fighter2->collisionBox.position.x - (fighter2->collisionBox.width / 2),
+					fighter2->collisionBox.position.y };
+				f2TopRightCoords = { fighter2->collisionBox.position.x + (fighter2->collisionBox.width / 2), 
+					fighter2->collisionBox.position.y + fighter2->collisionBox.height };
 			}
 
-			if (fighter1->collisionBox.topRightCoords.x < fighter2->collisionBox.bottomLeftCoords.x ||
-				fighter1->collisionBox.bottomLeftCoords.x > fighter2->collisionBox.topRightCoords.x)
+			//If NO intersection between points then no collision occurring
+			if (f1TopRightCoords.x < f2BottomLeftCoords.x ||
+				f1BottomLeftCoords.x > f2TopRightCoords.x)
 			{
 				return;
 			}
 
-			if (fighter1->collisionBox.topRightCoords.y < fighter2->collisionBox.bottomLeftCoords.y ||
-				fighter1->collisionBox.bottomLeftCoords.y > fighter2->collisionBox.topRightCoords.y)
+			//If NO intersection between points then no collision occurring
+			if (f1TopRightCoords.y < f2BottomLeftCoords.y ||
+				f1BottomLeftCoords.y > f2TopRightCoords.y)
 			{
 				return;
 			}
 
+			//Else collision!
 			LOG("Collision!\n");
 		}();
 	}
