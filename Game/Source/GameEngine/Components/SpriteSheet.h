@@ -30,8 +30,8 @@ namespace Comp
 
 	private:
 		Blz::Graphics::Texture texture{};
-		Blz::Array<Vector3D, 6> vertexData;
-		glm::ivec2 tileDimensions;
+		Blz::Array<Vector3D, 6> vertexData{};
+		glm::ivec2 tileDimensions{};
 		uint16 scaleFactor{1};
 	};
 }

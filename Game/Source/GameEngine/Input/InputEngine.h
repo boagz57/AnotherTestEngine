@@ -15,6 +15,6 @@ namespace Blz::Input
 		auto Update(Scene& scene) -> void;
 
 	private:
-		SDL_Event evnt;
+		SDL_Event evnt{};
 	};
 }

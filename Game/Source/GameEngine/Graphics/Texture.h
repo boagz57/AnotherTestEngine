@@ -15,9 +15,9 @@ namespace Blz::Graphics
 		auto GetHeight() const -> uint16 { return static_cast<uint16>(height); };
 
 	private:
-		GLuint id{ 0 };
-		int32 width = 0;
-		int32 height = 0;
-		int32 channels = 0;
+		GLuint id{};
+		int32 width{};
+		int32 height{};
+		int32 channels{};
 	};
 }

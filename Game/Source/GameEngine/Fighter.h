@@ -8,6 +8,7 @@
 #include "Components/Velocity.h"
 #include "Components/Input.h"
 #include "Components/Transform.h"
+#include "Components/RectangleCollision.h"
 #include "Components\Position.h"
 
 namespace Blz { namespace Input { class Engine; }; };
@@ -19,14 +20,14 @@ namespace Blz { namespace Physics { class GameLogic; }; };
 namespace Blz { namespace Input { class GameLogic; }; };
 namespace Blz { namespace Animation { class GameLogic; }; };
 
-class Fighter 
+class Fighter
 {
 public:
 	Fighter() = default;
 
 	void Init(sfloat startingWorldPositionX, sfloat startingWorldPositionY, Blz::Graphics::Texture texture);
 
-	glm::vec2 originalPosition{ 0.0f, 0.0f };
+	glm::vec2 originalPosition{};
 
 protected:
 	Comp::Transform const GetTransform() const { return transform; };
@@ -36,6 +37,7 @@ protected:
 	Comp::Velocity const GetVelocity() const { return velocity; };
 	Comp::Position const GetPosition() const { return position; };
 	Comp::Movement const GetMovement() const { return movement; };
+	Comp::RectangleCollision const GetCollisionBox() const { return collisionBox; };
 
 private:
 	friend class Blz::Graphics::Engine;
@@ -47,11 +49,12 @@ private:
 	friend class Blz::Input::GameLogic;
 	friend class Blz::Animation::GameLogic;
 
-	Comp::Transform transform;
-	Comp::Velocity velocity;
-	Comp::SpriteSheet spriteSheet;
-	Comp::Animation animation;
-	Comp::Position position;
-	Comp::Input input;
-	Comp::Movement movement;
+	Comp::Transform transform{};
+	Comp::Velocity velocity{};
+	Comp::SpriteSheet spriteSheet{};
+	Comp::Animation animation{};
+	Comp::Position position{};
+	Comp::Input input{};
+	Comp::Movement movement{};
+	Comp::RectangleCollision collisionBox{};
 };

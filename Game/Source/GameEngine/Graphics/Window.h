@@ -22,7 +22,7 @@ namespace Blz::Graphics
 
 		const uint16 width;
 		const uint16 height;
-		SDL_Window* p_window = nullptr;
-		SDL_GLContext glContext = nullptr;
+		SDL_Window* p_window{ nullptr };
+		SDL_GLContext glContext{ nullptr };
 	};
 }

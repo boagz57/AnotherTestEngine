@@ -17,6 +17,6 @@ namespace Comp
 		auto SetVelocityX(sfloat x) -> void;
 
 	private:
-		glm::vec2 currentVelocity{ 0.0f, 0.0f };
+		glm::vec2 currentVelocity{};
 	};
 }

@@ -14,6 +14,6 @@ namespace Comp
 		glm::vec2 GetCurrentPosition() const;
 
 	private:
-		glm::vec2 currentPosition{ 0.0f, 0.0f };
+		glm::vec2 currentPosition{};
 	};
 }

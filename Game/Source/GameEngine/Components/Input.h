@@ -20,7 +20,7 @@ namespace Comp
 		Blz::Map<uint, bool> keyMap;
 
 	private:
-		bool Controllable = false;
-		Blz::Map<const int32, std::function<void(Fighter*)>> keyMovementBindings;
+		bool Controllable{ false };
+		Blz::Map<const int32, std::function<void(Fighter*)>> keyMovementBindings{};
 	};
 }

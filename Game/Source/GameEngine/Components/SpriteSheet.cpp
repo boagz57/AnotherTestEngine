@@ -39,7 +39,7 @@ namespace Comp
 
 		sfloat halfSpriteWidth = static_cast<sfloat>(singleSpriteWidth / 2);
 
-		//Setting sprite origin at bottom middle of image by subtracting half width 
+		//Setting sprite origin at bottom middle of image 
 		this->vertexData.at(0).SetPosition(glm::vec3{ screenPositionX + halfSpriteWidth, screenPositionY + singleSpriteHeight, 0.0f });//Top right corner
 		this->vertexData.at(1).SetPosition(glm::vec3{ screenPositionX - halfSpriteWidth, screenPositionY + singleSpriteHeight, 0.0f });//Top left corner
 		this->vertexData.at(2).SetPosition(glm::vec3{ screenPositionX - halfSpriteWidth, screenPositionY, 0.0f });//Bottom left corner

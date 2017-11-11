@@ -32,7 +32,7 @@ Blz::Physics::Engine physics;
 
 int main(int agrc, char** argv)
 {
-	Blz::Graphics::Window window(1280, 720);
+	Blz::Graphics::Window window(c_windowWidth, c_windowHeight);
 	Blz::Graphics::ShaderProgram colorShaderProgram;
 
 	Game game;
@@ -47,19 +47,26 @@ int main(int agrc, char** argv)
 	//Initialize systems
 	engineClock.Init();
 	game.Init();
+	physics.Init(scene);
 	renderer.Init(scene, window);
 	animation.Init(scene);
 
 	//Game loop
 	while (true)
 	{
-		engineClock.UpdateTime();
+		sfloat previousFrameDeltaTime = engineClock.CalculatePreviousFrameTime();
+
+		#if (DEBUG)
+		    //helps to prevent overly large detlatimes from getting passed when using debugger and breakpoints
+			if (previousFrameDeltaTime > 1.0f)
+				previousFrameDeltaTime = 1.0f/60.0f;
+		#endif
 
 		input.Update(scene);
 
 		game.Update();
 
-		physics.Update(scene);
+		physics.Update(scene, previousFrameDeltaTime);
 		AI.Update(scene);
 		animation.Update(scene);
 

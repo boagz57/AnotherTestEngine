@@ -18,8 +18,8 @@ void Game::Init()
 	Blz::Graphics::Texture fighterTexture("CatFighter.png");
 	Blz::Graphics::Texture backgroundTexture("BackgroundStage.png");
 
-	player.Init(110.0f, 10.0f, fighterTexture);
-	enemy.Init(40.0f, 20.0f, fighterTexture);
+	player.Init(160.0f, 10.0f, fighterTexture);
+	enemy.Init(80.0f, 10.0f, fighterTexture);
 
 	scene.AddFighter(&player);
 	scene.AddFighter(&enemy);
@@ -44,6 +44,7 @@ void Game::Update()
 	if (player.GetVelocity().GetCurrentState().x > 0)
 		BlzAnimation::PlayAnimation(&player, walkingRight);
 
+
 	ec.AddContext("When updating Game");
 }
 
@@ -54,17 +55,17 @@ void Game::Shutdown()
 
 void Game::MoveRight(Fighter* const fighter) 
 {
-	BlzPhysics::Move(fighter, 90.0f, 0.0f);
+	BlzPhysics::Move(fighter, 100.0f, 0.0f);
 }
 
 void Game::MoveLeft(Fighter* const fighter) 
 {
-	BlzPhysics::Move(fighter, -90.0f, 0.0f);
+	BlzPhysics::Move(fighter, -100.0f, 0.0f);
 }
 
 void Game::Jump(Fighter* const fighter)
 {
-	BlzPhysics::Jump(fighter, 50.0f);
+	BlzPhysics::Jump(fighter, 200.0f);
 }
 
 void Game::Punch(Fighter* const fighter)

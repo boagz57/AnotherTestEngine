@@ -1,4 +1,5 @@
 #pragma once
+#include "Fighter.h"
 #include "../Scene.h"
 
 
@@ -10,8 +11,12 @@ namespace Blz::Physics
 		Engine() = default;
 		~Engine() = default;
 
-		auto Init() -> void;
+		auto Init(Scene& scene) -> void;
 		auto Shutdown() -> void;
-		auto Update(Scene& scene) -> void;
+		auto Update(Scene& scene, sfloat deltaTime) -> void;
+
+	private:
+		Fighter* fighter1{ nullptr };
+		Fighter* fighter2{ nullptr };
 	};
 }

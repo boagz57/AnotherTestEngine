@@ -15,7 +15,7 @@ namespace Comp
 		auto DefaultAnimation() -> uint16 const { return defaultAnimationID; };
 
 	private:
-		Blz::Map<const uint16, Blz::Animation::AnimationClip> animationMap;
+		Blz::Map<const uint16, Blz::Animation::AnimationClip> animationMap{};
 		uint16 defaultAnimationID{};
 		Blz::Animation::AnimationClip currentAnimation{};
 	};

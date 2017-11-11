@@ -14,8 +14,8 @@ public:
 	inline void SetPosition(glm::vec3 positionToSet);
 	inline void SetUV(glm::vec2 textureCoordinatesToSet);
 
-	glm::vec3 position;
-	glm::vec2 textureCoordinates;
+	glm::vec3 position{};
+	glm::vec2 textureCoordinates{};
 };
 
 Vector3D::Vector3D()

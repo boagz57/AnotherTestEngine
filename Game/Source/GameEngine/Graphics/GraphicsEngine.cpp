@@ -39,9 +39,7 @@ namespace Blz::Graphics
 			{
 				ec.AddContext("When setting fighter sprite intial screen location and UVs");
 
-				Comp::Position convertedFighterPosition = ConvertWorldUnitsToScreenPixels(fighter->position, window.width);
-
-				fighter->spriteSheet.SetScreenPosition(convertedFighterPosition.GetCurrentPosition().x, convertedFighterPosition.GetCurrentPosition().y);
+				fighter->spriteSheet.SetScreenPosition(fighter->position.GetCurrentPosition().x, fighter->position.GetCurrentPosition().y);
 
 				{//Set initial sprite UV location
 					glm::ivec2 spriteSheetDimensions = fighter->spriteSheet.GetDimensions();
@@ -86,13 +84,11 @@ namespace Blz::Graphics
 
 				glm::vec2 translationAmount = fighter->position.GetCurrentPosition() - fighter->originalPosition;
 
-				glm::vec2 ConvertedTranslationPosition = ConvertWorldUnitsToScreenPixels(translationAmount, window.width);
-
 				//Round final pixel positions so fractional pixel values can't cause distorted artwork
-				ConvertedTranslationPosition.x = rint(ConvertedTranslationPosition.x);
-				ConvertedTranslationPosition.y = rint(ConvertedTranslationPosition.y);
+				translationAmount.x = rint(translationAmount.x);
+				translationAmount.y = rint(translationAmount.y);
 
-				glm::mat4 transformationMatrix = glm::translate(orthoProjection, glm::vec3{ ConvertedTranslationPosition.x, ConvertedTranslationPosition.y, 0.0f });
+				glm::mat4 transformationMatrix = glm::translate(orthoProjection, glm::vec3{ translationAmount.x, translationAmount.y, 0.0f });
 				glUniformMatrix4fv(transformationMatrixUniformLocation, 1, GL_FALSE, &(transformationMatrix[0][0]));
 			}
 
