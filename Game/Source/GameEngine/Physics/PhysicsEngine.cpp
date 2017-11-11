@@ -90,21 +90,21 @@ namespace Blz::Physics
 					fighter2->collisionBox.position.y + fighter2->collisionBox.height };
 			}
 
-			//If NO intersection between points then no collision occurring
+			//Exit returning NO intersection between bounding boxes
 			if (f1TopRightCoords.x < f2BottomLeftCoords.x ||
 				f1BottomLeftCoords.x > f2TopRightCoords.x)
 			{
 				return;
 			}
 
-			//If NO intersection between points then no collision occurring
+			//Exit returning NO intersection between bounding boxes
 			if (f1TopRightCoords.y < f2BottomLeftCoords.y ||
 				f1BottomLeftCoords.y > f2TopRightCoords.y)
 			{
 				return;
 			}
 
-			//Else collision!
+			//Else intersection and thus collision has occured!
 			LOG("Collision!\n");
 		}();
 	}

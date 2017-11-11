@@ -16,7 +16,7 @@ namespace Blz::Physics
 		auto Update(Scene& scene, sfloat deltaTime) -> void;
 
 	private:
-		Fighter* fighter1 = nullptr;
-		Fighter* fighter2 = nullptr;
+		Fighter* fighter1{ nullptr };
+		Fighter* fighter2{ nullptr };
 	};
 }

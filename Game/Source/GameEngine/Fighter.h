@@ -20,14 +20,14 @@ namespace Blz { namespace Physics { class GameLogic; }; };
 namespace Blz { namespace Input { class GameLogic; }; };
 namespace Blz { namespace Animation { class GameLogic; }; };
 
-class Fighter 
+class Fighter
 {
 public:
 	Fighter() = default;
 
 	void Init(sfloat startingWorldPositionX, sfloat startingWorldPositionY, Blz::Graphics::Texture texture);
 
-	glm::vec2 originalPosition{ 0.0f, 0.0f };
+	glm::vec2 originalPosition{};
 
 protected:
 	Comp::Transform const GetTransform() const { return transform; };
@@ -49,12 +49,12 @@ private:
 	friend class Blz::Input::GameLogic;
 	friend class Blz::Animation::GameLogic;
 
-	Comp::Transform transform;
-	Comp::Velocity velocity;
-	Comp::SpriteSheet spriteSheet;
-	Comp::Animation animation;
-	Comp::Position position;
-	Comp::Input input;
-	Comp::Movement movement;
-	Comp::RectangleCollision collisionBox;
+	Comp::Transform transform{};
+	Comp::Velocity velocity{};
+	Comp::SpriteSheet spriteSheet{};
+	Comp::Animation animation{};
+	Comp::Position position{};
+	Comp::Input input{};
+	Comp::Movement movement{};
+	Comp::RectangleCollision collisionBox{};
 };

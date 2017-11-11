@@ -5,8 +5,8 @@ namespace Comp
 {
 	struct RectangleCollision
 	{
-		sfloat width{ 0 };
-		sfloat height{ 0 };
-		glm::vec2 position{ 0 };
+		sfloat width{};
+		sfloat height{};
+		glm::vec2 position{};
 	};
 }

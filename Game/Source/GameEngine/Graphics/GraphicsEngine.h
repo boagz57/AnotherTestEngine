@@ -27,7 +27,6 @@ namespace Blz::Graphics
 		Comp::Sprite backGroundSprite;
 
 		GLuint backgroundVBO;
-		Array<GLuint, 2> fighterVBOs;
-
+		Array<GLuint, 2> fighterVBOs{};
 	};
 }

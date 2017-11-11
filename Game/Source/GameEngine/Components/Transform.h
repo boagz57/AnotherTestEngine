@@ -14,8 +14,8 @@ namespace Comp
 		void ZeroOut();
 
 	private:
-		glm::vec2 translation{ 0.0f, 0.0f };
-		glm::vec2 rotation{ 0.0f, 0.0f };
-		glm::vec2 scale{ 0.0f, 0.0f };
+		glm::vec2 translation{};
+		glm::vec2 rotation{};
+		glm::vec2 scale{};
 	};
 }

@@ -454,7 +454,6 @@ copy /y  "$(SolutionDir)ThirdParty\SDL\Lib\x86\SDL2.dll" "$(SolutionDir)Game\Bin
     <ClInclude Include="Source\GameEngine\Components\RectangleCollision.h" />
     <ClInclude Include="Source\GameEngine\Components\Sprite.h" />
     <ClInclude Include="Source\GameEngine\Containers\Array.h" />
-    <ClInclude Include="Source\GameEngine\Components\AABB.h" />
     <ClInclude Include="Source\GameEngine\Components\Transform.h" />
     <ClInclude Include="Source\Universal\Globals.h" />
     <ClInclude Include="Source\GameEngine\Graphics\OpenGL.h\OpenGL.h" />

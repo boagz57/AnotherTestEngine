@@ -15,7 +15,7 @@ namespace Blz::Timing
 		auto GetPreviousFrameTime() const -> float { return frameTime; };
 
 	private:
-		float frameTime = 0;
-		unsigned int timePointLastFrame = 0;
+		float frameTime{};
+		unsigned int timePointLastFrame{};
 	};
 }

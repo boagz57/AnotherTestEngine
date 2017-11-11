@@ -20,7 +20,7 @@ namespace Blz
 		void Write(const char* message, va_list);
 
 	private:
-		const char* cp_Filename = nullptr;
-		FILE* p_OutputFile = nullptr;
+		const char* cp_Filename{ nullptr };
+		FILE* p_OutputFile{ nullptr };
 	};
 }

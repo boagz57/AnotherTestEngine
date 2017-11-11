@@ -20,9 +20,9 @@ public:
 	auto SetBackground(Blz::Graphics::Texture backgroundTexture) -> void;
 
 private:
-	uint16 numFighters = 0;
-	Blz::SmallVector<Fighter*> fighters;
-	Blz::Graphics::Texture backgroundTexture;
+	uint16 numFighters{};
+	Blz::SmallVector<Fighter*> fighters{};
+	Blz::Graphics::Texture backgroundTexture{};
 
 	friend class Blz::Input::Engine;
 	friend class Blz::Animation::Engine;

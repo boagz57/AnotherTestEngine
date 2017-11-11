@@ -23,7 +23,7 @@ namespace Comp
 
 	private:
 		uint16 scaleFactor{ 1 };
-		Blz::Graphics::Texture texture;
-		Blz::Array<Vector3D, 6> vertexData;
+		Blz::Graphics::Texture texture{};
+		Blz::Array<Vector3D, 6> vertexData{};
 	};
 }
