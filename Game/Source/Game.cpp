@@ -1,10 +1,7 @@
-#include <SDL.h>
+#include <SDL_keyboard.h>
 #include <functional>
 #include "Game.h"
 #include "GameEngine/Scene.h"
-#include "GameEngine/AI/AIEngine.h"
-#include "GameEngine/Input/InputEngine.h"
-#include "GameEngine/Animation/AnimationEngine.h"
 #include "GameEngine/Physics/GameLogic/PhysicsGameLogic.h"
 #include "GameEngine/Input/GameLogic/InputGameLogic.h"
 #include "GameEngine/Animation/GameLogic/AnimationGameLogic.h"
@@ -37,15 +34,17 @@ void Game::Init()
 	BlzInput::Bind(SDLK_a, &player, std::bind(&Game::MoveLeft, this, &player));
 	BlzInput::Bind(SDLK_SPACE, &player, std::bind(&Game::Jump, this, &player));
 	BlzInput::Bind(SDLK_p, &player, std::bind(&Game::Punch, this, &player));
+
+	BlzPhysics::SetCollisionBox(&player, 64.0f, 64.0f, player.GetPosition().GetCurrentPosition());
+	BlzPhysics::SetCollisionBox(&enemy, 64.0f, 64.0f, enemy.GetPosition().GetCurrentPosition());
 }
 
 void Game::Update()
 {
+	ec.AddContext("When updating Game");
+
 	if (player.GetVelocity().GetCurrentState().x > 0)
 		BlzAnimation::PlayAnimation(&player, walkingRight);
-
-
-	ec.AddContext("When updating Game");
 }
 
 void Game::Shutdown()

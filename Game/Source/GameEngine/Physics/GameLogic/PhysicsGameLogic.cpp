@@ -5,6 +5,13 @@ namespace Blz
 {
 	namespace Physics
 	{
+		auto GameLogic::SetCollisionBox(Fighter* const cp_fighter, sfloat width, sfloat height, glm::vec2 position) -> void
+		{
+			cp_fighter->collisionBox.position = position;
+			cp_fighter->collisionBox.width = width;
+			cp_fighter->collisionBox.height = height;
+		}
+
 		auto GameLogic::Move(Fighter* const p_fighter, const sfloat movementInX, const sfloat movementInY) -> void
 		{
 			if (movementInX != 0.0f)

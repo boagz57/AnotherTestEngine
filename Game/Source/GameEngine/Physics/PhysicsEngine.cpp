@@ -16,15 +16,6 @@ namespace Blz::Physics
 
 	auto Engine::Init(Scene& scene) -> void
 	{
-		for (Fighter* fighter : scene.fighters)
-		{
-			{//Initialize fighter collision boxes 
-				fighter->collisionBox.width = 64.0f;
-				fighter->collisionBox.height = 64.0f;
-				fighter->collisionBox.position = fighter->position.GetCurrentPosition();
-			}
-		}
-
 		//caputre references to each individual fighter to check collisions in physics update
 		for (uint16 i = 0; i < scene.fighters.size(); ++i)
 		{
@@ -46,8 +37,10 @@ namespace Blz::Physics
 
 		for (Fighter* fighter : scene.fighters)
 		{
-			//All accepted components of physics system
-			auto[updatedFighterVelocity, updatedFighterPosition, updatedFighterMovement] = [&fighter, deltaTime](Comp::Velocity fighterVelocity, Comp::Position fighterPosition, Comp::Movement fighterMovement) -> Components
+			auto AcceptedComponents = [&fighter, deltaTime](
+				Comp::Velocity fighterVelocity, 
+				Comp::Position fighterPosition, 
+				Comp::Movement fighterMovement) -> Components
 			{
 				fighterPosition.Add(fighterVelocity.GetCurrentState().x * deltaTime, fighterVelocity.GetCurrentState().y * deltaTime);
 
@@ -63,8 +56,10 @@ namespace Blz::Physics
 					fighterVelocity.ZeroOutY();
 
 				return { fighterVelocity, fighterPosition, fighterMovement };
+			};
 
-			}(fighter->velocity, fighter->position, fighter->movement);
+			auto [updatedFighterVelocity, updatedFighterPosition, updatedFighterMovement] = 
+				AcceptedComponents(fighter->velocity, fighter->position, fighter->movement);
 
 			fighter->velocity = updatedFighterVelocity;
 			fighter->position = updatedFighterPosition;
