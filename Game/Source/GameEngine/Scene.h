@@ -2,7 +2,8 @@
 #include <GLM\vec2.hpp>
 #include "Graphics\Texture.h"
 #include "Containers/SmallVector.h"
-#include "Fighter.h"
+
+class Fighter;
 
 namespace Blz { namespace Input { class Engine; }; };
 namespace Blz { namespace Animation { class Engine; }; };

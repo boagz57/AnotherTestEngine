@@ -1,5 +1,6 @@
 #pragma once
-#include "Fighter.h"
+
+class Fighter;
 
 namespace Blz::Input
 {

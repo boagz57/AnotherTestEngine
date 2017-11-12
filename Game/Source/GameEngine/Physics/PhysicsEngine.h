@@ -1,7 +1,7 @@
 #pragma once
-#include "Fighter.h"
-#include "../Scene.h"
 
+class Fighter;
+class Scene;
 
 namespace Blz::Physics
 {

@@ -13,14 +13,12 @@
 #include "Graphics\Window.h"
 #include "Scene.h"
 #include "../Game.h"
-#include "Fighter.h"
 #include "Timing\Timing.h"
 #include "Animation\AnimationEngine.h"
 #include "Input\InputEngine.h"
 #include "Graphics\GraphicsEngine.h"
 #include "AI\AIEngine.h"
 #include "Physics\PhysicsEngine.h"
-#include <SDL.h>
 
 Scene scene;
 
@@ -48,7 +46,7 @@ int main(int agrc, char** argv)
 	engineClock.Init();
 	game.Init();
 	physics.Init(scene);
-	renderer.Init(scene, window);
+	renderer.Init(scene);
 	animation.Init(scene);
 
 	//Game loop
@@ -72,7 +70,7 @@ int main(int agrc, char** argv)
 
 		window.ClearBuffers();
 
-		renderer.Update(scene, colorShaderProgram, window);
+		renderer.Update(scene, colorShaderProgram);
 
 		window.SwapBuffers();
 

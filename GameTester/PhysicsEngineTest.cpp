@@ -4,7 +4,6 @@
 #include "Scene.h"
 #include "BlueGod.h"
 #include "GameEngine\Physics\PhysicsEngine.h"
-#include "GameEngine\Physics\PhysicsEngine.cpp"
 #include "GameEngine\Physics\GameLogic\PhysicsGameLogic.h"
 
 struct PhysicsEngineTest : public testing::Test

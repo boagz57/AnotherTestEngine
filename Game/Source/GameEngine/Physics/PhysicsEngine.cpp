@@ -1,5 +1,8 @@
 #include "../Scene.h"
+#include "Fighter.h"
 #include "Components/Position.h"
+#include "Components\Velocity.h"
+#include "Components\Movement.h"
 #include "PhysicsEngine.h"
 
 namespace Blz::Physics

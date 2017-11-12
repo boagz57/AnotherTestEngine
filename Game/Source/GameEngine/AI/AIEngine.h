@@ -1,5 +1,6 @@
 #pragma once
-#include "../Scene.h"
+
+class Scene;
 
 namespace Blz::AI
 {

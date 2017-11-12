@@ -1,5 +1,6 @@
-#include <SDL.h>
+#include <SDL_events.h>
 #include "../Fighter.h"
+#include "Scene.h"
 #include "InputEngine.h"
 
 namespace Blz::Input

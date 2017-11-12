@@ -12,22 +12,18 @@
 #include "../Scene.h"
 #include "../Fighter.h"
 
-//Helper functions
-static auto ConvertWorldUnitsToScreenPixels(Comp::Position positionToConvert, uint16 windowWidth)->Comp::Position;
-static auto ConvertWorldUnitsToScreenPixels(glm::vec2 positionToConvert, uint16 windowWidth)->glm::vec2;
-
 namespace Blz::Graphics
 {
-	auto Engine::Init(Scene& scene, const Window& window) -> void
+	auto Engine::Init(Scene& scene) -> void
 	{
 		//Turn OpenGL normalized device coodinates (-1 to 1) to pixel coordinates
-		orthoProjection = glm::ortho(0.0f, static_cast<sfloat>(window.width), 0.0f, static_cast<sfloat>(window.height));
+		orthoProjection = glm::ortho(0.0f, static_cast<sfloat>(c_windowWidth), 0.0f, static_cast<sfloat>(c_windowHeight));
 
 		{
 			ec.AddContext("When setting background image location");
 
 			this->backGroundSprite.Init(scene.backgroundTexture);
-			this->backGroundSprite.SetScreenPosition(static_cast<sfloat>(window.width / 2), 120.0f);
+			this->backGroundSprite.SetScreenPosition(static_cast<sfloat>(c_windowWidth/ 2), 120.0f);
 
 			this->backgroundVBO = GL::InitializeGPUBuffer(backGroundSprite.GetVertexData());
 		};
@@ -64,7 +60,7 @@ namespace Blz::Graphics
 		};
 	}
 
-	auto Engine::Update(Scene& scene, ShaderProgram& shader, const Window& window) -> void
+	auto Engine::Update(Scene& scene, ShaderProgram& shader) -> void
 	{
 		ec.AddContext("When updating graphics engine");
 
@@ -101,36 +97,4 @@ namespace Blz::Graphics
 
 		++i;
 	}
-}
-
-auto ConvertWorldUnitsToScreenPixels(Comp::Position position, uint16 windowWidth) -> Comp::Position
-{
-	ec.AddContext("When converting my world units to screen pixels");
-
-	if (windowWidth == 1920)
-	{
-		position.MultiplyBy(12, 12);
-	}
-	else if (windowWidth == 1280)
-	{
-		position.MultiplyBy(8, 8);
-	}
-
-	return position;
-}
-
-auto ConvertWorldUnitsToScreenPixels(glm::vec2 positionToConvert, uint16 windowWidth) -> glm::vec2
-{
-	ec.AddContext("When converting my world units to screen pixels");
-
-	if (windowWidth == 1920)
-	{
-		positionToConvert *= 12;
-	}
-	else if (windowWidth == 1280)
-	{
-		positionToConvert *= 8;
-	}
-
-	return positionToConvert;
 }

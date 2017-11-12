@@ -1,8 +1,7 @@
 #pragma once
-#include <SDL.h>
-#include "Fighter.h"
-#include "Containers/UnorderedMap.h"
-#include "../Scene.h"
+#include <SDL_events.h>
+
+class Scene;
 
 namespace Blz::Input
 {

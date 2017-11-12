@@ -1,6 +1,6 @@
 #pragma once
-#include "Containers/Vector.h"
-#include "Scene.h"
+
+class Scene;
 
 namespace Blz::Animation
 {

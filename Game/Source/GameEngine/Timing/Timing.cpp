@@ -1,4 +1,4 @@
-#include <SDL.h>
+#include <SDL_timer.h>
 #include "Timing.h"
 
 namespace Blz
