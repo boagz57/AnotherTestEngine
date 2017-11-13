@@ -3,6 +3,7 @@
 #include "Components/Position.h"
 #include "Components\Velocity.h"
 #include "Components\Movement.h"
+#include "Components\RectangleCollision.h"
 #include "PhysicsEngine.h"
 
 namespace Blz::Physics
@@ -13,6 +14,8 @@ namespace Blz::Physics
 		Comp::Position position;
 		Comp::Movement movement;
 	};
+
+	static auto CollisionSystem (Comp::RectangleCollision fighter1CollBox, Comp::Position fighter1Position, Comp::RectangleCollision fighter2CollBox, Comp::Position fighter2Position) -> bool;
 
 	auto Engine::Init(Scene& scene) -> void
 	{
@@ -66,44 +69,49 @@ namespace Blz::Physics
 			fighter->movement = updatedFighterMovement;
 		};
 
-		[&]()//AABB Collsion System
+		bool fightersCollided = CollisionSystem(fighter1->collisionBox, fighter1->position, fighter2->collisionBox, fighter2->position);
+
+		if (fightersCollided)
+			LOG("Collision!");
+	};
+
+	auto CollisionSystem(Comp::RectangleCollision fighter1CollBox, Comp::Position fighter1Position, Comp::RectangleCollision fighter2CollBox, Comp::Position fighter2Position) -> bool
+	{
+		fighter1CollBox.position = fighter1Position.GetCurrentPosition();
+		fighter2CollBox.position = fighter2Position.GetCurrentPosition();
+
+		static glm::vec2 f1BottomLeftCoords{};
+		static glm::vec2 f1TopRightCoords{};
+		static glm::vec2 f2BottomLeftCoords{};
+		static glm::vec2 f2TopRightCoords{};
+
+		{//Update fighter collision box coordinates
+			f1BottomLeftCoords = { fighter1CollBox.position.x - (fighter1CollBox.width / 2),
+				fighter1CollBox.position.y };
+			f1TopRightCoords = { fighter1CollBox.position.x + (fighter1CollBox.width / 2),
+				fighter1CollBox.position.y + fighter1CollBox.height };
+
+			f2BottomLeftCoords = { fighter2CollBox.position.x - (fighter2CollBox.width / 2),
+				fighter2CollBox.position.y };
+			f2TopRightCoords = { fighter2CollBox.position.x + (fighter2CollBox.width / 2),
+				fighter2CollBox.position.y + fighter2CollBox.height };
+		}
+
+		//Exit returning NO intersection between bounding boxes
+		if (f1TopRightCoords.x < f2BottomLeftCoords.x ||
+			f1BottomLeftCoords.x > f2TopRightCoords.x)
 		{
-			fighter1->collisionBox.position = scene.fighters.at(0)->position.GetCurrentPosition();
-			fighter2->collisionBox.position = scene.fighters.at(1)->position.GetCurrentPosition();
+			return false;
+		}
 
-			static glm::vec2 f1BottomLeftCoords{};
-			static glm::vec2 f1TopRightCoords{};
-			static glm::vec2 f2BottomLeftCoords{};
-			static glm::vec2 f2TopRightCoords{};
+		//Exit returning NO intersection between bounding boxes
+		if (f1TopRightCoords.y < f2BottomLeftCoords.y ||
+			f1BottomLeftCoords.y > f2TopRightCoords.y)
+		{
+			return false;
+		}
 
-			{//Update fighter collision box coordinates
-				f1BottomLeftCoords = { fighter1->collisionBox.position.x - (fighter1->collisionBox.width / 2), 
-					fighter1->collisionBox.position.y };
-				f1TopRightCoords = { fighter1->collisionBox.position.x + (fighter1->collisionBox.width / 2), 
-					fighter1->collisionBox.position.y + fighter1->collisionBox.height };
-
-				f2BottomLeftCoords = { fighter2->collisionBox.position.x - (fighter2->collisionBox.width / 2),
-					fighter2->collisionBox.position.y };
-				f2TopRightCoords = { fighter2->collisionBox.position.x + (fighter2->collisionBox.width / 2), 
-					fighter2->collisionBox.position.y + fighter2->collisionBox.height };
-			}
-
-			//Exit returning NO intersection between bounding boxes
-			if (f1TopRightCoords.x < f2BottomLeftCoords.x ||
-				f1BottomLeftCoords.x > f2TopRightCoords.x)
-			{
-				return;
-			}
-
-			//Exit returning NO intersection between bounding boxes
-			if (f1TopRightCoords.y < f2BottomLeftCoords.y ||
-				f1BottomLeftCoords.y > f2TopRightCoords.y)
-			{
-				return;
-			}
-
-			//Else intersection and thus collision has occured!
-			LOG("Collision!\n");
-		}();
+		//Else intersection and thus collision has occured!
+		return true;
 	};
 }
