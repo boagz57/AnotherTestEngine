@@ -1,45 +1,38 @@
 #pragma once
-#include "Containers/SmallVector.h"
+#include <array>
 #include "ErrorContext.h"
 
 namespace Blz
 {
 	namespace Err
 	{
-		Blz::SmallVector<const char*> ErrContext::errorContextDescriptions;
-		Blz::SmallVector<const char*> ErrContext::errorContextData;
-		uint16 ErrContext::numContexts = 0;
+		thread_local std::array<const char*, 1000> errorContextDescriptions{};
+		thread_local std::array<const char*, 1000> errorContextData{};
+		thread_local uint16 numContexts = 0;
 
-		ErrContext::ErrContext()
+		ErrContext::ErrContext(const char* c_ErrorContextDescription, const char* c_ErrorContexData /* default value = "" */)
 		{
-			errorContextDescriptions.reserve(100);
-			errorContextData.reserve(100);
+			errorContextDescriptions.at(numContexts) = c_ErrorContextDescription;
+			errorContextData.at(numContexts) = c_ErrorContexData;
+			++numContexts;
 		}
 
 		ErrContext::~ErrContext()
 		{
-			errorContextDescriptions.pop_back();
-			errorContextData.pop_back();
 			--numContexts;
-		}
-
-		auto ErrContext::AddContext(const char* c_ErrorContextDescription, const char* c_ErrorContexData /* default value = "" */) -> void
-		{
-			#if (DEBUG)
-				errorContextDescriptions.push_back(c_ErrorContextDescription);
-				errorContextData.push_back(c_ErrorContexData);
-				++numContexts;
-			#endif
 		}
 
 		auto ErrContext::LogContext() -> void
 		{
 			for (int i = 0; i < numContexts; ++i)
 			{
+				if (errorContextDescriptions.at(i) == nullptr)
+					LOG("ERROR with an error context description string being null!!!");
+				if (errorContextData.at(i) == nullptr)
+					LOG("ERROR with error context data being null!!!");
+
 				LOG("  %s: %s\n", errorContextDescriptions.at(i), errorContextData.at(i));
 			}
 		}
 	}
 }
-
-Blz::Err::ErrContext ec;

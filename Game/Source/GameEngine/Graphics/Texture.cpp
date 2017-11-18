@@ -7,7 +7,7 @@ namespace Blz
 	{
 		Texture::Texture(const Blz::string c_imageFilePath)
 		{
-			ec.AddContext("When constructing texture from", c_imageFilePath.c_str());
+			ERRCONTEXT("When constructing texture from", c_imageFilePath.c_str());
 
 			int32 forceChannels = 4;							   
 			auto* p_ImageData = stbi_load(c_imageFilePath.c_str(), &this->width, &this->height, &channels, forceChannels);
@@ -17,10 +17,9 @@ namespace Blz
 
 			ERRASSERT(p_ImageData != nullptr, "Image data {} did not load properly!", c_imageFilePath);
 
-			//TODO: uncomment RUNTIMEASSERT below so I check if images loaded are dimensions of 2
 			//Check if image is a power of 2 (which makes image compatible with older versions of opengl, also make things easier 
 			//for openGL to work with). If check is done with bitwise operations to keep check as fast as possible
-			//RUNTIME_ASSERT((this->width & (this->width - 1)) == 0 || (this->height & (this->height - 1)) == 0, "Image dimensions are not a power of 2!");
+			RUNTIME_ASSERT((this->width & (this->width - 1)) == 0 || (this->height & (this->height - 1)) == 0, "Image dimensions are not a power of 2!");
 
 
 			{//Flip image right side up since OpenGL reads it upside down.

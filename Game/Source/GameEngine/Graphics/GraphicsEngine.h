@@ -3,9 +3,6 @@
 #include "ShaderProgram.h"
 #include "Window.h"
 #include "../Vector3D.h"
-#include "../Scene.h"
-#include "Components\Sprite.h"
-#include "Containers\Array.h"
 
 /*
 	Responsible for the actual drawing of everything on screen.

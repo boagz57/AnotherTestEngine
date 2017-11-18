@@ -9,7 +9,7 @@
 
 //Used so I can have a build configuration setup with the same settings as the default debug configuration but with LOG
 //messages turned off. Helps unclutter unit tests as before LOG messages would be scattered about unit tests in console
-#elif (DEBUGUNIT) || (PROFILEUNIT)
+#elif (DEBUG_UNIT) || (PROFILE_UNIT)
 
 #define LOG(...) ((void)0)
 

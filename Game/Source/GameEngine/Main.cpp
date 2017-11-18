@@ -11,7 +11,11 @@
 
 #include "Graphics\ShaderProgram.h"
 #include "Graphics\Window.h"
+#include "Vertex2D.h"
 #include "Timing\Timing.h"
+#include "Graphics\Texture.h"
+#include "Graphics\OpenGL\OpenGL.h"
+#include <GL\glew.h>
 #include <SDL.h>
 
 int main(int agrc, char** argv)
@@ -30,7 +34,6 @@ int main(int agrc, char** argv)
 	while (true)
 	{
 		engineClock.UpdateTime();
-
 
 		window.ClearBuffers();
 

@@ -3,7 +3,7 @@
 
 namespace Blz
 {
-	template<typename type>
-	using SmallVector = boost::container::small_vector<type, 20>;
+	template<typename type, unsigned int size>
+	using SmallVector = boost::container::small_vector<type, size>;
 }
 

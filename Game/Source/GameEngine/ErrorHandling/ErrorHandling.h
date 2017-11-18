@@ -11,6 +11,9 @@
 	#define ERRASSERT(condition, msg, ...) \
 		do { if (!(condition)) Blz::Err::ErrorReport(#condition, __func__, __FILE__, __LINE__, msg, __VA_ARGS__); } while (0)
 
+	#define ERRCONTEXT(context, data) \
+		Blz::Err::ErrContext ec(context, data);
+
 #elif (PROFILE)
 	#define ERRASSERT(condition, msg, ...)
 #endif
@@ -23,7 +26,7 @@
 		static_assert(expr, msg) 
 
 //Turn off log messages when unit testing to console log (To prevent log messages from getting in the way of unit tests assert messages)
-#elif (DEBUGUNIT) || (PROFILEUNIT)
+#elif (DEBUG_UNIT) || (PROFILE_UNIT)
 	#define RUNTIME_ASSERT 
 	#define ERRASSERT(condition, msg, ...)
 
