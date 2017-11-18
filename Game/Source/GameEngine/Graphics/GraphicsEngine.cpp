@@ -1,22 +1,6 @@
 #include <GL\glew.h>
-#include <GLM\mat4x4.hpp>
-#include <GLM\gtc\matrix_transform.hpp>
-#include <math.h>
-#include <GLM\vec2.hpp>
-#include "ShaderProgram.h"
-#include "OpenGL\OpenGL.h"
-#include "../Components/SpriteSheet.h"
-#include "Texture.h"
-#include "../Vector3D.h"
-#include "GraphicsEngine.h"
-#include "../Scene.h"
-#include "../Fighter.h"
 
-//Helper functions
-static auto ConvertWorldUnitsToScreenPixels(Comp::Position positionToConvert, uint16 windowWidth)->Comp::Position;
-static auto ConvertWorldUnitsToScreenPixels(glm::vec2 positionToConvert, uint16 windowWidth)->glm::vec2;
-
-namespace Blz::Graphics
+/*namespace Blz::Graphics
 {
 	auto Engine::Init(Scene& scene, const Window& window) -> void
 	{
@@ -137,4 +121,4 @@ auto ConvertWorldUnitsToScreenPixels(glm::vec2 positionToConvert, uint16 windowW
 	}
 
 	return positionToConvert;
-}
+}*/

@@ -11,31 +11,13 @@
 
 #include "Graphics\ShaderProgram.h"
 #include "Graphics\Window.h"
-#include "Scene.h"
-#include "../Game.h"
-#include "Fighter.h"
 #include "Timing\Timing.h"
-#include "Animation\AnimationEngine.h"
-#include "Input\InputEngine.h"
-#include "Graphics\GraphicsEngine.h"
-#include "AI\AIEngine.h"
-#include "Physics\PhysicsEngine.h"
 #include <SDL.h>
-
-Scene scene;
-
-Blz::Graphics::Engine renderer;
-Blz::Input::Engine input;
-Blz::AI::Engine AI;
-Blz::Animation::Engine animation;
-Blz::Physics::Engine physics;
 
 int main(int agrc, char** argv)
 {
 	Blz::Graphics::Window window(1280, 720);
 	Blz::Graphics::ShaderProgram colorShaderProgram;
-
-	Game game;
 
 	colorShaderProgram.Init("Source/GameEngine/Shaders/VertexShader.glsl", "Source/GameEngine/Shaders/FragmentShader.glsl");
 	colorShaderProgram.Compile();
@@ -44,28 +26,14 @@ int main(int agrc, char** argv)
 	colorShaderProgram.Link();
 	colorShaderProgram.Bind();
 
-	//Initialize systems
-	engineClock.Init();
-	game.Init();
-	renderer.Init(scene, window);
-	animation.Init(scene);
-
 	//Game loop
 	while (true)
 	{
 		engineClock.UpdateTime();
 
-		input.Update(scene);
-
-		game.Update();
-
-		physics.Update(scene);
-		AI.Update(scene);
-		animation.Update(scene);
 
 		window.ClearBuffers();
 
-		renderer.Update(scene, colorShaderProgram, window);
 
 		window.SwapBuffers();
 

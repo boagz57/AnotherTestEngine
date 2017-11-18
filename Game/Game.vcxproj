@@ -205,6 +205,8 @@
       <ForcedIncludeFiles>$(ProjectDir)Source\GameEngine\Logging\Logger.h;$(ProjectDir)Source\Universal\PrimitiveTypes.h;$(ProjectDir)Source\Universal\Globals.h;$(ProjectDir)Source\GameEngine\ErrorHandling\ErrorHandling.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
       <PreprocessorDefinitions>GLEW_STATIC;_CRT_SECURE_NO_WARNINGS;STB_IMAGE_IMPLEMENTATION;DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <MinimalRebuild>false</MinimalRebuild>
     </ClCompile>
     <PostBuildEvent>
       <Command>lib /NOLOGO /OUT:"$(ProjectDir)Binaries\$(PlatformName)-$(Configuration)\$(ProjectName).lib" "$(ProjectDir)Intermediate\$(PlatformName)-$(Configuration)\*.obj"
@@ -235,6 +237,8 @@ copy /y  "$(SolutionDir)ThirdParty\SDL\Lib\x86\SDL2.dll" "$(SolutionDir)Game\Bin
       <ForcedIncludeFiles>$(ProjectDir)Source\GameEngine\Logging\Logger.h;$(ProjectDir)Source\Universal\PrimitiveTypes.h;$(ProjectDir)Source\Universal\Globals.h;$(ProjectDir)Source\GameEngine\ErrorHandling\ErrorHandling.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
       <PreprocessorDefinitions>GLEW_STATIC;_CRT_SECURE_NO_WARNINGS;STB_IMAGE_IMPLEMENTATION;DEBUGUNIT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <MinimalRebuild>false</MinimalRebuild>
     </ClCompile>
     <PostBuildEvent>
       <Command>lib /NOLOGO /OUT:"$(ProjectDir)Binaries\$(PlatformName)-$(Configuration)\$(ProjectName).lib" "$(ProjectDir)Intermediate\$(PlatformName)-$(Configuration)\*.obj"
@@ -300,6 +304,7 @@ copy /y  "$(SolutionDir)ThirdParty\SDL\Lib\x86\SDL2.dll" "$(SolutionDir)Game\Bin
       <ForcedIncludeFiles>$(ProjectDir)Source\GameEngine\Logging\Logger.h;$(ProjectDir)Source\Universal\PrimitiveTypes.h;$(ProjectDir)Source\Universal\Globals.h;$(ProjectDir)Source\GameEngine\ErrorHandling\ErrorHandling.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -327,6 +332,7 @@ copy /y  "$(SolutionDir)ThirdParty\SDL\Lib\x86\SDL2.dll" "$(SolutionDir)Game\Bin
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -353,6 +359,7 @@ copy /y  "$(SolutionDir)ThirdParty\SDL\Lib\x86\SDL2.dll" "$(SolutionDir)Game\Bin
       <ForcedIncludeFiles>$(ProjectDir)Source\GameEngine\Logging\Logger.h;$(ProjectDir)Source\Universal\PrimitiveTypes.h;$(ProjectDir)Source\Universal\Globals.h;$(ProjectDir)Source\GameEngine\ErrorHandling\ErrorHandling.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -408,71 +415,29 @@ copy /y  "$(SolutionDir)ThirdParty\SDL\Lib\x86\SDL2.dll" "$(SolutionDir)Game\Bin
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\ThirdParty\STB_Image\Source\stb_image.cpp" />
-    <ClCompile Include="Source\BlueGod.cpp" />
-    <ClCompile Include="Source\Game.cpp" />
-    <ClCompile Include="Source\GameEngine\Animation\AnimationClip.cpp" />
-    <ClCompile Include="Source\GameEngine\Animation\AnimationEngine.cpp" />
-    <ClCompile Include="Source\GameEngine\Animation\GameLogic\AnimationGameLogic.cpp" />
-    <ClCompile Include="Source\GameEngine\Components\Animation.cpp" />
-    <ClCompile Include="Source\GameEngine\Components\Input.cpp" />
-    <ClCompile Include="Source\GameEngine\Components\Movement.cpp" />
-    <ClCompile Include="Source\GameEngine\Components\Position.cpp" />
-    <ClCompile Include="Source\GameEngine\Components\Sprite.cpp" />
-    <ClCompile Include="Source\GameEngine\Components\Transform.cpp" />
-    <ClCompile Include="Source\GameEngine\Components\Velocity.cpp" />
     <ClCompile Include="Source\GameEngine\Graphics\OpenGL\OpenGL.cpp" />
-    <ClCompile Include="Source\GameEngine\Physics\PhysicsEngine.cpp" />
-    <ClCompile Include="Source\GameEngine\Physics\GameLogic\PhysicsGameLogic.cpp" />
-    <ClCompile Include="Source\GameEngine\AI\AIEngine.cpp" />
     <ClCompile Include="Source\GameEngine\Graphics\GraphicsEngine.cpp" />
-    <ClCompile Include="Source\GameEngine\Input\InputEngine.cpp" />
-    <ClCompile Include="Source\GameEngine\Input\GameLogic\InputGameLogic.cpp" />
-    <ClCompile Include="Source\GameEngine\Scene.cpp" />
-    <ClCompile Include="Source\GameEngine\Fighter.cpp" />
     <ClCompile Include="Source\GameEngine\Graphics\Texture.cpp" />
     <ClCompile Include="Source\GameEngine\ErrorHandling\ErrorContext.cpp" />
-    <ClCompile Include="Source\GameEngine\Camera2D.cpp" />
     <ClCompile Include="Source\GameEngine\Graphics\ShaderProgram.cpp" />
     <ClCompile Include="Source\GameEngine\Graphics\GLLogging.cpp" />
     <ClCompile Include="Source\GameEngine\File.cpp" />
-    <ClCompile Include="Source\GameEngine\Components\SpriteSheet.cpp" />
     <ClCompile Include="Source\GameEngine\Timing\Timing.cpp" />
     <ClCompile Include="Source\GameEngine\Main.cpp" />
     <ClCompile Include="Source\GameEngine\Graphics\Window.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Source\BlueGod.h" />
-    <ClInclude Include="Source\Game.h" />
-    <ClInclude Include="Source\GameEngine\Animation\AnimationClip.h" />
-    <ClInclude Include="Source\GameEngine\Animation\AnimationEngine.h" />
-    <ClInclude Include="Source\GameEngine\Animation\GameLogic\AnimationGameLogic.h" />
-    <ClInclude Include="Source\GameEngine\Components\Animation.h" />
-    <ClInclude Include="Source\GameEngine\Components\Input.h" />
-    <ClInclude Include="Source\GameEngine\Components\Movement.h" />
-    <ClInclude Include="Source\GameEngine\Components\Position.h" />
-    <ClInclude Include="Source\GameEngine\Components\Sprite.h" />
     <ClInclude Include="Source\GameEngine\Containers\Array.h" />
-    <ClInclude Include="Source\GameEngine\Components\AABB.h" />
-    <ClInclude Include="Source\GameEngine\Components\Transform.h" />
     <ClInclude Include="Source\Universal\Globals.h" />
     <ClInclude Include="Source\GameEngine\Graphics\OpenGL.h\OpenGL.h" />
     <ClInclude Include="Source\GameEngine\Logging\Logger.h" />
-    <ClInclude Include="Source\GameEngine\Physics\PhysicsEngine.h" />
-    <ClInclude Include="Source\GameEngine\Physics\GameLogic\PhysicsGameLogic.h" />
-    <ClInclude Include="Source\GameEngine\AI\AIEngine.h" />
     <ClInclude Include="Source\GameEngine\Graphics\GraphicsEngine.h" />
-    <ClInclude Include="Source\GameEngine\Input\InputEngine.h" />
-    <ClInclude Include="Source\GameEngine\Input\GameLogic\InputGameLogic.h" />
-    <ClInclude Include="Source\GameEngine\Scene.h" />
     <ClInclude Include="Source\GameEngine\ErrorHandling\ErrorContext.h" />
     <ClInclude Include="Source\GameEngine\ErrorHandling\ErrorHandling.h" />
-    <ClInclude Include="Source\GameEngine\Fighter.h" />
-    <ClInclude Include="Source\GameEngine\Camera2D.h" />
     <ClInclude Include="Source\GameEngine\Graphics\Texture.h" />
     <ClInclude Include="Source\GameEngine\Graphics\ShaderProgram.h" />
     <ClInclude Include="Source\GameEngine\Graphics\GLLogging.h" />
     <ClInclude Include="Source\GameEngine\File.h" />
-    <ClInclude Include="Source\GameEngine\Components\SpriteSheet.h" />
     <ClInclude Include="Source\GameEngine\Timing\Timing.h" />
     <ClInclude Include="Source\GameEngine\Vector3D.h" />
     <ClInclude Include="Source\GameEngine\Graphics\Window.h" />
@@ -481,7 +446,6 @@ copy /y  "$(SolutionDir)ThirdParty\SDL\Lib\x86\SDL2.dll" "$(SolutionDir)Game\Bin
     <ClInclude Include="Source\GameEngine\Containers\SmallVector.h" />
     <ClInclude Include="Source\GameEngine\Containers\UnorderedMap.h" />
     <ClInclude Include="Source\GameEngine\Containers\Vector.h" />
-    <ClInclude Include="Source\GameEngine\Components\Velocity.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets" />
