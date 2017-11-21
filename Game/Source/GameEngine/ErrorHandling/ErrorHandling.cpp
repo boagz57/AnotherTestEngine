@@ -1,14 +1,14 @@
-#pragma once
 #include <array>
-#include "ErrorContext.h"
+#include <cstdint>
+#include "ErrorHandling.h"
 
 namespace Blz
 {
 	namespace Err
 	{
-		thread_local std::array<const char*, 1000> errorContextDescriptions{};
-		thread_local std::array<const char*, 1000> errorContextData{};
-		thread_local uint16 numContexts = 0;
+		thread_local std::array<const char*, 100> errorContextDescriptions{};
+		thread_local std::array<const char*, 100> errorContextData{};
+		thread_local uint16_t numContexts = 0;
 
 		ErrContext::ErrContext(const char* c_ErrorContextDescription, const char* c_ErrorContexData /* default value = "" */)
 		{

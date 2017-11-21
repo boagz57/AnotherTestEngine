@@ -12,14 +12,14 @@ namespace Blz
 			int32 forceChannels = 4;							   
 			auto* p_ImageData = stbi_load(c_imageFilePath.c_str(), &this->width, &this->height, &channels, forceChannels);
 
-			RUNTIME_ASSERT(this->width >= 0, "Image width not specified!");
-			RUNTIME_ASSERT(this->height >= 0, "Image height not specified!");
+			BLZ_RUNTIME_ASSERT(this->width >= 0, "Image width not specified!");
+			BLZ_RUNTIME_ASSERT(this->height >= 0, "Image height not specified!");
 
 			ERRASSERT(p_ImageData != nullptr, "Image data {} did not load properly!", c_imageFilePath);
 
 			//Check if image is a power of 2 (which makes image compatible with older versions of opengl, also make things easier 
 			//for openGL to work with). If check is done with bitwise operations to keep check as fast as possible
-			RUNTIME_ASSERT((this->width & (this->width - 1)) == 0 || (this->height & (this->height - 1)) == 0, "Image dimensions are not a power of 2!");
+			BLZ_RUNTIME_ASSERT((this->width & (this->width - 1)) == 0 || (this->height & (this->height - 1)) == 0, "Image dimensions are not a power of 2!");
 
 
 			{//Flip image right side up since OpenGL reads it upside down.

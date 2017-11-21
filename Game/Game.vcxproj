@@ -202,7 +202,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>$(SolutionDir)ThirdParty\GLM\Include\;$(SolutionDir)ThirdParty\STB_Image\Include;$(SolutionDir)ThirdParty\SDL\Include;$(SolutionDir)ThirdParty\GLEW\Include\;$(SolutionDir)ThirdParty\Boost\Include;$(SolutionDir)ThirdParty\SpdLog\Include\;$(ProjectDir)Source\GameEngine\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <ForcedIncludeFiles>$(ProjectDir)Source\GameEngine\Logging\Logger.h;$(ProjectDir)Source\Universal\PrimitiveTypes.h;$(ProjectDir)Source\Universal\Globals.h;$(ProjectDir)Source\GameEngine\ErrorHandling\ErrorHandling.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles>$(ProjectDir)Source\Universal\PrimitiveTypes.h;$(ProjectDir)Source\Universal\Globals.h;$(ProjectDir)Source\GameEngine\ErrorHandling\Logger.h;$(ProjectDir)Source\GameEngine\ErrorHandling\ErrorHandling.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
       <PreprocessorDefinitions>GLEW_STATIC;_CRT_SECURE_NO_WARNINGS;DEBUG;STB_IMAGE_IMPLEMENTATION;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
@@ -356,9 +356,9 @@ copy /y  "$(SolutionDir)ThirdParty\SDL\Lib\x86\SDL2.dll" "$(SolutionDir)Game\Bin
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>$(SolutionDir)ThirdParty\GLM\Include\;$(SolutionDir)ThirdParty\STB_Image\Include;$(SolutionDir)ThirdParty\SDL\Include;$(SolutionDir)ThirdParty\GLEW\Include\;$(SolutionDir)ThirdParty\Boost\Include;$(SolutionDir)ThirdParty\SpdLog\Include\;$(ProjectDir)Source\GameEngine\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>GLEW_STATIC;_CRT_SECURE_NO_WARNINGS;PROFILE_UNIT;STB_IMAGE_IMPLEMENTATION;PROFILEUNIT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ForcedIncludeFiles>$(ProjectDir)Source\GameEngine\Logging\Logger.h;$(ProjectDir)Source\Universal\PrimitiveTypes.h;$(ProjectDir)Source\Universal\Globals.h;$(ProjectDir)Source\GameEngine\ErrorHandling\ErrorHandling.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles>$(ProjectDir)Source\Universal\PrimitiveTypes.h;$(ProjectDir)Source\Universal\Globals.h;$(ProjectDir)Source\GameEngine\ErrorHandling\ErrorHandling.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
-      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
@@ -418,7 +418,7 @@ copy /y  "$(SolutionDir)ThirdParty\SDL\Lib\x86\SDL2.dll" "$(SolutionDir)Game\Bin
     <ClCompile Include="Source\GameEngine\Graphics\OpenGL\OpenGL.cpp" />
     <ClCompile Include="Source\GameEngine\Graphics\GraphicsEngine.cpp" />
     <ClCompile Include="Source\GameEngine\Graphics\Texture.cpp" />
-    <ClCompile Include="Source\GameEngine\ErrorHandling\ErrorContext.cpp" />
+    <ClCompile Include="Source\GameEngine\ErrorHandling\ErrorHandling.cpp" />
     <ClCompile Include="Source\GameEngine\Graphics\ShaderProgram.cpp" />
     <ClCompile Include="Source\GameEngine\Graphics\GLLogging.cpp" />
     <ClCompile Include="Source\GameEngine\File.cpp" />
@@ -430,9 +430,8 @@ copy /y  "$(SolutionDir)ThirdParty\SDL\Lib\x86\SDL2.dll" "$(SolutionDir)Game\Bin
     <ClInclude Include="Source\GameEngine\Containers\Array.h" />
     <ClInclude Include="Source\Universal\Globals.h" />
     <ClInclude Include="Source\GameEngine\Graphics\OpenGL.h\OpenGL.h" />
-    <ClInclude Include="Source\GameEngine\Logging\Logger.h" />
+    <ClInclude Include="Source\GameEngine\ErrorHandling\Logger.h" />
     <ClInclude Include="Source\GameEngine\Graphics\GraphicsEngine.h" />
-    <ClInclude Include="Source\GameEngine\ErrorHandling\ErrorContext.h" />
     <ClInclude Include="Source\GameEngine\ErrorHandling\ErrorHandling.h" />
     <ClInclude Include="Source\GameEngine\Graphics\Texture.h" />
     <ClInclude Include="Source\GameEngine\Graphics\ShaderProgram.h" />
