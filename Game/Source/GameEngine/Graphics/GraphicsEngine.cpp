@@ -20,8 +20,6 @@ namespace Blz::Graphics
 		orthoProjection = glm::ortho(0.0f, static_cast<sfloat>(c_windowWidth), 0.0f, static_cast<sfloat>(c_windowHeight));
 
 		{
-			ec.AddContext("When setting background image location");
-
 			this->backGroundSprite.Init(scene.backgroundTexture);
 			this->backGroundSprite.SetScreenPosition(static_cast<sfloat>(c_windowWidth/ 2), 120.0f);
 
@@ -33,8 +31,6 @@ namespace Blz::Graphics
 		for (Fighter* fighter : scene.fighters)
 		{
 			{
-				ec.AddContext("When setting fighter sprite intial screen location and UVs");
-
 				fighter->spriteSheet.SetScreenPosition(fighter->position.GetCurrentPosition().x, fighter->position.GetCurrentPosition().y);
 
 				{//Set initial sprite UV location
@@ -62,8 +58,6 @@ namespace Blz::Graphics
 
 	auto Engine::Update(Scene& scene, ShaderProgram& shader) -> void
 	{
-		ec.AddContext("When updating graphics engine");
-
 		GLuint transformationMatrixUniformLocation = shader.GetUniformLocation("transformationMatrix");
 
 		GLuint uniformLocation = shader.GetUniformLocation("basicTexture");
@@ -76,8 +70,6 @@ namespace Blz::Graphics
 		for (Fighter* fighter : scene.fighters)
 		{
 			{
-				ec.AddContext("When translating fighter verticies to move fighter");
-
 				glm::vec2 translationAmount = fighter->position.GetCurrentPosition() - fighter->originalPosition;
 
 				//Round final pixel positions so fractional pixel values can't cause distorted artwork

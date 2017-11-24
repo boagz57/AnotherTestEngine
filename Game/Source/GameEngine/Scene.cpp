@@ -8,8 +8,6 @@ Scene::Scene()
 
 auto Scene::AddFighter(Fighter* p_fighter) -> void 
 {
-	ec.AddContext("When adding a fighter");
-
 	fighters.push_back(p_fighter); 
 }
 

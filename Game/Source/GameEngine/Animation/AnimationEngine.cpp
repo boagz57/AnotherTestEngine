@@ -15,16 +15,12 @@ namespace Blz::Animation
 
 	auto Engine::Update(Scene& scene) -> void
 	{
-		ec.AddContext("When updating Animation engine");
-
 		for (Fighter* fighter : scene.fighters)
 		{
 			//Set next animation frame
 			[](Comp::Animation& fighterAnimation, Comp::SpriteSheet& fighterSprite, const Comp::Velocity& fighterVelocity,
 				const Comp::Position& fighterPosition, const Comp::Input& input)
 			{
-				ec.AddContext("When trying to set next animation frame to display");
-
 				Comp::Input fighterInput = input;
 
 				if (std::abs(std::floor(fighterVelocity.GetCurrentState().x)) == 0.0f &&

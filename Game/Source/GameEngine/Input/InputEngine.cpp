@@ -7,8 +7,6 @@ namespace Blz::Input
 {
 	auto Engine::Update(Scene& scene) -> void
 	{
-		ec.AddContext("When updating input engine");
-
 		for (Fighter* fighter : scene.fighters)
 		{
 			if (fighter->input.IsControllable())

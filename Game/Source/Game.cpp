@@ -10,8 +10,6 @@ extern Scene scene;
 
 void Game::Init()
 {
-	ec.AddContext("When initializing Game");
-
 	Blz::Graphics::Texture fighterTexture("CatFighter.png");
 	Blz::Graphics::Texture backgroundTexture("BackgroundStage.png");
 
@@ -41,8 +39,6 @@ void Game::Init()
 
 void Game::Update()
 {
-	ec.AddContext("When updating Game");
-
 	if (player.GetVelocity().GetCurrentState().x > 0)
 		BlzAnimation::PlayAnimation(&player, walkingRight);
 }

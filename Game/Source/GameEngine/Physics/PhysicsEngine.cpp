@@ -36,8 +36,6 @@ namespace Blz::Physics
 
 	auto Engine::Update(Scene& scene, sfloat deltaTime) -> void
 	{
-		ec.AddContext("When updating Physics engine");
-
 		for (Fighter* fighter : scene.fighters)
 		{
 			auto AcceptedComponents = [&fighter, deltaTime](

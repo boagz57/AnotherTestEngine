@@ -2,11 +2,10 @@
 #include "ErrorHandling\ErrorContext.h"
 #include "Timing\Timing.h"
 
-extern Blz::Err::ErrContext ec;
 extern Blz::Timing::EngineClock engineClock;
 
-constexpr uint16 c_windowWidth = 1920;
-constexpr uint16 c_windowHeight = 1080;
+constexpr uint16 c_windowWidth = 1280;
+constexpr uint16 c_windowHeight = 720;
 
 const sfloat c_levelBorderMaxX = 1920.0f;
 const sfloat c_levelBorderMaxY = 1080.0f;
