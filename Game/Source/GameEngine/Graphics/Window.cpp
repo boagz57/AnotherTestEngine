@@ -34,7 +34,7 @@ namespace Blz::Graphics
 		p_window = SDL_CreateWindow("Shadow Gods", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, this->width, this->height, SDL_WINDOW_OPENGL);
 		if (!p_window)
 		{
-			LOG("ERROR: SDL window failed to initialize! SDL error: %s\n", SDL_GetError());
+			CONSOLE("ERROR: SDL window failed to initialize! SDL error: %s\n", SDL_GetError());
 			SDL_Quit();
 		}
 
@@ -47,13 +47,13 @@ namespace Blz::Graphics
 		//Log current computer opengl version and capabilities
 		Graphics::RestartGLLogFile();
 		Graphics::LogToFile("OpenGL Version %s\n\n", glGetString(GL_VERSION));
-		LOG("OpenGL Version %s\n\n", glGetString(GL_VERSION));
+		CONSOLE("OpenGL Version %s\n\n", glGetString(GL_VERSION));
 		Graphics::LogCurrentGPUCapabilites();
 
 		glewExperimental = GL_TRUE;
 		if (glewInit() != GLEW_OK)
 		{
-			LOG("ERROR: GLEW failed to initialize!");
+			CONSOLE("ERROR: GLEW failed to initialize!");
 
 			SDL_GL_DeleteContext(glContext);
 			SDL_DestroyWindow(p_window);
@@ -100,38 +100,38 @@ namespace Blz::Graphics
 		// ignore non-significant error/warning codes
 		if (id == 131169 || id == 131185 || id == 131218 || id == 131204) return;
 
-		LOG("---------------\n");
-		LOG("OpenGL Debug message (%i): %s\n", id, message);
+		CONSOLE("---------------\n");
+		CONSOLE("OpenGL Debug message (%i): %s\n", id, message);
 
 		switch (source)
 		{
-		case GL_DEBUG_SOURCE_API:             LOG("Source: API"); break;
-		case GL_DEBUG_SOURCE_WINDOW_SYSTEM:   LOG("Source: Window System"); break;
-		case GL_DEBUG_SOURCE_SHADER_COMPILER: LOG("Source: Shader Compiler"); break;
-		case GL_DEBUG_SOURCE_THIRD_PARTY:     LOG("Source: Third Party"); break;
-		case GL_DEBUG_SOURCE_APPLICATION:     LOG("Source: Application"); break;
-		case GL_DEBUG_SOURCE_OTHER:           LOG("Source: Other"); break;
-		}LOG("\n");
+		case GL_DEBUG_SOURCE_API:             CONSOLE("Source: API"); break;
+		case GL_DEBUG_SOURCE_WINDOW_SYSTEM:   CONSOLE("Source: Window System"); break;
+		case GL_DEBUG_SOURCE_SHADER_COMPILER: CONSOLE("Source: Shader Compiler"); break;
+		case GL_DEBUG_SOURCE_THIRD_PARTY:     CONSOLE("Source: Third Party"); break;
+		case GL_DEBUG_SOURCE_APPLICATION:     CONSOLE("Source: Application"); break;
+		case GL_DEBUG_SOURCE_OTHER:           CONSOLE("Source: Other"); break;
+		}CONSOLE("\n");
 
 		switch (type)
 		{
-		case GL_DEBUG_TYPE_ERROR:               LOG("Type: Error"); break;
-		case GL_DEBUG_TYPE_DEPRECATED_BEHAVIOR: LOG("Type: Deprecated Behaviour"); break;
-		case GL_DEBUG_TYPE_UNDEFINED_BEHAVIOR:  LOG("Type: Undefined Behaviour"); break;
-		case GL_DEBUG_TYPE_PORTABILITY:         LOG("Type: Portability"); break;
-		case GL_DEBUG_TYPE_PERFORMANCE:         LOG("Type: Performance"); break;
-		case GL_DEBUG_TYPE_MARKER:              LOG("Type: Marker"); break;
-		case GL_DEBUG_TYPE_PUSH_GROUP:          LOG("Type: Push Group"); break;
-		case GL_DEBUG_TYPE_POP_GROUP:           LOG("Type: Pop Group"); break;
-		case GL_DEBUG_TYPE_OTHER:               LOG("Type: Other"); break;
-		} LOG("\n");
+		case GL_DEBUG_TYPE_ERROR:               CONSOLE("Type: Error"); break;
+		case GL_DEBUG_TYPE_DEPRECATED_BEHAVIOR: CONSOLE("Type: Deprecated Behaviour"); break;
+		case GL_DEBUG_TYPE_UNDEFINED_BEHAVIOR:  CONSOLE("Type: Undefined Behaviour"); break;
+		case GL_DEBUG_TYPE_PORTABILITY:         CONSOLE("Type: Portability"); break;
+		case GL_DEBUG_TYPE_PERFORMANCE:         CONSOLE("Type: Performance"); break;
+		case GL_DEBUG_TYPE_MARKER:              CONSOLE("Type: Marker"); break;
+		case GL_DEBUG_TYPE_PUSH_GROUP:          CONSOLE("Type: Push Group"); break;
+		case GL_DEBUG_TYPE_POP_GROUP:           CONSOLE("Type: Pop Group"); break;
+		case GL_DEBUG_TYPE_OTHER:               CONSOLE("Type: Other"); break;
+		} CONSOLE("\n");
 
 		switch (severity)
 		{
-		case GL_DEBUG_SEVERITY_HIGH:         LOG("Severity: high"); break;
-		case GL_DEBUG_SEVERITY_MEDIUM:       LOG("Severity: medium"); break;
-		case GL_DEBUG_SEVERITY_LOW:          LOG("Severity: low"); break;
-		case GL_DEBUG_SEVERITY_NOTIFICATION: LOG("Severity: notification"); break;
-		}LOG("\n\n");
+		case GL_DEBUG_SEVERITY_HIGH:         CONSOLE("Severity: high"); break;
+		case GL_DEBUG_SEVERITY_MEDIUM:       CONSOLE("Severity: medium"); break;
+		case GL_DEBUG_SEVERITY_LOW:          CONSOLE("Severity: low"); break;
+		case GL_DEBUG_SEVERITY_NOTIFICATION: CONSOLE("Severity: notification"); break;
+		}CONSOLE("\n\n");
 	}
 }

@@ -2,7 +2,7 @@
 #include <cstdint>
 #include "ErrorContext.h"
 
-namespace Blz
+namespace Bgz
 {
 	namespace Err
 	{
@@ -27,11 +27,11 @@ namespace Blz
 			for (int i = 0; i < numContexts; ++i)
 			{
 				if (errorContextDescriptions.at(i) == nullptr)
-					LOG("ERROR with an error context description string being null!!!");
+					CONSOLE("ERROR with an error context description string being null!!!");
 				if (errorContextData.at(i) == nullptr)
-					LOG("ERROR with error context data being null!!!");
+					CONSOLE("ERROR with error context data being null!!!");
 
-				LOG("  %s: %s\n", errorContextDescriptions.at(i), errorContextData.at(i));
+				CONSOLE("  %s: %s\n", errorContextDescriptions.at(i), errorContextData.at(i));
 			}
 		}
 	}

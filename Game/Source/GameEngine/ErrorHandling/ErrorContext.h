@@ -1,6 +1,6 @@
 #pragma once
 
-namespace Blz
+namespace Bgz
 {
 	namespace Err
 	{

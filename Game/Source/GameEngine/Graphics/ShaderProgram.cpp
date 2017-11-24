@@ -23,7 +23,7 @@ namespace Blz::Graphics
 			std::ifstream shaderFileInputStream(c_ShaderFilePath);
 			if (!shaderFileInputStream.good())
 			{
-				LOG("%s Shader File failed to load!\n", c_TypeOfShader);
+				CONSOLE("%s Shader File failed to load!\n", c_TypeOfShader);
 			};
 
 			return Blz::string(std::istreambuf_iterator<char>(shaderFileInputStream), std::istreambuf_iterator<char>());
@@ -71,7 +71,7 @@ namespace Blz::Graphics
 
 		if (!CheckShaderProgramStatus(programID))
 		{
-			LOG("Failed to link openGL program");
+			CONSOLE("Failed to link openGL program");
 			return;
 		}
 
@@ -113,7 +113,7 @@ namespace Blz::Graphics
 			GLsizei bufferSize;
 			glGetShaderInfoLog(shaderID, infoLogLength, &bufferSize, buffer);
 
-			LOG(buffer);
+			CONSOLE(buffer);
 
 			delete[] buffer;
 
@@ -137,7 +137,7 @@ namespace Blz::Graphics
 			GLsizei bufferSize;
 			glGetProgramInfoLog(programID, infoLogLength, &bufferSize, buffer);
 
-			LOG(buffer);
+			CONSOLE(buffer);
 
 			delete[] buffer;
 

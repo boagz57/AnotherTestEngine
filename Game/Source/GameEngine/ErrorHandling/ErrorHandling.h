@@ -8,11 +8,25 @@
 #include "ErrorContext.h"
 
 #if (DEBUG)
+	#define BGZ_ERRCTXT1(errorDescription) \
+		Bgz::Err::ErrContext ec(errorDescription);
+#else
+	#define BGZ_ERRCTXT1(errorDescription) ((void)0)
+#endif
+
+#if(DEBUG)
+	#define BGZ_ERRCTXT2(errorDescription, errorData) \
+		Bgz::Err::ErrContext ec(errorDescription, errorData);
+#else
+	#define BGZ_ERRCTXT2(errorDescription) ((void)0)
+#endif
+
+#if (DEBUG)
 	#define ERRASSERT(condition, msg, ...) \
-		do { if (!(condition)) Blz::Err::ErrorReport(#condition, __func__, __FILE__, __LINE__, msg, __VA_ARGS__); } while (0)
+		do { if (!(condition)) Bgz::Err::ErrorReport(#condition, __func__, __FILE__, __LINE__, msg, __VA_ARGS__); } while (0)
 
 #elif (PROFILE)
-	#define ERRASSERT(condition, msg, ...)
+	#define ERRASSERT(condition, msg, ...) ((void)0)
 #endif
 
 #if (DEBUG) || (PROFILE)
@@ -34,7 +48,7 @@
 	#define ERRASSERT(condition, msg, ...)
 #endif
 
-namespace Blz
+namespace Bgz
 {
 	namespace Err
 	{

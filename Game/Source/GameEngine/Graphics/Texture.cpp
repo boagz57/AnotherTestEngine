@@ -7,11 +7,15 @@ namespace Blz
 	{
 		Texture::Texture(const Blz::string c_imageFilePath)
 		{
+			BGZ_ERRCTXT2("When loading texture", c_imageFilePath.c_str());
+
 			int32 forceChannels = 4;							   
 			auto* p_ImageData = stbi_load(c_imageFilePath.c_str(), &this->width, &this->height, &channels, forceChannels);
 
 			RUNTIME_ASSERT(this->width >= 0, "Image width not specified!");
 			RUNTIME_ASSERT(this->height >= 0, "Image height not specified!");
+
+			p_ImageData = nullptr;
 
 			ERRASSERT(p_ImageData != nullptr, "Image data {} did not load properly!", c_imageFilePath);
 

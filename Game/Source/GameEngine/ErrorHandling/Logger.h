@@ -4,7 +4,7 @@
 
 #if (DEBUG) || (PROFILE)
 
-#define LOG(...) \
+#define CONSOLE(...) \
 	do { fprintf_s(stderr, __VA_ARGS__); } while (0)
 
 //Used so I can have a build configuration setup with the same settings as the default debug configuration but with LOG

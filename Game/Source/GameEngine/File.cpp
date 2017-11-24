@@ -31,7 +31,7 @@ namespace Blz
 	{
 		if (!p_OutputFile)
 		{
-			LOG("ERROR: could not open %s file for appending\n", this->cp_Filename);
+			CONSOLE("ERROR: could not open %s file for appending\n", this->cp_Filename);
 			return false;
 		}
 

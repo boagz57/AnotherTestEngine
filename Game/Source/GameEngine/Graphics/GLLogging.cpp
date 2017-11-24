@@ -20,7 +20,7 @@ namespace Blz::Graphics
 		File glLogFile(GL_LOG_FILE);
 		if (!glLogFile.Good())
 		{
-			LOG("ERROR: could not open GL_LOG_FILE log file %s for writing\n", GL_LOG_FILE);
+			CONSOLE("ERROR: could not open GL_LOG_FILE log file %s for writing\n", GL_LOG_FILE);
 			return false;
 		}
 
@@ -173,7 +173,7 @@ namespace Blz::Graphics
 
 		int32 result = -1;
 		glGetProgramiv(shaderProgramID, GL_VALIDATE_STATUS, &result);
-		LOG("program %i GL_VALIDATE_STATUS = %s\n", shaderProgramID, (result == GL_TRUE) ? "VALID" : "INVALID!");
+		CONSOLE("program %i GL_VALIDATE_STATUS = %s\n", shaderProgramID, (result == GL_TRUE) ? "VALID" : "INVALID!");
 
 		if (result != GL_TRUE)
 		{
@@ -200,7 +200,7 @@ namespace Blz::Graphics
 
 		if (!glLogFile.Good())
 		{
-			LOG("ERROR: could not open %s file for appending\n", GL_LOG_FILE);
+			CONSOLE("ERROR: could not open %s file for appending\n", GL_LOG_FILE);
 			return false;
 		}
 

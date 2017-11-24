@@ -42,6 +42,7 @@ int main(int agrc, char** argv)
 	colorShaderProgram.Link();
 	colorShaderProgram.Bind();
 
+	BGZ_ERRCTXT1("When first initializing system");
 	//Initialize systems
 	engineClock.Init();
 	game.Init();

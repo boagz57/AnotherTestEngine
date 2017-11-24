@@ -28,7 +28,7 @@ namespace Blz
 				FPS = static_cast<float>((frames / (.001 * (SDL_GetTicks() - startTime))));
 				startTime = SDL_GetTicks();
 				frames = 0;
-				LOG("FPS: %f\n", FPS);
+				CONSOLE("FPS: %f\n", FPS);
 			}
 		}
 

@@ -39,6 +39,8 @@ void Game::Init()
 
 void Game::Update()
 {
+	BGZ_ERRCTXT1("When updating game");
+
 	if (player.GetVelocity().GetCurrentState().x > 0)
 		BlzAnimation::PlayAnimation(&player, walkingRight);
 }

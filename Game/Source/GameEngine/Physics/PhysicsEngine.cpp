@@ -70,7 +70,7 @@ namespace Blz::Physics
 		bool fightersCollided = CollisionSystem(fighter1->collisionBox, fighter1->position, fighter2->collisionBox, fighter2->position);
 
 		if (fightersCollided)
-			LOG("Collision!");
+			CONSOLE("Collision!");
 	};
 
 	auto CollisionSystem(Comp::RectangleCollision fighter1CollBox, Comp::Position fighter1Position, Comp::RectangleCollision fighter2CollBox, Comp::Position fighter2Position) -> bool
