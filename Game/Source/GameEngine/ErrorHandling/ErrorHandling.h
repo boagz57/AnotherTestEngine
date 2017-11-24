@@ -1,7 +1,4 @@
 #pragma once
-
-#define SPDLOG_DEBUG_ON
-#include <SDL.h>
 #include <SpdLog\spdlog.h>
 #include <assert.h>
 #include <boost/assert.hpp>
@@ -67,7 +64,6 @@ namespace Bgz
 
 			console->error(combinedErrMessages.c_str(), args...);
 			console->info("In function {}() \n        {}: {}", functionName, file, lineNumber);
-			SDL_Quit();
 			exit(0);
 		}
 	}
