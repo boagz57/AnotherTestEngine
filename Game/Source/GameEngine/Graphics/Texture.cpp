@@ -12,12 +12,12 @@ namespace Blz
 			int32 forceChannels = 4;							   
 			auto* p_ImageData = stbi_load(c_imageFilePath.c_str(), &this->width, &this->height, &channels, forceChannels);
 
-			RUNTIME_ASSERT(this->width >= 0, "Image width not specified!");
-			RUNTIME_ASSERT(this->height >= 0, "Image height not specified!");
+			BGZ_RUNTIME_ASSERT(this->width >= 0, "Image width not specified!");
+			BGZ_RUNTIME_ASSERT(this->height >= 0, "Image height not specified!");
 
 			p_ImageData = nullptr;
 
-			ERRASSERT(p_ImageData != nullptr, "Image data {} did not load properly!", c_imageFilePath);
+			BGZ_ERRASSERT(p_ImageData != nullptr, "Image data {} did not load properly!", c_imageFilePath);
 
 			//TODO: uncomment RUNTIMEASSERT below so I check if images loaded are dimensions of 2
 			//Check if image is a power of 2 (which makes image compatible with older versions of opengl, also make things easier 
@@ -52,7 +52,7 @@ namespace Blz
 			{//Send down imageData to openGL and set some default parameters for image
 				glGenTextures(1, &(this->id));
 
-				ERRASSERT(this->id != 0, "Texture was not properly generated!");
+				BGZ_ERRASSERT(this->id != 0, "Texture was not properly generated!");
 
 				glActiveTexture(GL_TEXTURE0);
 				glBindTexture(GL_TEXTURE_2D, this->id);

@@ -35,7 +35,7 @@ namespace Comp
 
 	void Input::KeyPressed(const int32 key, Fighter * const fighter)
 	{
-		RUNTIME_ASSERT(keyMovementBindings.find(key) != keyMovementBindings.end(), "Input key has not been assigned!");
+		BGZ_RUNTIME_ASSERT(keyMovementBindings.find(key) != keyMovementBindings.end(), "Input key has not been assigned!");
 
 		auto action = keyMovementBindings[key];
 		action(fighter);

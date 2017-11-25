@@ -20,7 +20,7 @@ namespace Comp
 
 	GLuint const SpriteSheet::GetTextureID() const
 	{
-		ERRASSERT(texture.GetID() != 0, "Spritesheet Texture has not been initialized properly!");
+		BGZ_ERRASSERT(texture.GetID() != 0, "Spritesheet Texture has not been initialized properly!");
 		return texture.GetID();
 	}
 

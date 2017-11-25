@@ -26,8 +26,8 @@ namespace Blz
 
 			auto DrawTexture(Blz::Array<Vector3D, 6> vertexData, GLuint textureID, GLuint VBOID) -> void
 			{
-				RUNTIME_ASSERT(textureID != 0, "Texture id is invalid!");
-				RUNTIME_ASSERT(VBOID != 0, "VBO id is invalid!");
+				BGZ_RUNTIME_ASSERT(textureID != 0, "Texture id is invalid!");
+				BGZ_RUNTIME_ASSERT(VBOID != 0, "VBO id is invalid!");
 
 				glBindTexture(GL_TEXTURE_2D, textureID);
 

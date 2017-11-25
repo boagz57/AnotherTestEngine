@@ -12,8 +12,8 @@ namespace Comp
 
 	void Animation::SetCurrentAnimation(uint16 const animationID)
 	{
-		RUNTIME_ASSERT(animationMap.find(animationID) != animationMap.end(), "Animation not found!");
-		RUNTIME_ASSERT(animationMap.find(defaultAnimationID) != animationMap.end(), "No default animation specified for fighter!");
+		BGZ_RUNTIME_ASSERT(animationMap.find(animationID) != animationMap.end(), "Animation not found!");
+		BGZ_RUNTIME_ASSERT(animationMap.find(defaultAnimationID) != animationMap.end(), "No default animation specified for fighter!");
 
 		currentAnimation = animationMap.find(animationID)->second;
 		animationMap.at(animationID).CycleAnimation();

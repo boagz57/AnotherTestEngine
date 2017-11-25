@@ -1,5 +1,5 @@
 #include <array>
-#include <cstdint>
+#include "Logger.h"
 #include "ErrorContext.h"
 
 namespace Bgz
@@ -8,7 +8,7 @@ namespace Bgz
 	{
 		thread_local std::array<const char*, 100> errorContextDescriptions{};
 		thread_local std::array<const char*, 100> errorContextData{};
-		thread_local uint16_t numContexts = 0;
+		thread_local unsigned int numContexts = 0;
 
 		ErrContext::ErrContext(const char* c_ErrorContextDescription, const char* c_ErrorContexData /* default value = "" */)
 		{
@@ -24,14 +24,14 @@ namespace Bgz
 
 		auto ErrContext::LogContext() -> void
 		{
-			for (int i = 0; i < numContexts; ++i)
+			for (unsigned int i = 0; i < numContexts; ++i)
 			{
 				if (errorContextDescriptions.at(i) == nullptr)
-					CONSOLE("ERROR with an error context description string being null!!!");
+					fprintf_s(stderr, "ERROR with an error context description string being null!!!");
 				if (errorContextData.at(i) == nullptr)
-					CONSOLE("ERROR with error context data being null!!!");
+					fprintf_s(stderr, "ERROR with error context data being null!!!");
 
-				CONSOLE("  %s: %s\n", errorContextDescriptions.at(i), errorContextData.at(i));
+				fprintf_s(stderr, "  %s: %s\n", errorContextDescriptions.at(i), errorContextData.at(i));
 			}
 		}
 	}

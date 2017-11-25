@@ -4,45 +4,29 @@
 #include <boost/assert.hpp>
 #include "ErrorContext.h"
 
-#if (DEBUG)
+#if BGZ_ERRHANDLING_ON
 	#define BGZ_ERRCTXT1(errorDescription) \
 		Bgz::Err::ErrContext ec(errorDescription);
-#else
-	#define BGZ_ERRCTXT1(errorDescription) ((void)0)
-#endif
 
-#if(DEBUG)
 	#define BGZ_ERRCTXT2(errorDescription, errorData) \
 		Bgz::Err::ErrContext ec(errorDescription, errorData);
-#else
-	#define BGZ_ERRCTXT2(errorDescription) ((void)0)
-#endif
 
-#if (DEBUG)
-	#define ERRASSERT(condition, msg, ...) \
+	#define BGZ_ERRASSERT(condition, msg, ...) \
 		do { if (!(condition)) Bgz::Err::ErrorReport(#condition, __func__, __FILE__, __LINE__, msg, __VA_ARGS__); } while (0)
 
-#elif (PROFILE)
-	#define ERRASSERT(condition, msg, ...) ((void)0)
-#endif
-
-#if (DEBUG) || (PROFILE)
-	#define RUNTIME_ASSERT \
+	#define BGZ_RUNTIME_ASSERT \
 		BOOST_ASSERT_MSG 
 
-	#define COMPILETIME_ASSERT(expr, msg) \
+	#define BGZ_COMPILETIME_ASSERT(expr, msg) \
 		static_assert(expr, msg) 
 
-//Turn off log messages when unit testing to console log (To prevent log messages from getting in the way of unit tests assert messages)
-#elif (DEBUGUNIT) || (PROFILEUNIT)
-	#define RUNTIME_ASSERT 
-	#define ERRASSERT(condition, msg, ...)
-
 #else
-	#define NDEBUG
-	#define RUNTIME_ASSERT 
-	#define COMPILETIME_ASSERT(expr, msg)
-	#define ERRASSERT(condition, msg, ...)
+	#define BGZ_ERRCTXT1(errorDescription) __noop
+	#define BGZ_ERRCTXT2(errorDescription, errorData) __noop
+	#define BGZ_ERRASSERT(condition, msg, ...) __noop
+	#define BGZ_RUNTIME_ASSERT __noop
+	#define BGZ_COMPILETIME_ASSERT(expr, msg) __noop
+
 #endif
 
 namespace Bgz
